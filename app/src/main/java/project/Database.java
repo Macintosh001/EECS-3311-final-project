@@ -22,7 +22,7 @@ public class Database {
         //initialize some connection information
         url = "jdbc:mysql://localhost:3306/Assignment_EECS_3311";
         username = "root";
-        password = "379680";
+        password = "root1234";
     }
 
     /**
