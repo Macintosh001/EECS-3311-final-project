@@ -29,6 +29,10 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    // This dependency is used to connect java to mySQL
+    implementation 'com.mysql:mysql-connector-j:8.0.32'
+
 }
 
 application {
