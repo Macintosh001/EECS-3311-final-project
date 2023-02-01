@@ -1,6 +1,8 @@
 package project.persistence;
 
+import project.objects.Filter;
 import project.objects.Product;
+import project.objects.ProductList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +16,27 @@ public class Persistence {
     }
 
     public void addProduct(Product product) {
-        this.productList.add(product);
+        // TODO implement
     }
 
     public void removeProduct(Integer barcode) {
-        for (Product product: this.productList) {
-            if (Objects.equals(product.getBarcode(), barcode)) {
-                this.productList.remove(product);
-            }
-        }
+        // TODO implement
     }
 
     public void replaceProduct(Product product) {
-        this.removeProduct(product.getBarcode());
-        this.addProduct(product);
+        // TODO implement
     }
 
     public Product getProduct(Integer barcode) {
+        // TODO implement
+        return null;
+    }
+
+    public ProductList getProductList() {
+        return null;
+    }
+
+    public ProductList getFilteredProductList(Filter filter) {
         // TODO implement
         return null;
     }

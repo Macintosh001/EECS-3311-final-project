@@ -3,24 +3,14 @@ package project.objects;
 import java.util.Date;
 
 public class Product {
-    private Integer barcode;
-    private String name;
-    private Integer quantity;
-    private Float price;
-    private Date expityDate;
-
-    private static int nextBarcode = 0;
+    private final Integer barcode;
+    private final String name;
+    private final Integer quantity;
+    private final Float price;
+    private final Date expityDate;
 
     public Product(Integer barcode, String name, Integer quantity, Float price, Date expityDate) {
         this.barcode = barcode;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.expityDate = expityDate;
-    }
-    public Product(String name, Integer quantity, Float price, Date expityDate) {
-        this.barcode = nextBarcode;
-        nextBarcode++;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -45,10 +35,5 @@ public class Product {
 
     public Date getExpityDate() {
         return expityDate;
-    }
-
-    // This method should only be called once when we load the database!!!
-    public void setNextBarcode(Integer barcode) {
-        Product.nextBarcode = barcode;
     }
 }

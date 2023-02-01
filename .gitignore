@@ -8,5 +8,5 @@ bin/
 build
 
 # IDE Junk
-.idea/*
-.vscode/*
+**/.idea/*
+**/.vscode/*

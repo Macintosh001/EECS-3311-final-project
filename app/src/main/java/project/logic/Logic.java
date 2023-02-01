@@ -5,11 +5,14 @@ import project.persistence.Persistence;
 
 import java.util.Date;
 
-public class MutatorLogic {
+public class Logic {
     Persistence persistence;
 
+    private static int nextBarcode = 0;
+
     public void addProduct(String name, Integer quantity, Float price, Date expiryDate) {
-        Product product = new Product(name, quantity, price, expiryDate);
+        Product product = new Product(Logic.nextBarcode, name, quantity, price, expiryDate);
+        Logic.nextBarcode++;
         this.persistence.addProduct(product);
     }
 
