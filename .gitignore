@@ -6,3 +6,7 @@ bin/
 
 # Ignore Gradle build output directory
 build
+
+# IDE Junk
+.idea
+.vscode
