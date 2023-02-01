@@ -3,13 +3,24 @@ package project.objects;
 import java.util.Date;
 
 public class Product {
-    private int barcode;
+    private Integer barcode;
     private String name;
-    private int quantity;
-    private float price;
+    private Integer quantity;
+    private Float price;
     private Date expityDate;
 
-    public int getBarcode() {
+    private static int nextBarcode = 0;
+
+    public Product(String name, Integer quantity, Float price, Date expityDate) {
+        this.barcode = nextBarcode;
+        nextBarcode++;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.expityDate = expityDate;
+    }
+
+    public Integer getBarcode() {
         return barcode;
     }
 
@@ -17,11 +28,11 @@ public class Product {
         return name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 

@@ -31,6 +31,12 @@ dependencies {
 
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'project.application.App'
+    }
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'project.application.App'
