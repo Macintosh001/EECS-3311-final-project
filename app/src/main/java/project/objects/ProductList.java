@@ -14,7 +14,7 @@ public class ProductList {
         this.productList = productList;
     }
 
-    /*public String[][] getTableEntries() {
+    public String[][] getTableEntries() {
         String tableEntries =
-    }*/
+    }
 }
