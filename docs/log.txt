@@ -1,0 +1,10 @@
+Friday, January 27th
+
+Team
+- Team meeting to plan out the UML for iteration 1.
+- A simple design following the application/display/logic/persistence/objects pattern discussed in class was used.
+
+Wednesday, February 1st
+
+William
+- Began work on the business logic class based on the current design.
