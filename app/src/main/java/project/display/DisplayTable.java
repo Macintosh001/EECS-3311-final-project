@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DisplayTable {
@@ -47,12 +49,68 @@ public class DisplayTable {
         inside is where we can call our add and remove methods
          */
         addButton = new JButton("Add");
-        addButton.addActionListener(new ActionListener(){ // currently doesn't do anything even dummy data
-            @Override
+
+        addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                data.addProduct("dummy", 0,0f, new Date());
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Input");
+                dialog.setSize(400, 200);
+                dialog.setLayout(new BorderLayout());
+
+                JPanel fieldsPanel = new JPanel();
+                fieldsPanel.setLayout(new GridLayout(2, 2));
+
+                JLabel nameLabel = new JLabel("Name: ");
+                fieldsPanel.add(nameLabel);
+                JTextField nameField = new JTextField();
+                fieldsPanel.add(nameField);
+
+                JLabel quantityLabel = new JLabel("Quantity: ");
+                fieldsPanel.add(quantityLabel);
+                JTextField quantityField = new JTextField();
+                fieldsPanel.add(quantityField);
+
+                JLabel priceLabel = new JLabel("Price: ");
+                fieldsPanel.add(priceLabel);
+                JTextField priceField = new JTextField();
+                fieldsPanel.add(priceField);
+
+                JLabel expiryLabel = new JLabel("Expiry Date: ");
+                fieldsPanel.add(expiryLabel);
+                JTextField expiryField = new JTextField();
+                fieldsPanel.add(expiryField);
+
+
+                dialog.add(fieldsPanel, BorderLayout.CENTER);
+
+                JButton submitButton = new JButton("Submit");
+                submitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String name = nameField.getText();
+                        int quantity = Integer.parseInt(quantityField.getText());
+                        float price = Float.parseFloat(priceField.getText());
+                        String dateF = expiryField.getText();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                        Date date = null;
+                        try {
+                            date = dateFormat.parse(dateF);
+                        } catch (ParseException t) {
+                            t.printStackTrace();
+                        }
+                        data.addProduct(name,quantity, price, new Date());
+                        dialog.dispose();
+                    }
+                });
+
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.add(submitButton);
+
+                dialog.add(buttonPanel, BorderLayout.PAGE_END);
+                dialog.setVisible(true);
             }
         });
+
 
         removeButton = new JButton("Remove");
         removeButton.addActionListener(new ActionListener(){ // currently doesn't do anything
