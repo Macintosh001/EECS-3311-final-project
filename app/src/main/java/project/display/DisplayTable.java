@@ -1,67 +1,70 @@
 package project.display;
 
-import project.objects.Product;
+import project.logic.ILogic;
 import project.objects.ProductList;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.List;
 
 public class DisplayTable {
 
-    /* Perhaps using the singleton pattern to ensure only one table is created?
-    What if we want to search for a specific item, should we return a list with only that item?
-    Maybe a better idea to display a simple screen with information about the item whereby you order more of the Product
+    /* This class is responsible for displaying current inventory data
      */
-
+    private final String[] columnNames = { "ID", "Item name", "Quantity", "Price", "Expiry Date" };
+    private ProductList productList;
     private JTable table1;
     private JPanel panel1;
+    private JPanel buttonsPanel;
     private JFrame frame;
+    private JButton addButton; // will be mapped to an addProduct operation that adds a Product to the ProductList
+    private JButton removeButton; // will be mapped to a removeProduct operation that removes a product from the list
+    @SuppressWarnings("BoundFieldAssignment")
+    public DisplayTable(ILogic data){
 
-    private Button addButton; // will be mapped to an addProduct operation that adds a Product to the ProductList
-    private Button removeButton; // will be mapped to a removeProduct operation that removes a product from the list
-    private Button searchButton; // will be mapped to a findProduct operation that will find a product in the list and return it
-    public DisplayTable(String[][] data){
         frame = new JFrame();
         frame.setTitle("Basic Table");
-
-        // Column Names
-        String[] columnNames = { "ID", "Item name", "Quantity", "Price", "Expiry Date" };
-
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // initializing the JTable
-        table1 = new JTable(data, columnNames);
+        //noinspection BoundFieldAssignment
+        table1 = new JTable(data.getProductList().getTableEntries(), columnNames);
         table1.setBounds(30,40,200,300);
         // adding the JTable to the scroll pane
-        JScrollPane sp = new JScrollPane(table1);
-        frame.add(sp);
+        panel1 = new JPanel(new BorderLayout());
+        panel1.add(new JScrollPane(table1), BorderLayout.CENTER);
         //frame size
         frame.setSize(500,200);
         // make frame visible
+
+        // JPanel buttonsPanel configuration, need a separate panel to help with organizing layout
+        buttonsPanel = new JPanel();
+        /*
+        add and remove buttons below
+        each takes an ActionListener which is responsible for implement the
+        actionPerformed(ActionEvent e) method
+        inside is where we can call our add and remove methods
+         */
+        addButton = new JButton("Add");
+        addButton.addActionListener(new ActionListener(){ // currently doesn't do anything even dummy data
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                data.addProduct("dummy", 0,0f, new Date());
+            }
+        });
+
+        removeButton = new JButton("Remove");
+        removeButton.addActionListener(new ActionListener(){ // currently doesn't do anything
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                data.removeProduct(1);
+            }
+        });
+        buttonsPanel.add(addButton);
+        buttonsPanel.add(removeButton);
+        panel1.add(buttonsPanel, BorderLayout.PAGE_END);
+        frame.add(panel1);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    // driver method
-    public static void main(String[] args) {
-//        Date expiry = new Date();
-//        Product p1;
-//        Product p2;
-//        Product p3;
-//        Product p4;
-//
-//        p1 = new Product("dummy", 1, 2.99f, expiry);
-//        p2 = new Product("dummy", 1, 2.99f, expiry);
-//        p3 = new Product("dummy", 1, 2.99f, expiry);
-//        p4 = new Product("dummy", 1, 2.99f, expiry);
-//
-//        List<Product> products = new ArrayList<Product>();
-//        products.add(p2);
-//        products.add(p3);
-//        products.add(p4);
-//        products.add(p1);
-//        ProductList products1 = new ProductList(products);
-//
-//        new DisplayTable(products1.getTableEntries());
     }
 }
