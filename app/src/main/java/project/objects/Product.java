@@ -3,17 +3,14 @@ package project.objects;
 import java.util.Date;
 
 public class Product {
-    private Integer barcode;
-    private String name;
-    private Integer quantity;
-    private Float price;
-    private Date expityDate;
+    private final Integer barcode;
+    private final String name;
+    private final Integer quantity;
+    private final Float price;
+    private final Date expityDate;
 
-    private static int nextBarcode = 0;
-
-    public Product(String name, Integer quantity, Float price, Date expityDate) {
-        this.barcode = nextBarcode;
-        nextBarcode++;
+    public Product(Integer barcode, String name, Integer quantity, Float price, Date expityDate) {
+        this.barcode = barcode;
         this.name = name;
         this.quantity = quantity;
         this.price = price;

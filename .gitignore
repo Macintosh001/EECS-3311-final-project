@@ -8,5 +8,6 @@ bin/
 build
 
 # IDE Junk
-.idea
-.vscode
+.idea/workspace.xml
+**/.idea/*
+**/.vscode/*
