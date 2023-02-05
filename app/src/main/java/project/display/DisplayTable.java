@@ -113,10 +113,41 @@ public class DisplayTable {
 
 
         removeButton = new JButton("Remove");
-        removeButton.addActionListener(new ActionListener(){ // currently doesn't do anything
-            @Override
+        removeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                data.removeProduct(1);
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Input");
+                dialog.setSize(400, 200);
+                dialog.setLayout(new BorderLayout());
+
+                JPanel fieldsPanel = new JPanel();
+                fieldsPanel.setLayout(new GridLayout(2, 2));
+
+
+                JLabel barcodeLabel = new JLabel("Barcode: ");
+                fieldsPanel.add(barcodeLabel);
+                JTextField barcodeField = new JTextField();
+                fieldsPanel.add(barcodeField);
+
+
+                dialog.add(fieldsPanel, BorderLayout.CENTER);
+
+                JButton submitButton = new JButton("Submit");
+                submitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                        int barcode = Integer.parseInt(barcodeField.getText());
+
+                        data.removeProduct(barcode);
+                        dialog.dispose();
+                    }
+                });
+
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.add(submitButton);
+
+                dialog.add(buttonPanel, BorderLayout.PAGE_END);
+                dialog.setVisible(true);
             }
         });
         buttonsPanel.add(addButton);
