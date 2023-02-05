@@ -1,4 +1,4 @@
-package project;
+package project.display;
 
 import project.objects.Product;
 import project.objects.ProductList;
@@ -44,24 +44,24 @@ public class DisplayTable {
     }
     // driver method
     public static void main(String[] args) {
-        Date expiry = new Date();
-        Product p1;
-        Product p2;
-        Product p3;
-        Product p4;
-
-        p1 = new Product("dummy", 1, 2.99f, expiry);
-        p2 = new Product("dummy", 1, 2.99f, expiry);
-        p3 = new Product("dummy", 1, 2.99f, expiry);
-        p4 = new Product("dummy", 1, 2.99f, expiry);
-
-        List<Product> products = new ArrayList<Product>();
-        products.add(p2);
-        products.add(p3);
-        products.add(p4);
-        products.add(p1);
-        ProductList products1 = new ProductList(products);
-
-        new DisplayTable(products1.getTableEntries());
+//        Date expiry = new Date();
+//        Product p1;
+//        Product p2;
+//        Product p3;
+//        Product p4;
+//
+//        p1 = new Product("dummy", 1, 2.99f, expiry);
+//        p2 = new Product("dummy", 1, 2.99f, expiry);
+//        p3 = new Product("dummy", 1, 2.99f, expiry);
+//        p4 = new Product("dummy", 1, 2.99f, expiry);
+//
+//        List<Product> products = new ArrayList<Product>();
+//        products.add(p2);
+//        products.add(p3);
+//        products.add(p4);
+//        products.add(p1);
+//        ProductList products1 = new ProductList(products);
+//
+//        new DisplayTable(products1.getTableEntries());
     }
 }

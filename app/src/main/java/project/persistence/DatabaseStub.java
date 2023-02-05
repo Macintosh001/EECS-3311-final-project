@@ -15,7 +15,7 @@ import java.util.Date;
 public class DatabaseStub implements Database {
     private ArrayList<Product> dbStub;
 
-    DatabaseStub(){
+    public DatabaseStub(){
         this.dbStub = this.getTestContent();
     }
 
@@ -28,8 +28,8 @@ public class DatabaseStub implements Database {
         ArrayList<Product> ret = new ArrayList<Product>();
         Date expOreos = new Date(2024,1,1);
         Date expCheetos = new Date(2028,1,2);
-        Product oreos = new Product("oreos", 75, 3.99F, expOreos);
-        Product cheetos = new Product("cheetos", 44, 2.99F, expCheetos);
+        Product oreos = new Product(0, "oreos", 75, 3.99F, expOreos);
+        Product cheetos = new Product(1, "cheetos", 44, 2.99F, expCheetos);
         ret.add(oreos);
         ret.add(cheetos);
         return ret;
