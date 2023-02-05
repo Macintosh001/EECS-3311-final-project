@@ -1,11 +1,12 @@
 package project.logic;
 
 import project.objects.Product;
+import project.objects.ProductList;
 import project.persistence.Persistence;
 
 import java.util.Date;
 
-public class Logic {
+public class Logic implements ILogic {
     Persistence persistence;
 
     private static int nextBarcode = 0;
@@ -42,5 +43,9 @@ public class Logic {
         Product oldProduct = this.persistence.getProduct(barcode);
         Product newProduct = new Product(barcode, oldProduct.getName(), oldProduct.getQuantity(), oldProduct.getPrice(), expityDate);
         this.persistence.replaceProduct(newProduct);
+    }
+
+    public ProductList getProductList() {
+        return this.persistence.getProductList();
     }
 }
