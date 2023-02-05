@@ -3,9 +3,19 @@
  */
 package project.application;
 
+import project.display.DisplayTable;
+import project.logic.ILogic;
+import project.logic.Logic;
+import project.persistence.Database;
+import project.persistence.DatabaseStub;
+
 public class App {
     public static void main(String[] args) {
-        // TODO implement this stuff
-        System.out.println("Nothing here yet!");
+        Database database = new DatabaseStub();
+
+        // The "nextBarcode" for logic has to be hardcoded based on the test data
+        // That's set up when the DatabaseStub is initialized.
+        ILogic logic = new Logic(database, 3);
+        DisplayTable displayTable = new DisplayTable(logic.getProductList().getTableEntries());
     }
 }
