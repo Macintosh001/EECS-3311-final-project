@@ -4,6 +4,7 @@ import project.logic.ILogic;
 import project.objects.ProductList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class DisplayTable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // initializing the JTable
         //noinspection BoundFieldAssignment
-        table1 = new JTable(data.getProductList().getTableEntries(), columnNames);
+        table1 = new JTable(new DefaultTableModel(data.getProductList().getTableEntries(),columnNames));
         table1.setBounds(30,40,200,300);
         // adding the JTable to the scroll pane
         panel1 = new JPanel(new BorderLayout());
@@ -99,6 +100,7 @@ public class DisplayTable {
                             t.printStackTrace();
                         }
                         data.addProduct(name,quantity, price, new Date());
+                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
                         dialog.dispose();
                     }
                 });
@@ -139,6 +141,7 @@ public class DisplayTable {
                         int barcode = Integer.parseInt(barcodeField.getText());
 
                         data.removeProduct(barcode);
+                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
                         dialog.dispose();
                     }
                 });
