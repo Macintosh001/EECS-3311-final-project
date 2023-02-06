@@ -4,6 +4,7 @@ import project.logic.ILogic;
 import project.objects.ProductList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class DisplayTable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // initializing the JTable
         //noinspection BoundFieldAssignment
-        table1 = new JTable(data.getProductList().getTableEntries(), columnNames);
+        table1 = new JTable(new DefaultTableModel(data.getProductList().getTableEntries(),columnNames));
         table1.setBounds(30,40,200,300);
         // adding the JTable to the scroll pane
         panel1 = new JPanel(new BorderLayout());
@@ -99,6 +100,7 @@ public class DisplayTable {
                             t.printStackTrace();
                         }
                         data.addProduct(name,quantity, price, new Date());
+                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
                         dialog.dispose();
                     }
                 });
@@ -113,10 +115,42 @@ public class DisplayTable {
 
 
         removeButton = new JButton("Remove");
-        removeButton.addActionListener(new ActionListener(){ // currently doesn't do anything
-            @Override
+        removeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                data.removeProduct(1);
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Input");
+                dialog.setSize(400, 200);
+                dialog.setLayout(new BorderLayout());
+
+                JPanel fieldsPanel = new JPanel();
+                fieldsPanel.setLayout(new GridLayout(2, 2));
+
+
+                JLabel barcodeLabel = new JLabel("Barcode: ");
+                fieldsPanel.add(barcodeLabel);
+                JTextField barcodeField = new JTextField();
+                fieldsPanel.add(barcodeField);
+
+
+                dialog.add(fieldsPanel, BorderLayout.CENTER);
+
+                JButton submitButton = new JButton("Submit");
+                submitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                        int barcode = Integer.parseInt(barcodeField.getText());
+
+                        data.removeProduct(barcode);
+                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
+                        dialog.dispose();
+                    }
+                });
+
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.add(submitButton);
+
+                dialog.add(buttonPanel, BorderLayout.PAGE_END);
+                dialog.setVisible(true);
             }
         });
         buttonsPanel.add(addButton);

@@ -28,6 +28,7 @@ dependencies {
 
     // This dependency is used to connect java to mySQL
     implementation 'com.mysql:mysql-connector-j:8.0.32'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
 }
 
