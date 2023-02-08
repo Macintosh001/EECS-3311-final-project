@@ -36,7 +36,15 @@
 ## Aaron
 - Add and remove buttons now are fully functional
 
+# Tuesday, February 7th
+
+## Team
+- In the meeting we discussed bugs we've found so far and other things we may have missed or looked over during implementation. Issues were created in github and these were assigned to developers accordingly. We also discussed finalization of the documentation.
+
 # Wednesday, February 8th
 
 ## William
 - Added input validation to the feature that adds a new product to the database.
+
+## Aaron
+- Modified a few files for the app to start with 0 entries in order to observe barcode creation is handled correctly
