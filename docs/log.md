@@ -1,34 +1,42 @@
-Friday, January 27th
+# Friday, January 27th
 
-Team
+## Team
 - Team meeting to plan out the UML for iteration 1.
 - A simple design following the application/display/logic/persistence/objects pattern discussed in class was used.
 
-Saturday, January 28th
+# Saturday, January 28th
 
-Aaron
+## Aaron
 - Added some dependencies to the build.gradle file for javafx. Considering using javafx to handle the UI provided it has some advantage over java.swing
 
-Monday, January 30th
+# Monday, January 30th
 
-Aaron
+## Aaron
 - Decided along with Behzad to go with java.swing to implement the UI functionality. Was able to render a simple Table that will display the inventory. At this point I decided to implement the UI in one big class in order to have an MVP ready for delivery, however I am researching what patterns I may use to better separate the UI code to promote maintainability and extensability for future iterations.
 
-Wednesday, February 1st
+# Wednesday, February 1st
 
-William
+## William
 - Began work on the business logic class based on the current design.
 
-Aaron
+## Aaron
 - Tweaked the Display class to utilize the stub
 
-Sunday, February 5th
+# Sunday, February 5th
 
-Aaron
-- Added buttons (add and remove) to the Table and changed the Display class to interact with the ILogic interface rather than the concrete logic classes. Also added dialog box pop up when the buttons were clicked
+## Aaron
+- Added buttons (add and remove) to the Table and changed the Display class to interact with the ILogic interface rather than the concrete logic classes. 
+- Also added dialog box pop up when the buttons were clicked
 
+## William
+- Added the ILogic interface that can be used by the display, and finished implementing the nessecary business logic up to this point.
 
-Monday, February 6th
+# Monday, February 6th
 
-Aaron
+## Aaron
 - Add and remove buttons now are fully functional
+
+# Wednesday, February 8th
+
+## William
+- Added input validation to the feature that adds a new product to the database.
