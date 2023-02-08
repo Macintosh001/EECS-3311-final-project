@@ -1,3 +1,8 @@
+# Task allocation
+- Aaron Behzad (UI)
+- William Jeremy (Logic)
+- Lucas (Database)
+
 # Friday, January 27th
 
 ## Team
