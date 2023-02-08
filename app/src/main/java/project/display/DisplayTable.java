@@ -82,31 +82,87 @@ public class DisplayTable {
                 fieldsPanel.add(expiryField);
 
 
+
                 dialog.add(fieldsPanel, BorderLayout.CENTER);
 
+                JLabel errorLabel = new JLabel("");
                 JButton submitButton = new JButton("Submit");
+                JButton cancelButton = new JButton("Cancel");
                 submitButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String name = nameField.getText();
-                        int quantity = Integer.parseInt(quantityField.getText());
-                        float price = Float.parseFloat(priceField.getText());
-                        String dateF = expiryField.getText();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        // This method with read and then validate the inputs from the text fields
+                        // presented in the dialog box. If there is an error, the errorLabel will
+                        // be set to the error message.
 
+                        // If we get to the end of the method, and the error label is empty, that
+                        // means there were no errors, and we can add the product. Otherwise,
+                        // nothing happens and the user can make changes to the fields based on
+                        // the displayed error message.
+
+                        // These are the fields the user can set
+                        String name = "";
+                        int quantity = 0;
+                        float price = 0.0f;
                         Date date = null;
-                        try {
-                            date = dateFormat.parse(dateF);
-                        } catch (ParseException t) {
-                            t.printStackTrace();
+
+                        // Reset error label
+                        errorLabel.setText("");
+
+                        // Validate the name field
+                        name = nameField.getText();
+                        if (name.equals(""))
+                            errorLabel.setText("ERROR: Name cannot be empty!");
+
+                        // Validate the quantity field
+                        if (quantityField.getText().equals("")) {
+                            errorLabel.setText("ERROR: Quantity cannot be empty!");
+                        } else {
+                            try {
+                                quantity = Integer.parseInt(quantityField.getText());
+                                if (quantity < 0) {
+                                    errorLabel.setText("ERROR: Quantity cannot be negative!");
+                                }
+                            } catch (NumberFormatException ex) {
+                                errorLabel.setText("ERROR: Quantity must be a whole number!");
+                            }
                         }
-                        data.addProduct(name,quantity, price, new Date());
-                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
+
+                        if (priceField.getText().equals("")) {
+                           errorLabel.setText("ERROR: Price cannot be blank!");
+                        } else {
+                            try {
+                                price = Float.parseFloat(priceField.getText());
+                                if (price < 0) {
+                                    errorLabel.setText("ERROR: Price cannot be negative!");
+                                }
+                            } catch (NumberFormatException ex) {
+                                errorLabel.setText("ERROR: Price must be a decimal number!");
+                            }
+                        }
+
+                        // RIGHT NOW THE DATE IS NOT BEING SET AT ALL!!!
+                        date = new Date();
+
+                        // Only exit the dialog when there are no errors.
+                        if (errorLabel.getText().equals("")) {
+                            data.addProduct(name,quantity, price, date);
+                            table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
+                            dialog.dispose();
+                        }
+                    }
+                });
+
+                cancelButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
                         dialog.dispose();
                     }
                 });
 
                 JPanel buttonPanel = new JPanel();
                 buttonPanel.add(submitButton);
+                buttonPanel.add(cancelButton);
+                buttonPanel.add(errorLabel);
 
                 dialog.add(buttonPanel, BorderLayout.PAGE_END);
                 dialog.setVisible(true);
