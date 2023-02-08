@@ -8,11 +8,16 @@
 
 ## Aaron
 - Added some dependencies to the build.gradle file for javafx. Considering using javafx to handle the UI provided it has some advantage over java.swing
+## Lucas 
+- Added gradle dependency
+- Implemented some stabase fundamentals, which turned out to be for later iterations
+- Established connection method to database and wrote some code to initialize database
 
 # Monday, January 30th
 
 ## Aaron
 - Decided along with Behzad to go with java.swing to implement the UI functionality. Was able to render a simple Table that will display the inventory. At this point I decided to implement the UI in one big class in order to have an MVP ready for delivery, however I am researching what patterns I may use to better separate the UI code to promote maintainability and extensability for future iterations.
+
 
 # Wednesday, February 1st
 
