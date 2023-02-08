@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -141,7 +142,22 @@ public class DisplayTable {
                         }
 
                         // RIGHT NOW THE DATE IS NOT BEING SET AT ALL!!!
-                        date = new Date();
+                        
+
+                        String dateF = expiryField.getText();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM--dd");
+                        JFormattedTextField dField = new JFormattedTextField(dateFormat);
+
+                        
+                        try {
+                            date = dateFormat.parse(dateF);
+                        } catch (ParseException t) {
+                            t.printStackTrace();
+                        }
+                        data.addProduct(name,quantity, price, date);
+                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
+                        dialog.dispose();
+
 
                         // Only exit the dialog when there are no errors.
                         if (errorLabel.getText().equals("")) {
