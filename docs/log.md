@@ -10,7 +10,7 @@
 - Added some dependencies to the build.gradle file for javafx. Considering using javafx to handle the UI provided it has some advantage over java.swing
 ## Lucas 
 - Added gradle dependency for database connection
-- Implemented some stabase fundamentals, which turned out to be for later iterations
+- Implemented some database fundamentals, which turned out to be for later iterations
 - Established connection method to database and wrote some code to initialize database
 
 # Monday, January 30th
