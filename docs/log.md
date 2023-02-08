@@ -1,6 +1,6 @@
 # Task allocation
 - Aaron Behzad (UI)
-- William Jeremy (Logic)
+- William Jeremy (Logic, objects)
 - Lucas (Database)
 
 # Friday, January 27th
