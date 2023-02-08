@@ -77,10 +77,15 @@ public class DatabaseStub implements Database {
      */
     @Override
     public void removeProduct(Integer barcode) {
+        Product product = null;
         for(Product p: dbStub){
             if(p.getBarcode().intValue() == barcode.intValue()){
-                dbStub.remove(p);
+                product = p;
+                break;
             }
+        }
+        if(product != null) {
+            dbStub.remove(product);
         }
     }
 
