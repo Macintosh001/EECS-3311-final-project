@@ -9,7 +9,7 @@
 ## Aaron
 - Added some dependencies to the build.gradle file for javafx. Considering using javafx to handle the UI provided it has some advantage over java.swing
 ## Lucas 
-- Added gradle dependency
+- Added gradle dependency for database connection
 - Implemented some stabase fundamentals, which turned out to be for later iterations
 - Established connection method to database and wrote some code to initialize database
 
@@ -26,6 +26,17 @@
 
 ## Aaron
 - Tweaked the Display class to utilize the stub
+
+# Friday, February 3rd
+
+## Lucas
+- Draft of database interface
+- Draft of database stub functionality, including add/remove/etc. 
+
+# Saturday, February 4th
+
+## Lucas
+-reworked UML/plan for database design to match code
 
 # Sunday, February 5th
 
@@ -45,6 +56,9 @@
 
 ## Team
 - In the meeting we discussed bugs we've found so far and other things we may have missed or looked over during implementation. Issues were created in github and these were assigned to developers accordingly. We also discussed finalization of the documentation.
+
+## Lucas
+-Bug fixes, dead code removal, etc.
 
 # Wednesday, February 8th
 
