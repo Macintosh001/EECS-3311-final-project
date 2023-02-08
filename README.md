@@ -4,8 +4,11 @@ A very cool and classy project that will get us an A+
 ## Documentation
 All relevant documentation can be found in the [wiki](https://github.com/Macintosh001/EECS-3311-final-project/wiki).
 
-## Installation Instructions
+## Installation/Run Instructions
 You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the jar file onto your machine.
+
+### CLI
+If you're running the app from a CLI then run the following commands `java -jar app.jar`
 
 ### MacOS
 If you are using MacOS then here are some instructions you should follow
