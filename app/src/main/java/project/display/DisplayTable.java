@@ -56,35 +56,39 @@ public class DisplayTable {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new JDialog();
                 dialog.setTitle("Input");
-                dialog.setSize(400, 200);
+                dialog.setSize(350, 120);
                 dialog.setLayout(new BorderLayout());
 
                 JPanel fieldsPanel = new JPanel();
                 fieldsPanel.setLayout(new GridLayout(2, 2));
 
                 JLabel nameLabel = new JLabel("Name: ");
+                nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(nameLabel);
                 JTextField nameField = new JTextField();
                 fieldsPanel.add(nameField);
 
                 JLabel quantityLabel = new JLabel("Quantity: ");
+                quantityLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(quantityLabel);
                 JTextField quantityField = new JTextField();
                 fieldsPanel.add(quantityField);
 
                 JLabel priceLabel = new JLabel("Price: ");
+                priceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(priceLabel);
                 JTextField priceField = new JTextField();
                 fieldsPanel.add(priceField);
 
                 JLabel expiryLabel = new JLabel("Expiry Date: ");
+                expiryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(expiryLabel);
                 JTextField expiryField = new JTextField();
+                expiryField.setToolTipText("yyyy-MM-dd");
                 fieldsPanel.add(expiryField);
 
 
-
-                dialog.add(fieldsPanel, BorderLayout.CENTER);
+                dialog.add(fieldsPanel, BorderLayout.NORTH);
 
                 JLabel errorLabel = new JLabel("");
                 JButton submitButton = new JButton("Submit");
@@ -145,7 +149,7 @@ public class DisplayTable {
                         
 
                         String dateF = expiryField.getText();
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM--dd");
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         JFormattedTextField dField = new JFormattedTextField(dateFormat);
 
                         
@@ -154,10 +158,6 @@ public class DisplayTable {
                         } catch (ParseException t) {
                             t.printStackTrace();
                         }
-                        data.addProduct(name,quantity, price, date);
-                        table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
-                        dialog.dispose();
-
 
                         // Only exit the dialog when there are no errors.
                         if (errorLabel.getText().equals("")) {
@@ -180,7 +180,7 @@ public class DisplayTable {
                 buttonPanel.add(cancelButton);
                 buttonPanel.add(errorLabel);
 
-                dialog.add(buttonPanel, BorderLayout.PAGE_END);
+                dialog.add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
                 dialog.setVisible(true);
             }
         });
@@ -191,20 +191,22 @@ public class DisplayTable {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new JDialog();
                 dialog.setTitle("Input");
-                dialog.setSize(400, 200);
+                dialog.setSize(150, 100);
                 dialog.setLayout(new BorderLayout());
 
                 JPanel fieldsPanel = new JPanel();
-                fieldsPanel.setLayout(new GridLayout(2, 2));
+                fieldsPanel.setLayout(new GridLayout(1, 1));
 
 
                 JLabel barcodeLabel = new JLabel("Barcode: ");
+                barcodeLabel.setHorizontalAlignment(SwingConstants.LEFT);
                 fieldsPanel.add(barcodeLabel);
                 JTextField barcodeField = new JTextField();
+                barcodeField.setHorizontalAlignment(SwingConstants.LEFT);
                 fieldsPanel.add(barcodeField);
 
 
-                dialog.add(fieldsPanel, BorderLayout.CENTER);
+                dialog.add(fieldsPanel, BorderLayout.PAGE_START);
 
                 JButton submitButton = new JButton("Submit");
                 submitButton.addActionListener(new ActionListener() {
