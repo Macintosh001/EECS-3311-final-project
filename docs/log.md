@@ -41,7 +41,7 @@
 # Saturday, February 4th
 
 ## Lucas
--reworked UML/plan for database design to match code
+- reworked UML/plan for database design to match code
 
 # Sunday, February 5th
 
@@ -63,7 +63,7 @@
 - In the meeting we discussed bugs we've found so far and other things we may have missed or looked over during implementation. Issues were created in github and these were assigned to developers accordingly. We also discussed finalization of the documentation.
 
 ## Lucas
--Bug fixes in dbStub, dead code removal, etc.
+- Bug fixes in dbStub, dead code removal, etc.
 
 # Wednesday, February 8th
 
