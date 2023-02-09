@@ -3,6 +3,14 @@
 - William Jeremy (Logic, objects)
 - Lucas (Database)
 
+# Time spent vs time estimated
+- add to stock, 1 point estimated, 1 day spent by logic and db stub teams
+- remove from stock, 1 point estimated, 1 day spent by logic and db stub teams
+- view all items, 2 points estimated, 2 days spent by logic and db teams
+- update properties, 2 points estimated, 2 days spent by logic and db teams, gui for this task moved to later iterations
+- -gui 
+
+
 # Friday, January 27th
 
 ## Team
