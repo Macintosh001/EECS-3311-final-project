@@ -17,7 +17,7 @@
 - view all items: get list from db stub, create fixed stub data, logic for creating viewable data, list data in gui
 - update product info: db update and logic update, no gui update buttons/viewss implemented in this iteration
 
-
+# Work Log:
 
 # Friday, January 27th
 
