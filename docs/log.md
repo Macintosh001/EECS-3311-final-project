@@ -1,21 +1,38 @@
 # Task allocation
 - Aaron Behzad (UI)
-- William Jeremy (Logic, objects)
+- William Jeremy (Logic, Objects)
 - Lucas (Database)
 
-# Time spent vs time estimated
-- add to stock, 1 point estimated, 1 point spent by logic and db stub teams
-- remove from stock, 1 point estimated, 1 point spent by logic and db stub teams
-- view all items, 2 points estimated, 2 points spent by logic and db teams
-- update properties, 2 points estimated, 2 point spent by logic and db teams, gui for this task moved to later iterations
-- gui took 3 points to implement buttons and interactions for update and remove, and for the listing of items in stock.
-- all other small user stories were moved to the next iteration as a result of time constraints.
+# Time Spent vs Time Estimated
+Task | Time Estimated | Time Spent
+---|---|---
+Add to Stock | 1 Point | 2 Points
+Remove from Stock | 1 Point | 2 Points
+View Items | 2 Points | 1 Points
+Update Properties (only in backend right now) | 2 Points | 2 Points
 
 # Dev tasks per small user story
-- Remove from stock: remove from database stub, remove logic/db interaction, remove button on gui
-- Add to stock: add to database stub, add logic/db interaction, add button in gui
-- view all items: get list from db stub, create fixed stub data, logic for creating viewable data, list data in gui
-- update product info: db update and logic update, no gui update buttons/viewss implemented in this iteration
+
+### Add to Stock
+- Add Function in Database Stub
+- Add Function in Logic
+- Add Button/Dialog Box in GUI
+
+### Remove from Stock
+- Remove Function in Database Stub
+- Remove Function in Logic
+- Remove Button/Dialog in GUI
+
+### View Items
+- Function to get product list in Database Stub
+- Hold Data in Database Stub
+- Function to prepare data for GUI in the Domain Object
+- Display Data in a Table in GUI
+
+### Update Product
+- Function to replace product in Database Stub
+- Logic Functions to update each field in a product
+- (not implemented) GUI to call the update functions
 
 # Work Log:
 
@@ -38,7 +55,6 @@
 
 ## Aaron
 - Decided along with Behzad to go with java.swing to implement the UI functionality. Was able to render a simple Table that will display the inventory. At this point I decided to implement the UI in one big class in order to have an MVP ready for delivery, however I am researching what patterns I may use to better separate the UI code to promote maintainability and extensability for future iterations.
-
 
 # Wednesday, February 1st
 
