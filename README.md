@@ -21,3 +21,5 @@ If you are using MacOS then here are some instructions you should follow
 
 
 ### Windows
+If you are using windows, and the installation instructions above do not work:
+1. If opening the .jar file throws an error, try installing the newest version of java by following this link's instructions: https://phoenixnap.com/kb/install-java-windows Then try again, or run the jar in the command line as specified in the CLI section of this document.
