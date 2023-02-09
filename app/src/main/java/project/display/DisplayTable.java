@@ -141,7 +141,7 @@ public class DisplayTable {
                             }
                         }
 
-                        // RIGHT NOW THE DATE IS NOT BEING SET AT ALL!!!
+                        // Date and the Expiry date is being implemented here.
                         
 
                         String dateF = expiryField.getText();
@@ -156,12 +156,12 @@ public class DisplayTable {
                         }
                         data.addProduct(name,quantity, price, date);
                         table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
-                        dialog.dispose();
+                        dialog.dispose(); 
 
 
                         // Only exit the dialog when there are no errors.
                         if (errorLabel.getText().equals("")) {
-                            data.addProduct(name,quantity, price, date);
+                            data.addProduct(name,quantity, price, new Date());
                             table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
                             dialog.dispose();
                         }
