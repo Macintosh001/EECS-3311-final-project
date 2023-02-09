@@ -104,3 +104,8 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 
 ## Aaron
 - Modified a few files for the app to start with 0 entries in order to observe barcode creation is handled correctly
+
+# Thursday, February 9th
+
+## Jeremy
+- Added a funciton to ensure that items with a duplicate name will not be added.
