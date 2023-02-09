@@ -109,3 +109,7 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 
 ## Jeremy
 - Added a funciton to ensure that items with a duplicate name will not be added.
+
+## Behzad
+- Fixed the date input issue.
+- Added the meetings log files into the main
