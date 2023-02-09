@@ -4,11 +4,17 @@
 - Lucas (Database)
 
 # Time spent vs time estimated
-- add to stock, 1 point estimated, 1 day spent by logic and db stub teams
-- remove from stock, 1 point estimated, 1 day spent by logic and db stub teams
-- view all items, 2 points estimated, 2 days spent by logic and db teams
-- update properties, 2 points estimated, 2 days spent by logic and db teams, gui for this task moved to later iterations
-- -gui 
+- add to stock, 1 point estimated, 1 points spent by logic and db stub teams
+- remove from stock, 1 point estimated, 1 point spent by logic and db stub teams
+- view all items, 2 points estimated, 2 point spent by logic and db teams
+- update properties, 2 points estimated, 2 point spent by logic and db teams, gui for this task moved to later iterations
+- gui took 3 points to implement buttons and interactions for update and remove, and for the listing of items in stock.
+- all other small user stories were moved to the next iteration as a result of time constraints
+
+# Dev tasks per user story
+- Remove from stock: remove from database stub, remove logic, remove button on gui
+- Add to stock: add to database stub, add logic, add button
+- view all items: get list from db stub, create fixed stub data, logic for creating viewable data, list data in gui
 
 
 # Friday, January 27th
