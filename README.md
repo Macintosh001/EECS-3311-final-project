@@ -8,7 +8,7 @@ All relevant documentation can be found in the [wiki](https://github.com/Macinto
 You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the jar file onto your machine.
 
 ### CLI
-If you're running the app from a CLI then run the following commands `java -jar app.jar`
+If you're running the app from a CLI then run the following commands `java -jar app.jar`.
 
 ### MacOS
 If you are using MacOS then here are some instructions you should follow
@@ -18,7 +18,10 @@ If you are using MacOS then here are some instructions you should follow
 4. afterwards you should be able to open the file
 
 ### Linux
+If you're on linux, just open a terminal and run `java -jar app.jar`. If it doesn't work, you might have an outdated java version. Use  `java -version` to check, and you can install the right version of java using the right command for your distribution:
 
+Debian/Ubuntu `sudo apt install openjdk-17-jre`
+Feodra: `sudo dnf install java-17-openjdk`
 
 ### Windows
 If you are using windows, and the instructions above do not work for running the app:
