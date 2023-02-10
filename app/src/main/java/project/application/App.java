@@ -15,7 +15,7 @@ public class App {
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
-        ILogic logic = new Logic(database, 3);
+        ILogic logic = new Logic(database, 2);
         DisplayTable displayTable = new DisplayTable(logic);
     }
 }
