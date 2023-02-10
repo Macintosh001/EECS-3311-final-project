@@ -56,7 +56,7 @@ public class DisplayTable {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new JDialog();
                 dialog.setTitle("Input");
-                dialog.setSize(400, 200);
+                dialog.setSize(350, 120);
                 dialog.setLayout(new BorderLayout());
 
                 JPanel fieldsPanel = new JPanel();
@@ -84,11 +84,10 @@ public class DisplayTable {
                 expiryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(expiryLabel);
                 JTextField expiryField = new JTextField();
-                expiryField.setToolTipText("yyyy-mm-dd");  //Gives a quick hint to input dates.
-            
+                expiryField.setToolTipText("yyyy-mm-dd");  //Gives a quick hint to input dates
                 fieldsPanel.add(expiryField);
 
-                dialog.add(fieldsPanel, BorderLayout.CENTER);
+                dialog.add(fieldsPanel, BorderLayout.NORTH);
 
                 JLabel errorLabel = new JLabel("");
                 JButton submitButton = new JButton("Submit");
@@ -158,9 +157,8 @@ public class DisplayTable {
                         
                         try {  
                             date = dateFormat.parse(dateF);
-                        }
-                         catch(ParseException t) {
-                                    t.printStackTrace();
+                        } catch(ParseException t) {
+                            t.printStackTrace();
                         }
         
                         // Only exit the dialog when there are no errors.
@@ -184,8 +182,7 @@ public class DisplayTable {
                 buttonPanel.add(cancelButton);
                 buttonPanel.add(errorLabel);
 
-
-                dialog.add(buttonPanel, BorderLayout.PAGE_END);
+                dialog.add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
                 dialog.setVisible(true);
             }
         });
@@ -198,20 +195,22 @@ public class DisplayTable {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new JDialog();
                 dialog.setTitle("Input");
-                dialog.setSize(400, 200);
+                dialog.setSize(150, 100);
                 dialog.setLayout(new BorderLayout());
 
                 JPanel fieldsPanel = new JPanel();
-                fieldsPanel.setLayout(new GridLayout(2, 2));
+                fieldsPanel.setLayout(new GridLayout(1, 1));
 
                 // for the barcode label
                 JLabel barcodeLabel = new JLabel("Barcode: ");
+                barcodeLabel.setHorizontalAlignment(SwingConstants.LEFT);
                 fieldsPanel.add(barcodeLabel);
                 JTextField barcodeField = new JTextField();
+                barcodeField.setHorizontalAlignment(SwingConstants.LEFT);
                 fieldsPanel.add(barcodeField);
 
 
-                dialog.add(fieldsPanel, BorderLayout.CENTER);
+                dialog.add(fieldsPanel, BorderLayout.PAGE_START);
 
 
                 // submit button to remove the product from the list
