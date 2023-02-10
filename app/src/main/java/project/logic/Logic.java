@@ -17,10 +17,15 @@ public class Logic implements ILogic {
     }
 
     public void addProduct(String name, Integer quantity, Float price, Date expiryDate) {
+        if (hasItemWithName(name)) {
+            System.out.println("A product with name " + name + " already exists");
+            return;
+        }
+
         Product product = new Product(Logic.nextBarcode, name, quantity, price, expiryDate);
         Logic.nextBarcode++;
         this.database.addProduct(product);
-    }
+}
 
     public void removeProduct(Integer barcode) {
         this.database.removeProduct(barcode);
@@ -53,4 +58,14 @@ public class Logic implements ILogic {
     public ProductList getProductList() {
         return this.database.getProductList();
     }
+
+    private boolean hasItemWithName(String name) {
+        ProductList productList = this.database.getProductList();
+        for (String[] product : productList.getTableEntries()) {
+            if (product[1].equals(name)) {
+                return true;
+            }
+        }
+        return false;
+  }
 }
