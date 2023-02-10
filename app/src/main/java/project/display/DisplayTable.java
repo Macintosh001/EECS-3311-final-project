@@ -56,7 +56,7 @@ public class DisplayTable {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new JDialog();
                 dialog.setTitle("Input");
-                dialog.setSize(350, 120);
+                dialog.setSize(600, 120);
                 dialog.setLayout(new BorderLayout());
 
                 JPanel fieldsPanel = new JPanel();
@@ -114,8 +114,9 @@ public class DisplayTable {
 
                         // Validate the name field
                         name = nameField.getText();
-                        if (name.equals(""))
+                        if (name.equals("")) {
                             errorLabel.setText("ERROR: Name cannot be empty!");
+                        }
 
                         // Validate the quantity field
                         // i.e. the quantity cannot be empty, negative and it must be a whole number.
@@ -151,19 +152,21 @@ public class DisplayTable {
                         // The right format of the date-input should be displayed for the client.
                         // the proper format is: yyyy-mm-dd
 
+
                         String dateF = expiryField.getText();
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         JFormattedTextField dField = new JFormattedTextField(dateFormat);
-                        
-                        try {  
+
+                        try {
                             date = dateFormat.parse(dateF);
                         } catch(ParseException t) {
-                            t.printStackTrace();
+                            errorLabel.setText("ERROR: Date invalid. yyyy-mm-dd");
                         }
-        
+
+
                         // Only exit the dialog when there are no errors.
                         if (errorLabel.getText().equals("")) {
-                            data.addProduct(name,quantity, price, date);
+                            data.addProduct(name, quantity, price, date);
                             table1.setModel(new DefaultTableModel(data.getProductList().getTableEntries(), columnNames));
                             dialog.dispose();
                         }
@@ -178,6 +181,7 @@ public class DisplayTable {
                 });
 
                 JPanel buttonPanel = new JPanel();
+                buttonPanel.setLayout(new GridLayout(1, 3));
                 buttonPanel.add(submitButton);
                 buttonPanel.add(cancelButton);
                 buttonPanel.add(errorLabel);
