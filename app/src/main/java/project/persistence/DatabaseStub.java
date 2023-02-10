@@ -26,8 +26,8 @@ public class DatabaseStub implements Database {
      */
     private ArrayList<Product> getTestContent(){
         ArrayList<Product> ret = new ArrayList<Product>();
-        Date expOreos = new Date(2024,1,1);
-        Date expCheetos = new Date(2028,1,2);
+        Date expOreos = new Date();
+        Date expCheetos = new Date();
         Product oreos = new Product(0, "oreos", 75, 3.99F, expOreos);
         Product cheetos = new Product(1, "cheetos", 44, 2.99F, expCheetos);
         ret.add(oreos);
