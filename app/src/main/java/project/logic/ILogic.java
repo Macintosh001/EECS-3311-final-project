@@ -1,15 +1,13 @@
 package project.logic;
 
+import project.objects.ErrorMsg;
 import project.objects.ProductList;
 
-import java.util.Date;
+import java.util.List;
 
 public interface ILogic {
-    public void addProduct(String name, Integer quantity, Float price, Date expiryDate);
-    public void removeProduct(Integer barcode);
-    public void updateProductName(Integer barcode, String name);
-    public void updateProductQuantity(Integer barcode, Integer quantity);
-    public void updateProductPrice(Integer barcode, Float price);
-    public void updateProductExpiryDate(Integer barcode, Date expityDate);
-    public ProductList getProductList();
+    List<ErrorMsg> addProduct(String name, String quantity, String price, String expiryDate);
+    List<ErrorMsg> removeProduct(String barcode);
+    List<ErrorMsg> updateProduct(String barcode, String name, String quantity, String price, String expiryDate);
+    ProductList getProductList();
 }
