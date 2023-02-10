@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,26 +63,30 @@ public class DisplayTable {
                 fieldsPanel.setLayout(new GridLayout(2, 2));
 
                 JLabel nameLabel = new JLabel("Name: ");
+                nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(nameLabel);
                 JTextField nameField = new JTextField();
                 fieldsPanel.add(nameField);
 
                 JLabel quantityLabel = new JLabel("Quantity: ");
+                quantityLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(quantityLabel);
                 JTextField quantityField = new JTextField();
                 fieldsPanel.add(quantityField);
 
                 JLabel priceLabel = new JLabel("Price: ");
+                priceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(priceLabel);
                 JTextField priceField = new JTextField();
                 fieldsPanel.add(priceField);
 
                 JLabel expiryLabel = new JLabel("Expiry Date: ");
+                expiryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                 fieldsPanel.add(expiryLabel);
                 JTextField expiryField = new JTextField();
+                expiryField.setToolTipText("yyyy-mm-dd");  //Gives a quick hint to input dates.
+            
                 fieldsPanel.add(expiryField);
-
-
 
                 dialog.add(fieldsPanel, BorderLayout.CENTER);
 
@@ -114,6 +119,7 @@ public class DisplayTable {
                             errorLabel.setText("ERROR: Name cannot be empty!");
 
                         // Validate the quantity field
+                        // i.e. the quantity cannot be empty, negative and it must be a whole number.
                         if (quantityField.getText().equals("")) {
                             errorLabel.setText("ERROR: Quantity cannot be empty!");
                         } else {
@@ -126,7 +132,9 @@ public class DisplayTable {
                                 errorLabel.setText("ERROR: Quantity must be a whole number!");
                             }
                         }
-
+                        
+                        // Checkes whether the Price input is correct
+                        // i.e. whether is blank, negative or is not a decimal number.
                         if (priceField.getText().equals("")) {
                            errorLabel.setText("ERROR: Price cannot be blank!");
                         } else {
@@ -140,9 +148,21 @@ public class DisplayTable {
                             }
                         }
 
-                        // RIGHT NOW THE DATE IS NOT BEING SET AT ALL!!!
-                        date = new Date();
+                        // Date and the Expiry date is being implemented here.
+                        // The right format of the date-input should be displayed for the client.
+                        // the proper format is: yyyy-mm-dd
 
+                        String dateF = expiryField.getText();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        JFormattedTextField dField = new JFormattedTextField(dateFormat);
+                        
+                        try {  
+                            date = dateFormat.parse(dateF);
+                        }
+                         catch(ParseException t) {
+                                    t.printStackTrace();
+                        }
+        
                         // Only exit the dialog when there are no errors.
                         if (errorLabel.getText().equals("")) {
                             data.addProduct(name,quantity, price, date);
@@ -164,11 +184,14 @@ public class DisplayTable {
                 buttonPanel.add(cancelButton);
                 buttonPanel.add(errorLabel);
 
+
                 dialog.add(buttonPanel, BorderLayout.PAGE_END);
                 dialog.setVisible(true);
             }
         });
 
+        // The remove button, in order to the remove a product from the list
+        // Once the client inputs the proper ID,barcode, the product will be removed.
 
         removeButton = new JButton("Remove");
         removeButton.addActionListener(new ActionListener() {
@@ -181,7 +204,7 @@ public class DisplayTable {
                 JPanel fieldsPanel = new JPanel();
                 fieldsPanel.setLayout(new GridLayout(2, 2));
 
-
+                // for the barcode label
                 JLabel barcodeLabel = new JLabel("Barcode: ");
                 fieldsPanel.add(barcodeLabel);
                 JTextField barcodeField = new JTextField();
@@ -190,6 +213,8 @@ public class DisplayTable {
 
                 dialog.add(fieldsPanel, BorderLayout.CENTER);
 
+
+                // submit button to remove the product from the list
                 JButton submitButton = new JButton("Submit");
                 submitButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
