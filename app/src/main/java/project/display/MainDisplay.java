@@ -46,6 +46,12 @@ public class MainDisplay {
         removeButton.addActionListener(e -> new RemoveDialog(this));
         frame.add(removeButton);
 
+        // This is the button to update products
+        JButton updateButton = new JButton("Update Product");
+        updateButton.setBounds(820, 130, 200, 50);
+        updateButton.addActionListener(e -> new UpdateDialog(this));
+        frame.add(updateButton);
+
         frame.setVisible(true);
     }
 
