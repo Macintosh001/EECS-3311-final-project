@@ -11,6 +11,7 @@ public class MainDisplay {
 
     private ILogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
+    private final String[] updateOptions = {"update product"};
     private JTable table;
 
     public MainDisplay(ILogic logic) {
@@ -46,6 +47,9 @@ public class MainDisplay {
         removeButton.addActionListener(e -> new RemoveDialog(this));
         frame.add(removeButton);
 
+        JComboBox updates = new JComboBox(updateOptions);
+        updates.setBounds(820, 130,200,50);
+        frame.add(updates);
         frame.setVisible(true);
     }
 
