@@ -4,6 +4,7 @@ import project.logic.ILogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class MainDisplay {
 
@@ -28,6 +29,7 @@ public class MainDisplay {
         // This is the table containing all the products
         table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
         table.setEnabled(false);
+        table.setBackground(Color.LIGHT_GRAY);
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10, 10, 800, 700);
         frame.add(tablePane);
@@ -48,6 +50,10 @@ public class MainDisplay {
         updates.setBounds(820, 130,200,50);
         frame.add(updates);
         frame.setVisible(true);
+    }
+
+    public JTable getTable(){
+        return this.table;
     }
 
     public ILogic getLogic() {

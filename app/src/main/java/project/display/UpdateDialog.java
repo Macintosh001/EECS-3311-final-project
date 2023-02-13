@@ -5,6 +5,8 @@ import project.objects.ErrorMsg;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.List;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -47,6 +49,15 @@ public class UpdateDialog extends JDialog {
         JLabel dateInputLabel = new JLabel("Expiry Date:");
         dateInputLabel.setBounds(10, 200, 200, 50);
         add(dateInputLabel);
+
+        display.getTable().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                int i = display.getTable().getSelectedRow();
+                // create temporary variables to hold product values
+            }
+        });
 
         // add date picker with icon as button
         DatePickerSettings dateSettings = new DatePickerSettings();
