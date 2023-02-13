@@ -4,14 +4,11 @@ import project.logic.ILogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainDisplay {
 
     private ILogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private final String[] updateOptions = {"update product"};
     private JTable table;
 
     public MainDisplay(ILogic logic) {

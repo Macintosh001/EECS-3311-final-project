@@ -48,6 +48,7 @@ public class AddDialog extends JDialog {
         dateInputLabel.setBounds(10, 200, 200, 50);
         add(dateInputLabel);
 
+        // add date picker with an icon for the button
         DatePickerSettings dateSettings = new DatePickerSettings();
         dateSettings.getEnableYearMenu();
         DatePicker datePicker = new DatePicker(dateSettings);
@@ -67,7 +68,7 @@ public class AddDialog extends JDialog {
                     nameInput.getText(),
                     quantityInput.getText(),
                     priceInput.getText(),
-                    datePicker.getText()
+                    datePicker.getDateStringOrEmptyString()
             );
             if (errorMsgList.isEmpty()) {
                 display.regenTable();
