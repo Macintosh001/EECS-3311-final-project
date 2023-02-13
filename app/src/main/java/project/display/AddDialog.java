@@ -1,9 +1,14 @@
 package project.display;
 
+import com.github.lgooddatepicker.demo.FullDemo;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 public class AddDialog extends JDialog {
 
@@ -38,17 +43,22 @@ public class AddDialog extends JDialog {
         priceInput.setBounds(220, 130, 200, 50);
         add(priceInput);
 
+
         JLabel dateInputLabel = new JLabel("Expiry Date:");
         dateInputLabel.setBounds(10, 200, 200, 50);
         add(dateInputLabel);
 
-        JTextField dateInput = new JTextField();
-        dateInput.setBounds(220, 200, 200, 50);
-        add(dateInput);
-
-        JLabel dateHintLabel = new JLabel("Date Format: yyyy-mm-dd");
-        dateHintLabel.setBounds(10, 260, 200, 50);
-        add(dateHintLabel);
+        DatePickerSettings dateSettings = new DatePickerSettings();
+        dateSettings.getEnableYearMenu();
+        DatePicker datePicker = new DatePicker(dateSettings);
+        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
+        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
+        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
+        JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
+        datePickerButton.setText("");
+        datePickerButton.setIcon(dateExampleIcon);
+        datePicker.setBounds(220,200,200,50);
+        add(datePicker);
 
         JButton addButton = new JButton("Add");
         addButton.setBounds(10, 540, 200, 50);
@@ -57,7 +67,7 @@ public class AddDialog extends JDialog {
                     nameInput.getText(),
                     quantityInput.getText(),
                     priceInput.getText(),
-                    dateInput.getText()
+                    datePicker.getText()
             );
             if (errorMsgList.isEmpty()) {
                 display.regenTable();

@@ -47,7 +47,7 @@ public class MainDisplay {
         removeButton.addActionListener(e -> new RemoveDialog(this));
         frame.add(removeButton);
 
-        JComboBox updates = new JComboBox(updateOptions);
+        JButton updates = new JButton("Update Product");
         updates.setBounds(820, 130,200,50);
         frame.add(updates);
         frame.setVisible(true);

@@ -1,9 +1,14 @@
 package project.display;
 
+import com.github.lgooddatepicker.demo.FullDemo;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 public class UpdateDialog extends JDialog {
 
@@ -43,13 +48,19 @@ public class UpdateDialog extends JDialog {
         dateInputLabel.setBounds(10, 200, 200, 50);
         add(dateInputLabel);
 
-        JTextField dateInput = new JTextField();
-        dateInput.setBounds(220, 200, 200, 50);
-        add(dateInput);
+        // add date picker with icon as button
+        DatePickerSettings dateSettings = new DatePickerSettings();
+        dateSettings.getEnableYearMenu();
+        DatePicker datePicker = new DatePicker(dateSettings);
+        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
+        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
+        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
+        JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
+        datePickerButton.setText("");
+        datePickerButton.setIcon(dateExampleIcon);
+        datePicker.setBounds(220,200,200,50);
+        add(datePicker);
 
-        JLabel dateHintLabel = new JLabel("Date Format: yyyy-mm-dd");
-        dateHintLabel.setBounds(10, 260, 200, 50);
-        add(dateHintLabel);
 
         JButton updateButton = new JButton("Update");
         updateButton.setBounds(10, 540, 200, 50);
@@ -58,7 +69,7 @@ public class UpdateDialog extends JDialog {
                     nameInput.getText(),
                     quantityInput.getText(),
                     priceInput.getText(),
-                    dateInput.getText()
+                    datePicker.getText()
             );
             if (errorMsgList.isEmpty()) {
                 display.regenTable();
