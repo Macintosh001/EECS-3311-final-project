@@ -114,3 +114,13 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Fixed the date input issue.
 - Added the meetings log files into the main
 - Added more comments to the Display.java
+
+# Saturday, February 11th
+
+## Behzad
+- Our Dev team shared the .jar file with us.
+
+# Sunday, February 12th
+
+## Behzad 
+- We shared our project(.jar file) with our client team with the description.
