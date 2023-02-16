@@ -3,6 +3,7 @@ package project.persistence;
 import project.objects.Product;
 import project.objects.ProductList;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Persistence implements Database{
     private DatabaseManager db;
@@ -20,19 +21,36 @@ public class Persistence implements Database{
             Statement statement = db.exportStatement();
             ResultSet res = statement.executeQuery("select * from product where barcode =" + barcode.toString());
             Product p = extractProductFromResultSet(res);
+            db.terminate();
             return p;
         } catch(SQLException e) {
             e.printStackTrace();
             return null;
         }
-
-
-
     }
+
 
     @Override
     public ProductList getProductList() {
-        return null;
+        ArrayList<Product> prod = new ArrayList<>();
+
+        try{
+            Statement statement = db.exportStatement();
+            ResultSet res = statement.executeQuery("select barcode from product");
+            if(res != null){
+                Product p;
+                while(res.next()){
+                    p = getProduct(res.getInt("barcode"));
+                    prod.add(p);
+                }
+            }
+            db.terminate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        ProductList query = new ProductList(prod);
+        return query;
     }
 
     @Override
