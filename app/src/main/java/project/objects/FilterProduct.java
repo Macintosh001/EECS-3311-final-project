@@ -43,7 +43,7 @@ public class FilterProduct {
         else if(filterType.toLowerCase().compareTo("quantity") != 0
                 && filterType.toLowerCase().compareTo("name") != 0
                 && filterType.toLowerCase().compareTo("barcode") != 0
-                && filterType.toLowerCase().compareTo("expiryDate") != 0
+                && filterType.toLowerCase().compareTo("expirydate") != 0
                 && filterType.toLowerCase().compareTo("price") != 0){
             return null;
         }
