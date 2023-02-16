@@ -14,6 +14,10 @@ public class ProductList {
         this.productList = productList;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
     public String[][] getTableEntries() {
         String[][] tableEntries = new String[this.productList.size()][5];
 
