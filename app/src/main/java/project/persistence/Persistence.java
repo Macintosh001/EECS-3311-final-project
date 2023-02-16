@@ -16,7 +16,18 @@ public class Persistence implements Database{
 
     @Override
     public Product getProduct(Integer barcode) {
-        return null;
+        try{
+            Statement statement = db.exportStatement();
+            ResultSet res = statement.executeQuery("select * from product where barcode =" + barcode.toString());
+            Product p = extractProductFromResultSet(res);
+            return p;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+
     }
 
     @Override
@@ -65,10 +76,38 @@ public class Persistence implements Database{
 
         String ret = "(" +
                 barcode + ", " +
-                "\'" + name + "\'" + ", " +
+                "'" + name + "'" + ", " +
                 price + ", " +
                 quantity + ", " +
-                "\'"+expiryDate + "\'"+ ")";
+                "'"+expiryDate + "'"+ ")";
         return ret;
     }
+
+    private Product extractProductFromResultSet(ResultSet res){
+        Integer barcode;
+        String name;
+        Float price;
+        Integer quantity;
+        Date expiryDate;
+
+        try{
+            if(res != null){
+                res.next();
+                barcode = res.getInt("barcode");
+                name = res.getString("name");
+                price = res.getFloat("price");
+                quantity = res.getInt("quantity");
+                expiryDate = new Date(res.getDate("expiry_date").getTime());
+                return new Product(barcode, name, quantity, price, expiryDate);
+            }
+            else {
+                return null;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }
