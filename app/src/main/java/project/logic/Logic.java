@@ -120,7 +120,7 @@ public class Logic implements ILogic {
     }
 
     @Override
-    public List<ErrorMsg> updateProduct( String name, String quantity, String price, String expiryDate) {
+    public List<ErrorMsg> updateProduct( String barcode, String name, String quantity, String price, String expiryDate) {
         return null;
     }
 

@@ -22,6 +22,14 @@ public class UpdateDialog extends JDialog {
         setLayout(null);
         setResizable(false);
 
+        JLabel barcodeInputLabel = new JLabel("Barcode:");
+        barcodeInputLabel.setBounds(10, 10, 200, 50);
+        add(barcodeInputLabel);
+
+        JTextField barcodeInput = new JTextField();
+        barcodeInput.setBounds(220, 10, 200, 50);
+        add(barcodeInput);
+
         JLabel nameInputLabel = new JLabel("Name:");
         nameInputLabel.setBounds(10, 10, 200, 50);
         add(nameInputLabel);
@@ -77,6 +85,7 @@ public class UpdateDialog extends JDialog {
         updateButton.setBounds(10, 540, 200, 50);
         updateButton.addActionListener(e -> {
             List<ErrorMsg> errorMsgList = display.getLogic().updateProduct(
+                    barcodeInput.getText(),
                     nameInput.getText(),
                     quantityInput.getText(),
                     priceInput.getText(),
