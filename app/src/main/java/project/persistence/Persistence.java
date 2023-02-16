@@ -39,15 +39,22 @@ public class Persistence implements Database{
 
     @Override
     public void removeProduct(Integer barcode) {
-
+        try {
+            Statement statement = this.db.exportStatement();
+            statement.execute("delete from product where barcode ="+ barcode.toString());
+            this.db.terminate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void replaceProduct(Product product) {
-
+        removeProduct(product.getBarcode());
+        addProduct(product);
     }
 
-    public String getSQLProductString(Product product){
+    private String getSQLProductString(Product product){
         String barcode = product.getBarcode().toString();
         String quantity = product.getQuantity().toString();
         String name = product.getName();
