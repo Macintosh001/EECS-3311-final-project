@@ -1,8 +1,5 @@
 package project.persistence;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * This Class implements database connections and some basic DB functionality needed for an inventory system.
@@ -88,6 +85,9 @@ public class DatabaseManager {
         }
     }
 
+
+
+
     /**
      * Initializes the inventory database. That is, creates a working, but empty, inventory system
      * on the database with create table statements. Must be called, or the equivalent actions taken on the mySQL server
@@ -111,4 +111,36 @@ public class DatabaseManager {
         }
     }
 
+    public boolean databaseExists(){
+        try {
+            this.connectToServer();
+            Statement statement = con.createStatement();
+            ResultSet res = statement.executeQuery("show databases");
+            if(res != null){
+                while(res.next()){
+                    if(res.getString(1).toLowerCase().compareTo("assignment_eecs_3311") == 0){
+                        return true;
+                    }
+                }
+            }
+           return false;
+
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public Statement exportStatement(){
+        try{
+            this.connect();
+            return con.createStatement();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
 }
