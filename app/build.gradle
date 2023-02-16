@@ -19,10 +19,11 @@ repositories {
 
 dependencies {
     // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
     // This dependency is used to connect java to mySQL
     implementation 'com.mysql:mysql-connector-j:8.0.32'
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     // this dependency is used to implement the date picker
     implementation group: 'com.github.lgooddatepicker', name: 'LGoodDatePicker', version: '11.2.1'
@@ -39,4 +40,12 @@ application {
     mainClass = 'project.application.App'
 }
 
+test {
+    useJUnitPlatform()
 
+    maxHeapSize = '1G'
+
+    testLogging {
+        events "passed"
+    }
+}

@@ -12,6 +12,7 @@ import java.util.List;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 
+
 public class UpdateDialog extends JDialog {
 
     public UpdateDialog(MainDisplay display) {
@@ -31,6 +32,7 @@ public class UpdateDialog extends JDialog {
         add(barcodeInput);
 
         JLabel nameInputLabel = new JLabel("Name:");
+
         nameInputLabel.setBounds(10, 10, 200, 50);
         add(nameInputLabel);
 
@@ -98,6 +100,7 @@ public class UpdateDialog extends JDialog {
                 new ErrorDialog(errorMsgList);
             }
         });
+
         add(updateButton);
 
         JButton cancelButton = new JButton("Cancel");
