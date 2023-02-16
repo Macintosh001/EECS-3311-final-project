@@ -119,11 +119,13 @@ public class DatabaseManager {
             if(res != null){
                 while(res.next()){
                     if(res.getString(1).toLowerCase().compareTo("assignment_eecs_3311") == 0){
+                        this.terminate();
                         return true;
                     }
                 }
             }
-           return false;
+            this.terminate();
+            return false;
 
         } catch(SQLException e){
             e.printStackTrace();
@@ -142,5 +144,5 @@ public class DatabaseManager {
         }
     }
 
-    
+
 }
