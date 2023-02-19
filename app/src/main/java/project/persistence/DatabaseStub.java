@@ -1,10 +1,12 @@
 package project.persistence;
 
+import project.objects.FilterProduct;
 import project.objects.Product;
 import project.objects.ProductList;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * An implementation of a database communication class, used for testing only.
@@ -99,5 +101,9 @@ public class DatabaseStub implements Database {
         addProduct(product);
     }
 
+    @Override
+    public ProductList getFilteredProductList(List<FilterProduct> filters){
+        return null;
+    }
 
 }

@@ -1,5 +1,7 @@
 package project.objects;
 
+import java.util.ArrayList;
+
 /**
  * Class represents a filter over a range of values for products.
  * For example, a filter could be created for all products with quantities on the range
@@ -12,7 +14,7 @@ public class FilterProduct {
     //Values barcode, name, quantity, etc.
     private final String filterType;
 
-    //objects of type Integer, Float, Date or String only. Objects should be of the same type.
+    //objects of type Integer, Float, Date or String only. Objects should be of the same type, or one null.
     private final Object rangeStart;
     private final Object rangeEnd;
 
@@ -25,31 +27,11 @@ public class FilterProduct {
      * @return a productFilter ot null if params are not valid to create a filter
      */
     public static FilterProduct FilterProductFactory(String filterType, Object rangeStart, Object rangeEnd){
-        if(rangeStart.getClass().getName().compareTo(rangeEnd.getClass().getName()) != 0){
-           return null;
-        }
-        else if(rangeStart.getClass().getName().compareTo("String") != 0
-                && rangeStart.getClass().getName().compareTo("Integer") != 0
-                && rangeStart.getClass().getName().compareTo("Float") != 0
-                && rangeStart.getClass().getName().compareTo("Date") != 0){
+       if(!validParams(filterType, rangeStart, rangeEnd)){
             return null;
-        }
-        else if(rangeEnd.getClass().getName().compareTo("String") != 0
-                && rangeEnd.getClass().getName().compareTo("Integer") != 0
-                && rangeEnd.getClass().getName().compareTo("Float") != 0
-                && rangeEnd.getClass().getName().compareTo("Date") != 0){
-            return null;
-        }
-        else if(filterType.toLowerCase().compareTo("quantity") != 0
-                && filterType.toLowerCase().compareTo("name") != 0
-                && filterType.toLowerCase().compareTo("barcode") != 0
-                && filterType.toLowerCase().compareTo("expirydate") != 0
-                && filterType.toLowerCase().compareTo("price") != 0){
-            return null;
-        }
-        else{
-            return new FilterProduct(filterType, rangeStart, rangeEnd);
-        }
+       } else{
+           return new FilterProduct(filterType, rangeStart, rangeEnd);
+       }
 
     }
 
@@ -70,4 +52,44 @@ public class FilterProduct {
     public Object getRangeStart() {
         return rangeStart;
     }
+
+    public static boolean validParams(String filterType, Object rangeStart, Object rangeEnd){
+        ArrayList<String> possibleTypes = new ArrayList<>();
+        possibleTypes.add("expirydate");
+        possibleTypes.add("quantity");
+        possibleTypes.add("price");
+        possibleTypes.add("barcode");
+
+        ArrayList<String> possibleObjectTypes = new ArrayList<>();
+        possibleObjectTypes.add("java.lang.float");
+        possibleObjectTypes.add("java.lang.integer");
+        possibleObjectTypes.add("java.util.date");
+
+
+        if(!possibleTypes.contains(filterType.toLowerCase())){
+            return false;
+        }
+        else if(rangeStart == null && rangeEnd == null){
+            return false;
+        }
+        else if(rangeStart == null && possibleObjectTypes.contains(rangeEnd.getClass().getName().toLowerCase())){
+            return true;
+        }
+        else if(rangeEnd == null && possibleObjectTypes.contains(rangeStart.getClass().getName().toLowerCase())){
+            return true;
+        }
+        else if(rangeEnd != null && !possibleObjectTypes.contains(rangeEnd.getClass().getName().toLowerCase())){
+            return false;
+        }
+        else if(rangeStart != null && !possibleObjectTypes.contains(rangeStart.getClass().getName().toLowerCase())){
+            return false;
+        }
+        else if(rangeEnd != null && rangeStart != null && rangeEnd.getClass().getName().toLowerCase().compareTo(rangeStart.getClass().getName().toLowerCase()) != 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }

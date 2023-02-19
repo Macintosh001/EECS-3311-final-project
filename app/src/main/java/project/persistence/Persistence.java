@@ -1,9 +1,11 @@
 package project.persistence;
 
+import project.objects.FilterProduct;
 import project.objects.Product;
 import project.objects.ProductList;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Persistence implements Database{
     private DatabaseManager db;
@@ -127,5 +129,73 @@ public class Persistence implements Database{
         }
     }
 
+    @Override
+    public ProductList getFilteredProductList(List<FilterProduct> filters){
+        String filterString = this.getFilterString(filters);
+        try{
+            Statement statement = db.exportStatement();
+            ResultSet res = statement.executeQuery(filterString);
+            ProductList productList = this.extractProductListFromResultSet(res);
+            db.terminate();
+            return productList;
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private ProductList extractProductListFromResultSet(ResultSet res){
+        ArrayList<Product> prodList= new ArrayList<>();
+        try{
+            if(res != null){
+                while(res.next()){
+                    Product p = this.getProduct(res.getInt("barcode"));
+                    prodList.add(p);
+                }
+                ProductList ret = new ProductList(prodList);
+                return ret;
+            }
+            return null;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private String getFilterString(List<FilterProduct> filters){
+        StringBuilder filterString = new StringBuilder("select barcode from Product where ");
+        int count = 0;
+        for(FilterProduct filter: filters){
+            String rangeStart;
+            String rangeEnd;
+            if(filter.getRangeStart() != null && filter.getRangeStart().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                java.util.Date date = (java.util.Date) filter.getRangeStart();
+                java.sql.Date dateStart = new java.sql.Date(date.getTime());
+                rangeStart = dateStart.toString();
+            }
+            else{
+                rangeStart = filter.getRangeStart().toString();
+            }
+
+
+            if(filter.getRangeEnd() != null && filter.getRangeEnd().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                java.util.Date date = (java.util.Date) filter.getRangeEnd();
+                java.sql.Date dateEnd = new java.sql.Date(date.getTime());
+                rangeEnd = dateEnd.toString();
+            }
+            else{
+                rangeEnd = filter.getRangeEnd().toString();
+            }
+
+            if(count == 0){
+                filterString.append(filter.getFilterType()).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+            }
+            else {
+                filterString.append(" AND ").append(filter.getFilterType()).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+            }
+            count++;
+        } //end for
+        return filterString.toString();
+    }
 
 }
