@@ -162,45 +162,99 @@ public class Persistence implements Database{
         }
     }
 
-    private String getFilterString(List<FilterProduct> filters){
+    public String getFilterString(List<FilterProduct> filters){
         StringBuilder filterString = new StringBuilder("select barcode from Product where ");
         int count = 0;
         for(FilterProduct filter: filters){
             String rangeStart;
             String rangeEnd;
             String filterType;
-            if(filter.getRangeStart() != null && filter.getRangeStart().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
-                java.util.Date date = (java.util.Date) filter.getRangeStart();
-                java.sql.Date dateStart = new java.sql.Date(date.getTime());
-                rangeStart = dateStart.toString();
+            if(filter.getRangeStart() == null && filter.getRangeEnd() != null){
+
+                if(filter.getRangeEnd().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                    java.util.Date date = (java.util.Date) filter.getRangeEnd();
+                    java.sql.Date dateEnd = new java.sql.Date(date.getTime());
+                    rangeEnd = dateEnd.toString();
+                }
+                else{
+                    rangeEnd = filter.getRangeEnd().toString();
+                }
+
+                if(filter.getFilterType().toLowerCase().compareTo("expirydate") == 0){
+                    filterType = "expiry_date";
+                }
+                else{
+                    filterType = filter.getFilterType();
+                }
+
+                if(count == 0){
+                    filterString.append(filterType).append(" <= ").append("'").append(rangeEnd).append("'");
+                }
+                else {
+                    filterString.append(" AND ").append(filterType).append(" <= ").append("'").append(rangeEnd).append("'");
+                }
+                count++;
             }
-            else{
-                rangeStart = filter.getRangeStart().toString();
+            else if(filter.getRangeEnd() == null && filter.getRangeStart() != null){
+                if(filter.getRangeStart().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                    java.util.Date date = (java.util.Date) filter.getRangeStart();
+                    java.sql.Date dateStart = new java.sql.Date(date.getTime());
+                    rangeStart = dateStart.toString();
+                }
+                else{
+                    rangeStart = filter.getRangeStart().toString();
+                }
+                if(filter.getFilterType().toLowerCase().compareTo("expirydate") == 0){
+                    filterType = "expiry_date";
+                }
+                else{
+                    filterType = filter.getFilterType();
+                }
+
+                if(count == 0){
+                    filterString.append(filterType).append(" >= ").append("'").append(rangeStart).append("'");
+                }
+                else {
+                    filterString.append(" AND ").append(filterType).append(" >= ").append("'").append(rangeStart).append("'");
+                }
+                count++;
+            }
+            else if(filter.getRangeEnd() != null && filter.getRangeStart() != null){
+                if(filter.getRangeStart().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                    java.util.Date date = (java.util.Date) filter.getRangeStart();
+                    java.sql.Date dateStart = new java.sql.Date(date.getTime());
+                    rangeStart = dateStart.toString();
+                }
+                else{
+                    rangeStart = filter.getRangeStart().toString();
+                }
+
+                if(filter.getRangeEnd().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
+                    java.util.Date date = (java.util.Date) filter.getRangeEnd();
+                    java.sql.Date dateEnd = new java.sql.Date(date.getTime());
+                    rangeEnd = dateEnd.toString();
+                }
+                else{
+                    rangeEnd = filter.getRangeEnd().toString();
+                }
+
+                if(filter.getFilterType().toLowerCase().compareTo("expirydate") == 0){
+                    filterType = "expiry_date";
+                }
+                else{
+                    filterType = filter.getFilterType();
+                }
+
+                if(count == 0){
+                    filterString.append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+                }
+                else {
+                    filterString.append(" AND ").append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+                }
+                count++;
             }
 
-            if(filter.getRangeEnd() != null && filter.getRangeEnd().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
-                java.util.Date date = (java.util.Date) filter.getRangeEnd();
-                java.sql.Date dateEnd = new java.sql.Date(date.getTime());
-                rangeEnd = dateEnd.toString();
-            }
-            else{
-                rangeEnd = filter.getRangeEnd().toString();
-            }
 
-            if(filter.getFilterType().toLowerCase().compareTo("expirydate") == 0){
-                filterType = "expiry_date";
-            }
-            else{
-                filterType = filter.getFilterType();
-            }
-
-            if(count == 0){
-                filterString.append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
-            }
-            else {
-                filterString.append(" AND ").append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
-            }
-            count++;
         } //end for
         return filterString.toString();
     }
