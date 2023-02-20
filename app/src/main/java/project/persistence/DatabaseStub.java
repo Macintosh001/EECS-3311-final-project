@@ -125,9 +125,25 @@ public class DatabaseStub implements Database {
 
     private ArrayList<Product> quantityFilter(ArrayList<Product> input, Integer start, Integer end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
-        for(Product p: input){
-            if(p.getQuantity() > end || p.getQuantity() < start){
-                leftOver.remove(p);
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getQuantity() > end){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getQuantity() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getQuantity() > end || p.getQuantity() < start){
+                    leftOver.remove(p);
+                }
             }
         }
         return leftOver;
@@ -135,19 +151,52 @@ public class DatabaseStub implements Database {
 
     private ArrayList<Product> barcodeFilter(ArrayList<Product> input, Integer start, Integer end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
-        for(Product p: input){
-            if(p.getBarcode() > end || p.getBarcode() < start){
-                leftOver.remove(p);
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getBarcode() > end){
+                    leftOver.remove(p);
+                }
             }
         }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getBarcode() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getBarcode() > end || p.getBarcode() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+
         return leftOver;
     }
 
     private ArrayList<Product> priceFilter(ArrayList<Product> input, Float start, Float end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
-        for(Product p: input){
-            if(p.getPrice() > end || p.getPrice() < start){
-                leftOver.remove(p);
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getPrice() > end){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getPrice() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getPrice() > end || p.getPrice() < start){
+                    leftOver.remove(p);
+                }
             }
         }
         return leftOver;
@@ -155,9 +204,25 @@ public class DatabaseStub implements Database {
 
     private ArrayList<Product> dateFilter(ArrayList<Product> input, java.util.Date start, java.util.Date end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
-        for(Product p: input){
-            if(p.getExpityDate().after(end) || p.getExpityDate().before(start)){
-                leftOver.remove(p);
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getExpityDate().after(end)){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getExpityDate().before(start)){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getExpityDate().after(end) || p.getExpityDate().before(start)){
+                    leftOver.remove(p);
+                }
             }
         }
         return leftOver;
