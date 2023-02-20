@@ -168,6 +168,7 @@ public class Persistence implements Database{
         for(FilterProduct filter: filters){
             String rangeStart;
             String rangeEnd;
+            String filterType;
             if(filter.getRangeStart() != null && filter.getRangeStart().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
                 java.util.Date date = (java.util.Date) filter.getRangeStart();
                 java.sql.Date dateStart = new java.sql.Date(date.getTime());
@@ -176,7 +177,6 @@ public class Persistence implements Database{
             else{
                 rangeStart = filter.getRangeStart().toString();
             }
-
 
             if(filter.getRangeEnd() != null && filter.getRangeEnd().getClass().getName().toLowerCase().compareTo("java.util.date") == 0){
                 java.util.Date date = (java.util.Date) filter.getRangeEnd();
@@ -187,11 +187,18 @@ public class Persistence implements Database{
                 rangeEnd = filter.getRangeEnd().toString();
             }
 
+            if(filter.getFilterType().toLowerCase().compareTo("expirydate") == 0){
+                filterType = "expiry_date";
+            }
+            else{
+                filterType = filter.getFilterType();
+            }
+
             if(count == 0){
-                filterString.append(filter.getFilterType()).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+                filterString.append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
             }
             else {
-                filterString.append(" AND ").append(filter.getFilterType()).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
+                filterString.append(" AND ").append(filterType).append(" between ").append("'").append(rangeStart).append("'").append(" and ").append("'").append(rangeEnd).append("'");
             }
             count++;
         } //end for
