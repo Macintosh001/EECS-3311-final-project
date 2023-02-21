@@ -17,6 +17,8 @@ public class InitialDisplay {
 
     public InitialDisplay(){
 
+        this.logic = logic;
+
         // instantiate the window, fix the size ect.
         frame = new JFrame("Landing Page");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

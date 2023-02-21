@@ -14,6 +14,7 @@ public class MainDisplay {
 
     public MainDisplay(ILogic logic) {
 
+        this.logic = logic;
         // First we will construct all the UI elements.
 
         // This is the actual window.
@@ -27,7 +28,7 @@ public class MainDisplay {
         // This is the table containing all the products
         table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
         table.setEnabled(false);
-        table.setBackground(Color.LIGHT_GRAY);
+        //table.setBackground(Color.LIGHT_GRAY);
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10, 10, 800, 700);
         frame.add(tablePane);
