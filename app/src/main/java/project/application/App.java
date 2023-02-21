@@ -3,6 +3,7 @@
  */
 package project.application;
 
+import project.display.InitialDisplay;
 import project.display.MainDisplay;
 import project.logic.ILogic;
 import project.logic.Logic;
@@ -16,6 +17,7 @@ public class App {
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
         ILogic logic = new Logic(database, 2);
-        MainDisplay display = new MainDisplay(logic);
+        //MainDisplay display = new MainDisplay(logic);
+        InitialDisplay init = new InitialDisplay();
     }
 }
