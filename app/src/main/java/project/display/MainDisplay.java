@@ -14,8 +14,6 @@ public class MainDisplay {
 
     public MainDisplay(ILogic logic) {
 
-        this.logic = logic;
-
         // First we will construct all the UI elements.
 
         // This is the actual window.

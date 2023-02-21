@@ -12,12 +12,12 @@ public class InitialDisplay {
 
     private JFrame frame;
     private ILogic logic;
+    private final String user = "user";
+    private final String passw = "pass123";
 
     public InitialDisplay(){
 
-        this.logic = logic;
         // instantiate the window, fix the size ect.
-        DefaultTableModel tableModel = new DefaultTableModel();
         frame = new JFrame("Landing Page");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300,275);
@@ -58,10 +58,17 @@ public class InitialDisplay {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(managerButton.isSelected()){
+                // need to handle username and password info here
+                String p = new String(password.getPassword());
+                String u = usernameInput.getText();
+
+                if(!(p.equals("pass123")&& u.equals("user"))){
+                    JFrame f = new JFrame();
+                    JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
+                }
+                if(managerButton.isSelected() || employeeButton.isSelected()) {
                     MainDisplay mainDisplay = new MainDisplay(logic);
-                } else {
-                    MainDisplay mainDisplay = new MainDisplay(logic);
+                    mainDisplay.regenTable();
                 }
             }
         });

@@ -18,6 +18,6 @@ public class App {
         // That's set up when the DatabaseStub is initialized.
         ILogic logic = new Logic(database, 2);
         //MainDisplay display = new MainDisplay(logic);
-        InitialDisplay init = new InitialDisplay();
+       InitialDisplay init = new InitialDisplay();
     }
 }
