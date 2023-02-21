@@ -162,7 +162,7 @@ public class Persistence implements Database{
         }
     }
 
-    public String getFilterString(List<FilterProduct> filters){
+    private String getFilterString(List<FilterProduct> filters){
         StringBuilder filterString = new StringBuilder("select barcode from Product where ");
         int count = 0;
         for(FilterProduct filter: filters){
