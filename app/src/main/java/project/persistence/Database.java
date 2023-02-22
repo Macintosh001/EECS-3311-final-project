@@ -1,7 +1,10 @@
 package project.persistence;
 
+import project.objects.FilterProduct;
 import project.objects.Product;
 import project.objects.ProductList;
+
+import java.util.List;
 
 /**
  * The database interface contains operations for interacting with a database.
@@ -48,4 +51,5 @@ public interface Database {
      */
     public void replaceProduct(Product product);
 
+    public ProductList getFilteredProductList(List<FilterProduct> filters);
 }
