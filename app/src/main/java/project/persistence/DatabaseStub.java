@@ -1,10 +1,11 @@
 package project.persistence;
 
+import project.objects.FilterProduct;
 import project.objects.Product;
-import project.objects.ProductList;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * An implementation of a database communication class, used for testing only.
@@ -52,13 +53,11 @@ public class DatabaseStub implements Database {
     }
 
     /**
-     *
      * @return a productList representing the complete set of objects of a stub
      */
     @Override
-    public ProductList getProductList() {
-        ProductList ret = new ProductList(dbStub);
-        return ret;
+    public List<Product> getProductList() {
+        return dbStub;
     }
 
 
@@ -99,5 +98,131 @@ public class DatabaseStub implements Database {
         addProduct(product);
     }
 
+    @Override
+    public ProductList getFilteredProductList(List<FilterProduct> filters){
+        ArrayList<Product> leftOver = (ArrayList<Product>) this.dbStub.clone();
+
+        for(FilterProduct filt: filters){
+            if(filt.getFilterType().toLowerCase().compareTo("quantity") == 0){
+                leftOver = quantityFilter(leftOver, (Integer) filt.getRangeStart(), (Integer) filt.getRangeEnd());
+            }
+            else if(filt.getFilterType().toLowerCase().compareTo("price") == 0){
+                leftOver = priceFilter(leftOver, (Float) filt.getRangeStart(), (Float) filt.getRangeEnd());
+            }
+            else if(filt.getFilterType().toLowerCase().compareTo("barcode") == 0){
+                leftOver = barcodeFilter(leftOver, (Integer) filt.getRangeStart(), (Integer) filt.getRangeEnd());
+            }
+            else if(filt.getFilterType().toLowerCase().compareTo("expirydate") == 0){
+                leftOver = dateFilter(leftOver, (java.util.Date) filt.getRangeStart(), (java.util.Date) filt.getRangeEnd());
+            }
+        }
+
+        return new ProductList(leftOver);
+    }
+
+    private ArrayList<Product> quantityFilter(ArrayList<Product> input, Integer start, Integer end){
+        ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getQuantity() > end){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getQuantity() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getQuantity() > end || p.getQuantity() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        return leftOver;
+    }
+
+    private ArrayList<Product> barcodeFilter(ArrayList<Product> input, Integer start, Integer end){
+        ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getBarcode() > end){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getBarcode() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getBarcode() > end || p.getBarcode() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+
+        return leftOver;
+    }
+
+    private ArrayList<Product> priceFilter(ArrayList<Product> input, Float start, Float end){
+        ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getPrice() > end){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getPrice() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getPrice() > end || p.getPrice() < start){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        return leftOver;
+    }
+
+    private ArrayList<Product> dateFilter(ArrayList<Product> input, java.util.Date start, java.util.Date end){
+        ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
+        if(start  == null && end != null){
+            for(Product p: input){
+                if(p.getExpityDate().after(end)){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end == null){
+            for(Product p: input){
+                if(p.getExpityDate().before(start)){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        else if(start != null && end != null){
+            for(Product p: input){
+                if(p.getExpityDate().after(end) || p.getExpityDate().before(start)){
+                    leftOver.remove(p);
+                }
+            }
+        }
+        return leftOver;
+    }
 
 }

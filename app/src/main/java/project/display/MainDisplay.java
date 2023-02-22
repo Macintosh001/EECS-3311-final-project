@@ -8,20 +8,24 @@ import java.awt.*;
 
 public class MainDisplay {
 
-    private ILogic logic;
+    private ILogic logic = null;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private JTable table;
+    private final JTable table;
+
+    public MainDisplay(){
+
+        this.table = new JTable();
+    }
 
     public MainDisplay(ILogic logic) {
 
         this.logic = logic;
-
         // First we will construct all the UI elements.
 
         // This is the actual window.
         JFrame frame = new JFrame("T.I.M.");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280 + 2, 720 + 30);
+        frame.setSize(1050, 720);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setResizable(false);
@@ -29,7 +33,7 @@ public class MainDisplay {
         // This is the table containing all the products
         table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
         table.setEnabled(false);
-        table.setBackground(Color.LIGHT_GRAY);
+        //table.setBackground(Color.LIGHT_GRAY);
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10, 10, 800, 700);
         frame.add(tablePane);
