@@ -38,6 +38,4 @@ public class ManagerView extends MainDisplay{
 
         frame.setVisible(true);
     }
-
-
 }
