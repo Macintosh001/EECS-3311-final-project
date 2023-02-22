@@ -2,7 +2,6 @@ package project.persistence;
 
 import project.objects.FilterProduct;
 import project.objects.Product;
-import project.objects.ProductList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,13 +53,11 @@ public class DatabaseStub implements Database {
     }
 
     /**
-     *
      * @return a productList representing the complete set of objects of a stub
      */
     @Override
-    public ProductList getProductList() {
-        ProductList ret = new ProductList(dbStub);
-        return ret;
+    public List<Product> getProductList() {
+        return dbStub;
     }
 
 

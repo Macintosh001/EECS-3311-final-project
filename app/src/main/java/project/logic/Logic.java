@@ -2,7 +2,6 @@ package project.logic;
 
 import project.objects.ErrorMsg;
 import project.objects.Product;
-import project.objects.ProductList;
 import project.persistence.Database;
 
 import java.text.ParseException;

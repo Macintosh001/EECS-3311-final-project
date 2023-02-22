@@ -2,7 +2,7 @@ package project.persistence;
 
 import project.objects.FilterProduct;
 import project.objects.Product;
-import project.objects.ProductList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Persistence implements Database{
 
 
     @Override
-    public ProductList getProductList() {
+    public List<Product> getProductList() {
         ArrayList<Product> prod = new ArrayList<>();
 
         try{
@@ -51,8 +51,7 @@ public class Persistence implements Database{
             e.printStackTrace();
         }
 
-        ProductList query = new ProductList(prod);
-        return query;
+        return prod;
     }
 
     @Override
@@ -130,12 +129,12 @@ public class Persistence implements Database{
     }
 
     @Override
-    public ProductList getFilteredProductList(List<FilterProduct> filters){
+    public List<Product> getFilteredProductList(List<FilterProduct> filters){
         String filterString = this.getFilterString(filters);
         try{
             Statement statement = db.exportStatement();
             ResultSet res = statement.executeQuery(filterString);
-            ProductList productList = this.extractProductListFromResultSet(res);
+            List<Product> productList = this.extractProductListFromResultSet(res);
             db.terminate();
             return productList;
         } catch(SQLException e){
@@ -144,7 +143,7 @@ public class Persistence implements Database{
         }
     }
 
-    private ProductList extractProductListFromResultSet(ResultSet res){
+    private List<Product> extractProductListFromResultSet(ResultSet res){
         ArrayList<Product> prodList= new ArrayList<>();
         try{
             if(res != null){
@@ -152,8 +151,7 @@ public class Persistence implements Database{
                     Product p = this.getProduct(res.getInt("barcode"));
                     prodList.add(p);
                 }
-                ProductList ret = new ProductList(prodList);
-                return ret;
+                return prodList;
             }
             return null;
         }catch(SQLException e){

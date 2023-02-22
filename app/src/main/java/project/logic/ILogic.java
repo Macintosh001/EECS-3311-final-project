@@ -1,7 +1,7 @@
 package project.logic;
 
 import project.objects.ErrorMsg;
-import project.objects.ProductList;
+
 import java.util.List;
 
 public interface ILogic {

@@ -2,7 +2,6 @@ package project.persistence;
 
 import project.objects.FilterProduct;
 import project.objects.Product;
-import project.objects.ProductList;
 
 import java.util.List;
 
@@ -25,10 +24,9 @@ public interface Database {
     public Product getProduct(Integer barcode);
 
     /**
-     *
      * @return a productList representing the objects of a db/stub
      */
-    public ProductList getProductList();
+    public List<Product> getProductList();
 
 
     //Modification of DB or stub
@@ -51,5 +49,5 @@ public interface Database {
      */
     public void replaceProduct(Product product);
 
-    public ProductList getFilteredProductList(List<FilterProduct> filters);
+    public List<Product> getFilteredProductList(List<FilterProduct> filters);
 }
