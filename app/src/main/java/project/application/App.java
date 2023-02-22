@@ -21,5 +21,7 @@ public class App {
        //InitialDisplay init = new InitialDisplay();
         //CouponManagerView coupon = new CouponManagerView(logic);
         //SaleView sale = new SaleView(logic);
+        //EmployeeView emp = new EmployeeView(logic);
+        ManagerView mv = new ManagerView(logic);
     }
 }

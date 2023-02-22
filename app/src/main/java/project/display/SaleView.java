@@ -25,10 +25,10 @@ public class SaleView extends MainDisplay{
         tablePane.setBounds(10,10,300,400);
         frame.add(tablePane);
 
-        JButton addButton = new JButton("Scan");
-        addButton.setBounds(350, 10, 200, 50);
-        addButton.addActionListener(e -> new AddDialog(this));
-        frame.add(addButton);
+        JButton scanButton = new JButton("Scan");
+        scanButton.setBounds(350, 10, 200, 50);
+        scanButton.addActionListener(e -> new ScanDialog(this));
+        frame.add(scanButton);
 
         JButton applyCouponButton = new JButton("Apply Coupon");
         applyCouponButton.setBounds(350, 70, 200, 50);
