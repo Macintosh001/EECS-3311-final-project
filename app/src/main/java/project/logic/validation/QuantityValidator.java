@@ -13,17 +13,13 @@ public class QuantityValidator implements Validator<Integer> {
         Integer result = null;
         List<ErrorMsg> errorMsgs = new ArrayList<>();
 
-        if (entry.equals("")) {
-            errorMsgs.add(new ErrorMsg("Quantity cannot be blank!"));
-        } else {
-            try {
-                result = Integer.parseInt(entry);
-                if (result < 0) {
-                    errorMsgs.add(new ErrorMsg("Quantity cannot be negative!"));
-                }
-            } catch (NumberFormatException ex) {
-                errorMsgs.add(new ErrorMsg("Quantity must be a whole number!"));
+        try {
+            result = Integer.parseInt(entry);
+            if (result < 0) {
+                errorMsgs.add(new ErrorMsg("Quantity cannot be negative!"));
             }
+        } catch (NumberFormatException ex) {
+            errorMsgs.add(new ErrorMsg("Quantity must be a whole number!"));
         }
 
         if (errorMsgs.isEmpty()) {

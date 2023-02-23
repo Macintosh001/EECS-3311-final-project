@@ -12,17 +12,13 @@ public class PriceValidator implements Validator<Float> {
         Float result = null;
         List<ErrorMsg> errorMsgs = new ArrayList<>();
 
-        if (entry.equals("")) {
-            errorMsgs.add(new ErrorMsg("Price cannot be blank!"));
-        } else {
-            try {
-                result = Float.parseFloat(entry);
-                if (result < 0) {
-                    errorMsgs.add(new ErrorMsg("Price cannot be negative!"));
-                }
-            } catch (NumberFormatException ex) {
-                errorMsgs.add(new ErrorMsg("Price must be a decimal number!"));
+        try {
+            result = Float.parseFloat(entry);
+            if (result < 0) {
+                errorMsgs.add(new ErrorMsg("Price cannot be negative!"));
             }
+        } catch (NumberFormatException ex) {
+            errorMsgs.add(new ErrorMsg("Price must be a decimal number!"));
         }
 
         if (errorMsgs.isEmpty()) {

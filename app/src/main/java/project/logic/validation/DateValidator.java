@@ -15,14 +15,10 @@ public class DateValidator implements Validator<Date> {
         Date result = null;
         List<ErrorMsg> errorMsgs = new ArrayList<>();
 
-        if (entry.equals("")) {
-            errorMsgs.add(new ErrorMsg("Expiry date cannot be empty!"));
-        } else {
-            try {
-                result = new SimpleDateFormat("yyyy-MM-dd").parse(entry);
-            } catch (ParseException t) {
-                errorMsgs.add(new ErrorMsg("Invalid date. Format is 'yyyy-mm-dd'"));
-            }
+        try {
+            result = new SimpleDateFormat("yyyy-MM-dd").parse(entry);
+        } catch (ParseException t) {
+            errorMsgs.add(new ErrorMsg("Invalid date. Format is 'yyyy-mm-dd'"));
         }
 
         if (errorMsgs.isEmpty()) {
