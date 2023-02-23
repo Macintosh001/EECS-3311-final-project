@@ -21,7 +21,7 @@ public class Persistence implements Database{
     public Product getProduct(Integer barcode) {
         try{
             Statement statement = db.exportStatement();
-            ResultSet res = statement.executeQuery("select * from product where barcode =" + barcode.toString());
+            ResultSet res = statement.executeQuery("select * from PRODUCT where barcode =" + barcode.toString());
             Product p = extractProductFromResultSet(res);
             db.terminate();
             return p;
@@ -38,7 +38,7 @@ public class Persistence implements Database{
 
         try{
             Statement statement = db.exportStatement();
-            ResultSet res = statement.executeQuery("select barcode from product");
+            ResultSet res = statement.executeQuery("select barcode from PRODUCT");
             if(res != null){
                 Product p;
                 while(res.next()){
@@ -59,7 +59,7 @@ public class Persistence implements Database{
         String values = this.getSQLProductString(product);
         try {
             Statement statement = this.db.exportStatement();
-            statement.execute("insert into product values " + values);
+            statement.execute("insert into PRODUCT values " + values);
             this.db.terminate();
         } catch(SQLException e){
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class Persistence implements Database{
     public void removeProduct(Integer barcode) {
         try {
             Statement statement = this.db.exportStatement();
-            statement.execute("delete from product where barcode ="+ barcode.toString());
+            statement.execute("delete from PRODUCT where barcode ="+ barcode.toString());
             this.db.terminate();
         } catch(SQLException e){
             e.printStackTrace();
@@ -161,7 +161,7 @@ public class Persistence implements Database{
     }
 
     private String getFilterString(List<FilterProduct> filters){
-        StringBuilder filterString = new StringBuilder("select barcode from Product where ");
+        StringBuilder filterString = new StringBuilder("select barcode from PRODUCT where ");
         int count = 0;
         for(FilterProduct filter: filters){
             String rangeStart;

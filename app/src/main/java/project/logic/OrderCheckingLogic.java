@@ -1,11 +1,14 @@
 package project.logic;
 
+import project.logic.validation.DateValidator;
 import project.logic.validation.PriceValidator;
+import project.logic.validation.QuantityValidator;
 import project.objects.ErrorMsg;
 import project.objects.Result;
 import project.persistence.Database;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OrderCheckingLogic {
@@ -47,20 +50,37 @@ public class OrderCheckingLogic {
         }
 
         // Validate quantity entries
-        PriceValidator priceValidator = new PriceValidator();
+        QuantityValidator quantityValidator = new QuantityValidator();
 
-        Result<Float, List<ErrorMsg>> minPriceResult = priceValidator.validate(minPrice);
-        if (minPriceResult.getError() == null) {
+        Result<Integer, List<ErrorMsg>> minQuantityResult = quantityValidator.validate(minQuantity);
+        if (minQuantityResult.getError() == null) {
             // Yay!
         } else {
-            errorMsgs.addAll(minPriceResult.getError());
+            errorMsgs.addAll(minQuantityResult.getError());
         }
 
-        Result<Float, List<ErrorMsg>> maxPriceResult = priceValidator.validate(maxPrice);
-        if (maxPriceResult.getError() == null) {
+        Result<Integer, List<ErrorMsg>> maxQuantityResult = quantityValidator.validate(maxQuantity);
+        if (maxQuantityResult.getError() == null) {
             // Yay!
         } else {
-            errorMsgs.addAll(maxPriceResult.getError());
+            errorMsgs.addAll(maxQuantityResult.getError());
+        }
+
+        // Validate quantity entries
+        DateValidator dateValidator = new DateValidator();
+
+        Result<Date, List<ErrorMsg>> minDateResult = dateValidator.validate(minExpiryDate);
+        if (minDateResult.getError() == null) {
+            // Yay!
+        } else {
+            errorMsgs.addAll(minDateResult.getError());
+        }
+
+        Result<Date, List<ErrorMsg>> maxDateResult = dateValidator.validate(maxExpiryDate);
+        if (maxDateResult.getError() == null) {
+            // Yay!
+        } else {
+            errorMsgs.addAll(maxDateResult.getError());
         }
 
         if (errorMsgs.isEmpty()) {

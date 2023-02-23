@@ -99,7 +99,7 @@ public class DatabaseStub implements Database {
     }
 
     @Override
-    public ProductList getFilteredProductList(List<FilterProduct> filters){
+    public List<Product> getFilteredProductList(List<FilterProduct> filters){
         ArrayList<Product> leftOver = (ArrayList<Product>) this.dbStub.clone();
 
         for(FilterProduct filt: filters){
@@ -117,7 +117,7 @@ public class DatabaseStub implements Database {
             }
         }
 
-        return new ProductList(leftOver);
+        return leftOver;
     }
 
     private ArrayList<Product> quantityFilter(ArrayList<Product> input, Integer start, Integer end){
