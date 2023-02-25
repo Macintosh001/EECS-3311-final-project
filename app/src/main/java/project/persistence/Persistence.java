@@ -15,6 +15,7 @@ public class Persistence implements Database{
         if(!db.databaseExists()) {
             db.createDB();
         }
+        db.forceCurrentVersion();
     }
 
     @Override
@@ -257,4 +258,7 @@ public class Persistence implements Database{
         return filterString.toString();
     }
 
+
+
+    
 }

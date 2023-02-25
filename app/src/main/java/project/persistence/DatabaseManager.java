@@ -16,7 +16,7 @@ public class DatabaseManager {
 
     public DatabaseManager(){
         //initialize some connection information
-        url = "jdbc:mysql://localhost:3306/Assignment_EECS_3311";
+        url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
         username = "root";
         password = "root1234";
     }
@@ -42,7 +42,7 @@ public class DatabaseManager {
      * @throws: SQLException
      */
     public void connect(){
-        url = "jdbc:mysql://localhost:3306/Assignment_EECS_3311";
+        url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
         try {
             con = DriverManager.getConnection(url, username, password);
         }
@@ -76,7 +76,7 @@ public class DatabaseManager {
         try {
             this.connectToServer();
             Statement statement = con.createStatement();
-            statement.execute("create schema Assignment_EECS_3311");
+            statement.execute("create schema TIM_Assignment_EECS_3311");
             this.terminate();
             this.buildDBSchema();
 
@@ -96,15 +96,50 @@ public class DatabaseManager {
      *
      */
     private void buildDBSchema(){
+            createProductTable();
+            createCouponTable();
+            createOrderableTable();
+    }
+
+    private void createProductTable(){
         try {
             this.connect();
             Statement statement = con.createStatement();
-            statement.execute("create table PRODUCT" +
-                    "(BARCODE INT primary key not null," +
-                    "NAME VARCHAR(500)," +
-                    "PRICE REAL not null check(price >= 0) default(0), " +
-                    "QUANTITY INT not null default(0), " +
-                    "EXPIRY_DATE DATE)");
+            statement.execute("create table product" +
+                    "(barcode int primary key not null," +
+                    "name varchar(500)," +
+                    "price real not null check(price >= 0) default(0), " +
+                    "quantity int not null default(0), " +
+                    "expiry_date date)");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
+    private void createCouponTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table coupon"
+            +"(code varchar(500) primary key not null,"
+            +"discount real not null default(0)" +
+                    ")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
+    private void createOrderableTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table orderable"
+                    +"(name varchar(500) primary key not null,"
+                    +"price real not null check(price >= 0) default(0),"
+                    +"shelf_life int not null check(shelf_life >= 0) default(0)" +
+                    ")");
             this.terminate();
         } catch(SQLException c) {
             c.printStackTrace();
@@ -118,7 +153,42 @@ public class DatabaseManager {
             ResultSet res = statement.executeQuery("show databases");
             if(res != null){
                 while(res.next()){
-                    if(res.getString(1).toLowerCase().compareTo("assignment_eecs_3311") == 0){
+                    if(res.getString(1).toLowerCase().compareTo("tim_assignment_eecs_3311") == 0){
+                        this.terminate();
+                        return true;
+                    }
+                }
+            }
+            this.terminate();
+            return false;
+
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void forceCurrentVersion(){
+        if(!tableFound("coupon")){
+            createCouponTable();
+        }
+        if(!tableFound("product")){
+            createProductTable();
+        }
+        if(!tableFound("orderable")){
+            createOrderableTable();
+        }
+
+    }
+
+    private boolean tableFound(String tableName){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            ResultSet res = statement.executeQuery("show tables");
+            if(res != null){
+                while(res.next()){
+                    if(res.getString(1).toLowerCase().compareTo(tableName.toLowerCase()) == 0){
                         this.terminate();
                         return true;
                     }
