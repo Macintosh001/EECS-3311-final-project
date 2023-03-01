@@ -1,11 +1,11 @@
-# Inventory Management System
+# The Inventory Manager (TIM)
 A very cool and classy project that will get us an A+
 
 ## Documentation
 All relevant documentation can be found in the [wiki](https://github.com/Macintosh001/EECS-3311-final-project/wiki).
 
-## Installation/Run Instructions
-You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the jar file onto your machine.
+## Installation / Run Instructions
+You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the JAR file onto your machine.
 
 ### CLI
 If you're running the app from a CLI then run the following commands `java -jar app.jar`.
@@ -34,3 +34,6 @@ If your .jar is still not working, these steps might help:
 4. In the second pop up, under system variables click on Path > Edit > New. 
 5. Paste the address of the bin folder from earlier with a semi-colon. For example, C:\Program Files\Java\jdk-19\bin; would be pasted. Press ok.
 6. Try to open the .jar file again. If working in the command line, you must restart the terminal before running `java -jar app.jar`again.
+
+## Unit Tests
+We use gradle as out build manager. All our unit tests are stored in `app/src/test/java`. In order to run said tests, simple run `gradle test` in a CLI.
