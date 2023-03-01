@@ -17,7 +17,8 @@ public class DatabaseStub implements Database {
     private ArrayList<Product> dbStub;
 
     public DatabaseStub(){
-        this.dbStub = this.getTestContent();
+//        this.dbStub = this.getTestContent();
+        this.dbStub = new ArrayList<>();
     }
 
     /**

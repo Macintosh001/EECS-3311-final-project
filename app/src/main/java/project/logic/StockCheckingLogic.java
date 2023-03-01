@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderCheckingLogic {
-    private Database db;
+public class StockCheckingLogic {
+    Database db;
 
-    public OrderCheckingLogic(Database db) {
+    public StockCheckingLogic(Database db) {
         this.db = db;
     }
 
@@ -122,13 +122,13 @@ public class OrderCheckingLogic {
         if (errorMsgs.isEmpty()) {
             List<FilterProduct> filters = new ArrayList<>();
 
-            if (oMinPrice != null && oMaxPrice != null) {
+            if (oMinPrice != null || oMaxPrice != null) {
                 filters.add(FilterProduct.FilterProductFactory("price", oMinPrice, oMaxPrice));
             }
-            if (oMinQuantity != null && oMaxQuantity != null) {
+            if (oMinQuantity != null || oMaxQuantity != null) {
                 filters.add(FilterProduct.FilterProductFactory("quantity", oMinQuantity, oMaxQuantity));
             }
-            if (oMinDate != null && oMaxDate != null) {
+            if (oMinDate != null || oMaxDate != null) {
                 filters.add(FilterProduct.FilterProductFactory("expirydate", oMinDate, oMaxDate));
             }
 
