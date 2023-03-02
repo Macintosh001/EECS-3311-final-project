@@ -13,10 +13,10 @@ import java.util.List;
  * Uses fixed starting content so that behavior/outputs are predictable during testing.
  * This is not persistent storage; when a program ends, data is lost.
  */
-public class DatabaseStub implements Database {
+public class ProductDatabaseStub implements ProductDatabase {
     private ArrayList<Product> dbStub;
 
-    public DatabaseStub(){
+    public ProductDatabaseStub(){
         this.dbStub = this.getTestContent();
     }
 

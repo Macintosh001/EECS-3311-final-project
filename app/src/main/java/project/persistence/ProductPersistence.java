@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persistence implements Database{
+public class ProductPersistence implements ProductDatabase {
     private DatabaseManager db;
 
-    public Persistence(){
+    public ProductPersistence(){
         this.db = new DatabaseManager();
         if(!db.databaseExists()) {
             db.createDB();
@@ -260,5 +260,5 @@ public class Persistence implements Database{
 
 
 
-    
+
 }
