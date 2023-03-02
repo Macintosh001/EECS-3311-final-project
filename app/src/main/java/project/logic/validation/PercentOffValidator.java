@@ -6,16 +6,19 @@ import project.objects.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarcodeValidator implements Validator<Integer> {
+public class PercentOffValidator implements Validator<Float> {
     @Override
-    public Result<Integer, List<ErrorMsg>> validate(String entry) {
-        Integer result = null;
+    public Result<Float, List<ErrorMsg>> validate(String entry) {
+        Float result = null;
         List<ErrorMsg> errorMsgs = new ArrayList<>();
 
         try {
-            result = Integer.parseInt(entry);
+            result = Float.parseFloat(entry);
+            if (0.0f <= result && result <= 100.0f) {
+                errorMsgs.add(new ErrorMsg("Discount must be between 0% and 100% off!"));
+            }
         } catch (NumberFormatException ex) {
-            errorMsgs.add(new ErrorMsg("Barcode must be a whole number!"));
+            errorMsgs.add(new ErrorMsg("Discount must be a decimal number!"));
         }
 
         if (errorMsgs.isEmpty()) {

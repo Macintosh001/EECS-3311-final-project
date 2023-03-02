@@ -26,6 +26,7 @@ public class StockCheckingLogicTest {
 
     @Test
     void getFilteredList() {
+        // Set up the stub database.
         Database db = new DatabaseStub();
         StockCheckingLogic logic = new StockCheckingLogic(db);
 
@@ -36,14 +37,18 @@ public class StockCheckingLogicTest {
         db.addProduct(new Product(4, "Chips", 200, 3.99f, new Date(4)));
         db.addProduct(new Product(5, "Cheese", 10, 4.99f, new Date(5)));
 
+        // Test the filter on quantities
         assertEquals(3, logic.getFilteredList("", "",
                 "", "101",
                 "", "").getResult().length);
 
+        // Test the filter on prices
         assertEquals(2, logic.getFilteredList("1.0", "2.0",
                 "", "",
                 "", "").getResult().length);
 
+        // Test invalid inputs
+        // There should be one error for each incorrect entry
         assertEquals(6, logic.getFilteredList("x", "x",
                 "x", "x",
                 "x", "x").getError().size());

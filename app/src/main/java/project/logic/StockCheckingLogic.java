@@ -25,7 +25,7 @@ public class StockCheckingLogic {
      * @return The list in a format usable by TableModel.
      */
     public String[][] getProductList() {
-        return TableEntryGenerator.genTableEntries(db.getProductList());
+        return TableEntryGenerator.genProductTableEntries(db.getProductList());
     }
 
     /**
@@ -57,7 +57,6 @@ public class StockCheckingLogic {
 
         // Validate price entries
         PriceValidator priceValidator = new PriceValidator();
-
 
         if (!minPrice.equals("")) {
             Result<Float, List<ErrorMsg>> minPriceResult = priceValidator.validate(minPrice);
@@ -132,7 +131,7 @@ public class StockCheckingLogic {
                 filters.add(FilterProduct.FilterProductFactory("expirydate", oMinDate, oMaxDate));
             }
 
-            return new Result<>(TableEntryGenerator.genTableEntries(db.getFilteredProductList(filters)), null);
+            return new Result<>(TableEntryGenerator.genProductTableEntries(db.getFilteredProductList(filters)), null);
         } else {
             return new Result<>(null, errorMsgs);
         }

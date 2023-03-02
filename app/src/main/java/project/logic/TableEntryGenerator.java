@@ -1,11 +1,12 @@
 package project.logic;
 
+import project.objects.Coupon;
 import project.objects.Product;
 
 import java.util.List;
 
 public class TableEntryGenerator {
-    public static String[][] genTableEntries(List<Product> list) {
+    public static String[][] genProductTableEntries(List<Product> list) {
         String[][] tableEntries = new String[list.size()][5];
 
         int i = 0;
@@ -15,6 +16,19 @@ public class TableEntryGenerator {
             tableEntries[i][2] = product.getQuantity().toString();
             tableEntries[i][3] = String.format("%.2f", product.getPrice());
             tableEntries[i][4] = product.getExpityDate().toString();
+            i++;
+        }
+
+        return tableEntries;
+    }
+
+    public static String[][] genCouponTableEntries(List<Coupon> list) {
+        String[][] tableEntries = new String[list.size()][2];
+
+        int i = 0;
+        for (Coupon coupon: list) {
+            tableEntries[i][0] = coupon.getCode();
+            tableEntries[i][1] = Double.toString(Math.floor(coupon.getPercentOff() * 100.0f));
             i++;
         }
 

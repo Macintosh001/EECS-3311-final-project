@@ -28,7 +28,10 @@ public class StockManagingLogic extends StockCheckingLogic {
         Integer oBarcode = barcodeResult.getResult();
         boolean hasBarcode = false;
         for (Product p: super.db.getProductList()) {
-            if (p.getBarcode().equals(oBarcode)) hasBarcode = true;
+            if (p.getBarcode().equals(oBarcode)) {
+                hasBarcode = true;
+                break;
+            }
         }
         if (!hasBarcode) {
             errorMsgs.add(new ErrorMsg("Product with barcode '" + barcode + "' does not exist!"));
