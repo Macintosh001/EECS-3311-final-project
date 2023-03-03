@@ -123,7 +123,7 @@ public class DatabaseManager {
             Statement statement = con.createStatement();
             statement.execute("create table coupon"
             +"(code varchar(500) primary key not null,"
-            +"discount real not null default(0)" +
+            +"percent_off real not null default(0)" +
                     ")");
             this.terminate();
         } catch(SQLException c) {
