@@ -98,10 +98,17 @@ public class ProductDatabaseStub implements ProductDatabase {
         addProduct(product);
     }
 
+    /**
+     *  apply a list of filters to the products in storage; output the products that
+     *  meet the criteria of all filter objects in the list of filters.
+     * @param filters a list of filter objects
+     * @return a filtered list of products
+     */
     @Override
     public ArrayList<Product> getFilteredProductList(List<FilterProduct> filters){
         ArrayList<Product> leftOver = (ArrayList<Product>) this.dbStub.clone();
 
+        //apply filters
         for(FilterProduct filt: filters){
             if(filt.getFilterType().toLowerCase().compareTo("quantity") == 0){
                 leftOver = quantityFilter(leftOver, (Integer) filt.getRangeStart(), (Integer) filt.getRangeEnd());
@@ -120,6 +127,16 @@ public class ProductDatabaseStub implements ProductDatabase {
         return leftOver;
     }
 
+    /**
+     * Return the list of products left over after a quantity filter is applied.
+     * That is, if the product has quantity between start and stop,
+     * or above start if stop is null, or below end if start is null, then
+     * the product is part of the returned list
+     * @param input a list of products
+     * @param start a start to the filter range
+     * @param end an end to the filter range
+     * @return the leftover products
+     */
     private ArrayList<Product> quantityFilter(ArrayList<Product> input, Integer start, Integer end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
         if(start  == null && end != null){
@@ -146,6 +163,16 @@ public class ProductDatabaseStub implements ProductDatabase {
         return leftOver;
     }
 
+    /**
+     * Return the list of products left over after a barcode filter is applied.
+     * That is, if the product has a barcode between start and stop,
+     * or above start if stop is null, or below end if start is null, then
+     * the product is part of the returned list
+     * @param input a list of products
+     * @param start a start to the filter range
+     * @param end an end to the filter range
+     * @return the leftover products
+     */
     private ArrayList<Product> barcodeFilter(ArrayList<Product> input, Integer start, Integer end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
         if(start  == null && end != null){
@@ -173,6 +200,16 @@ public class ProductDatabaseStub implements ProductDatabase {
         return leftOver;
     }
 
+    /**
+     * Return the list of products left over after a price filter is applied.
+     * That is, if the product has a price between start and stop,
+     * or above start if stop is null, or below end if start is null, then
+     * the product is part of the returned list
+     * @param input a list of products
+     * @param start a start to the filter range
+     * @param end an end to the filter range
+     * @return the leftover products
+     */
     private ArrayList<Product> priceFilter(ArrayList<Product> input, Float start, Float end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
         if(start  == null && end != null){
@@ -199,6 +236,16 @@ public class ProductDatabaseStub implements ProductDatabase {
         return leftOver;
     }
 
+    /**
+     * Return the list of products left over after a date filter is applied.
+     * That is, if the product has a date between start and stop,
+     * or after start if stop is null, or before end if start is null, then
+     * the product is part of the returned list
+     * @param input a list of products
+     * @param start a start to the filter range
+     * @param end an end to the filter range
+     * @return the leftover products
+     */
     private ArrayList<Product> dateFilter(ArrayList<Product> input, java.util.Date start, java.util.Date end){
         ArrayList<Product> leftOver = (ArrayList<Product>) input.clone();
         if(start  == null && end != null){

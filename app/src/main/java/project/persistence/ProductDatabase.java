@@ -49,5 +49,11 @@ public interface ProductDatabase {
      */
     public void replaceProduct(Product product);
 
+    /**
+     *  apply a list of filters to the products in storage; output the products that
+     *  meet the criteria of all filter objects in the list of filters.
+     * @param filters a list of filter objects
+     * @return a filtered list of products
+     */
     public List<Product> getFilteredProductList(List<FilterProduct> filters);
 }

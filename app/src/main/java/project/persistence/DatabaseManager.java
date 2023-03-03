@@ -86,8 +86,6 @@ public class DatabaseManager {
     }
 
 
-
-
     /**
      * Initializes the inventory database. That is, creates a working, but empty, inventory system
      * on the database with create table statements. Must be called, or the equivalent actions taken on the mySQL server
@@ -101,6 +99,9 @@ public class DatabaseManager {
             createOrderableTable();
     }
 
+    /**
+     * create the product table in the db
+     */
     private void createProductTable(){
         try {
             this.connect();
@@ -117,6 +118,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * create the coupon table in the db
+     */
     private void createCouponTable(){
         try {
             this.connect();
@@ -131,6 +135,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * create the orderable table in the db
+     */
     private void createOrderableTable(){
         try {
             this.connect();
@@ -146,6 +153,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     *
+     * @return true if a database with the name of the database to be created exists, false otherwise
+     */
     public boolean databaseExists(){
         try {
             this.connectToServer();
@@ -168,6 +179,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     Add all missing tables to the database. Used to maintain the current version of the db
+     */
     public void forceCurrentVersion(){
         if(!tableFound("coupon")){
             createCouponTable();
@@ -181,6 +195,11 @@ public class DatabaseManager {
 
     }
 
+    /**
+     *
+     * @param tableName name of a table
+     * @return true if table with tableName exists in db
+     */
     private boolean tableFound(String tableName){
         try {
             this.connect();
@@ -204,6 +223,11 @@ public class DatabaseManager {
     }
 
 
+    /**
+     * Connect to db and create statement object
+     * @return statement object
+     * Note: should call terminate() after use of the exported statement is complete.
+     */
     public Statement exportStatement(){
         try{
             this.connect();

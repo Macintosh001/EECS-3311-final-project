@@ -10,9 +10,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class to interact with the orderable table of the mySQL database.
+ * Storage is persistent. Interact with this class through the interface OrderableDatabase.
+ */
 public class OrderablePersistence implements OrderableDatabase{
     private DatabaseManager db;
 
+    /**
+     * Constructor: initialize fields.
+     * Check if a mySQL database exists; if not, build one on the user's local host server with the
+     * databaseManager field. Force the current version of the database
+     * for those with missing tables.
+     * This way, a user is guaranteed to have a database that supports the operations in this class
+     * before these operations are invoked; this design avoids errors of missing tables or databases.
+     */
     public OrderablePersistence(){
         this.db = new DatabaseManager();
         if(!db.databaseExists()) {
@@ -22,8 +34,14 @@ public class OrderablePersistence implements OrderableDatabase{
     }
 
 
+    /**
+     * Add orderable to the orderable table of the database by first converting the
+     * orderable object to an SQL appropriate string, then executing SQL commands wih this string
+     * @param orderable to be added
+     */
     @Override
     public void addOrderable(Orderable orderable) {
+        //convert to SQL value string
         String values = this.getSQLOrderableString(orderable);
         try {
             Statement statement = this.db.exportStatement();
@@ -34,6 +52,10 @@ public class OrderablePersistence implements OrderableDatabase{
         }
     }
 
+    /**
+     * Delete an orderable with the given name from the orderable table in the database.
+     * @param name the unique name of the orderable to be removed
+     */
     @Override
     public void removeOrderable(String name) {
         try {
@@ -45,17 +67,31 @@ public class OrderablePersistence implements OrderableDatabase{
         }
     }
 
+    /**
+     * Update an orderable in storage by deleting it from the orderable table and adding
+     *  a new orderable with the same name but updated information to the table.
+     *   If no orderable with the same name as the input exists in storage, a new orderable will be added to storage.
+     *  @param orderable updated orderable object
+     */
     @Override
     public void replaceOrderable(Orderable orderable) {
         this.removeOrderable(orderable.getName());
         this.addOrderable(orderable);
     }
 
+    /**
+     * Retrieve an orderable with the given name from the database. Build and return an orderable object
+     * that is equivalent to the retrieved database entity.
+     * Database unchanged by this method
+     * @param name name of the retrieved orderable
+     * @return a orderable object representing the coupon orderable in the database.
+     */
     @Override
     public Orderable getOrderable(String name) {
         try{
             Statement statement = db.exportStatement();
             ResultSet res = statement.executeQuery("select * from orderable where name = " + "'" + name+ "'");
+            //get an orderable object from the query results
             Orderable ord = extractOrderableFromResultSet(res);
             db.terminate();
             return ord;
@@ -67,6 +103,10 @@ public class OrderablePersistence implements OrderableDatabase{
 
 
 
+    /**
+     * Returns a list of orderables representing the current content of the orderable table in the database
+     * @return a list of orderables equivalent to the data in the orderable table.
+     */
     @Override
     public List<Orderable> getOrderableList() {
         ArrayList<Orderable> ords = new ArrayList<>();
@@ -83,6 +123,14 @@ public class OrderablePersistence implements OrderableDatabase{
     }
 
 
+    /**
+     * Convert orderable object into a string of its field values in a form
+     * useful for JDBC SQL statements.
+     * Used to convert an orderable into a form in which it is addable to the orderable table of the database.
+     * Helper method for addOrderable()
+     * @param orderable a orderable object
+     * @return a string of the field values for the orderable, that is addable to the orderable table in the database
+     */
     private String getSQLOrderableString(Orderable orderable){
         String price = orderable.getPrice().toString();
         String shelfLife = orderable.getShelfLife().toString();
@@ -92,6 +140,13 @@ public class OrderablePersistence implements OrderableDatabase{
     }
 
 
+    /**
+     *  Takes a ResultSet object that was created from querying a single orderable entity from the orderable table,
+     *  and converts this result set into an orderable object that stores equivalent information.
+     *  This is useful in the getCoupon method, which will return the result of its call to this method.
+     * @param res a resultSet representing a single orderable having been queried from the orderable table
+     * @return am orderable object representing the result of querying a single row of the coupon table.
+     */
     private Orderable extractOrderableFromResultSet(ResultSet res) {
         String name;
         Float price;
@@ -116,6 +171,15 @@ public class OrderablePersistence implements OrderableDatabase{
         }
     }
 
+    /**
+     * given a resultset representing a query of oderable names from the coupon table,
+     * this method uses the getOrderable method to create a set of orderable objects with these names,
+     * that represent a set of orderables currently in the database.
+     * This is useful in the getOrderableList method, which returns the result of its call to this method
+     * @param res a resultSet representing a list of queried names from the orderable table
+     * @return a list of orderable objects that a) are currently present in the database and b) have the same names as those stored in the argument ResultSet
+     *
+     */
     private ArrayList<Orderable> extractOrderableListFromResultSet(ResultSet res){
         ArrayList<Orderable> ords = new ArrayList<>();
         try{
