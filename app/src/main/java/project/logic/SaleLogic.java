@@ -74,7 +74,7 @@ public class SaleLogic {
     }
     
     
-    public double getTotal() {
+    public String getTotal() {
     	double subtotal = 0;
     	String[][] cartTable = getCartTable();
     	for (int i = 0; i < cartTable.length; i ++) {
