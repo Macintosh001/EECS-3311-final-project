@@ -98,6 +98,17 @@ public class OrderLogic {
             return errorMsgs;
         }
 
+        // Validate price
+        if (price.equals("")) {
+            errorMsgs.add(new ErrorMsg("Price cannot be empty!"));
+        }
+        PriceValidator pv = new PriceValidator();
+        Result<Float, List<ErrorMsg>> priceResult = pv.validate(price);
+        if (priceResult.getError() != null) {
+            return priceResult.getError();
+        }
+        Float oPrice = priceResult.getResult();
+
         // Grab the Orderable from the database, throw error if it doesn't exist
         Orderable orderable = null;
         for (Orderable o: orderableDB.getOrderableList()) {
@@ -111,6 +122,8 @@ public class OrderLogic {
             return errorMsgs;
         }
 
+        Orderable updatedOrderable = new Orderable(name, oPrice, orderable.getShelfLife());
+        orderableDB.replaceOrderable(updatedOrderable);
 
         return errorMsgs;
     }
@@ -124,6 +137,18 @@ public class OrderLogic {
             return errorMsgs;
         }
 
+        // Validate shelf life
+        if (shelfLife.equals("")) {
+            errorMsgs.add(new ErrorMsg("Shelf life cannot be empty!"));
+        }
+        ShelfLifeValidator sv = new ShelfLifeValidator();
+        Result<Integer, List<ErrorMsg>> lifeResult = sv.validate(shelfLife);
+        if (lifeResult.getError() != null) {
+            return lifeResult.getError();
+        }
+        Integer oShelfLife = lifeResult.getResult();
+
+
         // Grab the Orderable from the database, throw error if it doesn't exist
         Orderable orderable = null;
         for (Orderable o: orderableDB.getOrderableList()) {
@@ -137,6 +162,8 @@ public class OrderLogic {
             return errorMsgs;
         }
 
+        Orderable updatedOrderable = new Orderable(name, orderable.getPrice(), oShelfLife);
+        orderableDB.replaceOrderable(updatedOrderable);
 
         return errorMsgs;
     }
@@ -162,8 +189,8 @@ public class OrderLogic {
         Float oPrice = priceResult.getResult();
 
         // Validate shelf life
-        if (price.equals("")) {
-            errorMsgs.add(new ErrorMsg("Price cannot be empty!"));
+        if (shelfLife.equals("")) {
+            errorMsgs.add(new ErrorMsg("Shelf life cannot be empty!"));
         }
         ShelfLifeValidator sv = new ShelfLifeValidator();
         Result<Integer, List<ErrorMsg>> lifeResult = sv.validate(shelfLife);
