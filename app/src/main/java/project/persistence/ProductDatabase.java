@@ -11,7 +11,7 @@ import java.util.List;
  * database stub for testing purposes. This way, business logic can communicate with the interface
  * while not knowing if it is communicating with a stub or true database.
  */
-public interface Database {
+public interface ProductDatabase {
 
 
     //Query DB or stub

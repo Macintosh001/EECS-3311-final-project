@@ -6,16 +6,16 @@ import project.logic.validation.QuantityValidator;
 import project.objects.ErrorMsg;
 import project.objects.FilterProduct;
 import project.objects.Result;
-import project.persistence.Database;
+import project.persistence.ProductDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class StockCheckingLogic {
-    Database db;
+    ProductDatabase db;
 
-    public StockCheckingLogic(Database db) {
+    public StockCheckingLogic(ProductDatabase db) {
         this.db = db;
     }
 

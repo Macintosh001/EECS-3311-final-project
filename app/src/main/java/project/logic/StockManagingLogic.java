@@ -4,13 +4,13 @@ import project.logic.validation.BarcodeValidator;
 import project.objects.ErrorMsg;
 import project.objects.Product;
 import project.objects.Result;
-import project.persistence.Database;
+import project.persistence.ProductDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StockManagingLogic extends StockCheckingLogic {
-    public StockManagingLogic(Database db) {
+    public StockManagingLogic(ProductDatabase db) {
         super(db);
     }
 

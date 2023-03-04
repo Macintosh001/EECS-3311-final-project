@@ -1,9 +1,8 @@
 import org.junit.jupiter.api.Test;
-import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
 import project.objects.Product;
-import project.persistence.Database;
-import project.persistence.DatabaseStub;
+import project.persistence.ProductDatabase;
+import project.persistence.ProductDatabaseStub;
 
 import java.util.Date;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StockManagingLogicTest {
     @Test
     void removeProduct() {
-        Database db = new DatabaseStub();
+        ProductDatabase db = new ProductDatabaseStub();
         StockManagingLogic logic = new StockManagingLogic(db);
 
         db.addProduct(new Product(0, "Chips", 100, 1.99f, new Date(0)));

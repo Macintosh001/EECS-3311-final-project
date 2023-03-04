@@ -4,8 +4,6 @@
 package project.application;
 
 //import project.display.*;
-import project.persistence.Database;
-import project.persistence.DatabaseStub;
 
 public class App {
     public static void main(String[] args) {

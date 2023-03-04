@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persistence implements Database{
+public class Persistence implements ProductDatabase {
     private DatabaseManager db;
 
     public Persistence(){

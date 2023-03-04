@@ -1,6 +1,7 @@
 package project.logic;
 
 import project.objects.Coupon;
+import project.objects.Orderable;
 import project.objects.Product;
 
 import java.util.List;
@@ -29,6 +30,20 @@ public class TableEntryGenerator {
         for (Coupon coupon: list) {
             tableEntries[i][0] = coupon.getCode();
             tableEntries[i][1] = Double.toString(Math.floor(coupon.getPercentOff() * 100.0f));
+            i++;
+        }
+
+        return tableEntries;
+    }
+
+    public static String[][] genOrderableTableEntries(List<Orderable> list) {
+        String[][] tableEntries = new String[list.size()][3];
+
+        int i = 0;
+        for (Orderable orderable: list) {
+            tableEntries[i][0] = orderable.getName();
+            tableEntries[i][3] = String.format("%.2f", orderable.getPrice());
+            tableEntries[i][2] = orderable.getShelfLife().toString() + " Days";
             i++;
         }
 
