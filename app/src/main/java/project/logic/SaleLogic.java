@@ -83,7 +83,7 @@ public class SaleLogic {
     	if (this.coupon != null) {
     		subtotal *= (1 - this.coupon.getPercentOff());
     	}
-    	return subtotal;
+    	return String.format("%.2f", subtotal);
     }
 
 
