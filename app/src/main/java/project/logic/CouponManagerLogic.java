@@ -4,6 +4,7 @@ import project.logic.validation.PercentOffValidator;
 import project.objects.Coupon;
 import project.objects.ErrorMsg;
 import project.objects.Result;
+import project.persistence.CouponDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

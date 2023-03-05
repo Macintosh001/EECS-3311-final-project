@@ -6,6 +6,7 @@ import project.logic.validation.QuantityValidator;
 import project.objects.ErrorMsg;
 import project.objects.FilterProduct;
 import project.objects.Result;
+import project.persistence.ProductDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;

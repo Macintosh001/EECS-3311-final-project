@@ -9,19 +9,19 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class SaleLogic {
-	private ProductDatabase productDB;
+    private ProductDatabase productDB;
     private final Map<Integer, Integer> cart;
     private CouponDatabase couponDB;
     private Coupon coupon;
-    
-    
+
+
     public SaleLogic(ProductDatabase productDB, CouponDatabase couponDB) {
         this.productDB = productDB;
         this.couponDB = couponDB;
         this.cart = new HashMap<>();
         this.coupon = null;
     }
-    
+
     public List<ErrorMsg> scan(Integer barcode) {
         List<ErrorMsg> errors = new ArrayList<>();
         Product product = productDB.getProduct(barcode);
@@ -30,16 +30,16 @@ public class SaleLogic {
         } else if (product.getQuantity() < 1) {
             errors.add(new ErrorMsg("Product out of stock"));
         } else {
-        	if (cart.containsKey(barcode)) {
-        		cart.put(barcode,cart.get(barcode) + 1);
-        	}
-        	else {
-        		cart.put(barcode, 1);
-        	}
+            if (cart.containsKey(barcode)) {
+                cart.put(barcode,cart.get(barcode) + 1);
+            }
+            else {
+                cart.put(barcode, 1);
+            }
         }
         return errors;
     }
-    
+
     public String[][] getCartTable() {
         String[][] cartTable = new String[cart.size()][4];
         Set<Integer> barcodeSet = cart.keySet();
@@ -53,59 +53,59 @@ public class SaleLogic {
         }
         return cartTable;
     }
-    
+
     public void clearShoppingCart() {
         cart.clear();
     }
-    
 
-    
+
+
     public List<ErrorMsg> applyCoupon(String code) {
-    	List<ErrorMsg> errors = new ArrayList<>();
-    	Coupon tmpCoupon = couponDB.getCoupon(code);
-    	if (this.coupon != null) {
-    		errors.add(new ErrorMsg("Coupon already applied"));
-    	} else if (tmpCoupon == null) {
-    		errors.add(new ErrorMsg("Invalid coupon code"));
-    	} else {
-    		this.coupon = tmpCoupon;
-    	}
-    	return errors;	
+        List<ErrorMsg> errors = new ArrayList<>();
+        Coupon tmpCoupon = couponDB.getCoupon(code);
+        if (this.coupon != null) {
+            errors.add(new ErrorMsg("Coupon already applied"));
+        } else if (tmpCoupon == null) {
+            errors.add(new ErrorMsg("Invalid coupon code"));
+        } else {
+            this.coupon = tmpCoupon;
+        }
+        return errors;
     }
-    
-    
+
+
     public String getTotal() {
-    	double subtotal = 0;
-    	String[][] cartTable = getCartTable();
-    	for (int i = 0; i < cartTable.length; i ++) {
-        	subtotal = Float.parseFloat(cartTable[i][3]) * Integer.parseInt(cartTable[i][2]); // subtotal += product.getPrice() * product.getQuantity();
-    	}
-    	if (this.coupon != null) {
-    		subtotal *= (1 - this.coupon.getPercentOff());
-    	}
-    	return String.format("%.2f", subtotal);
+        double subtotal = 0;
+        String[][] cartTable = getCartTable();
+        for (int i = 0; i < cartTable.length; i ++) {
+            subtotal = Float.parseFloat(cartTable[i][3]) * Integer.parseInt(cartTable[i][2]); // subtotal += product.getPrice() * product.getQuantity();
+        }
+        if (this.coupon != null) {
+            subtotal *= (1 - this.coupon.getPercentOff());
+        }
+        return String.format("%.2f", subtotal);
     }
 
 
 
-    
+
     public List<ErrorMsg> buy() {
         List<ErrorMsg> errors = new ArrayList<>();
-        Set<Integer> barcodeSet = cart.keySet();       
+        Set<Integer> barcodeSet = cart.keySet();
         for (Integer barcode: barcodeSet) {
             Product product = productDB.getProduct(barcode);
             if (product.getQuantity() < cart.get(barcode)){
-            	errors.add(new ErrorMsg("Product out of stock"));
+                errors.add(new ErrorMsg("Product out of stock"));
             }
         }
-                
+
 
         if (errors.isEmpty()) {
-        	for (Integer barcode: barcodeSet) {
-           		Product product = productDB.getProduct(barcode);
-            	Product newProduct = new Product(product.getBarcode(), product.getName(), product.getQuantity() - cart.get(barcode), product.getPrice(), product.getExpityDate());
-				productDB.replaceProduct(newProduct);
-        	}    
+            for (Integer barcode: barcodeSet) {
+                Product product = productDB.getProduct(barcode);
+                Product newProduct = new Product(product.getBarcode(), product.getName(), product.getQuantity() - cart.get(barcode), product.getPrice(), product.getExpityDate());
+                productDB.replaceProduct(newProduct);
+            }
             this.clearShoppingCart();
         }
         return errors;
