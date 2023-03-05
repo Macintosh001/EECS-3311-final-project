@@ -16,12 +16,12 @@ public class App {
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
         ILogic logic = new Logic(database, 2);
-        //MainDisplay display = new MainDisplay(logic);
+        MainDisplay display = new MainDisplay(logic);
         //OrderView view = new OrderView(logic);
        //InitialDisplay init = new InitialDisplay();
         //CouponManagerView coupon = new CouponManagerView(logic);
         //SaleView sale = new SaleView(logic);
         //EmployeeView emp = new EmployeeView(logic);
-        ManagerView mv = new ManagerView(logic);
+        //ManagerView mv = new ManagerView(logic);
     }
 }
