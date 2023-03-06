@@ -1,5 +1,6 @@
 package project.display;
 
+import project.display.dialog.order_dialog.*;
 import project.logic.OrderLogic;
 
 import javax.swing.*;
@@ -13,10 +14,11 @@ public class OrderView {
 
     private OrderLogic oLogic = null;
     private final JTable table;
+    final String[] COLUMNS = {"Name", "Price", "Shelf Life"};
 
     public OrderView (OrderLogic oLogic){
 
-        final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
+        this.oLogic = oLogic;
 
         JFrame frame = new JFrame("Orders");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,39 +31,46 @@ public class OrderView {
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
-        tablePane.setBounds(10,10,800,650);
+        tablePane.setBounds(10,10,600,650);
         frame.add(tablePane);
 
         // This is the button to add products
         JButton orderButton = new JButton("Order");
-        orderButton.setBounds(820, 10, 200, 50);
-        //orderButton.addActionListener(e -> new OrderDialog(this));
+        orderButton.setBounds(500, 10, 200, 50);
+        orderButton.addActionListener(e -> new PlaceOrderDialog(this));
         frame.add(orderButton);
 
         // This is the button to remove products
         JButton updatePriceButton = new JButton("Update Price");
-        updatePriceButton.setBounds(820, 70, 200, 50);
-        //updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
+        updatePriceButton.setBounds(500, 70, 200, 50);
+        updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
         frame.add(updatePriceButton);
 
         // This is the button to update products
         JButton updateButton = new JButton("Update shelf life");
-        updateButton.setBounds(820, 130, 200, 50);
-        //updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
+        updateButton.setBounds(500, 130, 200, 50);
+        updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
         frame.add(updateButton);
 
         JButton addButton = new JButton("Add");
-        addButton.setBounds(820, 190, 200, 50);
-        //addButton.addActionListener(e -> new AddDialog(this));
+        addButton.setBounds(500, 190, 200, 50);
+        addButton.addActionListener(e -> new AddOrderDialog(this));
         frame.add(addButton);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.setBounds(820, 250, 200, 50);
-        //removeButton.addActionListener(e -> new Builder.RemoveDialog(this));
+        removeButton.setBounds(500, 250, 200, 50);
+        removeButton.addActionListener(e -> new RemoveOrderDialog(this));
         frame.add(removeButton);
 
         frame.setVisible(true);
     }
 
+    public OrderLogic getOLogic(){
+        return oLogic;
+    }
+
+    public void regenTable(){
+        table.setModel(new DefaultTableModel(oLogic.getOrderableList(), COLUMNS));
+    }
 
 }

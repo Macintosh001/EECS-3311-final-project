@@ -20,45 +20,54 @@ public class AddOrderDialog extends JDialog {
         setLayout(null);
         setResizable(false);
 
-        JLabel codeInputLabel = new JLabel("Code:");
-        codeInputLabel.setBounds(10, 10, 200, 50);
-        add(codeInputLabel);
+        JLabel nameInputLabel = new JLabel("Name:");
+        nameInputLabel.setBounds(10, 10, 200, 50);
+        add(nameInputLabel);
 
-        JTextField codeInput = new JTextField();
-        codeInput.setBounds(220, 10, 200, 50);
-        add(codeInput);
+        JTextField nameInput = new JTextField();
+        nameInput.setBounds(220, 10, 200, 50);
+        add(nameInput);
 
-        JLabel percentInputLabel = new JLabel("Percentage off:");
-        percentInputLabel.setBounds(10, 70, 200, 50);
-        add(percentInputLabel);
+        JLabel priceInputLabel = new JLabel("Price:");
+        priceInputLabel.setBounds(10, 70, 200, 50);
+        add(priceInputLabel);
 
-        JTextField percentInput = new JTextField();
-        percentInput.setBounds(220, 70, 200, 50);
-        add(percentInput);
+        JTextField priceInput = new JTextField();
+        priceInput.setBounds(220, 70, 200, 50);
+        add(priceInput);
 
-        JButton addButton = new JButton("Add Coupon");
-        addButton.setBounds(10, 540, 200, 50);
-        //addButton.addActionListener(new ActionListener() {
+        JLabel shelfLifeInputLabel = new JLabel("Shelf Life:");
+        shelfLifeInputLabel.setBounds(10, 70, 200, 50);
+        add(shelfLifeInputLabel);
 
-            //public void actionPerformed(ActionEvent e) {
-//                List<ErrorMsg> errorMsgList = oView.getCpLogic().addCoupon(
-//                        codeInput.getText(),
-//                        percentInput.getText()
-//                );
-//                if(errorMsgList.isEmpty()){
-//                    oView.regenTable();
-//                    dispose();
-//                } else {
-//                    new ErrorDialog(errorMsgList);
-//                }
-//            }
-                // });
-                // add(addButton
+        JTextField shelfLifeInput = new JTextField();
+        shelfLifeInput.setBounds(220, 70, 200, 50);
+        add(shelfLifeInput);
+
+        JButton addOrderButton = new JButton("Add Order");
+        addOrderButton.setBounds(10, 540, 200, 50);
+        addOrderButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                List<ErrorMsg> errorMsgList = oView.getOLogic().addOrderable(
+                        nameInput.getText(),
+                        priceInput.getText(),
+                        shelfLifeInput.getText()
+                );
+                if(errorMsgList.isEmpty()){
+                    oView.regenTable();
+                    dispose();
+                } else {
+                    new ErrorDialog(errorMsgList);
+                }
+            }
+        });
+        add(addOrderButton);
 
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(220,540,200,50);
-        //cancelButton.addActionListener(e -> dispose());
+        cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
 
         setVisible(true);
