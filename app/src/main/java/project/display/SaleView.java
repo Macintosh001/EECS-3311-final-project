@@ -10,9 +10,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class SaleView extends MainDisplay{
 
+    private SaleLogic sLogic = null;
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
+    private JTable table;
+
     public SaleView(SaleLogic sLogic){
 
-        final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
+        this.sLogic = sLogic;
 
         JFrame frame = new JFrame("POS");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,7 +25,7 @@ public class SaleView extends MainDisplay{
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTable table = new JTable(new DefaultTableModel(sLogic.getCartTable(), COLUMNS));
+        table = new JTable(new DefaultTableModel(sLogic.getCartTable(), COLUMNS));
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
@@ -43,6 +47,19 @@ public class SaleView extends MainDisplay{
         buyButton.addActionListener(e -> new BuyDialog(this));
         frame.add(buyButton);
 
+        JButton clearButton = new JButton("Clear Cart");
+        clearButton.setBounds(350, 190, 200, 50);
+        clearButton.addActionListener(e -> new BuyDialog(this));
+        frame.add(clearButton);
+
         frame.setVisible(true);
+    }
+
+    public SaleLogic getsLogic(){
+        return sLogic;
+    }
+
+    public void regenTable(){
+        table.setModel(new DefaultTableModel(sLogic.getCartTable(), COLUMNS));
     }
 }

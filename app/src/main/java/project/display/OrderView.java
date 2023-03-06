@@ -10,6 +10,10 @@ This view should perhaps have a view of the inventory in a table format
 an order button and a cancel button
  */
 public class OrderView {
+
+    private OrderLogic oLogic = null;
+    private final JTable table;
+
     public OrderView (OrderLogic oLogic){
 
         final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
@@ -21,7 +25,7 @@ public class OrderView {
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTable table = new JTable(new DefaultTableModel(oLogic.getOrderableList(), COLUMNS));
+        table = new JTable(new DefaultTableModel(oLogic.getOrderableList(), COLUMNS));
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
@@ -58,4 +62,6 @@ public class OrderView {
 
         frame.setVisible(true);
     }
+
+
 }

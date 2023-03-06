@@ -5,16 +5,21 @@ package project.application;
 
 import project.display.*;
 import project.logic.CouponManagerLogic;
+import project.logic.SaleLogic;
 import project.objects.Coupon;
 import project.persistence.CouponDatabase;
 import project.persistence.CouponDatabaseStub;
+import project.persistence.ProductDatabase;
+import project.persistence.ProductDatabaseStub;
 
 import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
 
+        ProductDatabaseStub productDB =  new ProductDatabaseStub();
         CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        SaleLogic sLogic = new SaleLogic(productDB,couponStub);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
@@ -22,7 +27,7 @@ public class App {
         //OrderView view = new OrderView(logic);
        //InitialDisplay init = new InitialDisplay();
         //CouponManagerView coupon = new CouponManagerView(cpLogic);
-        //SaleView sale = new SaleView(logic);
+        SaleView sale = new SaleView(sLogic);
         //EmployeeView emp = new EmployeeView(logic);
         //ManagerView mv = new ManagerView(logic);
     }

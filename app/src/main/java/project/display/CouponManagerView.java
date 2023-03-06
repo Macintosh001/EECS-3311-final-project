@@ -51,7 +51,6 @@ public class CouponManagerView {
     }
 
     public CouponManagerLogic getCpLogic(){
-
         return cpLogic;
     }
 
