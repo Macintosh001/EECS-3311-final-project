@@ -21,7 +21,7 @@ public class App {
         // That's set up when the DatabaseStub is initialized.
         //OrderView view = new OrderView(logic);
        //InitialDisplay init = new InitialDisplay();
-        CouponManagerView coupon = new CouponManagerView(cpLogic);
+        //CouponManagerView coupon = new CouponManagerView(cpLogic);
         //SaleView sale = new SaleView(logic);
         //EmployeeView emp = new EmployeeView(logic);
         //ManagerView mv = new ManagerView(logic);

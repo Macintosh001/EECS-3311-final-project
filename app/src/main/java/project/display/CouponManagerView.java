@@ -42,6 +42,11 @@ public class CouponManagerView {
         removeButton.addActionListener(e -> new RemoveCouponDialog(this));
         frame.add(removeButton);
 
+        JButton updateButton = new JButton("Update Coupon");
+        updateButton.setBounds(350, 130, 200, 50);
+        updateButton.addActionListener(e -> new RemoveCouponDialog(this));
+        frame.add(updateButton);
+
         frame.setVisible(true);
     }
 

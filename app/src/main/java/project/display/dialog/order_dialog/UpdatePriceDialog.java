@@ -1,4 +1,4 @@
-package project.display.dialog;
+package project.display.dialog.order_dialog;
 
 import project.display.MainDisplay;
 
