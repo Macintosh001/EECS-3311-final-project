@@ -149,5 +149,4 @@ public class StockCheckingView {
     public void regenTable(){
         table.setModel(new DefaultTableModel(scLogic.getProductList(), COLUMNS));
     }
-
 }

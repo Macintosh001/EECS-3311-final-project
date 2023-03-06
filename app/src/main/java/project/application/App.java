@@ -17,18 +17,13 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
 
-        //ProductDatabaseStub productDB =  new ProductDatabaseStub();
-        //CouponDatabaseStub couponStub = new CouponDatabaseStub();
-        //SaleLogic sLogic = new SaleLogic(productDB,couponStub);
-        //CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
-        //StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
-        //OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
-        //OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
-        //CouponDatabaseStub couponStub = new CouponDatabaseStub();
-        //SaleLogic sLogic = new SaleLogic(productDB,couponStub);
-        //CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
-        //StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
-      //  StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        ProductDatabaseStub productDB =  new ProductDatabaseStub();
+        CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
+        OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB);
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
@@ -37,9 +32,9 @@ public class App {
         //CouponManagerView coupon = new CouponManagerView(cpLogic);
         //SaleView sale = new SaleView(sLogic);
         //EmployeeView emp = new EmployeeView(logic);
-        //ManagerView mv = new ManagerView(logic);
+        ManagerView mv = new ManagerView();
 
         //StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
-       // StockManagingView stockManagingView = new StockManagingView(smLogic);
+       //StockManagingView stockManagingView = new StockManagingView(smLogic);
     }
 }
