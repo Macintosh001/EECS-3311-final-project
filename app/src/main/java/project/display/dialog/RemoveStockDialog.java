@@ -28,12 +28,25 @@ public class RemoveStockDialog extends JDialog {
         add(barcodeInput);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.setBounds(10, 540, 200, 50);
+        removeButton.setBounds(100, 70, 200, 50);
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<ErrorMsg> errorMsgList = smView.getsmLogic().removeProduct(barcodeInput.getText());
+
+                if (errorMsgList.isEmpty()) {
+                    smView.regenTable();
+                    dispose();
+                } else {
+                    new ErrorDialog(errorMsgList);
+                }
             }
         });
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setBounds(220, 540, 200, 50);
+        cancelButton.addActionListener(e -> dispose());
+        add(cancelButton);
+
+        setVisible(true);
     }
 }

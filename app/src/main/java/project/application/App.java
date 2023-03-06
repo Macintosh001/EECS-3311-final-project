@@ -24,14 +24,15 @@ public class App {
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponStub);
 
         // That's set up when the DatabaseStub is initialized.
         //OrderView view = new OrderView(oLogic);
        //InitialDisplay init = new InitialDisplay();
         //CouponManagerView coupon = new CouponManagerView(cpLogic);
         //SaleView sale = new SaleView(sLogic);
-        //EmployeeView emp = new EmployeeView(logic);
-        ManagerView mv = new ManagerView(cpLogic,smLogic,oLogic);
+        //EmployeeView emp = new EmployeeView(scLogic, sLogic);
+        //ManagerView mv = new ManagerView(cpLogic,smLogic,oLogic);
 
         //StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
        //StockManagingView stockManagingView = new StockManagingView(smLogic);

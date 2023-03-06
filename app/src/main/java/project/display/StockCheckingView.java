@@ -90,37 +90,37 @@ public class StockCheckingView {
 
         JLabel minDateLabel = new JLabel("Start:");
         // add date picker with an icon for the button
-        DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.getEnableYearMenu();
-        DatePicker minDatePicker = new DatePicker(dateSettings);
-        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
-        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
-        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
-        JButton datePickerButton = minDatePicker.getComponentToggleCalendarButton();
-        datePickerButton.setText("");
-        datePickerButton.setIcon(dateExampleIcon);
-        minDatePicker.setBounds(620,240,100,50);
-        frame.add(minDatePicker);
+//        DatePickerSettings dateSettings = new DatePickerSettings();
+//        dateSettings.getEnableYearMenu();
+//        DatePicker minDatePicker = new DatePicker(dateSettings);
+//        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
+//        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
+//        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
+//        JButton datePickerButton = minDatePicker.getComponentToggleCalendarButton();
+//        datePickerButton.setText("");
+//        datePickerButton.setIcon(dateExampleIcon);
+//        minDatePicker.setBounds(620,240,100,50);
+//        frame.add(minDatePicker);
 
-//        JTextField fDateMinInput = new JTextField();
-//        fDateMinInput.setBounds(620, 240, 100, 50);
-//        frame.add(fDateMinInput);
+        JTextField fDateMinInput = new JTextField();
+        fDateMinInput.setBounds(620, 240, 100, 50);
+        frame.add(fDateMinInput);
 
         JLabel MaxDateLabel = new JLabel("End:");
         MaxDateLabel.setBounds(750, 240, 100, 50);
         frame.add(MaxDateLabel);
 
         // add date picker with an icon for the button
-        DatePicker maxDatePicker = new DatePicker(dateSettings);
-        JButton datePickerButton2 = maxDatePicker.getComponentToggleCalendarButton();
-        datePickerButton.setText("");
-        datePickerButton.setIcon(dateExampleIcon);
-        maxDatePicker.setBounds(800,240,100,50);
-        frame.add(maxDatePicker);
+//        DatePicker maxDatePicker = new DatePicker(dateSettings);
+//        JButton datePickerButton2 = maxDatePicker.getComponentToggleCalendarButton();
+//        datePickerButton.setText("");
+//        datePickerButton.setIcon(dateExampleIcon);
+//        maxDatePicker.setBounds(800,240,100,50);
+//        frame.add(maxDatePicker);
 
-//        JTextField fDateMaxInput = new JTextField();
-//        fDateMaxInput.setBounds(800, 240, 100, 50);
-//        frame.add(fDateMaxInput);
+        JTextField fDateMaxInput = new JTextField();
+        fDateMaxInput.setBounds(800, 240, 100, 50);
+        frame.add(fDateMaxInput);
 
         JButton confirmButton = new JButton("Confirm");
         confirmButton.setBounds(700, 330, 100, 50);
@@ -132,8 +132,10 @@ public class StockCheckingView {
                         fPriceMaxInput.getText(),
                         fQuantityMinInput.getText(),
                         fQuantityMaxInput.getText(),
-                        minDatePicker.getDateStringOrEmptyString(),
-                        maxDatePicker.getDateStringOrEmptyString()
+                        fDateMinInput.getText(),
+                        fDateMaxInput.getText()
+//                        minDatePicker.getDateStringOrEmptyString(),
+//                        maxDatePicker.getDateStringOrEmptyString()
                 );
                 // need to regen table
             }

@@ -24,7 +24,7 @@ public class StockManagingView {
         frame.setResizable(false);
 
         table = new JTable(new DefaultTableModel(smLogic.getProductList(), COLUMNS));
-        table.setEnabled(false);
+        table.setEnabled(true);
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,300,400);
