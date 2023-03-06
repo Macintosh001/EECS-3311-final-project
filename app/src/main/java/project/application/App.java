@@ -7,6 +7,7 @@ import project.display.*;
 import project.logic.CouponManagerLogic;
 import project.logic.SaleLogic;
 import project.logic.StockCheckingLogic;
+import project.logic.StockManagingLogic;
 import project.objects.Coupon;
 import project.persistence.CouponDatabase;
 import project.persistence.CouponDatabaseStub;
@@ -23,6 +24,7 @@ public class App {
         SaleLogic sLogic = new SaleLogic(productDB,couponStub);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+      //  StockManagingLogic smLogic = new StockManagingLogic(productDB);
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
@@ -34,5 +36,6 @@ public class App {
         //ManagerView mv = new ManagerView(logic);
 
         StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
+       // StockManagingView stockManagingView = new StockManagingView(smLogic);
     }
 }

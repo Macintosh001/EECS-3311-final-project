@@ -34,45 +34,73 @@ public class StockCheckingView {
         tablePane.setBounds(10,10,500,400);
         frame.add(tablePane);
 
+        //Filter by label
         JLabel filterPriceLabel = new JLabel("Filter by Price:");
-        filterPriceLabel.setBounds(670, 10, 200, 50);
+        filterPriceLabel.setBounds(700, 10, 200, 50);
         frame.add(filterPriceLabel);
+
+        JLabel minPriceLabel = new JLabel("Min:");
+        minPriceLabel.setBounds(570, 60, 100, 50);
+        frame.add(minPriceLabel);
 
         JTextField fPriceMinInput = new JTextField();
         fPriceMinInput.setBounds(620, 60, 100, 50);
         frame.add(fPriceMinInput);
 
+        JLabel maxPriceLabel = new JLabel("Max:");
+        maxPriceLabel.setBounds(750, 60, 100, 50);
+        frame.add(maxPriceLabel);
+
         JTextField fPriceMaxInput = new JTextField();
-        fPriceMaxInput.setBounds(730, 60, 100, 50);
+        fPriceMaxInput.setBounds(800, 60, 100, 50);
         frame.add(fPriceMaxInput);
 
 
+        // Filter by Quantity
         JLabel filterQuantityLabel = new JLabel("Filter by Quantity:");
-        filterQuantityLabel.setBounds(670, 100, 200, 50);
+        filterQuantityLabel.setBounds(700, 100, 200, 50);
         frame.add(filterQuantityLabel);
+
+        JLabel minQuantityLabel = new JLabel("Min:");
+        minQuantityLabel.setBounds(570, 150, 100, 50);
+        frame.add(minQuantityLabel);
 
         JTextField fQuantityMinInput = new JTextField();
         fQuantityMinInput.setBounds(620, 150, 100, 50);
         frame.add(fQuantityMinInput);
 
+        JLabel maxQuantityLabel = new JLabel("Max:");
+        maxQuantityLabel.setBounds(750, 150, 100, 50);
+        frame.add(maxQuantityLabel);
+
         JTextField fQuantityMaxInput = new JTextField();
-        fQuantityMaxInput.setBounds(730, 150, 100, 50);
+        fQuantityMaxInput.setBounds(800, 150, 100, 50);
         frame.add(fQuantityMaxInput);
 
+
+        // Filter by Date
         JLabel filterDateLabel = new JLabel("Filter by Expiry Date:");
-        filterDateLabel.setBounds(670, 190, 200, 50);
+        filterDateLabel.setBounds(700, 190, 200, 50);
         frame.add(filterDateLabel);
+
+        JLabel minDateLabel = new JLabel("Start:");
+        minDateLabel.setBounds(570, 240, 100, 50);
+        frame.add(minDateLabel);
 
         JTextField fDateMinInput = new JTextField();
         fDateMinInput.setBounds(620, 240, 100, 50);
         frame.add(fDateMinInput);
 
+        JLabel MaxDateLabel = new JLabel("End:");
+        MaxDateLabel.setBounds(750, 240, 100, 50);
+        frame.add(MaxDateLabel);
+
         JTextField fDateMaxInput = new JTextField();
-        fDateMaxInput.setBounds(730, 240, 100, 50);
+        fDateMaxInput.setBounds(800, 240, 100, 50);
         frame.add(fDateMaxInput);
 
         JButton confirmButton = new JButton("Confirm");
-        confirmButton.setBounds(10, 540, 100, 50);
+        confirmButton.setBounds(700, 330, 100, 50);
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
