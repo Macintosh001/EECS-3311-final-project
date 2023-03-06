@@ -4,22 +4,24 @@
 package project.application;
 
 import project.display.*;
-import project.logic.ILogic;
-import project.logic.Logic;
-import project.persistence.Database;
-import project.persistence.DatabaseStub;
+import project.logic.CouponManagerLogic;
+import project.objects.Coupon;
+import project.persistence.CouponDatabase;
+import project.persistence.CouponDatabaseStub;
+
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        Database database = new DatabaseStub();
+
+        CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
-        ILogic logic = new Logic(database, 2);
-        MainDisplay display = new MainDisplay(logic);
         //OrderView view = new OrderView(logic);
        //InitialDisplay init = new InitialDisplay();
-        //CouponManagerView coupon = new CouponManagerView(logic);
+        CouponManagerView coupon = new CouponManagerView(cpLogic);
         //SaleView sale = new SaleView(logic);
         //EmployeeView emp = new EmployeeView(logic);
         //ManagerView mv = new ManagerView(logic);

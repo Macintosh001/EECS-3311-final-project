@@ -1,13 +1,16 @@
 package project.display;
 
-import project.logic.ILogic;
+import project.display.dialog.ApplyCouponDialog;
+import project.display.dialog.BuyDialog;
+import project.display.dialog.ScanDialog;
+import project.logic.SaleLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class SaleView extends MainDisplay{
 
-    public SaleView(ILogic logic){
+    public SaleView(SaleLogic sLogic){
 
         final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
 
@@ -18,7 +21,7 @@ public class SaleView extends MainDisplay{
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTable table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
+        JTable table = new JTable(new DefaultTableModel(sLogic.getCartTable(), COLUMNS));
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);

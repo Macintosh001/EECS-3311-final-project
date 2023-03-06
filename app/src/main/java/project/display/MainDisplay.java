@@ -1,25 +1,19 @@
 package project.display;
 
-import project.logic.ILogic;
+import project.display.dialog.AddDialog;
+import project.display.dialog.UpdateDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 
 public class MainDisplay {
 
-    private ILogic logic = null;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private final JTable table;
+    //private final JTable table;
 
-    public MainDisplay(){
 
-        this.table = new JTable();
-    }
+    public MainDisplay() {
 
-    public MainDisplay(ILogic logic) {
-
-        this.logic = logic;
         // First we will construct all the UI elements.
 
         // This is the actual window.
@@ -31,12 +25,12 @@ public class MainDisplay {
         frame.setResizable(false);
 
         // This is the table containing all the products
-        table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
-        table.setEnabled(false);
+        //table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
+        //table.setEnabled(false);
         //table.setBackground(Color.LIGHT_GRAY);
-        JScrollPane tablePane = new JScrollPane(table);
-        tablePane.setBounds(10, 10, 800, 700);
-        frame.add(tablePane);
+        //JScrollPane tablePane = new JScrollPane(table);
+        //tablePane.setBounds(10, 10, 800, 700);
+        //frame.add(tablePane);
 
         // This is the button to add products
         JButton addButton = new JButton("Add Product");
@@ -47,7 +41,6 @@ public class MainDisplay {
         // This is the button to remove products
         JButton removeButton = new JButton("Remove Product");
         removeButton.setBounds(820, 70, 200, 50);
-        removeButton.addActionListener(e -> new RemoveDialog(this));
         frame.add(removeButton);
 
         // This is the button to update products
@@ -59,16 +52,16 @@ public class MainDisplay {
         frame.setVisible(true);
     }
 
-    public JTable getTable(){
-        return this.table;
-    }
+    //public JTable getTable(){
+        //return this.table;
+    //}
 
-    public ILogic getLogic() {
-        return logic;
-    }
+    //public ILogic getLogic() {
+      //  return logic;
+    //}
 
-    public void regenTable() {
-        table.setModel(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
-    }
+    //public void regenTable() {
+      //  table.setModel(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
+    //}
 
 }

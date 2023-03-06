@@ -1,6 +1,8 @@
-package project.display;
+package project.display.dialog;
 
 import com.github.lgooddatepicker.demo.FullDemo;
+import project.display.MainDisplay;
+import project.display.dialog.ErrorDialog;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -59,14 +61,13 @@ public class UpdateDialog extends JDialog {
         dateInputLabel.setBounds(10, 250, 200, 50);
         add(dateInputLabel);
 
-        display.getTable().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+        //display.getTable().addMouseListener(new MouseAdapter() {
+        //public void mouseClicked(MouseEvent e) {
 
-                int i = display.getTable().getSelectedRow();
-                // create temporary variables to hold product values
-            }
-        });
+        //int i = display.getTable().getSelectedRow();
+        // create temporary variables to hold product values
+        //}
+        //});
 
         // add date picker with icon as button
         DatePickerSettings dateSettings = new DatePickerSettings();
@@ -78,33 +79,33 @@ public class UpdateDialog extends JDialog {
         JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
         datePickerButton.setText("");
         datePickerButton.setIcon(dateExampleIcon);
-        datePicker.setBounds(220,250,200,50);
+        datePicker.setBounds(220, 250, 200, 50);
         add(datePicker);
 
 
         JButton updateButton = new JButton("Update");
         updateButton.setBounds(10, 540, 200, 50);
         updateButton.addActionListener(e -> {
-            List<ErrorMsg> errorMsgList = display.getLogic().updateProduct(
-                    barcodeInput.getText(),
-                    nameInput.getText(),
-                    quantityInput.getText(),
-                    priceInput.getText(),
-                    datePicker.getText()
-            );
-            if (errorMsgList.isEmpty()) {
-                display.regenTable();
-                dispose();
-            } else {
-                new ErrorDialog(errorMsgList);
-            }
+//            List<ErrorMsg> errorMsgList = display.getLogic().updateProduct(
+//                    barcodeInput.getText(),
+//                    nameInput.getText(),
+//                    quantityInput.getText(),
+//                    priceInput.getText(),
+//                    datePicker.getText()
+//            );
+//            if (errorMsgList.isEmpty()) {
+//                display.regenTable();
+//                dispose();
+//            } else {
+//                new ErrorDialog(errorMsgList);
+//            }
         });
 
         add(updateButton);
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(220, 540, 200, 50);
-        cancelButton.addActionListener(e -> dispose());
+        //cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
 
         setVisible(true);

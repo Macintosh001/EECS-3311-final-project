@@ -1,6 +1,7 @@
-package project.display;
+package project.display.dialog;
 
 import com.github.lgooddatepicker.demo.FullDemo;
+import project.display.MainDisplay;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -61,23 +62,23 @@ public class AddDialog extends JDialog {
         datePicker.setBounds(220,200,200,50);
         add(datePicker);
 
-        JButton addButton = new JButton("Add");
-        addButton.setBounds(10, 540, 200, 50);
-        addButton.addActionListener(e -> {
-            List<ErrorMsg> errorMsgList = display.getLogic().addProduct(
-                    nameInput.getText(),
-                    quantityInput.getText(),
-                    priceInput.getText(),
-                    datePicker.getDateStringOrEmptyString()
-            );
-            if (errorMsgList.isEmpty()) {
-                display.regenTable();
-                dispose();
-            } else {
-                new ErrorDialog(errorMsgList);
-            }
-        });
-        add(addButton);
+//        JButton addButton = new JButton("Add");
+//        addButton.setBounds(10, 540, 200, 50);
+//        addButton.addActionListener(e -> {
+//            List<ErrorMsg> errorMsgList = display.getLogic().addProduct(
+//                    nameInput.getText(),
+//                    quantityInput.getText(),
+//                    priceInput.getText(),
+//                    datePicker.getDateStringOrEmptyString()
+//            );
+//            if (errorMsgList.isEmpty()) {
+//                display.regenTable();
+//                dispose();
+//            } else {
+//                new ErrorDialog(errorMsgList);
+//            }
+//        });
+//        add(addButton);
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(220, 540, 200, 50);

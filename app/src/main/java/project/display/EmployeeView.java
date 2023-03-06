@@ -1,7 +1,6 @@
 package project.display;
 
-import project.logic.ILogic;
-
+import project.display.dialog.AddDialog;
 import javax.swing.*;
 
 /*
@@ -10,7 +9,7 @@ only able to search the table for specific items
  */
 public class EmployeeView extends MainDisplay{
 
-    public EmployeeView(ILogic logic){
+    public EmployeeView(){
 
         JFrame frame = new JFrame("Employee");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +25,7 @@ public class EmployeeView extends MainDisplay{
 
         JButton saleButton = new JButton("Sale");
         saleButton.setBounds(200, 70, 200, 50);
-        saleButton.addActionListener(e -> new RemoveDialog(this));
+        //saleButton.addActionListener(e -> new Builder.RemoveDialog(this));
         frame.add(saleButton);
 
         frame.setVisible(true);

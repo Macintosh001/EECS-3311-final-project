@@ -1,15 +1,22 @@
 package project.display;
 
-import project.logic.ILogic;
-
+import project.display.dialog.AddDialog;
+import project.display.dialog.coupon_dialog.AddCouponDialog;
+import project.display.dialog.coupon_dialog.RemoveCouponDialog;
+import project.logic.CouponManagerLogic;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class CouponManagerView extends MainDisplay{
+public class CouponManagerView {
 
-    public CouponManagerView(ILogic logic){
+    private CouponManagerLogic cpLogic = null;
+    private final JTable table;
+    final String[] COLUMNS = {"Barcode", "Discount"};
 
-        final String[] COLUMNS = {"Barcode", "Discount"};
+    public CouponManagerView(CouponManagerLogic cpLogic){
+
+        this.cpLogic = cpLogic;
+
 
         JFrame frame = new JFrame("Coupons");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,7 +25,7 @@ public class CouponManagerView extends MainDisplay{
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTable table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
+        table = new JTable(new DefaultTableModel(cpLogic.getCouponTable(), COLUMNS));
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
@@ -27,14 +34,23 @@ public class CouponManagerView extends MainDisplay{
 
         JButton addButton = new JButton("Add Coupon");
         addButton.setBounds(350, 10, 200, 50);
-        addButton.addActionListener(e -> new AddDialog(this));
+        addButton.addActionListener(e -> new AddCouponDialog(this));
         frame.add(addButton);
 
         JButton removeButton = new JButton("Remove Coupon");
         removeButton.setBounds(350, 70, 200, 50);
-        removeButton.addActionListener(e -> new RemoveDialog(this));
+        removeButton.addActionListener(e -> new RemoveCouponDialog(this));
         frame.add(removeButton);
 
         frame.setVisible(true);
+    }
+
+    public CouponManagerLogic getCpLogic(){
+
+        return cpLogic;
+    }
+
+    public void regenTable(){
+        table.setModel(new DefaultTableModel(cpLogic.getCouponTable(), COLUMNS));
     }
 }

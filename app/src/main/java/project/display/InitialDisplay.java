@@ -1,6 +1,5 @@
 package project.display;
 
-import project.logic.ILogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,13 +10,11 @@ import java.awt.event.ActionListener;
 public class InitialDisplay {
 
     private JFrame frame;
-    private ILogic logic;
     private final String user = "user";
     private final String passw = "pass123";
 
     public InitialDisplay(){
 
-        this.logic = logic;
 
         // instantiate the window, fix the size ect.
         frame = new JFrame("Landing Page");
@@ -64,14 +61,14 @@ public class InitialDisplay {
                 String p = new String(password.getPassword());
                 String u = usernameInput.getText();
 
-                if(!(p.equals("pass123")&& u.equals("user"))){
-                    JFrame f = new JFrame();
-                    JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
-                }
-                if(managerButton.isSelected() || employeeButton.isSelected()) {
-                    MainDisplay mainDisplay = new MainDisplay(logic);
-                    mainDisplay.regenTable();
-                }
+//                if(!(p.equals("pass123")&& u.equals("user"))){
+//                    JFrame f = new JFrame();
+//                    JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
+//                }
+//                if(managerButton.isSelected() || employeeButton.isSelected()) {
+//                    MainDisplay mainDisplay = new MainDisplay(logic);
+//                    mainDisplay.regenTable();
+//                }
             }
         });
     }

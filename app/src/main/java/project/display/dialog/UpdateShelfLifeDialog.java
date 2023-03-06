@@ -1,4 +1,6 @@
-package project.display;
+package project.display.dialog;
+
+import project.display.MainDisplay;
 
 import javax.swing.*;
 

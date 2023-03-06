@@ -1,16 +1,20 @@
 package project.display;
 
-import project.logic.ILogic;
+import project.display.dialog.AddDialog;
+import project.display.dialog.OrderDialog;
+import project.display.dialog.UpdatePriceDialog;
+import project.display.dialog.UpdateShelfLifeDialog;
+import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+
 /*
 This view should perhaps have a view of the inventory in a table format
 an order button and a cancel button
  */
 public class OrderView extends MainDisplay{
-    public OrderView (ILogic logic){
+    public OrderView (OrderLogic oLogic){
 
         final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
 
@@ -21,7 +25,7 @@ public class OrderView extends MainDisplay{
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTable table = new JTable(new DefaultTableModel(logic.getProductList().getTableEntries(), COLUMNS));
+        JTable table = new JTable(new DefaultTableModel(oLogic.getOrderableList(), COLUMNS));
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
@@ -53,7 +57,7 @@ public class OrderView extends MainDisplay{
 
         JButton removeButton = new JButton("Remove");
         removeButton.setBounds(820, 250, 200, 50);
-        removeButton.addActionListener(e -> new RemoveDialog(this));
+        //removeButton.addActionListener(e -> new Builder.RemoveDialog(this));
         frame.add(removeButton);
 
         frame.setVisible(true);
