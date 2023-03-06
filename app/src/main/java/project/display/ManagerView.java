@@ -19,7 +19,10 @@ buttons representing operations that the manager may want to use
  */
 public class ManagerView {
 
-    public ManagerView(){
+    public CouponManagerLogic cLogic = null;
+    public StockManagingLogic smLogic = null;
+    public OrderLogic oLogic = null;
+    public ManagerView(CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
         JFrame frame = new JFrame("Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,9 +36,7 @@ public class ManagerView {
         couponButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CouponDatabase cdb = null;
-                CouponManagerLogic cLogic = new CouponManagerLogic(cdb);
-                CouponManagerView cView = new CouponManagerView(cLogic) ;
+                CouponManagerView cView = new CouponManagerView(cLogic);
             }
         });
         frame.add(couponButton);
@@ -45,8 +46,6 @@ public class ManagerView {
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductDatabase pdb = null;
-                StockManagingLogic smLogic = new StockManagingLogic(pdb);
                 StockManagingView smView = new StockManagingView(smLogic);
             }
         });
@@ -57,9 +56,6 @@ public class ManagerView {
         orderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderableDatabase odb = null;
-                ProductDatabase pdb = null;
-                OrderLogic oLogic = new OrderLogic(pdb,odb);
                 OrderView oView = new OrderView(oLogic);
             }
         });
