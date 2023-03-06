@@ -8,6 +8,7 @@ import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 import project.logic.SaleLogic;
 import project.logic.StockCheckingLogic;
+import project.logic.StockManagingLogic;
 import project.objects.Coupon;
 import project.persistence.*;
 
@@ -17,12 +18,20 @@ public class App {
     public static void main(String[] args) {
 
         ProductDatabaseStub productDB =  new ProductDatabaseStub();
+<<<<<<< HEAD
         //CouponDatabaseStub couponStub = new CouponDatabaseStub();
         //SaleLogic sLogic = new SaleLogic(productDB,couponStub);
         //CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
         //StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
         OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
         OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
+=======
+        CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        SaleLogic sLogic = new SaleLogic(productDB,couponStub);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+      //  StockManagingLogic smLogic = new StockManagingLogic(productDB);
+>>>>>>> a926a6cab19eef9e7eabde3827d9b3d7baeb10f4
 
         // The "nextBarcode" for logic has to be hardcoded based on the test data
         // That's set up when the DatabaseStub is initialized.
@@ -33,6 +42,11 @@ public class App {
         //EmployeeView emp = new EmployeeView(logic);
         //ManagerView mv = new ManagerView(logic);
 
+<<<<<<< HEAD
         //StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
+=======
+        StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
+       // StockManagingView stockManagingView = new StockManagingView(smLogic);
+>>>>>>> a926a6cab19eef9e7eabde3827d9b3d7baeb10f4
     }
 }
