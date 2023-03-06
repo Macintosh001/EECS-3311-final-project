@@ -1,5 +1,6 @@
 package project.display;
 
+import project.display.dialog.RemoveStockDialog;
 import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
 
@@ -31,14 +32,13 @@ public class StockManagingView {
 
         JButton removeButton = new JButton("Remove Item");
         removeButton.setBounds(350,70,200,50);
-        // So what happens when the remove button is clicked?
-        //removeButton.addActionListener(e -> new removeProductDiolog(this));
+        removeButton.addActionListener(e -> new RemoveStockDialog(this));
         frame.add(removeButton);
 
         frame.setVisible(true);
     }
 
-    public StockCheckingLogic getsmLogic() {
+    public StockManagingLogic getsmLogic() {
         return smLogic;
     }
 
