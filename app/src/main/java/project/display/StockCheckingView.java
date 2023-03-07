@@ -27,7 +27,7 @@ public class StockCheckingView {
 
         JFrame frame = new JFrame("Stock Checking");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1050,720);
+        frame.setSize(1050,550);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setResizable(false);
@@ -125,7 +125,8 @@ public class StockCheckingView {
         frame.add(fDateMaxInput);
 
         JButton confirmButton = new JButton("Confirm");
-        confirmButton.setBounds(700, 330, 100, 50);
+        confirmButton.setBounds(800, 330, 100, 50);
+
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,6 +143,16 @@ public class StockCheckingView {
                 // need to regen table
             }
         });
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(620,330,100,50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        frame.add(backButton);
         frame.add(confirmButton);
 
         frame.setVisible(true);

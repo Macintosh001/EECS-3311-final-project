@@ -6,6 +6,8 @@ import project.logic.StockManagingLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StockManagingView {
 
@@ -31,9 +33,19 @@ public class StockManagingView {
         frame.add(tablePane);
 
         JButton removeButton = new JButton("Remove Item");
-        removeButton.setBounds(350,70,200,50);
+        removeButton.setBounds(350, 10,200,50);
         removeButton.addActionListener(e -> new RemoveStockDialog(this));
         frame.add(removeButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(350,350,200,50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        frame.add(backButton);
 
         frame.setVisible(true);
     }

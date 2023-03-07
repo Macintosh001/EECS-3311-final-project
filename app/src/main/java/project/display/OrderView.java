@@ -5,6 +5,8 @@ import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /*
 This view should perhaps have a view of the inventory in a table format
@@ -61,6 +63,16 @@ public class OrderView {
         removeButton.setBounds(720, 250, 200, 50);
         removeButton.addActionListener(e -> new RemoveOrderDialog(this));
         frame.add(removeButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(720,600,200,50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        frame.add(backButton);
 
         frame.setVisible(true);
     }

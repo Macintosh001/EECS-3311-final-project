@@ -59,7 +59,6 @@ public class SaleLogic {
     }
 
 
-
     public List<ErrorMsg> applyCoupon(String code) {
         List<ErrorMsg> errors = new ArrayList<>();
         Coupon tmpCoupon = couponDB.getCoupon(code);

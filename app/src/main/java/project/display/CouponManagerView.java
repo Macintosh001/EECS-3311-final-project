@@ -6,6 +6,8 @@ import project.display.dialog.coupon_dialog.RemoveCouponDialog;
 import project.logic.CouponManagerLogic;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CouponManagerView {
 
@@ -46,6 +48,16 @@ public class CouponManagerView {
         updateButton.setBounds(350, 130, 200, 50);
         updateButton.addActionListener(e -> new RemoveCouponDialog(this));
         frame.add(updateButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(350,350,200,50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        frame.add(backButton);
 
         frame.setVisible(true);
     }

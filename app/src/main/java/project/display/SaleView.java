@@ -4,13 +4,15 @@ import project.display.dialog.sale_dialog.ApplyCouponDialog;
 import project.display.dialog.sale_dialog.BuyDialog;
 import project.display.dialog.sale_dialog.ScanDialog;
 import project.logic.SaleLogic;
+import project.objects.ErrorMsg;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class SaleView extends MainDisplay{
+public class SaleView {
 
     private SaleLogic sLogic = null;
     private final String[] COLUMNS = {"Name", "Price"};
@@ -46,7 +48,12 @@ public class SaleView extends MainDisplay{
 
         JButton buyButton = new JButton("Buy");
         buyButton.setBounds(350, 130, 200, 50);
-        buyButton.addActionListener(e -> new BuyDialog(this));
+        buyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<ErrorMsg> errorMsgList = sLogic.buy();
+            }
+        });
         frame.add(buyButton);
 
         JButton clearButton = new JButton("Clear Cart");
@@ -54,10 +61,20 @@ public class SaleView extends MainDisplay{
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                sLogic.clearShoppingCart();
             }
         });
         frame.add(clearButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(350,350,200,50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        frame.add(backButton);
 
         frame.setVisible(true);
     }
