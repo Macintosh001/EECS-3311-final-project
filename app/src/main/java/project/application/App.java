@@ -17,26 +17,6 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
 
-//        ProductDatabaseStub productDB =  new ProductDatabaseStub();
-//        CouponDatabaseStub couponStub = new CouponDatabaseStub();
-//        OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
-//        OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
-//        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
-//        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
-//        StockManagingLogic smLogic = new StockManagingLogic(productDB);
-//        SaleLogic sLogic = new SaleLogic(productDB, couponStub);
-
-        // That's set up when the DatabaseStub is initialized.
-        //OrderView view = new OrderView(oLogic);
-//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
-        //CouponManagerView coupon = new CouponManagerView(cpLogic);
-        //SaleView sale = new SaleView(sLogic);
-        //EmployeeView emp = new EmployeeView(scLogic, sLogic);
-        //ManagerView mv = new ManagerView(cpLogic,smLogic,oLogic);
-
-        //StockCheckingView stockCheckingView = new StockCheckingView(scLogic);
-       //StockManagingView stockManagingView = new StockManagingView(smLogic);
-
         init();
     }
 
