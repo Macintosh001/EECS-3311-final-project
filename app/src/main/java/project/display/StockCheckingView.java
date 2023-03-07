@@ -89,6 +89,8 @@ public class StockCheckingView {
         frame.add(filterDateLabel);
 
         JLabel minDateLabel = new JLabel("Start:");
+        minDateLabel.setBounds(570, 240, 100, 50);
+        frame.add(minDateLabel);
         // add date picker with an icon for the button
 //        DatePickerSettings dateSettings = new DatePickerSettings();
 //        dateSettings.getEnableYearMenu();

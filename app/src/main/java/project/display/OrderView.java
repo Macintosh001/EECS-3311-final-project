@@ -36,29 +36,29 @@ public class OrderView {
 
         // This is the button to add products
         JButton orderButton = new JButton("Order");
-        orderButton.setBounds(500, 10, 200, 50);
+        orderButton.setBounds(720, 10, 200, 50);
         orderButton.addActionListener(e -> new PlaceOrderDialog(this));
         frame.add(orderButton);
 
         // This is the button to remove products
         JButton updatePriceButton = new JButton("Update Price");
-        updatePriceButton.setBounds(500, 70, 200, 50);
+        updatePriceButton.setBounds(720, 70, 200, 50);
         updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
         frame.add(updatePriceButton);
 
         // This is the button to update products
         JButton updateButton = new JButton("Update shelf life");
-        updateButton.setBounds(500, 130, 200, 50);
+        updateButton.setBounds(720, 130, 200, 50);
         updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
         frame.add(updateButton);
 
         JButton addButton = new JButton("Add");
-        addButton.setBounds(500, 190, 200, 50);
+        addButton.setBounds(720, 190, 200, 50);
         addButton.addActionListener(e -> new AddOrderDialog(this));
         frame.add(addButton);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.setBounds(500, 250, 200, 50);
+        removeButton.setBounds(720, 250, 200, 50);
         removeButton.addActionListener(e -> new RemoveOrderDialog(this));
         frame.add(removeButton);
 

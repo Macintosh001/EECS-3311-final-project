@@ -27,8 +27,8 @@ public class App {
         SaleLogic sLogic = new SaleLogic(productDB, couponStub);
 
         // That's set up when the DatabaseStub is initialized.
-        //OrderView view = new OrderView(oLogic);
-       //InitialDisplay init = new InitialDisplay();
+        OrderView view = new OrderView(oLogic);
+        //InitialDisplay init = new InitialDisplay();
         //CouponManagerView coupon = new CouponManagerView(cpLogic);
         //SaleView sale = new SaleView(sLogic);
         //EmployeeView emp = new EmployeeView(scLogic, sLogic);
