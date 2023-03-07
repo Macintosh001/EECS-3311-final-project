@@ -13,7 +13,7 @@ public class RemoveStockDialog extends JDialog {
     public RemoveStockDialog(StockManagingView smView){
 
         setTitle("Remove Product");
-        setSize(800 + 2, 600 + 30);
+        setSize(400, 300);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
@@ -24,11 +24,11 @@ public class RemoveStockDialog extends JDialog {
         add(barcodeInputLabel);
 
         JTextField barcodeInput = new JTextField();
-        barcodeInput.setBounds(220, 10, 200, 50);
+        barcodeInput.setBounds(70, 10, 200, 50);
         add(barcodeInput);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.setBounds(100, 70, 200, 50);
+        removeButton.setBounds(70, 70, 200, 50);
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,8 +42,9 @@ public class RemoveStockDialog extends JDialog {
                 }
             }
         });
+        add(removeButton);
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.setBounds(220, 540, 200, 50);
+        cancelButton.setBounds(70, 200, 200, 50);
         cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
 

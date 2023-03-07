@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 employee view should show the inventory in a table format
 only able to search the table for specific items
  */
-public class EmployeeView extends MainDisplay{
+public class EmployeeView{
 
     private StockCheckingLogic scLogic = null;
     private SaleLogic sLogic = null;
@@ -31,6 +31,7 @@ public class EmployeeView extends MainDisplay{
             @Override
             public void actionPerformed(ActionEvent e) {
                 StockCheckingView scView = new StockCheckingView(scLogic);
+                frame.dispose();
             }
         });
         frame.add(stockCheckButton);
@@ -41,6 +42,7 @@ public class EmployeeView extends MainDisplay{
             @Override
             public void actionPerformed(ActionEvent e) {
                 SaleView sView = new SaleView(sLogic);
+                frame.dispose();
             }
         });
         frame.add(saleButton);

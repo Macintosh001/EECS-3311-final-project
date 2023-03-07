@@ -37,6 +37,7 @@ public class ManagerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CouponManagerView cView = new CouponManagerView(cLogic);
+                frame.dispose();
             }
         });
         frame.add(couponButton);
@@ -47,6 +48,7 @@ public class ManagerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StockManagingView smView = new StockManagingView(smLogic);
+                frame.dispose();
             }
         });
         frame.add(stockButton);
@@ -57,6 +59,7 @@ public class ManagerView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OrderView oView = new OrderView(oLogic);
+                frame.dispose();
             }
         });
         frame.add(orderButton);

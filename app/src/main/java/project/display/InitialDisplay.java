@@ -1,6 +1,8 @@
 package project.display;
 
 
+import project.logic.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,15 +11,20 @@ import java.awt.event.ActionListener;
 
 public class InitialDisplay {
 
-    private JFrame frame;
+    private StockCheckingLogic scLogic = null;
+    private SaleLogic sLogic = null;
+    public CouponManagerLogic cLogic = null;
+    public StockManagingLogic smLogic = null;
+    public OrderLogic oLogic = null;
     private final String user = "user";
     private final String passw = "pass123";
 
-    public InitialDisplay(){
+    public InitialDisplay(StockCheckingLogic scLogic, SaleLogic sLogic,
+                          CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
 
         // instantiate the window, fix the size ect.
-        frame = new JFrame("Landing Page");
+        JFrame frame = new JFrame("Landing Page");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300,275);
         frame.setLocationRelativeTo(null);
@@ -42,6 +49,10 @@ public class InitialDisplay {
         JRadioButton employeeButton = new JRadioButton("Employee");
         employeeButton.setBounds(100,120,120,30);
 
+        ButtonGroup group = new ButtonGroup();
+        group.add(managerButton);
+        group.add(employeeButton);
+
         JButton login = new JButton("Login");
         login.setBounds(100,175, 80,30);
 
@@ -61,16 +72,18 @@ public class InitialDisplay {
                 String p = new String(password.getPassword());
                 String u = usernameInput.getText();
 
-//                if(!(p.equals("pass123")&& u.equals("user"))){
-//                    JFrame f = new JFrame();
-//                    JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
-//                }
-//                if(managerButton.isSelected() || employeeButton.isSelected()) {
-//                    MainDisplay mainDisplay = new MainDisplay(logic);
-//                    mainDisplay.regenTable();
-//                }
+                if(!(p.equals("pass123")&& u.equals("user"))){
+                    JFrame f = new JFrame();
+                    JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
+                }
+                else if(managerButton.isSelected()) {
+                    ManagerView mView = new ManagerView(cLogic,smLogic,oLogic);
+                    frame.dispose();
+                } else if (employeeButton.isSelected()) {
+                    EmployeeView eView = new EmployeeView(scLogic, sLogic);
+                    frame.dispose();
+                }
             }
         });
     }
-
 }
