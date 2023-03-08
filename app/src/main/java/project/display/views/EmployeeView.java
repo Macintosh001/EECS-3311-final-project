@@ -13,9 +13,19 @@ public class EmployeeView extends JPanel {
         setBounds(0, 0, 1000, 700);
         setLayout(null);
 
-        JLabel label = new JLabel("Employee View");
-        label.setBounds(0, 0, 200, 30);
-        add(label);
+        JButton scButton = new JButton("Check what's in Stock");
+        scButton.setBounds(110, 210, 180, 80);
+        scButton.addActionListener(e -> {
+            display.advanceTo(display.getStockCheckingView());
+        });
+        add(scButton);
+
+        JButton sButton = new JButton("Point of Sale");
+        sButton.setBounds(110, 310, 180, 80);
+        sButton.addActionListener(e -> {
+            display.advanceTo(display.getSaleView());
+        });
+        add(sButton);
 
         JButton logoutButton = new JButton("Logout");
         logoutButton.setBounds(810, 610, 180, 80);
