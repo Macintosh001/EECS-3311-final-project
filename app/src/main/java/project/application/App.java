@@ -3,16 +3,14 @@
  */
 package project.application;
 
-import project.display.*;
+import project.display.Display;
+import project.displayold.*;
 import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 import project.logic.SaleLogic;
 import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
-import project.objects.Coupon;
 import project.persistence.*;
-
-import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -31,6 +29,7 @@ public class App {
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponStub);
 
-        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
+        Display display = new Display();
+//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }
