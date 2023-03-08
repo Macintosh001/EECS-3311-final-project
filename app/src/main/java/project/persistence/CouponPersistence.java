@@ -24,8 +24,8 @@ public class CouponPersistence implements CouponDatabase{
      * This way, a user is guaranteed to have a database that supports the operations in this class
      * before these operations are invoked; this design avoids errors of missing tables or databases.
      */
-    public CouponPersistence(){
-        this.db = new DatabaseManager();
+    public CouponPersistence(String username, String password){
+        this.db = new DatabaseManager(username, password);
         if(!db.databaseExists()) {
             db.createDB();
         }

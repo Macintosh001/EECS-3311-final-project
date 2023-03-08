@@ -14,11 +14,11 @@ public class DatabaseManager {
     private String username; //the username of the user connecting
     private String password; //the password of the connection
 
-    public DatabaseManager(){
+    public DatabaseManager(String username, String password){
         //initialize some connection information
         url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
-        username = "root";
-        password = "root1234";
+        this.username = username;
+        this.password = password;
     }
 
     /**
