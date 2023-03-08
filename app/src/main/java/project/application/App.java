@@ -9,23 +9,47 @@ import project.logic.OrderLogic;
 import project.logic.SaleLogic;
 import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
+import project.objects.Coupon;
+import project.objects.Orderable;
+import project.objects.Product;
 import project.persistence.*;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        init();
+        new DBConnectionWindow();
     }
 
-    public static void init(){
+    public static void init(String username, String password) throws SQLException {
 
-        ProductDatabaseStub productDB =  new ProductDatabaseStub();
-        CouponDatabaseStub couponStub = new CouponDatabaseStub();
-        OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
-        OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
-        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
+        ProductDatabase productDB = null;
+        OrderableDatabase orderDB = null;
+        CouponDatabase couponDB = null;
+
+        productDB = new ProductPersistence(username, password);
+        orderDB = new OrderablePersistence(username, password);
+        couponDB = new CouponPersistence(username, password);
+
+        // We want to populate the DB if it's empty!
+        if (productDB.getProductList().isEmpty()) {
+            productDB.addProduct(new Product(0, "Chips", 100, 0.99f, new Date()));
+        }
+        if (orderDB.getOrderableList().isEmpty()) {
+            orderDB.addOrderable(new Orderable("Chips", 0.99f, 300));
+        }
+        if (couponDB.getCouponList().isEmpty()) {
+            couponDB.addCoupon(new Coupon("SAVE10", 0.1f));
+        }
+
+        OrderLogic oLogic = new OrderLogic(productDB,orderDB);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
-        SaleLogic sLogic = new SaleLogic(productDB, couponStub);
+        SaleLogic sLogic = new SaleLogic(productDB, couponDB);
 
         Display display = new Display(
                 scLogic,
