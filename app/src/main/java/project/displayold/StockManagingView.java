@@ -1,6 +1,6 @@
 package project.displayold;
 
-import project.displayold.dialog.RemoveStockDialog;
+import project.display.dialogs.RemoveStockDialog;
 import project.logic.*;
 
 import javax.swing.*;
@@ -36,7 +36,7 @@ public class StockManagingView extends InitialDisplay{
 
         JButton removeButton = new JButton("Remove Item");
         removeButton.setBounds(350, 10,200,50);
-        removeButton.addActionListener(e -> new RemoveStockDialog(this));
+//        removeButton.addActionListener(e -> new RemoveStockDialog(this));
         frame.add(removeButton);
 
         JButton backButton = new JButton("Back");

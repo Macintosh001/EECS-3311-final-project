@@ -22,6 +22,13 @@ public class AdminView extends JPanel {
         });
         add(scButton);
 
+        JButton smButton = new JButton("Manage what's in Stock");
+        smButton.setBounds(310, 210, 180, 80);
+        smButton.addActionListener(e -> {
+            display.advanceTo(display.getStockManagingView());
+        });
+        add(smButton);
+
         BackButton logoutButton = new BackButton("Logout", display);
         add(logoutButton);
 

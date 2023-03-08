@@ -1,11 +1,8 @@
 package project.display;
 
-import project.display.views.AdminView;
-import project.display.views.EmployeeView;
-import project.display.views.LoginView;
-import project.display.views.ManagerView;
-import project.display.views.StockCheckingView;
+import project.display.views.*;
 import project.logic.StockCheckingLogic;
+import project.logic.StockManagingLogic;
 
 import javax.swing.*;
 import java.util.Stack;
@@ -18,12 +15,14 @@ public class Display extends JFrame {
     private final AdminView adminView;
 
     private final StockCheckingView stockCheckingView;
+    private final StockManagingView stockManagingView;
 
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
 
     public Display(
-            StockCheckingLogic stockCheckingLogic
+            StockCheckingLogic stockCheckingLogic,
+            StockManagingLogic stockManagingLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -40,6 +39,7 @@ public class Display extends JFrame {
         this.adminView = new AdminView(this);
 
         this.stockCheckingView = new StockCheckingView(this, stockCheckingLogic);
+        this.stockManagingView = new StockManagingView(this, stockManagingLogic);
 
         add(loginView);
 
@@ -48,12 +48,13 @@ public class Display extends JFrame {
         add(adminView);
 
         add(stockCheckingView);
+        add(stockManagingView);
 
         setVisible(true);
 
         // Setup the Stack
         this.viewStack = new Stack<>();
-        currentPanel = loginView;
+        currentPanel = adminView;
         currentPanel.setVisible(true);
     }
 
@@ -88,5 +89,9 @@ public class Display extends JFrame {
 
     public StockCheckingView getStockCheckingView() {
         return stockCheckingView;
+    }
+
+    public StockManagingView getStockManagingView() {
+        return stockManagingView;
     }
 }

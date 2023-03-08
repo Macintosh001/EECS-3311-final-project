@@ -30,7 +30,8 @@ public class App {
         SaleLogic sLogic = new SaleLogic(productDB, couponStub);
 
         Display display = new Display(
-                scLogic
+                scLogic,
+                smLogic
         );
 //        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }

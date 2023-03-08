@@ -1,6 +1,6 @@
-package project.displayold.dialog;
+package project.display.dialogs;
 
-import project.displayold.StockManagingView;
+import project.display.views.StockManagingView;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class RemoveStockDialog extends JDialog {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = smView.getsmLogic().removeProduct(barcodeInput.getText());
+                List<ErrorMsg> errorMsgList = smView.getLogic().removeProduct(barcodeInput.getText());
 
                 if (errorMsgList.isEmpty()) {
                     smView.regenTable();
@@ -43,6 +43,7 @@ public class RemoveStockDialog extends JDialog {
             }
         });
         add(removeButton);
+
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(70, 200, 200, 50);
         cancelButton.addActionListener(e -> dispose());
