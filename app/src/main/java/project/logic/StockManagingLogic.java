@@ -4,6 +4,7 @@ import project.logic.validation.BarcodeValidator;
 import project.objects.ErrorMsg;
 import project.objects.Product;
 import project.objects.Result;
+import project.persistence.ProductDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

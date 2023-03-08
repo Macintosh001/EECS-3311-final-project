@@ -48,7 +48,7 @@ public class CouponManagerLogic {
         if (percentOffResult.getError() != null) {
             return percentOffResult.getError();
         }
-        Float oPercentOff = percentOffResult.getResult();
+        Float oPercentOff = percentOffResult.getResult() / 100.0f;
 
         // Add new coupon to database
         db.addCoupon(new Coupon(code, oPercentOff));
@@ -112,7 +112,7 @@ public class CouponManagerLogic {
         if (percentOffResult.getError() != null) {
             return percentOffResult.getError();
         }
-        Float oPercentOff = percentOffResult.getResult();
+        Float oPercentOff = percentOffResult.getResult() / 100.0f;
 
         // Update coupon in database
         db.replaceCoupon(new Coupon(code, oPercentOff));

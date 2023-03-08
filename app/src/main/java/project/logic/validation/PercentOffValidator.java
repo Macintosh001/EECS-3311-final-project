@@ -14,7 +14,7 @@ public class PercentOffValidator implements Validator<Float> {
 
         try {
             result = Float.parseFloat(entry);
-            if (0.0f <= result && result <= 100.0f) {
+            if (!(0.0f <= result && result <= 100.0f)) {
                 errorMsgs.add(new ErrorMsg("Discount must be between 0% and 100% off!"));
             }
         } catch (NumberFormatException ex) {

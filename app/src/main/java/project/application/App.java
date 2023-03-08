@@ -3,25 +3,37 @@
  */
 package project.application;
 
-import project.display.*;
-import project.logic.ILogic;
-import project.logic.Logic;
-import project.persistence.Database;
-import project.persistence.DatabaseStub;
+import project.display.Display;
+import project.logic.CouponManagerLogic;
+import project.logic.OrderLogic;
+import project.logic.SaleLogic;
+import project.logic.StockCheckingLogic;
+import project.logic.StockManagingLogic;
+import project.persistence.*;
 
 public class App {
     public static void main(String[] args) {
-        Database database = new DatabaseStub();
+        init();
+    }
 
-        // The "nextBarcode" for logic has to be hardcoded based on the test data
-        // That's set up when the DatabaseStub is initialized.
-        ILogic logic = new Logic(database, 2);
-        MainDisplay display = new MainDisplay(logic);
-        //OrderView view = new OrderView(logic);
-       //InitialDisplay init = new InitialDisplay();
-        //CouponManagerView coupon = new CouponManagerView(logic);
-        //SaleView sale = new SaleView(logic);
-        //EmployeeView emp = new EmployeeView(logic);
-        //ManagerView mv = new ManagerView(logic);
+    public static void init(){
+
+        ProductDatabaseStub productDB =  new ProductDatabaseStub();
+        CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
+        OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponStub);
+
+        Display display = new Display(
+                scLogic,
+                smLogic,
+                oLogic,
+                cpLogic,
+                sLogic
+        );
+//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }

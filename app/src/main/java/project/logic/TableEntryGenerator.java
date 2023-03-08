@@ -42,7 +42,7 @@ public class TableEntryGenerator {
         int i = 0;
         for (Orderable orderable: list) {
             tableEntries[i][0] = orderable.getName();
-            tableEntries[i][3] = String.format("%.2f", orderable.getPrice());
+            tableEntries[i][1] = String.format("%.2f", orderable.getPrice());
             tableEntries[i][2] = orderable.getShelfLife().toString() + " Days";
             i++;
         }
