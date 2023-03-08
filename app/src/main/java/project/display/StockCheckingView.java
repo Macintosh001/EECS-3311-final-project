@@ -3,7 +3,7 @@ package project.display;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.demo.FullDemo;
-import project.logic.StockCheckingLogic;
+import project.logic.*;
 import project.objects.ErrorMsg;
 import project.objects.Result;
 
@@ -15,14 +15,16 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.List;
 
-public class StockCheckingView {
+public class StockCheckingView extends InitialDisplay{
 
     private StockCheckingLogic scLogic = null;
     private JTable table;
     private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
 
-    public StockCheckingView(StockCheckingLogic scLogic){
+    public StockCheckingView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                             CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
         this.scLogic = scLogic;
 
         JFrame frame = new JFrame("Stock Checking");
@@ -149,7 +151,8 @@ public class StockCheckingView {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                EmployeeView eView = new EmployeeView(scLogic,sLogic,cLogic,smLogic,oLogic);
+                frame.dispose();
             }
         });
         frame.add(backButton);

@@ -28,7 +28,7 @@ public class DevView {
         couponButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CouponManagerView cView = new CouponManagerView(cLogic);
+                CouponManagerView cView = new CouponManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -39,7 +39,7 @@ public class DevView {
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StockManagingView smView = new StockManagingView(smLogic);
+                StockManagingView smView = new StockManagingView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -50,7 +50,7 @@ public class DevView {
         orderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderView oView = new OrderView(oLogic);
+                OrderView oView = new OrderView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -61,7 +61,7 @@ public class DevView {
         stockCheckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StockCheckingView scView = new StockCheckingView(scLogic);
+                StockCheckingView scView = new StockCheckingView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -72,7 +72,7 @@ public class DevView {
         posButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SaleView sView = new SaleView(sLogic);
+                SaleView sView = new SaleView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });

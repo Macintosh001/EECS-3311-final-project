@@ -1,20 +1,22 @@
 package project.display;
 
 import project.display.dialog.RemoveStockDialog;
-import project.logic.StockCheckingLogic;
-import project.logic.StockManagingLogic;
+import project.logic.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StockManagingView {
+public class StockManagingView extends InitialDisplay{
 
     private StockManagingLogic smLogic = null;
     private JTable table;
     private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
-    public StockManagingView(StockManagingLogic smLogic){
+    public StockManagingView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                             CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
+
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
 
         this.smLogic = smLogic;
 
@@ -42,7 +44,8 @@ public class StockManagingView {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ManagerView mView = new ManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
+                frame.dispose();
             }
         });
         frame.add(backButton);

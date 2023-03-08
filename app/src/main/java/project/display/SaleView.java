@@ -3,7 +3,7 @@ package project.display;
 import project.display.dialog.sale_dialog.ApplyCouponDialog;
 import project.display.dialog.sale_dialog.BuyDialog;
 import project.display.dialog.sale_dialog.ScanDialog;
-import project.logic.SaleLogic;
+import project.logic.*;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -12,14 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class SaleView {
+public class SaleView extends InitialDisplay{
 
     private SaleLogic sLogic = null;
     private final String[] COLUMNS = {"Name", "Price"};
     private final JTable table;
 
-    public SaleView(SaleLogic sLogic){
+    public SaleView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                    CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
         this.sLogic = sLogic;
 
         JFrame frame = new JFrame("POS");
@@ -71,7 +73,8 @@ public class SaleView {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                EmployeeView eView = new EmployeeView(scLogic,sLogic,cLogic,smLogic,oLogic);
+                frame.dispose();
             }
         });
         frame.add(backButton);

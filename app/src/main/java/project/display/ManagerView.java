@@ -1,9 +1,7 @@
 package project.display;
 
 import project.display.dialog.AddDialog;
-import project.logic.CouponManagerLogic;
-import project.logic.OrderLogic;
-import project.logic.StockManagingLogic;
+import project.logic.*;
 import project.persistence.CouponDatabase;
 import project.persistence.OrderableDatabase;
 import project.persistence.ProductDatabase;
@@ -17,12 +15,19 @@ This view pertains to all the controls and data a manager should have access too
 general view of the inventory in a table format
 buttons representing operations that the manager may want to use
  */
-public class ManagerView {
+public class ManagerView extends InitialDisplay{
 
-    public CouponManagerLogic cLogic = null;
-    public StockManagingLogic smLogic = null;
-    public OrderLogic oLogic = null;
-    public ManagerView(CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
+    private CouponManagerLogic cpLogic = null;
+    private StockManagingLogic smLogic = null;
+    private OrderLogic oLogic = null;
+
+    public ManagerView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                       CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
+
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
+        this.cpLogic = cLogic;
+        this.smLogic = smLogic;
+        this.oLogic = oLogic;
 
         JFrame frame = new JFrame("Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +41,7 @@ public class ManagerView {
         couponButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CouponManagerView cView = new CouponManagerView(cLogic);
+                CouponManagerView cView = new CouponManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -47,7 +52,7 @@ public class ManagerView {
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StockManagingView smView = new StockManagingView(smLogic);
+                StockManagingView smView = new StockManagingView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -58,7 +63,7 @@ public class ManagerView {
         orderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderView oView = new OrderView(oLogic);
+                OrderView oView = new OrderView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });

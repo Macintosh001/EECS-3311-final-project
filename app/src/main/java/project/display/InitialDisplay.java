@@ -14,8 +14,29 @@ public class InitialDisplay {
     private StockCheckingLogic scLogic = null;
     private SaleLogic sLogic = null;
     public CouponManagerLogic cLogic = null;
-    public StockManagingLogic smLogic = null;
-    public OrderLogic oLogic = null;
+    private StockManagingLogic smLogic = null;
+    private OrderLogic oLogic = null;
+
+    public StockCheckingLogic getScLogic() {
+        return scLogic;
+    }
+
+    public SaleLogic getsLogic() {
+        return sLogic;
+    }
+
+    public CouponManagerLogic getcLogic() {
+        return cLogic;
+    }
+
+    public StockManagingLogic getSmLogic() {
+        return smLogic;
+    }
+
+    public OrderLogic getoLogic() {
+        return oLogic;
+    }
+
     private final String user = "user";
     private final String passw = "pass123";
 
@@ -81,10 +102,10 @@ public class InitialDisplay {
                     JOptionPane.showMessageDialog(f,"Incorrect Username and Password","Alert",JOptionPane.WARNING_MESSAGE);
                 }
                 else if(managerButton.isSelected()) {
-                    ManagerView mView = new ManagerView(cLogic,smLogic,oLogic);
+                    ManagerView mView = new ManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
                     frame.dispose();
                 } else if (employeeButton.isSelected()) {
-                    EmployeeView eView = new EmployeeView(scLogic, sLogic);
+                    EmployeeView eView = new EmployeeView(scLogic,sLogic,cLogic,smLogic,oLogic);
                     frame.dispose();
                 } else if (devButton.isSelected()) {
                     DevView dView = new DevView(cLogic,smLogic,oLogic,scLogic,sLogic);

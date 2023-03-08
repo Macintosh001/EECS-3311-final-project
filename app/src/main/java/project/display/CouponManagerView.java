@@ -3,20 +3,23 @@ package project.display;
 import project.display.dialog.AddDialog;
 import project.display.dialog.coupon_dialog.AddCouponDialog;
 import project.display.dialog.coupon_dialog.RemoveCouponDialog;
-import project.logic.CouponManagerLogic;
+import project.logic.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CouponManagerView {
+public class CouponManagerView extends InitialDisplay{
 
     private CouponManagerLogic cpLogic = null;
     private final JTable table;
     final String[] COLUMNS = {"Barcode", "Discount"};
 
-    public CouponManagerView(CouponManagerLogic cpLogic){
+    public CouponManagerView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                             CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
         this.cpLogic = cpLogic;
 
 
@@ -54,7 +57,8 @@ public class CouponManagerView {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ManagerView mView = new ManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
+                frame.dispose();
             }
         });
         frame.add(backButton);

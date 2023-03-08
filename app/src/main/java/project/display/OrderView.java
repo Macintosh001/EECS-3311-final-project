@@ -1,7 +1,7 @@
 package project.display;
 
 import project.display.dialog.order_dialog.*;
-import project.logic.OrderLogic;
+import project.logic.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,14 +12,16 @@ import java.awt.event.ActionListener;
 This view should perhaps have a view of the inventory in a table format
 an order button and a cancel button
  */
-public class OrderView {
+public class OrderView extends InitialDisplay{
 
     private OrderLogic oLogic = null;
     private final JTable table;
     final String[] COLUMNS = {"Name", "Price", "Shelf Life"};
 
-    public OrderView (OrderLogic oLogic){
+    public OrderView (StockCheckingLogic scLogic, SaleLogic sLogic,
+                      CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
 
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
         this.oLogic = oLogic;
 
         JFrame frame = new JFrame("Orders");
@@ -69,7 +71,7 @@ public class OrderView {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ManagerView mView = new ManagerView(scLogic,sLogic,cLogic,smLogic,oLogic);
             }
         });
         frame.add(backButton);

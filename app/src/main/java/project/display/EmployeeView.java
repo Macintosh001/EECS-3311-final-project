@@ -1,8 +1,7 @@
 package project.display;
 
 import project.display.dialog.AddDialog;
-import project.logic.SaleLogic;
-import project.logic.StockCheckingLogic;
+import project.logic.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,11 +11,14 @@ import java.awt.event.ActionListener;
 employee view should show the inventory in a table format
 only able to search the table for specific items
  */
-public class EmployeeView{
+public class EmployeeView extends InitialDisplay{
 
     private StockCheckingLogic scLogic = null;
     private SaleLogic sLogic = null;
-    public EmployeeView(StockCheckingLogic scLogic, SaleLogic sLogic){
+    public EmployeeView(StockCheckingLogic scLogic, SaleLogic sLogic,
+                        CouponManagerLogic cLogic, StockManagingLogic smLogic, OrderLogic oLogic){
+
+        super(scLogic,sLogic,cLogic,smLogic,oLogic);
 
         JFrame frame = new JFrame("Employee");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,7 +32,7 @@ public class EmployeeView{
         stockCheckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StockCheckingView scView = new StockCheckingView(scLogic);
+                StockCheckingView scView = new StockCheckingView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
@@ -41,7 +43,7 @@ public class EmployeeView{
         saleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SaleView sView = new SaleView(sLogic);
+                SaleView sView = new SaleView(scLogic,sLogic,cLogic,smLogic,oLogic);
                 frame.dispose();
             }
         });
