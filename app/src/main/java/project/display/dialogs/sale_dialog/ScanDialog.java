@@ -32,12 +32,9 @@ public class ScanDialog extends JDialog {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = sView.getLogic().scan(
-                        Integer.parseInt(codeInput.getText())
-                );
+                List<ErrorMsg> errorMsgList = sView.getLogic().scan(Integer.parseInt(codeInput.getText()));
                 if (errorMsgList.isEmpty()) {
                     sView.regenTable();
-                    dispose();
                 } else {
                     new ErrorDialog(errorMsgList);
                 }
@@ -45,7 +42,7 @@ public class ScanDialog extends JDialog {
         });
         add(addButton);
 
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Done");
         cancelButton.setBounds(220, 540, 200, 50);
         cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
