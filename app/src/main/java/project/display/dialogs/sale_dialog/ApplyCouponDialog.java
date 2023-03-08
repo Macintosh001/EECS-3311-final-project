@@ -1,7 +1,7 @@
-package project.displayold.dialog.sale_dialog;
+package project.display.dialogs.sale_dialog;
 
+import project.display.dialogs.ErrorDialog;
 import project.displayold.SaleView;
-import project.displayold.dialog.ErrorDialog;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ScanDialog extends JDialog {
+public class ApplyCouponDialog extends JDialog {
 
-    public ScanDialog(SaleView sView) {
+    public ApplyCouponDialog(SaleView sView){
 
-        setTitle("Scan");
+        setTitle("Apply Coupon");
         setSize(800 + 2, 600 + 30);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -27,14 +27,12 @@ public class ScanDialog extends JDialog {
         codeInput.setBounds(220, 10, 200, 50);
         add(codeInput);
 
-        JButton addButton = new JButton("Scan");
-        addButton.setBounds(10, 540, 200, 50);
-        addButton.addActionListener(new ActionListener() {
+        JButton applyButton = new JButton("Apply Coupon");
+        applyButton.setBounds(10, 540, 200, 50);
+        applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = sView.getsLogic().scan(
-                        Integer.parseInt(codeInput.getText())
-                );
+                List<ErrorMsg> errorMsgList = sView.getsLogic().applyCoupon(codeInput.getText());
                 if (errorMsgList.isEmpty()) {
                     sView.regenTable();
                     dispose();
@@ -43,7 +41,7 @@ public class ScanDialog extends JDialog {
                 }
             }
         });
-        add(addButton);
+        add(applyButton);
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(220, 540, 200, 50);
@@ -52,4 +50,5 @@ public class ScanDialog extends JDialog {
 
         setVisible(true);
     }
+
 }

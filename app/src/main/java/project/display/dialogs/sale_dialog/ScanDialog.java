@@ -1,7 +1,7 @@
-package project.displayold.dialog.coupon_dialog;
+package project.display.dialogs.sale_dialog;
 
-import project.displayold.CouponManagerView;
-import project.displayold.dialog.ErrorDialog;
+import project.display.dialogs.ErrorDialog;
+import project.displayold.SaleView;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class AddCouponDialog extends JDialog {
+public class ScanDialog extends JDialog {
 
-    public AddCouponDialog(CouponManagerView cpView){
+    public ScanDialog(SaleView sView) {
 
-        setTitle("Add Coupon");
+        setTitle("Scan");
         setSize(800 + 2, 600 + 30);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -27,25 +27,16 @@ public class AddCouponDialog extends JDialog {
         codeInput.setBounds(220, 10, 200, 50);
         add(codeInput);
 
-        JLabel percentInputLabel = new JLabel("Percentage off:");
-        percentInputLabel.setBounds(10, 70, 200, 50);
-        add(percentInputLabel);
-
-        JTextField percentInput = new JTextField();
-        percentInput.setBounds(220, 70, 200, 50);
-        add(percentInput);
-
-        JButton addButton = new JButton("Add Coupon");
+        JButton addButton = new JButton("Scan");
         addButton.setBounds(10, 540, 200, 50);
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = cpView.getCpLogic().addCoupon(
-                        codeInput.getText(),
-                        percentInput.getText()
+                List<ErrorMsg> errorMsgList = sView.getsLogic().scan(
+                        Integer.parseInt(codeInput.getText())
                 );
-                if(errorMsgList.isEmpty()){
-                    cpView.regenTable();
+                if (errorMsgList.isEmpty()) {
+                    sView.regenTable();
                     dispose();
                 } else {
                     new ErrorDialog(errorMsgList);
@@ -55,7 +46,7 @@ public class AddCouponDialog extends JDialog {
         add(addButton);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.setBounds(220,540,200,50);
+        cancelButton.setBounds(220, 540, 200, 50);
         cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
 

@@ -36,6 +36,13 @@ public class AdminView extends JPanel {
         });
         add(smButton);
 
+        JButton cpButton = new JButton("Manage Coupons");
+        cpButton.setBounds(310, 310, 180, 80);
+        cpButton.addActionListener(e -> {
+            display.advanceTo(display.getCouponManagerView());
+        });
+        add(cpButton);
+
         BackButton logoutButton = new BackButton("Logout", display);
         add(logoutButton);
 

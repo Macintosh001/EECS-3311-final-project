@@ -1,4 +1,4 @@
-package project.displayold.dialog.sale_dialog;
+package project.display.dialogs.sale_dialog;
 
 import project.displayold.SaleView;
 

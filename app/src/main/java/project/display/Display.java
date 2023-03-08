@@ -1,6 +1,7 @@
 package project.display;
 
 import project.display.views.*;
+import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
@@ -18,6 +19,7 @@ public class Display extends JFrame {
     private final StockCheckingView stockCheckingView;
     private final StockManagingView stockManagingView;
     private final OrderView orderView;
+    private final CouponManagerView couponManagerView;
 
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
@@ -25,7 +27,8 @@ public class Display extends JFrame {
     public Display(
             StockCheckingLogic stockCheckingLogic,
             StockManagingLogic stockManagingLogic,
-            OrderLogic orderLogic
+            OrderLogic orderLogic,
+            CouponManagerLogic couponManagerLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -44,6 +47,7 @@ public class Display extends JFrame {
         this.stockCheckingView = new StockCheckingView(this, stockCheckingLogic);
         this.stockManagingView = new StockManagingView(this, stockManagingLogic);
         this.orderView = new OrderView(this, orderLogic);
+        this.couponManagerView = new CouponManagerView(this, couponManagerLogic);
 
         add(loginView);
 
@@ -54,6 +58,7 @@ public class Display extends JFrame {
         add(stockCheckingView);
         add(stockManagingView);
         add(orderView);
+        add(couponManagerView);
 
         setVisible(true);
 
@@ -114,5 +119,9 @@ public class Display extends JFrame {
 
     public OrderView getOrderView() {
         return orderView;
+    }
+
+    public CouponManagerView getCouponManagerView() {
+        return couponManagerView;
     }
 }

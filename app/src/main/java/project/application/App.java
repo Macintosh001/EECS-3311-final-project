@@ -32,7 +32,8 @@ public class App {
         Display display = new Display(
                 scLogic,
                 smLogic,
-                oLogic
+                oLogic,
+                cpLogic
         );
 //        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }

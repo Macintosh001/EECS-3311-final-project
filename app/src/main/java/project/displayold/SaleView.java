@@ -1,7 +1,7 @@
 package project.displayold;
 
-import project.displayold.dialog.sale_dialog.ApplyCouponDialog;
-import project.displayold.dialog.sale_dialog.ScanDialog;
+import project.display.dialogs.sale_dialog.ApplyCouponDialog;
+import project.display.dialogs.sale_dialog.ScanDialog;
 import project.logic.*;
 import project.objects.ErrorMsg;
 

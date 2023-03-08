@@ -1,7 +1,7 @@
 package project.displayold;
 
-import project.displayold.dialog.coupon_dialog.AddCouponDialog;
-import project.displayold.dialog.coupon_dialog.RemoveCouponDialog;
+import project.display.dialogs.coupon_dialog.AddCouponDialog;
+import project.display.dialogs.coupon_dialog.RemoveCouponDialog;
 import project.logic.*;
 
 import javax.swing.*;
@@ -38,17 +38,17 @@ public class CouponManagerView extends InitialDisplay{
 
         JButton addButton = new JButton("Add Coupon");
         addButton.setBounds(350, 10, 200, 50);
-        addButton.addActionListener(e -> new AddCouponDialog(this));
+//        addButton.addActionListener(e -> new AddCouponDialog(this));
         frame.add(addButton);
 
         JButton removeButton = new JButton("Remove Coupon");
         removeButton.setBounds(350, 70, 200, 50);
-        removeButton.addActionListener(e -> new RemoveCouponDialog(this));
+//        removeButton.addActionListener(e -> new RemoveCouponDialog(this));
         frame.add(removeButton);
 
         JButton updateButton = new JButton("Update Coupon");
         updateButton.setBounds(350, 130, 200, 50);
-        updateButton.addActionListener(e -> new RemoveCouponDialog(this));
+//        updateButton.addActionListener(e -> new RemoveCouponDialog(this));
         frame.add(updateButton);
 
         JButton backButton = new JButton("Back");
