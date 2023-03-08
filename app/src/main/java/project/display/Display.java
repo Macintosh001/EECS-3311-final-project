@@ -1,6 +1,7 @@
 package project.display;
 
 import project.display.views.*;
+import project.logic.OrderLogic;
 import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
 
@@ -16,13 +17,15 @@ public class Display extends JFrame {
 
     private final StockCheckingView stockCheckingView;
     private final StockManagingView stockManagingView;
+    private final OrderView orderView;
 
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
 
     public Display(
             StockCheckingLogic stockCheckingLogic,
-            StockManagingLogic stockManagingLogic
+            StockManagingLogic stockManagingLogic,
+            OrderLogic orderLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -40,6 +43,7 @@ public class Display extends JFrame {
 
         this.stockCheckingView = new StockCheckingView(this, stockCheckingLogic);
         this.stockManagingView = new StockManagingView(this, stockManagingLogic);
+        this.orderView = new OrderView(this, orderLogic);
 
         add(loginView);
 
@@ -49,6 +53,7 @@ public class Display extends JFrame {
 
         add(stockCheckingView);
         add(stockManagingView);
+        add(orderView);
 
         setVisible(true);
 
@@ -58,17 +63,29 @@ public class Display extends JFrame {
         currentPanel.setVisible(true);
     }
 
+    private void refresh(JPanel panel) {
+        if (panel instanceof ViewWithTable) {
+            ((ViewWithTable) panel).regenTable();
+        }
+    }
+
     public void advanceTo(JPanel panel) {
         currentPanel.setVisible(false);
         viewStack.push(currentPanel);
         currentPanel = panel;
+        refresh(currentPanel);
         currentPanel.setVisible(true);
     }
 
     public void back() {
         currentPanel.setVisible(false);
-        currentPanel = viewStack.pop();
-        currentPanel.setVisible(true);
+        if (viewStack.empty()) {
+            dispose();
+        } else {
+            currentPanel = viewStack.pop();
+            refresh(currentPanel);
+            currentPanel.setVisible(true);
+        }
     }
 
     public LoginView getLoginView() {
@@ -93,5 +110,9 @@ public class Display extends JFrame {
 
     public StockManagingView getStockManagingView() {
         return stockManagingView;
+    }
+
+    public OrderView getOrderView() {
+        return orderView;
     }
 }

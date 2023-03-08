@@ -13,7 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class StockManagingView extends JPanel {
+public class StockManagingView extends JPanel implements ViewWithTable {
     private StockManagingLogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
     private JTable table;

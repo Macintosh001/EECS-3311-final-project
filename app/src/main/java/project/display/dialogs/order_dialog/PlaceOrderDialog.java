@@ -1,7 +1,8 @@
-package project.displayold.dialog.order_dialog;
+package project.display.dialogs.order_dialog;
 
-import project.displayold.OrderView;
-import project.displayold.dialog.ErrorDialog;
+import project.display.dialogs.ErrorDialog;
+import project.display.views.OrderView;
+import project.display.views.ViewWithTable;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PlaceOrderDialog extends JDialog{
+public class PlaceOrderDialog extends JDialog {
 
     public PlaceOrderDialog(OrderView oView){
 
@@ -40,7 +41,7 @@ public class PlaceOrderDialog extends JDialog{
         orderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = oView.getOLogic().placeOrder(
+                List<ErrorMsg> errorMsgList = oView.getLogic().placeOrder(
                        nameInput.getText(),
                        quantityInput.getText()
                 );
@@ -56,7 +57,7 @@ public class PlaceOrderDialog extends JDialog{
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(220,540,200,50);
-        //cancelButton.addActionListener(e -> dispose());
+        cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
 
         setVisible(true);

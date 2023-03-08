@@ -1,7 +1,7 @@
-package project.displayold.dialog.order_dialog;
+package project.display.dialogs.order_dialog;
 
-import project.displayold.OrderView;
-import project.displayold.dialog.ErrorDialog;
+import project.display.dialogs.ErrorDialog;
+import project.display.views.OrderView;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class UpdatePriceDialog extends JDialog {
+public class AddOrderDialog extends JDialog {
 
-    public UpdatePriceDialog(OrderView oView){
+    public AddOrderDialog(OrderView oView){
 
-        setTitle("Update Price");
+        setTitle("Add Order");
         setSize(800 + 2, 600 + 30);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -35,14 +35,23 @@ public class UpdatePriceDialog extends JDialog {
         priceInput.setBounds(220, 70, 200, 50);
         add(priceInput);
 
-        JButton updateButton = new JButton("Update Price");
-        updateButton.setBounds(10, 540, 200, 50);
-        updateButton.addActionListener(new ActionListener() {
-            @Override
+        JLabel shelfLifeInputLabel = new JLabel("Shelf Life:");
+        shelfLifeInputLabel.setBounds(10, 70, 200, 50);
+        add(shelfLifeInputLabel);
+
+        JTextField shelfLifeInput = new JTextField();
+        shelfLifeInput.setBounds(220, 70, 200, 50);
+        add(shelfLifeInput);
+
+        JButton addOrderButton = new JButton("Add Order");
+        addOrderButton.setBounds(10, 540, 200, 50);
+        addOrderButton.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = oView.getOLogic().updatePrice(
+                List<ErrorMsg> errorMsgList = oView.getLogic().addOrderable(
                         nameInput.getText(),
-                        priceInput.getText()
+                        priceInput.getText(),
+                        shelfLifeInput.getText()
                 );
                 if(errorMsgList.isEmpty()){
                     oView.regenTable();
@@ -52,8 +61,7 @@ public class UpdatePriceDialog extends JDialog {
                 }
             }
         });
-
-        add(updateButton);
+        add(addOrderButton);
 
 
         JButton cancelButton = new JButton("Cancel");
@@ -62,5 +70,6 @@ public class UpdatePriceDialog extends JDialog {
         add(cancelButton);
 
         setVisible(true);
+
     }
 }

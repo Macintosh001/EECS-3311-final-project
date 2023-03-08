@@ -4,17 +4,14 @@ import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
 import project.logic.StockCheckingLogic;
-import project.logic.validation.PriceValidator;
 import project.objects.ErrorMsg;
 import project.objects.Result;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-public class StockCheckingView extends JPanel {
+public class StockCheckingView extends JPanel implements ViewWithTable {
     private StockCheckingLogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
     private JTable table;
@@ -109,5 +106,8 @@ public class StockCheckingView extends JPanel {
 
     public void regenTable(String[][] entries){
         table.setModel(new DefaultTableModel(entries, COLUMNS));
+    }
+    public void regenTable() {
+        table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
     }
 }

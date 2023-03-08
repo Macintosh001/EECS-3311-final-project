@@ -1,6 +1,6 @@
 package project.displayold;
 
-import project.displayold.dialog.order_dialog.*;
+import project.display.dialogs.order_dialog.*;
 import project.logic.*;
 
 import javax.swing.*;
@@ -41,29 +41,29 @@ public class OrderView extends InitialDisplay{
         // This is the button to add products
         JButton orderButton = new JButton("Order");
         orderButton.setBounds(720, 10, 200, 50);
-        orderButton.addActionListener(e -> new PlaceOrderDialog(this));
+//        orderButton.addActionListener(e -> new PlaceOrderDialog(this));
         frame.add(orderButton);
 
         // This is the button to remove products
         JButton updatePriceButton = new JButton("Update Price");
         updatePriceButton.setBounds(720, 70, 200, 50);
-        updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
+//        updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
         frame.add(updatePriceButton);
 
         // This is the button to update products
         JButton updateButton = new JButton("Update shelf life");
         updateButton.setBounds(720, 130, 200, 50);
-        updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
+//        updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
         frame.add(updateButton);
 
         JButton addButton = new JButton("Add");
         addButton.setBounds(720, 190, 200, 50);
-        addButton.addActionListener(e -> new AddOrderDialog(this));
+//        addButton.addActionListener(e -> new AddOrderDialog(this));
         frame.add(addButton);
 
         JButton removeButton = new JButton("Remove");
         removeButton.setBounds(720, 250, 200, 50);
-        removeButton.addActionListener(e -> new RemoveOrderDialog(this));
+//        removeButton.addActionListener(e -> new RemoveOrderDialog(this));
         frame.add(removeButton);
 
         JButton backButton = new JButton("Back");

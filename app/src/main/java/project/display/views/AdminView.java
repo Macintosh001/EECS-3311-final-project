@@ -22,6 +22,13 @@ public class AdminView extends JPanel {
         });
         add(scButton);
 
+        JButton oButton = new JButton("Order more Stock");
+        oButton.setBounds(110, 310, 180, 80);
+        oButton.addActionListener(e -> {
+            display.advanceTo(display.getOrderView());
+        });
+        add(oButton);
+
         JButton smButton = new JButton("Manage what's in Stock");
         smButton.setBounds(310, 210, 180, 80);
         smButton.addActionListener(e -> {
