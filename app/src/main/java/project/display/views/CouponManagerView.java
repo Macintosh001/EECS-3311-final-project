@@ -4,6 +4,7 @@ import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.coupon_dialog.AddCouponDialog;
 import project.display.dialogs.coupon_dialog.RemoveCouponDialog;
+import project.display.dialogs.coupon_dialog.UpdateCouponDialog;
 import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 
@@ -44,7 +45,7 @@ public class CouponManagerView extends JPanel implements ViewWithTable {
 
         JButton updateButton = new JButton("Update Coupon");
         updateButton.setBounds(410, 210, 180, 80);
-        updateButton.addActionListener(e -> new RemoveCouponDialog(this));
+        updateButton.addActionListener(e -> new UpdateCouponDialog(this));
         add(updateButton);
 
         // Hide when initialized

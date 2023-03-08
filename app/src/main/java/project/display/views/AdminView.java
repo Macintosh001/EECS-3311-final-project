@@ -22,12 +22,12 @@ public class AdminView extends JPanel {
         });
         add(scButton);
 
-        JButton oButton = new JButton("Order more Stock");
-        oButton.setBounds(110, 310, 180, 80);
-        oButton.addActionListener(e -> {
-            display.advanceTo(display.getOrderView());
+        JButton sButton = new JButton("Point of Sale");
+        sButton.setBounds(110, 310, 180, 80);
+        sButton.addActionListener(e -> {
+            display.advanceTo(display.getSaleView());
         });
-        add(oButton);
+        add(sButton);
 
         JButton smButton = new JButton("Manage what's in Stock");
         smButton.setBounds(310, 210, 180, 80);
@@ -36,8 +36,16 @@ public class AdminView extends JPanel {
         });
         add(smButton);
 
+        JButton oButton = new JButton("Order more Stock");
+        oButton.setBounds(310, 310, 180, 80);
+        oButton.addActionListener(e -> {
+            display.advanceTo(display.getOrderView());
+        });
+        add(oButton);
+
+
         JButton cpButton = new JButton("Manage Coupons");
-        cpButton.setBounds(310, 310, 180, 80);
+        cpButton.setBounds(310, 410, 180, 80);
         cpButton.addActionListener(e -> {
             display.advanceTo(display.getCouponManagerView());
         });

@@ -4,7 +4,6 @@
 package project.application;
 
 import project.display.Display;
-import project.displayold.*;
 import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 import project.logic.SaleLogic;
@@ -14,7 +13,6 @@ import project.persistence.*;
 
 public class App {
     public static void main(String[] args) {
-
         init();
     }
 
@@ -33,7 +31,8 @@ public class App {
                 scLogic,
                 smLogic,
                 oLogic,
-                cpLogic
+                cpLogic,
+                sLogic
         );
 //        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
