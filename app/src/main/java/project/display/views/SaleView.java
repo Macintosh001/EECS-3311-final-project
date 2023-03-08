@@ -13,8 +13,9 @@ import java.util.List;
 
 public class SaleView extends JPanel implements ViewWithTable {
     private final SaleLogic logic;
-    private final String[] COLUMNS = {"Name", "Price"};
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
     private JTable table;
+    private JLabel totalPrice;
 
     public SaleView(Display display, SaleLogic logic) {
         super();
@@ -26,8 +27,12 @@ public class SaleView extends JPanel implements ViewWithTable {
         table.setEnabled(false);
 
         JScrollPane tablePane = new JScrollPane(table);
-        tablePane.setBounds(10,10,330,680);
+        tablePane.setBounds(10,10,330,580);
         add(tablePane);
+
+        totalPrice = new JLabel("Total Cost: $0.00");
+        totalPrice.setBounds(10, 610, 300, 50);
+        add(totalPrice);
 
         JButton scanButton = new JButton("Scan");
         scanButton.setBounds(350, 10, 200, 50);
@@ -43,12 +48,17 @@ public class SaleView extends JPanel implements ViewWithTable {
         buyButton.setBounds(350, 130, 200, 50);
         buyButton.addActionListener(e -> {
                 List<ErrorMsg> errorMsgList = logic.buy();
+                logic.clearShoppingCart();
+                regenTable();
         });
         add(buyButton);
 
         JButton clearButton = new JButton("Clear Cart");
         clearButton.setBounds(350, 190, 200, 50);
-        clearButton.addActionListener(e -> logic.clearShoppingCart());
+        clearButton.addActionListener(e -> {
+            logic.clearShoppingCart();
+            regenTable();
+        });
         add(clearButton);
 
         BackButton backButton = new BackButton("Back", display);
@@ -64,5 +74,6 @@ public class SaleView extends JPanel implements ViewWithTable {
 
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getCartTable(), COLUMNS));
+        totalPrice.setText("Total Cost: $" + logic.getTotal());
     }
 }
