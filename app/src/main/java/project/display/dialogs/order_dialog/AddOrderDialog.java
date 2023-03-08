@@ -36,11 +36,11 @@ public class AddOrderDialog extends JDialog {
         add(priceInput);
 
         JLabel shelfLifeInputLabel = new JLabel("Shelf Life:");
-        shelfLifeInputLabel.setBounds(10, 70, 200, 50);
+        shelfLifeInputLabel.setBounds(10, 130, 200, 50);
         add(shelfLifeInputLabel);
 
         JTextField shelfLifeInput = new JTextField();
-        shelfLifeInput.setBounds(220, 70, 200, 50);
+        shelfLifeInput.setBounds(220, 130, 200, 50);
         add(shelfLifeInput);
 
         JButton addOrderButton = new JButton("Add Order");
