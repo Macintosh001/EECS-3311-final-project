@@ -5,6 +5,7 @@ import project.display.views.EmployeeView;
 import project.display.views.LoginView;
 import project.display.views.ManagerView;
 import project.display.views.StockCheckingView;
+import project.logic.StockCheckingLogic;
 
 import javax.swing.*;
 import java.util.Stack;
@@ -22,6 +23,7 @@ public class Display extends JFrame {
     private JPanel currentPanel;
 
     public Display(
+            StockCheckingLogic stockCheckingLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -37,13 +39,15 @@ public class Display extends JFrame {
         this.managerView = new ManagerView(this);
         this.adminView = new AdminView(this);
 
-        this.stockCheckingView = new StockCheckingView(this);
+        this.stockCheckingView = new StockCheckingView(this, stockCheckingLogic);
 
         add(loginView);
 
         add(employeeView);
         add(managerView);
         add(adminView);
+
+        add(stockCheckingView);
 
         setVisible(true);
 

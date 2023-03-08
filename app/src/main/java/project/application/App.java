@@ -29,7 +29,9 @@ public class App {
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponStub);
 
-        Display display = new Display();
+        Display display = new Display(
+                scLogic
+        );
 //        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }

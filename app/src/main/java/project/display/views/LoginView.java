@@ -32,7 +32,7 @@ public class LoginView extends JPanel {
         JButton loginAsAdmin = new JButton("Login as Admin (Dev/QA/TA)");
         loginAsAdmin.setBounds(110, 410, 380, 80);
         loginAsAdmin.addActionListener(e -> {
-            display.advanceTo(display.getManagerView());
+            display.advanceTo(display.getAdminView());
         });
         add(loginAsAdmin);
 

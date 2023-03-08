@@ -1,6 +1,7 @@
 package project.display.views;
 
 import project.display.Display;
+import project.display.buttons.BackButton;
 
 import javax.swing.*;
 
@@ -19,12 +20,9 @@ public class AdminView extends JPanel {
         scButton.addActionListener(e -> {
             display.advanceTo(display.getStockCheckingView());
         });
+        add(scButton);
 
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.setBounds(810, 610, 180, 80);
-        logoutButton.addActionListener(e -> {
-            display.back();
-        });
+        BackButton logoutButton = new BackButton("Logout", display);
         add(logoutButton);
 
         // Hide when initialized
