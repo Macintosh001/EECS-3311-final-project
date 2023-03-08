@@ -1,7 +1,7 @@
 package project.display.dialogs.sale_dialog;
 
 import project.display.dialogs.ErrorDialog;
-import project.displayold.SaleView;
+import project.display.views.SaleView;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class ApplyCouponDialog extends JDialog {
         applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = sView.getsLogic().applyCoupon(codeInput.getText());
+                List<ErrorMsg> errorMsgList = sView.getLogic().applyCoupon(codeInput.getText());
                 if (errorMsgList.isEmpty()) {
                     sView.regenTable();
                     dispose();

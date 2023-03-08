@@ -39,12 +39,12 @@ public class SaleView extends InitialDisplay{
 
         JButton scanButton = new JButton("Scan");
         scanButton.setBounds(350, 10, 200, 50);
-        scanButton.addActionListener(e -> new ScanDialog(this));
+//        scanButton.addActionListener(e -> new ScanDialog(this));
         frame.add(scanButton);
 
         JButton applyCouponButton = new JButton("Apply Coupon");
         applyCouponButton.setBounds(350, 70, 200, 50);
-        applyCouponButton.addActionListener(e -> new ApplyCouponDialog(this));
+//        applyCouponButton.addActionListener(e -> new ApplyCouponDialog(this));
         frame.add(applyCouponButton);
 
         JButton buyButton = new JButton("Buy");

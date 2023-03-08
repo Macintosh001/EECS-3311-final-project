@@ -1,7 +1,7 @@
 package project.display.dialogs.sale_dialog;
 
 import project.display.dialogs.ErrorDialog;
-import project.displayold.SaleView;
+import project.display.views.SaleView;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class ScanDialog extends JDialog {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = sView.getsLogic().scan(
+                List<ErrorMsg> errorMsgList = sView.getLogic().scan(
                         Integer.parseInt(codeInput.getText())
                 );
                 if (errorMsgList.isEmpty()) {
