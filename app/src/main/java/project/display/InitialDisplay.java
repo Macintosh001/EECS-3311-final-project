@@ -48,10 +48,13 @@ public class InitialDisplay {
         managerButton.setBounds(20,120,120,30);
         JRadioButton employeeButton = new JRadioButton("Employee");
         employeeButton.setBounds(100,120,120,30);
+        JRadioButton devButton = new JRadioButton("Dev/QA");
+        devButton.setBounds(190,120,120,30);
 
         ButtonGroup group = new ButtonGroup();
         group.add(managerButton);
         group.add(employeeButton);
+        group.add(devButton);
 
         JButton login = new JButton("Login");
         login.setBounds(100,175, 80,30);
@@ -63,6 +66,7 @@ public class InitialDisplay {
         frame.add(usernameInput);
         frame.add(managerButton);
         frame.add(employeeButton);
+        frame.add(devButton);
         frame.setVisible(true);
 
         login.addActionListener(new ActionListener() {
@@ -81,6 +85,9 @@ public class InitialDisplay {
                     frame.dispose();
                 } else if (employeeButton.isSelected()) {
                     EmployeeView eView = new EmployeeView(scLogic, sLogic);
+                    frame.dispose();
+                } else if (devButton.isSelected()) {
+                    DevView dView = new DevView(cLogic,smLogic,oLogic,scLogic,sLogic);
                     frame.dispose();
                 }
             }
