@@ -25,8 +25,13 @@ public class OrderablePersistence implements OrderableDatabase{
      * This way, a user is guaranteed to have a database that supports the operations in this class
      * before these operations are invoked; this design avoids errors of missing tables or databases.
      */
-    public OrderablePersistence(){
-        this.db = new DatabaseManager();
+    public OrderablePersistence(String username, String password) throws SQLException {
+        this.db = new DatabaseManager(username, password);
+
+        //test connection, throw exception if access denied
+        this.db.connectToServer();
+        this.db.terminate();
+
         if(!db.databaseExists()) {
             db.createDB();
         }

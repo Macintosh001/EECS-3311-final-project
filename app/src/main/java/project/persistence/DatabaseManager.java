@@ -14,11 +14,11 @@ public class DatabaseManager {
     private String username; //the username of the user connecting
     private String password; //the password of the connection
 
-    public DatabaseManager(){
+    public DatabaseManager(String username, String password){
         //initialize some connection information
         url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
-        username = "root";
-        password = "root1234";
+        this.username = username;
+        this.password = password;
     }
 
     /**
@@ -27,14 +27,9 @@ public class DatabaseManager {
      * Note: may be updated to return flags of success/failure
      * @throws SQLException
      */
-    public void connectToServer(){
+    public void connectToServer() throws SQLException{
         url = "jdbc:mysql://localhost:3306/";
-        try {
-            con = DriverManager.getConnection(url, username, password);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+        con = DriverManager.getConnection(url, username, password);
     }
 
     /**
