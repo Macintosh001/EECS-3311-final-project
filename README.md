@@ -28,6 +28,17 @@ The ZIP archive contains a `bin` folder. This folder has three different way to 
 
 If non of these options work, maybe the troubleshooting info below will help.
 
+## Unit Tests
+
+We use gradle as out build manager. All our unit tests are stored in `app/src/test/java/unit/`. In order to run said tests, simple run `gradle test` in a CLI. This requires you to have gradle installed of course.
+
+Also, for the integration test to work, the username and password of the local SQL database had to be hard-coded into the tests. So, to run them, you have two options:
+
+1. Set the password of `root`@`localhost` to `root1234`
+2. Change the username and password in the tests manually. 
+
+Integration tests are in `app/src/test/java/integration/` if you need to make this change.
+
 ## Troubleshooting
 
 ### MacOS
@@ -55,5 +66,4 @@ If your .jar is still not working, these steps might help:
 5. Paste the address of the bin folder from earlier with a semi-colon. For example, C:\Program Files\Java\jdk-19\bin; would be pasted. Press ok.
 6. Try to open the .jar file again. If working in the command line, you must restart the terminal before running `java -jar app.jar`again.
 
-## Unit Tests
-We use gradle as out build manager. All our unit tests are stored in `app/src/test/java`. In order to run said tests, simple run `gradle test` in a CLI.
+
