@@ -28,7 +28,7 @@ The ZIP archive contains a `bin` folder. This folder has three different way to 
 
 If non of these options work, maybe the troubleshooting info below will help.
 
-## Unit Tests
+## Unit / Integration Tests
 
 We use gradle as out build manager. All our unit tests are stored in `app/src/test/java/unit/`. In order to run said tests, simple run `gradle test` in a CLI. This requires you to have gradle installed of course.
 
