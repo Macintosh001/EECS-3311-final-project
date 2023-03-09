@@ -14,6 +14,11 @@ public class StockManagingLogic extends StockCheckingLogic {
         super(db);
     }
 
+    /**
+     * Simply removed the product from stock
+     * @param barcode the barcode of the product being removed
+     * @return any errors
+     */
     public List<ErrorMsg> removeProduct(String barcode) {
         // validate barcode
         List<ErrorMsg> errorMsgs = new ArrayList<>();
