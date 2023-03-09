@@ -22,6 +22,7 @@ public class SaleLogic {
         this.coupon = null;
     }
 
+    //Scan the barcode, check if it is valid
     public List<ErrorMsg> scan(String barcodeString) {
         List<ErrorMsg> errors = new ArrayList<>();
         int barcode;
@@ -31,6 +32,7 @@ public class SaleLogic {
             errors.add(new ErrorMsg("Invalid barcode format"));
             return errors;
         }
+        //Check if there is a product match the barcode, and check the quantity
         Product product = productDB.getProduct(barcode);
         if (product == null) {
             errors.add(new ErrorMsg("Product not found in inventory"));
@@ -46,6 +48,7 @@ public class SaleLogic {
         return errors;
     }
 
+    //Create the cart table
     public String[][] getCartTable() {
         String[][] cartTable = new String[cart.size()][4];
         Set<Integer> barcodeSet = cart.keySet();
@@ -60,11 +63,12 @@ public class SaleLogic {
         return cartTable;
     }
 
+    //remove all products in the cart
     public void clearShoppingCart() {
         cart.clear();
     }
 
-
+    //Apply the coupon, check if the same coupon already allpied, and check if the coupon is valid
     public List<ErrorMsg> applyCoupon(String code) {
         List<ErrorMsg> errors = new ArrayList<>();
         Coupon tmpCoupon = couponDB.getCoupon(code);
@@ -78,7 +82,7 @@ public class SaleLogic {
         return errors;
     }
 
-
+    //Count the total price after the coupon applied
     public String getTotal() {
         double subtotal = 0;
         String[][] cartTable = getCartTable();
@@ -93,7 +97,7 @@ public class SaleLogic {
 
 
 
-
+    //Check if the stock has enough quantity of the product to sell
     public List<ErrorMsg> buy() {
         List<ErrorMsg> errors = new ArrayList<>();
         Set<Integer> barcodeSet = cart.keySet();
@@ -104,7 +108,7 @@ public class SaleLogic {
             }
         }
 
-
+        //Update the quantity of the product in the stock 
         if (errors.isEmpty()) {
             for (Integer barcode: barcodeSet) {
                 Product product = productDB.getProduct(barcode);
