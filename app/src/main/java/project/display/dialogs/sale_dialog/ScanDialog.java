@@ -32,7 +32,7 @@ public class ScanDialog extends JDialog {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ErrorMsg> errorMsgList = sView.getLogic().scan(Integer.parseInt(codeInput.getText()));
+                List<ErrorMsg> errorMsgList = sView.getLogic().scan(codeInput.getText());
                 if (errorMsgList.isEmpty()) {
                     sView.regenTable();
                 } else {
