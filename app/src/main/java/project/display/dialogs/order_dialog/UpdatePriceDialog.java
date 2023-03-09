@@ -11,6 +11,9 @@ import java.util.List;
 
 public class UpdatePriceDialog extends JDialog {
 
+    /**
+     * @param oView the parent view of this dialog
+     */
     public UpdatePriceDialog(OrderView oView){
 
         setTitle("Update Price");

@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 public class RemoveCouponDialog extends JDialog{
 
+    /**
+     * @param cpView the parent view of this dialog
+     */
     public RemoveCouponDialog(CouponManagerView cpView){
 
         setTitle("Remove Coupon");

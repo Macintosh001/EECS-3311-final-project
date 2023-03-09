@@ -11,6 +11,9 @@ import java.util.List;
 
 public class UpdateShelfLifeDialog extends JDialog {
 
+    /**
+     * @param oView the parent view of this dialog
+     */
     public UpdateShelfLifeDialog(OrderView oView){
 
         setTitle("Update Shelf Life");

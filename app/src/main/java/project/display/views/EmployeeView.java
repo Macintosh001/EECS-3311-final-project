@@ -6,6 +6,9 @@ import javax.swing.*;
 
 public class EmployeeView extends JPanel {
 
+    /**
+     * @param display represents the JFrame that contains this panel
+     */
     public EmployeeView(Display display) {
 
         // Setup the Panel

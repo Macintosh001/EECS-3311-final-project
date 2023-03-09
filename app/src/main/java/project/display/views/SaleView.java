@@ -72,10 +72,16 @@ public class SaleView extends JPanel implements ViewWithTable {
         setVisible(false);
     }
 
+    /**
+     * @return a reference to the SaleLogic object
+     */
     public SaleLogic getLogic() {
         return logic;
     }
 
+    /**
+     * Responsible for regenerating the table when this table is updated or altered
+     */
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getCartTable(), COLUMNS));
         totalPrice.setText("Total Cost: $" + logic.getTotal());

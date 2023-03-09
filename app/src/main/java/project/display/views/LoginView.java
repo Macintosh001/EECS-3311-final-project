@@ -7,6 +7,9 @@ import javax.swing.*;
 
 public class LoginView extends JPanel {
 
+    /**
+     * @param display represents the JFrame that contains this panel
+     */
     public LoginView(Display display) {
 
         // Setup the Panel

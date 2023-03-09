@@ -5,6 +5,10 @@ import project.display.Display;
 import javax.swing.*;
 
 public class ManagerView extends JPanel {
+
+    /**
+     * @param display represents the JFrame that contains this panel
+     */
     public ManagerView(Display display) {
 
         // Setup the Panel

@@ -12,6 +12,9 @@ import java.util.List;
 
 public class PlaceOrderDialog extends JDialog {
 
+    /**
+     * @param oView the parent view of this dialog
+     */
     public PlaceOrderDialog(OrderView oView){
 
         setTitle("Place Order");

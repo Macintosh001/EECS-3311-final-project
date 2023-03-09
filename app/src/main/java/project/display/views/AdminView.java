@@ -7,6 +7,9 @@ import javax.swing.*;
 
 public class AdminView extends JPanel {
 
+    /**
+     * @param display represents the JFrame that contains this panel
+     */
     public AdminView(Display display) {
 
         // Setup the Panel

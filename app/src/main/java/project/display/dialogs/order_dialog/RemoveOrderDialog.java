@@ -11,6 +11,9 @@ import java.util.List;
 
 public class RemoveOrderDialog extends JDialog {
 
+    /**
+     * @param oView the parent view of this dialog
+     */
     public RemoveOrderDialog(OrderView oView){
 
         setTitle("Remove Order");

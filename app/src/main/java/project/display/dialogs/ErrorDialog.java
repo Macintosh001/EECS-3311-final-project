@@ -7,6 +7,10 @@ import java.util.List;
 
 public class ErrorDialog extends JDialog {
 
+
+    /**
+     * @param errorMsgList list of error messages
+     */
     public ErrorDialog(List<ErrorMsg> errorMsgList) {
         setTitle("Error!");
         setSize(400 + 2, 500 + 30);
