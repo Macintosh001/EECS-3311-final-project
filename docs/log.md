@@ -208,5 +208,4 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## William
 - A few more bug fixes
 
-## Aaron
-- added date filters in the Stock classes, utilizing the date picker
+
