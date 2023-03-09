@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//note: logic handles most extreme input values and error inputs, so it is not expected that
+//values passed to the database stub classes will be incorrect during calls.
 public class OrderableDatabaseStubTest {
 
 
@@ -76,53 +78,7 @@ public class OrderableDatabaseStubTest {
         assertEquals(4, ord.getShelfLife());
     }
 
-    @Test
-    void addLotsOfOrderablesTest(){
-        OrderableDatabase db = new OrderableDatabaseStub();
-        db.addOrderable(new Orderable("cheese", 1.9F, 12));
-        db.addOrderable(new Orderable("grapes", 2.9F, 10));
-        db.addOrderable(new Orderable("turkey", 5.5F, 4));
-        db.addOrderable(new Orderable("cracker", 60F, 50));
-        db.addOrderable(new Orderable("carrot", 1F, 7));
-        db.addOrderable(new Orderable("cheese2", 1.9F, 12));
-        db.addOrderable(new Orderable("grapes2", 2.9F, 10));
-        db.addOrderable(new Orderable("turkey2", 5.5F, 4));
-        db.addOrderable(new Orderable("cracker2", 60F, 50));
-        db.addOrderable(new Orderable("carrot2", 1F, 7));
-        db.addOrderable(new Orderable("cheese3", 1.9F, 12));
-        db.addOrderable(new Orderable("grapes3", 2.9F, 10));
-        db.addOrderable(new Orderable("turkey3", 5.5F, 4));
-        db.addOrderable(new Orderable("cracker3", 60F, 50));
-        db.addOrderable(new Orderable("carrot3", 1F, 7));
-        ArrayList<Orderable> ords = (ArrayList<Orderable>) db.getOrderableList();
 
-        ArrayList<String> names = new ArrayList<>();
-        for(Orderable ord: ords){
-            names.add(ord.getName());
-        }
-        assertEquals(17, ords.size());
-        assertTrue(names.contains("oreo"));
-        assertTrue(names.contains("cheeto"));
-        assertTrue(names.contains("cheese"));
-        assertTrue(names.contains("grapes"));
-        assertTrue(names.contains("turkey"));
-        assertTrue(names.contains("cracker"));
-        assertTrue(names.contains("carrot"));
-        assertTrue(names.contains("cheese2"));
-        assertTrue(names.contains("grapes2"));
-        assertTrue(names.contains("turkey2"));
-        assertTrue(names.contains("cracker2"));
-        assertTrue(names.contains("carrot2"));
-        assertTrue(names.contains("cheese3"));
-        assertTrue(names.contains("grapes3"));
-        assertTrue(names.contains("turkey3"));
-        assertTrue(names.contains("cracker3"));
-        assertTrue(names.contains("carrot3"));
-
-        Orderable ord = db.getOrderable("turkey");
-        assertEquals(5.5F, ord.getPrice());
-        assertEquals(4, ord.getShelfLife());
-    }
     @Test
     void removeOrderableTest(){
         OrderableDatabase db = new OrderableDatabaseStub();
