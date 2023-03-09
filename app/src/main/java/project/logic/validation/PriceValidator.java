@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PriceValidator implements Validator<Float> {
+    /**
+     * Checks if the entered string is a valid price
+     * @param entry the string
+     * @return the price as a float or some errors
+     */
     @Override
     public Result<Float, List<ErrorMsg>> validate(String entry) {
         Float result = null;

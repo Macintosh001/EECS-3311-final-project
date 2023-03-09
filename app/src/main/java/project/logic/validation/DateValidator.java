@@ -10,6 +10,11 @@ import java.util.Date;
 import java.util.List;
 
 public class DateValidator implements Validator<Date> {
+    /**
+     * checks if a string is a valid date
+     * @param entry the date
+     * @return the corresponding Date object or some errors
+     */
     @Override
     public Result<Date, List<ErrorMsg>> validate(String entry) {
         Date result = null;
