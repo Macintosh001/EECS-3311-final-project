@@ -11,6 +11,9 @@ import java.util.List;
 
 public class ScanDialog extends JDialog {
 
+    /**
+     * @param sView the parent view of this dialog
+     */
     public ScanDialog(SaleView sView) {
 
         setTitle("Scan");

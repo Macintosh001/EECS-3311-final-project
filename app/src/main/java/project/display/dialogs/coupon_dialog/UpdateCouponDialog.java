@@ -11,6 +11,9 @@ import java.util.List;
 
 public class UpdateCouponDialog extends JDialog{
 
+    /**
+     * @param cpView the parent view of this dialog
+     */
     public UpdateCouponDialog(CouponManagerView cpView){
 
         setTitle("Update Coupon");

@@ -21,6 +21,10 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private JTable table;
 
+    /**
+     * @param display represents the JFrame that contains this JPanel
+     * @param logic reference to the Logic object which handles the functionality and data structures
+     */
     public StockCheckingView(Display display, StockCheckingLogic logic) {
 
         super();
@@ -143,13 +147,23 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
         setVisible(false);
     }
 
+    /**
+     * @return a reference to the StockCheckingLogic object
+     */
     public StockCheckingLogic getLogic() {
         return logic;
     }
 
+    /**
+     * Responsible for regenerating the table
+     */
     public void regenTable(String[][] entries){
         table.setModel(new DefaultTableModel(entries, COLUMNS));
     }
+
+    /**
+     * Responsible for regenerating the table
+     */
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
     }

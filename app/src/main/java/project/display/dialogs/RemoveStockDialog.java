@@ -10,6 +10,9 @@ import java.util.List;
 
 public class RemoveStockDialog extends JDialog {
 
+    /**
+     * @param smView the parent view of this dialog
+     */
     public RemoveStockDialog(StockManagingView smView){
 
         setTitle("Remove Product");

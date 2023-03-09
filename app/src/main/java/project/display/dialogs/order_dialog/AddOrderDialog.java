@@ -11,6 +11,9 @@ import java.util.List;
 
 public class AddOrderDialog extends JDialog {
 
+    /**
+     * @param oView the parent view of this dialog
+     */
     public AddOrderDialog(OrderView oView){
 
         setTitle("Add Order");

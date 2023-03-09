@@ -24,6 +24,10 @@ StockManagingView extends JPanel implements ViewWithTable {
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private JTable table;
 
+    /**
+     * @param display represents the JFrame that contains this JPanel
+     * @param logic reference to the Logic object which handles the functionality and data structures
+     */
     public StockManagingView(Display display, StockManagingLogic logic) {
 
         super();
@@ -152,14 +156,23 @@ StockManagingView extends JPanel implements ViewWithTable {
         setVisible(false);
     }
 
+    /**
+     * @return a reference to the StockManagingLogic object
+     */
     public StockManagingLogic getLogic() {
         return logic;
     }
 
+    /**
+     * @param entries 2D array that holds the data in the table
+     */
     public void regenTable(String[][] entries){
         table.setModel(new DefaultTableModel(entries, COLUMNS));
     }
 
+    /**
+     * Responsible for regenerating a table when that table has been updated or altered
+     */
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
     }

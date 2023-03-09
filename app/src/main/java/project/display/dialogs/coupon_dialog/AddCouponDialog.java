@@ -11,6 +11,9 @@ import java.util.List;
 
 public class AddCouponDialog extends JDialog {
 
+    /**
+     * @param cpView the parent view of this dialog
+     */
     public AddCouponDialog(CouponManagerView cpView){
 
         setTitle("Add Coupon");

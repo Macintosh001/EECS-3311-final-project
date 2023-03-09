@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PercentOffValidator implements Validator<Float> {
+    /**
+     * Check if the string is a valid 'percent discount'
+     * @param entry the string
+     * @return the float corresponding to the discount or errors
+     */
     @Override
     public Result<Float, List<ErrorMsg>> validate(String entry) {
         Float result = null;

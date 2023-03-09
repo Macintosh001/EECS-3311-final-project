@@ -22,6 +22,13 @@ public class Display extends JFrame {
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
 
+    /**
+     * @param stockCheckingLogic logic object associated with the stock checking view
+     * @param stockManagingLogic logic object associated with the stock managing view
+     * @param orderLogic logic object associated with the order view
+     * @param couponManagerLogic logic object associated with the coupon manager view
+     * @param saleLogic logic object associated with the POS view
+     */
     public Display(
             StockCheckingLogic stockCheckingLogic,
             StockManagingLogic stockManagingLogic,
@@ -69,12 +76,18 @@ public class Display extends JFrame {
         currentPanel.setVisible(true);
     }
 
+    /**
+     * @param panel pass in the JPanel that needs to be updated
+     */
     private void refresh(JPanel panel) {
         if (panel instanceof ViewWithTable) {
             ((ViewWithTable) panel).regenTable();
         }
     }
 
+    /**
+     * @param panel pass in the next JPanel
+     */
     public void advanceTo(JPanel panel) {
         currentPanel.setVisible(false);
         viewStack.push(currentPanel);
@@ -83,6 +96,9 @@ public class Display extends JFrame {
         currentPanel.setVisible(true);
     }
 
+    /**
+     * Go back to the last JPanel
+     */
     public void back() {
         currentPanel.setVisible(false);
         if (viewStack.empty()) {
@@ -94,38 +110,65 @@ public class Display extends JFrame {
         }
     }
 
+    /**
+     * @return the a reference to the Login view
+     */
     public LoginView getLoginView() {
         return loginView;
     }
 
+    /**
+     * @return a reference to the Employee view
+     */
     public EmployeeView getEmployeeView() {
         return employeeView;
     }
 
+    /**
+     * @return a reference to the Manager View
+     */
     public ManagerView getManagerView() {
         return managerView;
     }
 
+    /**
+     * @return a reference to the Admin View
+     */
     public AdminView getAdminView() {
         return adminView;
     }
 
+    /**
+     * @return a reference to the Stock Checking View
+     */
     public StockCheckingView getStockCheckingView() {
         return stockCheckingView;
     }
 
+    /**
+     * @return a reference to the Stock Managing View
+     */
     public StockManagingView getStockManagingView() {
         return stockManagingView;
     }
 
+    /**
+     * @return a reference to the Order View
+     */
     public OrderView getOrderView() {
         return orderView;
     }
 
+    /**
+     * @return a reference to the Coupon Manager View
+     */
     public CouponManagerView getCouponManagerView() {
         return couponManagerView;
     }
 
+    /**
+     * @return a reference to the Sale/POS View
+     */
     public SaleView getSaleView() {
         return saleView;
     }

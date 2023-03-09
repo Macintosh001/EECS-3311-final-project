@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BarcodeValidator implements Validator<Integer> {
+    /**
+     * Check if the string is a valid barcode
+     * @param entry the badcode
+     * @return a result with either errors or the barcode as an int
+     */
     @Override
     public Result<Integer, List<ErrorMsg>> validate(String entry) {
         Integer result = null;

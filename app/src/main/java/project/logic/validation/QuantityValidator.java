@@ -8,6 +8,11 @@ import java.util.List;
 
 public class QuantityValidator implements Validator<Integer> {
 
+    /**
+     * checks if the input string is a valid quantity integer
+     * @param entry the input string
+     * @return returns the quantity as an int or returns errors
+     */
     @Override
     public Result<Integer, List<ErrorMsg>> validate(String entry) {
         Integer result = null;

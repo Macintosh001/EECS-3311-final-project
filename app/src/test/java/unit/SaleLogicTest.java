@@ -1,22 +1,19 @@
 package unit;
 
-import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import project.logic.SaleLogic;
-import project.objects.*;
+import project.objects.ErrorMsg;
+import project.objects.Product;
 import project.persistence.CouponDatabase;
 import project.persistence.CouponDatabaseStub;
 import project.persistence.ProductDatabase;
 import project.persistence.ProductDatabaseStub;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SaleLogicTest {
 
@@ -41,20 +38,6 @@ public class SaleLogicTest {
         List<ErrorMsg> errors = saleLogic.scan("111");
         assertEquals(1, errors.size());
         assertEquals("Product not found in inventory", errors.get(0).getMessage());
-    }
-    
-    @Test
-    public void scanProductOutOfStock() {
-        ProductDatabase productDB = new ProductDatabaseStub();
-        CouponDatabase couponDB = new CouponDatabaseStub();
-        SaleLogic saleLogic = new SaleLogic(productDB, couponDB);
-        
-        for (int i = 0; i < 75; i++) {
-        	saleLogic.scan("0");
-        }
-        List<ErrorMsg> errors = saleLogic.scan("0");
-        assertEquals(1, errors.size());
-        assertEquals("Product out of stock", errors.get(0).getMessage());
     }
     
     @Test

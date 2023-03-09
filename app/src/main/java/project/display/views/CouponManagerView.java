@@ -16,6 +16,10 @@ public class CouponManagerView extends JPanel implements ViewWithTable {
     final String[] COLUMNS = {"Barcode", "Discount"};
     private final JTable table;
 
+    /**
+     * @param display represents the JFrame that contains this JPanel
+     * @param logic reference to the Logic object which handles the functionality and data structures
+     */
     public CouponManagerView(Display display, CouponManagerLogic logic) {
         super();
         this.logic = logic;
@@ -52,10 +56,16 @@ public class CouponManagerView extends JPanel implements ViewWithTable {
         setVisible(false);
     }
 
+    /**
+     * @return a reference to the CouponManagerLogic object
+     */
     public CouponManagerLogic getLogic() {
         return logic;
     }
 
+    /**
+     * Responsible for regenerating a table when that table has been updated or altered
+     */
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getCouponTable(), COLUMNS));
     }

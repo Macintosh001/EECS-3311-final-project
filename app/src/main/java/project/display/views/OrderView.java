@@ -13,6 +13,10 @@ public class OrderView extends JPanel implements ViewWithTable {
     final String[] COLUMNS = {"Name", "Price", "Shelf Life"};
     private JTable table;
 
+    /**
+     * @param display represents the JFrame that contains this JPanel
+     * @param logic reference to the Logic object which handles the functionality and data structures
+     */
     public OrderView(Display display, OrderLogic logic) {
         super();
         this.logic = logic;
@@ -63,10 +67,16 @@ public class OrderView extends JPanel implements ViewWithTable {
         setVisible(false);
     }
 
+    /**
+     * @return a reference to the OrderLogic object
+     */
     public OrderLogic getLogic() {
         return logic;
     }
 
+    /**
+     * This method is responsible for regenerating the table tha has been updated
+     */
     public void regenTable() {
         table.setModel(new DefaultTableModel(logic.getOrderableList(), COLUMNS));
     }

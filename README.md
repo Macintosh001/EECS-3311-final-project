@@ -5,10 +5,30 @@ A very cool and classy project that will get us an A+
 All relevant documentation can be found in the [wiki](https://github.com/Macintosh001/EECS-3311-final-project/wiki).
 
 ## Installation / Run Instructions
-You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the JAR file onto your machine.
+You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). 
+Download the ZIP archive onto your machine.
 
-### CLI
-If you're running the app from a CLI then run the following commands `java -jar app.jar`.
+### SQL Database
+
+Our product required a local SQL database to work. So make sure you have one installed.
+To change your password (which you will need to know), you can run the following SQL query.
+```roomsql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+This will change your password to `password`.
+
+### Running the Application
+
+The ZIP archive contains a `bin` folder. This folder has three different way to run the app.
+
+- If you are on windows, you can run `app.bat`
+- If you are on Linux/Mac OS, you can run `app` since it's just a shell script
+- On any platform, you can run `app.jar` which is a runnable jar
+
+If non of these options work, maybe the troubleshooting info below will help.
+
+## Troubleshooting
 
 ### MacOS
 If you are using MacOS then here are some instructions you should follow
