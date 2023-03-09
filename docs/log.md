@@ -147,6 +147,12 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Create a TableEntryGenerator class that turns lists of domain objects into 2D String arrays to be used in a JTable. THis decreases code duplication.
 - (A lot of this was probably written earlier but today is when they were commited.)
 
+# Sunday, March 5th
+
+## Behzad
+- Working on the layouts and the views on UI
+- making StockManagingView and StockCheckingView
+
 # Tuesday, March 7th
 
 ## William
