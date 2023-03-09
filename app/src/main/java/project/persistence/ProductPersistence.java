@@ -196,10 +196,13 @@ public class ProductPersistence implements ProductDatabase {
         String filterString = this.getFilterString(filters);
         try{
             Statement statement = db.exportStatement();
-            ResultSet res = statement.executeQuery(filterString);
-            ArrayList<Product> productList = this.extractProductListFromResultSet(res);
+            if(filterString.compareTo("") != 0){
+                ResultSet res = statement.executeQuery(filterString);
+                return this.extractProductListFromResultSet(res);
+            }
+
             db.terminate();
-            return productList;
+            return this.getProductList();
         } catch(SQLException e){
             e.printStackTrace();
             return null;
@@ -238,6 +241,11 @@ public class ProductPersistence implements ProductDatabase {
      * @return a string representing a sql query equivalent to all filters in the list
      */
     private String getFilterString(List<FilterProduct> filters){
+        if(filters.isEmpty()){
+            return "";
+        }
+
+
         //starting generic code
         StringBuilder filterString = new StringBuilder("select barcode from product where ");
         int count = 0;
@@ -336,6 +344,15 @@ public class ProductPersistence implements ProductDatabase {
     }
 
 
-
+    @Override
+    public void empty(){
+        try{
+            Statement statement = db.exportStatement();
+            statement.execute("delete from product");
+            db.terminate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
 }

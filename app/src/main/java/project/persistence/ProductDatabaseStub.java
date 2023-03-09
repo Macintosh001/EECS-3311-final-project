@@ -272,4 +272,8 @@ public class ProductDatabaseStub implements ProductDatabase {
         return leftOver;
     }
 
+    @Override
+    public void empty(){
+        this.dbStub = new ArrayList<>();
+    }
 }

@@ -56,4 +56,6 @@ public interface ProductDatabase {
      * @return a filtered list of products
      */
     public List<Product> getFilteredProductList(List<FilterProduct> filters);
+
+    public void empty();
 }

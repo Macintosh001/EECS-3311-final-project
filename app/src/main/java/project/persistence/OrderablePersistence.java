@@ -202,4 +202,14 @@ public class OrderablePersistence implements OrderableDatabase{
         return ords;
     }
 
+    @Override
+    public void empty(){
+        try{
+            Statement statement = db.exportStatement();
+            statement.execute("delete from orderable");
+            db.terminate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
