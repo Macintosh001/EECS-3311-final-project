@@ -22,8 +22,15 @@ public class SaleLogic {
         this.coupon = null;
     }
 
-    public List<ErrorMsg> scan(Integer barcode) {
+    public List<ErrorMsg> scan(String barcodeString) {
         List<ErrorMsg> errors = new ArrayList<>();
+        int barcode;
+        try {
+            barcode = Integer.parseInt(barcodeString);
+        } catch (NumberFormatException e) {
+            errors.add(new ErrorMsg("Invalid barcode format"));
+            return errors;
+        }
         Product product = productDB.getProduct(barcode);
         if (product == null) {
             errors.add(new ErrorMsg("Product not found in inventory"));
@@ -31,9 +38,8 @@ public class SaleLogic {
             errors.add(new ErrorMsg("Product out of stock"));
         } else {
             if (cart.containsKey(barcode)) {
-                cart.put(barcode,cart.get(barcode) + 1);
-            }
-            else {
+                cart.put(barcode, cart.get(barcode) + 1);
+            } else {
                 cart.put(barcode, 1);
             }
         }
