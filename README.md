@@ -13,10 +13,10 @@ Download the ZIP archive onto your machine.
 Our product required a local SQL database to work. So make sure you have one installed.
 To change your password (which you will need to know), you can run the following SQL query.
 ```roomsql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root1234';
 ```
 
-This will change your password to `password`.
+This will change your password to `root1234`.
 
 ### Running the Application
 
@@ -34,7 +34,7 @@ We use gradle as out build manager. All our unit tests are stored in `app/src/te
 
 Also, for the integration test to work, the username and password of the local SQL database had to be hard-coded into the tests. So, to run them, you have two options:
 
-1. Set the password of `root`@`localhost` to `root1234`
+1. Set the password of `root`@`localhost` to `root1234`. (This can be done using the SQL query above.)
 2. Change the username and password in the tests manually. 
 
 Integration tests are in `app/src/test/java/integration/` if you need to make this change.
