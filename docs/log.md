@@ -124,3 +124,42 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 
 ## Behzad 
 - We shared our project(.jar file) with our client team with the description.
+
+# Thursday, February 16th
+
+## William
+- Added some basic unit tests
+- Refactored the UI to look less ugly
+
+# Tuesday, February 22nd
+
+## William
+- Added the "Result Type" so functions can return objects or errors depending on the inputs
+
+# Friday, March 3rd
+
+## William
+- Created a domain object for Coupon and Orderable
+- Created a bunch of Validator classes that will validate string inputs from the UI. This helps lower code duplication and increase cohesion
+- Added the Stock Checking and Stock Managing Logic
+- Added the Coupon Manager Logic
+- Added the Order Logic
+- Create a TableEntryGenerator class that turns lists of domain objects into 2D String arrays to be used in a JTable. THis decreases code duplication.
+- (A lot of this was probably written earlier but today is when they were commited.)
+
+# Tuesday, March 7th
+
+## William
+- Added some more unit tests for the logic classes
+
+# Wednesday, March 8th
+
+## William
+- Implemented a whole new system for managing different UI components and transfered the exsisted UI code into the new system.
+- Added a UI element that gets the username and password for the local SQL Database
+- A whole bunch of bug fixes
+
+# Thuesday, March 9th
+
+## William
+- A few more bug fixes
