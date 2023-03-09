@@ -7,6 +7,11 @@ import project.objects.Product;
 import java.util.List;
 
 public class TableEntryGenerator {
+    /**
+     * creates a Stirng[][] that can be used by a JTable
+     * @param list a list of product objects
+     * @return
+     */
     public static String[][] genProductTableEntries(List<Product> list) {
         String[][] tableEntries = new String[list.size()][5];
 
@@ -23,6 +28,11 @@ public class TableEntryGenerator {
         return tableEntries;
     }
 
+    /**
+     * creates a Stirng[][] that can be used by a JTable
+     * @param list a list of coupon objects
+     * @return
+     */
     public static String[][] genCouponTableEntries(List<Coupon> list) {
         String[][] tableEntries = new String[list.size()][2];
 
@@ -36,6 +46,11 @@ public class TableEntryGenerator {
         return tableEntries;
     }
 
+    /**
+     * creates a Stirng[][] that can be used by a JTable
+     * @param list a list of orderable objects
+     * @return
+     */
     public static String[][] genOrderableTableEntries(List<Orderable> list) {
         String[][] tableEntries = new String[list.size()][3];
 
