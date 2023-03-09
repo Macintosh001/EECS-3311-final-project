@@ -125,16 +125,33 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Behzad 
 - We shared our project(.jar file) with our client team with the description.
 
+## Aaron
+- Utilize a Date Picker to handle inputting dates in the UI
+
 # Thursday, February 16th
 
 ## William
 - Added some basic unit tests
 - Refactored the UI to look less ugly
 
+## Aaron
+- Fixed small bugs in the UI
+
+# Monday, February 21st
+
+## Aaron
+- Added multiple views and dialogs, some fully implemented and some empty
+
 # Tuesday, February 22nd
 
 ## William
 - Added the "Result Type" so functions can return objects or errors depending on the inputs
+
+# Thursday, March 2nd
+
+## Aaron
+- Thinking about using the Builder Pattern to build UI components which live in a Frame
+- Made some interfaces ect. NOTE we decided to move this to the next iteration
 
 # Friday, March 3rd
 
@@ -147,16 +164,33 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Create a TableEntryGenerator class that turns lists of domain objects into 2D String arrays to be used in a JTable. THis decreases code duplication.
 - (A lot of this was probably written earlier but today is when they were commited.)
 
+## Aaron
+- Completed CouponManagerView
+
 # Sunday, March 5th
 
 ## Behzad
 - Working on the layouts and the views on UI
 - making StockManagingView and StockCheckingView
 
+## Aaron
+- Worked on fleshing out the UI classes and their buttons with Behzad
+
+# Monday, March 6th
+
+## Aaron
+- Fixed bugs found in the UI
+- continued adding action listeners to the buttons
+
 # Tuesday, March 7th
 
 ## William
 - Added some more unit tests for the logic classes
+
+## Aaron
+- got Initial view working
+- added init() method in App class to encapsulate initialization
+- added back buttons to all applicable views, still need to add action listeners
 
 # Wednesday, March 8th
 
@@ -165,7 +199,14 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Added a UI element that gets the username and password for the local SQL Database
 - A whole bunch of bug fixes
 
+## Aaron
+- got back buttons working except for coupon manager
+- fixed some overlapping fields
+
 # Thuesday, March 9th
 
 ## William
 - A few more bug fixes
+
+## Aaron
+- added date filters in the Stock classes, utilizing the date picker
