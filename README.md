@@ -1,14 +1,34 @@
-# Inventory Management System
+# The Inventory Manager (TIM)
 A very cool and classy project that will get us an A+
 
 ## Documentation
 All relevant documentation can be found in the [wiki](https://github.com/Macintosh001/EECS-3311-final-project/wiki).
 
-## Installation/Run Instructions
-You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). Download the jar file onto your machine.
+## Installation / Run Instructions
+You can find our most recent releases [here](https://github.com/Macintosh001/EECS-3311-final-project/releases). 
+Download the ZIP archive onto your machine.
 
-### CLI
-If you're running the app from a CLI then run the following commands `java -jar app.jar`.
+### SQL Database
+
+Our product required a local SQL database to work. So make sure you have one installed.
+To change your password (which you will need to know), you can run the following SQL query.
+```roomsql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+This will change your password to `password`.
+
+### Running the Application
+
+The ZIP archive contains a `bin` folder. This folder has three different way to run the app.
+
+- If you are on windows, you can run `app.bat`
+- If you are on Linux/Mac OS, you can run `app` since it's just a shell script
+- On any platform, you can run `app.jar` which is a runnable jar
+
+If non of these options work, maybe the troubleshooting info below will help.
+
+## Troubleshooting
 
 ### MacOS
 If you are using MacOS then here are some instructions you should follow
@@ -34,3 +54,6 @@ If your .jar is still not working, these steps might help:
 4. In the second pop up, under system variables click on Path > Edit > New. 
 5. Paste the address of the bin folder from earlier with a semi-colon. For example, C:\Program Files\Java\jdk-19\bin; would be pasted. Press ok.
 6. Try to open the .jar file again. If working in the command line, you must restart the terminal before running `java -jar app.jar`again.
+
+## Unit Tests
+We use gradle as out build manager. All our unit tests are stored in `app/src/test/java`. In order to run said tests, simple run `gradle test` in a CLI.

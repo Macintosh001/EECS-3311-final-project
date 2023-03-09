@@ -10,3 +10,4 @@ build
 # IDE Junk
 .idea
 .vscode
+.metadata

@@ -14,11 +14,11 @@ public class DatabaseManager {
     private String username; //the username of the user connecting
     private String password; //the password of the connection
 
-    public DatabaseManager(){
+    public DatabaseManager(String username, String password){
         //initialize some connection information
-        url = "jdbc:mysql://localhost:3306/Assignment_EECS_3311";
-        username = "root";
-        password = "root1234";
+        url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
+        this.username = username;
+        this.password = password;
     }
 
     /**
@@ -27,14 +27,9 @@ public class DatabaseManager {
      * Note: may be updated to return flags of success/failure
      * @throws SQLException
      */
-    public void connectToServer(){
+    public void connectToServer() throws SQLException{
         url = "jdbc:mysql://localhost:3306/";
-        try {
-            con = DriverManager.getConnection(url, username, password);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+        con = DriverManager.getConnection(url, username, password);
     }
 
     /**
@@ -42,7 +37,7 @@ public class DatabaseManager {
      * @throws: SQLException
      */
     public void connect(){
-        url = "jdbc:mysql://localhost:3306/Assignment_EECS_3311";
+        url = "jdbc:mysql://localhost:3306/TIM_Assignment_EECS_3311";
         try {
             con = DriverManager.getConnection(url, username, password);
         }
@@ -76,7 +71,7 @@ public class DatabaseManager {
         try {
             this.connectToServer();
             Statement statement = con.createStatement();
-            statement.execute("create schema Assignment_EECS_3311");
+            statement.execute("create schema TIM_Assignment_EECS_3311");
             this.terminate();
             this.buildDBSchema();
 
@@ -84,8 +79,6 @@ public class DatabaseManager {
             c.printStackTrace();
         }
     }
-
-
 
 
     /**
@@ -96,21 +89,69 @@ public class DatabaseManager {
      *
      */
     private void buildDBSchema(){
+            createProductTable();
+            createCouponTable();
+            createOrderableTable();
+    }
+
+    /**
+     * create the product table in the db
+     */
+    private void createProductTable(){
         try {
             this.connect();
             Statement statement = con.createStatement();
-            statement.execute("create table PRODUCT" +
-                    "(BARCODE INT primary key not null," +
-                    "NAME VARCHAR(500)," +
-                    "PRICE REAL not null check(price >= 0) default(0), " +
-                    "QUANTITY INT not null default(0), " +
-                    "EXPIRY_DATE DATE)");
+            statement.execute("create table product" +
+                    "(barcode int primary key not null," +
+                    "name varchar(500)," +
+                    "price real not null check(price >= 0) default(0), " +
+                    "quantity int not null default(0), " +
+                    "expiry_date date)");
             this.terminate();
         } catch(SQLException c) {
             c.printStackTrace();
         }
     }
 
+    /**
+     * create the coupon table in the db
+     */
+    private void createCouponTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table coupon"
+            +"(code varchar(500) primary key not null,"
+            +"percent_off real not null default(0)" +
+                    ")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
+    /**
+     * create the orderable table in the db
+     */
+    private void createOrderableTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table orderable"
+                    +"(name varchar(500) primary key not null,"
+                    +"price real not null check(price >= 0) default(0),"
+                    +"shelf_life int not null check(shelf_life >= 0) default(0)" +
+                    ")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @return true if a database with the name of the database to be created exists, false otherwise
+     */
     public boolean databaseExists(){
         try {
             this.connectToServer();
@@ -118,7 +159,50 @@ public class DatabaseManager {
             ResultSet res = statement.executeQuery("show databases");
             if(res != null){
                 while(res.next()){
-                    if(res.getString(1).toLowerCase().compareTo("assignment_eecs_3311") == 0){
+                    if(res.getString(1).toLowerCase().compareTo("tim_assignment_eecs_3311") == 0){
+                        this.terminate();
+                        return true;
+                    }
+                }
+            }
+            this.terminate();
+            return false;
+
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     Add all missing tables to the database. Used to maintain the current version of the db
+     */
+    public void forceCurrentVersion(){
+        if(!tableFound("coupon")){
+            createCouponTable();
+        }
+        if(!tableFound("product")){
+            createProductTable();
+        }
+        if(!tableFound("orderable")){
+            createOrderableTable();
+        }
+
+    }
+
+    /**
+     *
+     * @param tableName name of a table
+     * @return true if table with tableName exists in db
+     */
+    private boolean tableFound(String tableName){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            ResultSet res = statement.executeQuery("show tables");
+            if(res != null){
+                while(res.next()){
+                    if(res.getString(1).toLowerCase().compareTo(tableName.toLowerCase()) == 0){
                         this.terminate();
                         return true;
                     }
@@ -134,6 +218,11 @@ public class DatabaseManager {
     }
 
 
+    /**
+     * Connect to db and create statement object
+     * @return statement object
+     * Note: should call terminate() after use of the exported statement is complete.
+     */
     public Statement exportStatement(){
         try{
             this.connect();

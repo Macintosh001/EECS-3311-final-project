@@ -3,25 +3,61 @@
  */
 package project.application;
 
-import project.display.*;
-import project.logic.ILogic;
-import project.logic.Logic;
-import project.persistence.Database;
-import project.persistence.DatabaseStub;
+import project.display.Display;
+import project.logic.CouponManagerLogic;
+import project.logic.OrderLogic;
+import project.logic.SaleLogic;
+import project.logic.StockCheckingLogic;
+import project.logic.StockManagingLogic;
+import project.objects.Coupon;
+import project.objects.Orderable;
+import project.objects.Product;
+import project.persistence.*;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        Database database = new DatabaseStub();
+        new DBConnectionWindow();
+    }
 
-        // The "nextBarcode" for logic has to be hardcoded based on the test data
-        // That's set up when the DatabaseStub is initialized.
-        ILogic logic = new Logic(database, 2);
-        //MainDisplay display = new MainDisplay(logic);
-        //OrderView view = new OrderView(logic);
-       //InitialDisplay init = new InitialDisplay();
-        //CouponManagerView coupon = new CouponManagerView(logic);
-        //SaleView sale = new SaleView(logic);
-        //EmployeeView emp = new EmployeeView(logic);
-        ManagerView mv = new ManagerView(logic);
+    public static void init(String username, String password) throws SQLException {
+
+        ProductDatabase productDB = null;
+        OrderableDatabase orderDB = null;
+        CouponDatabase couponDB = null;
+
+        productDB = new ProductPersistence(username, password);
+        orderDB = new OrderablePersistence(username, password);
+        couponDB = new CouponPersistence(username, password);
+
+        // We want to populate the DB if it's empty!
+        if (productDB.getProductList().isEmpty()) {
+            productDB.addProduct(new Product(0, "Chips", 100, 0.99f, new Date()));
+        }
+        if (orderDB.getOrderableList().isEmpty()) {
+            orderDB.addOrderable(new Orderable("Chips", 0.99f, 300));
+        }
+        if (couponDB.getCouponList().isEmpty()) {
+            couponDB.addCoupon(new Coupon("SAVE10", 0.1f));
+        }
+
+        OrderLogic oLogic = new OrderLogic(productDB,orderDB);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponDB);
+
+        Display display = new Display(
+                scLogic,
+                smLogic,
+                oLogic,
+                cpLogic,
+                sLogic
+        );
+//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }
