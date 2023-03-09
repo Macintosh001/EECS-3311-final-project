@@ -15,7 +15,7 @@ import java.util.List;
 
 public class StockManagingView extends JPanel implements ViewWithTable {
     private StockManagingLogic logic;
-    private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private JTable table;
 
     public StockManagingView(Display display, StockManagingLogic logic) {

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class StockCheckingView extends JPanel implements ViewWithTable {
     private StockCheckingLogic logic;
-    private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private JTable table;
 
     public StockCheckingView(Display display, StockCheckingLogic logic) {
