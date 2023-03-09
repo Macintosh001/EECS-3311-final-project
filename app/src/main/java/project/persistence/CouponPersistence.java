@@ -152,11 +152,14 @@ public class CouponPersistence implements CouponDatabase{
         Float percentOff;
         try{
             if(res != null){
-                res.next();
-
-                code = res.getString("code");
-                percentOff = res.getFloat("percent_off");
-                return new Coupon(code, percentOff);
+                if(res.next()){
+                    code = res.getString("code");
+                    percentOff = res.getFloat("percent_off");
+                    return new Coupon(code, percentOff);
+                }
+                else{
+                    return null;
+                }
             }
             else {
                 return null;

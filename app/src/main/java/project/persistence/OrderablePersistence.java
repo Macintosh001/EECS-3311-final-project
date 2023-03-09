@@ -159,13 +159,15 @@ public class OrderablePersistence implements OrderableDatabase{
 
         try{
             if(res != null){
-                res.next();
-
-                name = res.getString("name");
-                price = res.getFloat("price");
-                shelfLife = res.getInt("shelf_life");
-
-                return new Orderable(name, price, shelfLife);
+                if(res.next()){
+                    name = res.getString("name");
+                    price = res.getFloat("price");
+                    shelfLife = res.getInt("shelf_life");
+                    return new Orderable(name, price, shelfLife);
+                }
+                else{
+                    return null;
+                }
             }
             else {
                 return null;

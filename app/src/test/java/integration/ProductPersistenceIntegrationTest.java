@@ -1,91 +1,95 @@
-package unit;
+package integration;
+
 import org.junit.jupiter.api.Test;
 import project.objects.FilterProduct;
 import project.objects.Product;
-import project.persistence.ProductDatabase;
-import project.persistence.ProductDatabaseStub;
+import project.persistence.*;
 
-import java.util.Date;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//note: logic handles most extreme input values and error inputs, so it is not expected that
-//values passed to the database stub classes will be incorrect during calls.
-public class ProductDatabaseStubTest {
-
+/**
+ * Test class for the real database; this class forces predictable behavior by clearing the database
+ * before performing operations. This is a type of integration test.
+ * Note1 : This class modifies the database
+ * Note2 : This class, unlike the application, must have the password "root1234" and the username "root"
+ * setup on the database; for this with access to this class, for modification, simply change the
+ * values of the fields of this class to be your own username and password if you are unwilling to change these values.
+ */
+public class ProductPersistenceIntegrationTest {
+    //change these values to your own username/password before running.
+    private final String password = "root1234";
+    private final String username = "root";
     @Test
-    void getProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        Product p = db.getProduct(0);
-        assertEquals(75, p.getQuantity());
-        assertEquals(3.99F, p.getPrice());
-        assertEquals(0, p.getName().compareTo("oreos"));
-    }
-
-    @Test
-    void getNonexistantProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        Product p = db.getProduct(3);
-        assertNull(p);
-    }
-
-    @Test
-    void dateAddGetTest(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void addProductTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
+        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
+        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
+        assertEquals(3, ps.size());
+        assertEquals(200, db.getProduct(3).getQuantity());
+        assertEquals(2.99F, db.getProduct(4).getPrice());
+        assertEquals(0, db.getProduct(5).getName().compareTo("Apples"));
+
+    }
+    @Test
+    void getProductTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
+
         Product p = db.getProduct(3);
-        assertEquals(0, p.getExpityDate().compareTo(new Date(1)));
+        assertEquals(200, p.getQuantity());
+        assertEquals(0.99F, p.getPrice());
+        assertEquals(0, p.getName().compareTo("Tuna"));
     }
 
-
-
     @Test
-    void getProductListTest(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void getProductListTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
+        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
         ArrayList<Integer> quantities = new ArrayList<>();
         for(Product p : ps){
             quantities.add(p.getQuantity());
         }
-        assertTrue(quantities.contains(75));
-        assertTrue(quantities.contains(44));
+        assertTrue(quantities.contains(200));
+        assertTrue(quantities.contains(100));
+        assertTrue(quantities.contains(400));
     }
 
+
     @Test
-    void getEmptyProductListTest(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void getEmptyProductListTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
         db.empty();
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
         assertEquals(0, ps.size());
     }
 
     @Test
-    void addProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
-        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
-        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
-        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(5, ps.size());
-        assertEquals(200, db.getProduct(3).getQuantity());
-        assertEquals(2.99F, db.getProduct(4).getPrice());
-        assertEquals(0, db.getProduct(5).getName().compareTo("Apples"));
+    void getNonexistantProductTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+
+        Product p = db.getProduct(3);
+        assertNull(p);
     }
 
-    @Test
-    void addNullProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        db.addProduct(null);
-        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
-        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
-        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(5, ps.size());
-    }
 
     @Test
-    void addMoreProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void addMoreProductTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
         db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
@@ -101,129 +105,157 @@ public class ProductDatabaseStubTest {
         db.addProduct(new Product(16, "Chips", 107, 20.99f, new Date(2)));
         db.addProduct(new Product(17, "Ramen", 401, 11.99f, new Date(3)));
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(16, ps.size());
+        assertEquals(14, ps.size());
     }
 
-
-
     @Test
-    void removeProductTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        db.removeProduct(0);
+    void removeProductTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
+        db.removeProduct(4);
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
         ArrayList<Integer> ints = new ArrayList<>();
         for(Product p : ps){
             ints.add(p.getBarcode());
         }
-        assertFalse(ints.contains(0));
+        assertFalse(ints.contains(4));
     }
 
+    @Test
+    void removeNonexistent() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
+        db.removeProduct(1);
+        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
+        assertEquals(3, ps.size());
+    }
 
     @Test
-    void removeNonexistent(){
-        ProductDatabase db = new ProductDatabaseStub();
-        db.removeProduct(3);
+    void removeSameProductTwice() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
+        db.removeProduct(4);
+        db.removeProduct(4);
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
+        ArrayList<Integer> ints = new ArrayList<>();
+        for(Product p : ps){
+            ints.add(p.getBarcode());
+        }
+        assertFalse(ints.contains(4));
         assertEquals(2, ps.size());
     }
 
     @Test
-    void removeSameProductTwice(){
-        ProductDatabase db = new ProductDatabaseStub();
-        db.removeProduct(0);
-        db.removeProduct(0);
-        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        ArrayList<Integer> ints = new ArrayList<>();
-        for(Product p : ps){
-            ints.add(p.getBarcode());
-        }
-        assertFalse(ints.contains(0));
-        assertEquals(1, ps.size());
-    }
-
-    @Test
-    void removeNegativeBarcode(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void removeNegativeBarcode() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
         db.removeProduct(-1);
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(2, ps.size());
+        assertEquals(3, ps.size());
     }
 
     @Test
-    void replaceProductNewDateTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 75, 3.99F, new Date(1));
-        db.replaceProduct(oreos);
-        Product p = db.getProduct(0);
-        assertEquals(0, p.getExpityDate().compareTo(new Date(1)));
+    void replaceProductNewQuantityAndPriceTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
+        Product apples = new Product(4, "Apples", 2, 1f, new Date(1));
+        db.replaceProduct(apples);
+        Product p = db.getProduct(4);
+        assertEquals(2, p.getQuantity());
+        assertEquals(1f, p.getPrice());
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(2, ps.size());
+        assertEquals(3, ps.size());
     }
 
     @Test
-    void replaceProductNewQuantityAndPriceTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 80, 3.0F, new Date());
-        db.replaceProduct(oreos);
-        Product p = db.getProduct(0);
-        assertEquals(80, p.getQuantity());
-        assertEquals(3.0F, p.getPrice());
-        ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(2, ps.size());
-    }
-
-    @Test
-    void replaceProductNewNameTest(){
-        ProductDatabase db = new ProductDatabaseStub();
-        Product green = new Product(0, "Green", 75, 3.99F, new Date());
+    void replaceProductNewNameTest() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(4, "Apples", 0, 0f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 40, 1.9f, new Date(3)));
+        db.addProduct(new Product(6, "Grapes", 100, 0.99f, new Date(2)));
+        Product green = new Product(4, "Green", 0, 0F, new Date(1));
         db.replaceProduct(green);
-        Product p = db.getProduct(0);
+        Product p = db.getProduct(4);
         assertEquals(0, p.getName().compareTo("Green"));
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(2, ps.size());
+        assertEquals(3, ps.size());
     }
 
     @Test
-    void replaceNonexistantProduct(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void replaceNonexistantProduct() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         Product oreos = new Product(3, "oreos", 80, 3.0F, new Date(1));
         db.replaceProduct(oreos);
         Product p = db.getProduct(3);
         assertEquals(0, p.getName().compareTo("oreos"));
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
-        assertEquals(3, ps.size());
+        assertEquals(1, ps.size());
     }
 
     @Test
-    void priceFilter(){
+    void priceFilter() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("price", 2F, 5F);
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         filters.add(filt);
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(3, ps.size());
+        assertEquals(1, ps.size());
     }
 
     @Test
-    void quantityFilter(){
+    void quantityFilter() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("quantity", 70, 250);
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         filters.add(filt);
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(3, ps.size());
+        assertEquals(2, ps.size());
     }
 
     @Test
-    void barcodeFilter(){
+    void barcodeFilter() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("barcode", 0, 3);
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
+        db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
+        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
+        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
+        ArrayList<FilterProduct> filters = new ArrayList<>();
+        filters.add(filt);
+        ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
+        assertEquals(1, ps.size());
+    }
+
+    @Test
+    void dateFilter() throws SQLException {
+        FilterProduct filt = FilterProduct.FilterProductFactory("expiryDate", new Date(0), new Date(3));
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
@@ -233,25 +265,13 @@ public class ProductDatabaseStubTest {
         assertEquals(3, ps.size());
     }
 
-    @Test
-    void dateFilter(){
-        FilterProduct filt = FilterProduct.FilterProductFactory("expiryDate", new Date(1), new Date(3));
-        ProductDatabase db = new ProductDatabaseStub();
-        db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
-        db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
-        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
-        ArrayList<FilterProduct> filters = new ArrayList<>();
-        filters.add(filt);
-        ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(3, ps.size());
-    }
-
 
     @Test
-    void twoFilters(){
-        FilterProduct filt = FilterProduct.FilterProductFactory("expiryDate", new Date(1), new Date(3));
-        FilterProduct filt2 = FilterProduct.FilterProductFactory("quantity", 70, 150);
-        ProductDatabase db = new ProductDatabaseStub();
+    void twoFilters() throws SQLException {
+        FilterProduct filt = FilterProduct.FilterProductFactory("price", 0F, 2F);
+        FilterProduct filt2 = FilterProduct.FilterProductFactory("quantity", 150, 250);
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
@@ -263,14 +283,15 @@ public class ProductDatabaseStubTest {
     }
 
     @Test
-    void threeFilters(){
+    void threeFilters() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("expiryDate", new Date(1), new Date(3));
         FilterProduct filt2 = FilterProduct.FilterProductFactory("quantity", 70, 300);
         FilterProduct filt3 = FilterProduct.FilterProductFactory("price", 1F, 3F);
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
-        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
+        db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(4)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         filters.add(filt);
         filters.add(filt2);
@@ -279,50 +300,54 @@ public class ProductDatabaseStubTest {
         assertEquals(1, ps.size());
     }
     @Test
-    void filterAboveStartRangeTest(){
-        FilterProduct filt = FilterProduct.FilterProductFactory("quantity", 100, null);
+    void filterAboveStartRangeTest() throws SQLException {
+        FilterProduct filt = FilterProduct.FilterProductFactory("quantity", 150, null);
 
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         filters.add(filt);
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(3, ps.size());
+        assertEquals(2, ps.size());
     }
 
     @Test
-    void filterBelowEndRangeTest(){
+    void filterBelowEndRangeTest() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("quantity", null, 100);
 
-        ProductDatabase db = new ProductDatabaseStub();
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         filters.add(filt);
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(3, ps.size());
+        assertEquals(1, ps.size());
     }
 
     @Test
-    void filterWithNoFilters(){
-        ProductDatabase db = new ProductDatabaseStub();
+    void filterWithNoFilters() throws SQLException {
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
         ArrayList<FilterProduct> filters = new ArrayList<>();
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(5, ps.size());
+        assertEquals(3, ps.size());
     }
 
     @Test
-    void filtersWithAndWithoutNulls(){
+    void filtersWithAndWithoutNulls() throws SQLException {
         FilterProduct filt = FilterProduct.FilterProductFactory("expiryDate", new Date(1), new Date(3));
         FilterProduct filt2 = FilterProduct.FilterProductFactory("quantity", 200, null);
-        FilterProduct filt3 = FilterProduct.FilterProductFactory("price", null, 1.5F);
-        ProductDatabase db = new ProductDatabaseStub();
+        FilterProduct filt3 = FilterProduct.FilterProductFactory("price", null, 2.0F);
+        ProductDatabase db = new ProductPersistence(username, password);
+        db.empty();
         db.addProduct(new Product(3, "Tuna", 200, 0.99f, new Date(1)));
         db.addProduct(new Product(4, "Apples", 100, 2.99f, new Date(2)));
         db.addProduct(new Product(5, "Apples", 400, 1.99f, new Date(3)));
@@ -331,7 +356,6 @@ public class ProductDatabaseStubTest {
         filters.add(filt2);
         filters.add(filt3);
         ArrayList<Product> ps = (ArrayList<Product>) db.getFilteredProductList(filters);
-        assertEquals(1, ps.size());
+        assertEquals(2, ps.size());
     }
-
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//note: logic handles most extreme input values and error inputs, so it is not expected that
+//values passed to the database stub classes will be incorrect during calls.
 public class CouponDatabaseStubTest {
     @Test
     void getCouponTest(){
