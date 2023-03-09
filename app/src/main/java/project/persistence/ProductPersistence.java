@@ -48,7 +48,9 @@ public class ProductPersistence implements ProductDatabase {
         try{
             Statement statement = db.exportStatement();
             ResultSet res = statement.executeQuery("select * from product where barcode =" + barcode.toString());
+
             Product p = extractProductFromResultSet(res);
+
             db.terminate();
             return p;
         } catch(SQLException e) {
@@ -164,17 +166,22 @@ public class ProductPersistence implements ProductDatabase {
 
         try{
             if(res != null){
-                res.next();
-                barcode = res.getInt("barcode");
-                name = res.getString("name");
-                price = res.getFloat("price");
-                quantity = res.getInt("quantity");
-                expiryDate = new Date(res.getDate("expiry_date").getTime());
-                return new Product(barcode, name, quantity, price, expiryDate);
+                if(res.next()){
+                    barcode = res.getInt("barcode");
+                    name = res.getString("name");
+                    price = res.getFloat("price");
+                    quantity = res.getInt("quantity");
+                    expiryDate = new Date(res.getDate("expiry_date").getTime());
+                    return new Product(barcode, name, quantity, price, expiryDate);
+                }
+                else {
+                    return null;
+                }
             }
-            else {
+            else{
                 return null;
             }
+
         } catch(SQLException e){
             e.printStackTrace();
             return null;
