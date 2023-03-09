@@ -208,4 +208,11 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## William
 - A few more bug fixes
 
+## Behzad
+- Worked with William on the UML Diagrams
+- Merge all the UML diagrams and commit them
+- Uploaded the updated version of Meeting Log file
+
+## Aaron
+- added date filters in the Stock classes, utilizing the date picker
 
