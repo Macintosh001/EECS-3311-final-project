@@ -52,8 +52,7 @@ public class ProductDatabaseStubTest {
     @Test
     void getEmptyProductListTest(){
         ProductDatabase db = new ProductDatabaseStub();
-        db.removeProduct(1);
-        db.removeProduct(0);
+        db.empty();
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
         assertEquals(0, ps.size());
     }

@@ -42,8 +42,7 @@ public class OrderableDatabaseStubTest {
     @Test
     void getEmptyOrderableListTest(){
         OrderableDatabase db = new OrderableDatabaseStub();
-        db.removeOrderable("oreo");
-        db.removeOrderable("cheeto");
+        db.empty();
         ArrayList<Orderable> ords = (ArrayList<Orderable>) db.getOrderableList();
 
         assertEquals(0, ords.size());

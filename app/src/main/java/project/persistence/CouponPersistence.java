@@ -193,4 +193,14 @@ public class CouponPersistence implements CouponDatabase{
         }
         return coups;
     }
+    @Override
+    public void empty(){
+        try{
+            Statement statement = db.exportStatement();
+            statement.execute("delete from coupon");
+            db.terminate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

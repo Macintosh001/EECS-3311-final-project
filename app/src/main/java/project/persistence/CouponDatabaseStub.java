@@ -96,4 +96,10 @@ public class CouponDatabaseStub implements CouponDatabase{
     public List<Coupon> getCouponList() {
         return dbStub;
     }
+
+
+    @Override
+    public void empty(){
+        this.dbStub = new ArrayList<>();
+    }
 }

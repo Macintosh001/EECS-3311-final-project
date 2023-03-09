@@ -44,5 +44,5 @@ public interface CouponDatabase {
      */
     public List<Coupon> getCouponList();
 
-
+    public void empty();
 }

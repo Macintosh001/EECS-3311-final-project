@@ -38,8 +38,7 @@ public class CouponDatabaseStubTest {
     @Test
     void getEmptyCouponList(){
         CouponDatabase db = new CouponDatabaseStub();
-        db.removeCoupon("coup1");
-        db.removeCoupon("coup2");
+        db.empty();
         ArrayList<Coupon> coups = (ArrayList<Coupon>) db.getCouponList();
         assertEquals(0, coups.size());
     }

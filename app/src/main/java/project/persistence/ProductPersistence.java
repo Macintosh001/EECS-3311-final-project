@@ -336,6 +336,15 @@ public class ProductPersistence implements ProductDatabase {
     }
 
 
-
+    @Override
+    public void empty(){
+        try{
+            Statement statement = db.exportStatement();
+            statement.execute("delete from product");
+            db.terminate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
 }

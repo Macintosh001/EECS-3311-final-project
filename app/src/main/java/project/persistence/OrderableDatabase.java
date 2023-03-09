@@ -44,4 +44,5 @@ public interface OrderableDatabase {
      */
     public List<Orderable> getOrderableList();
 
+    public void empty();
 }

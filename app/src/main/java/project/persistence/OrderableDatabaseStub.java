@@ -96,4 +96,9 @@ public class OrderableDatabaseStub implements OrderableDatabase{
     public List<Orderable> getOrderableList() {
         return dbStub;
     }
+
+    @Override
+    public void empty(){
+        this.dbStub = new ArrayList<>();
+    }
 }
