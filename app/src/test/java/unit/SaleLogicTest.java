@@ -1,19 +1,16 @@
 package unit;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import project.logic.SaleLogic;
-import project.objects.ErrorMsg;
-import project.objects.Product;
+import project.objects.*;
 import project.persistence.CouponDatabase;
 import project.persistence.CouponDatabaseStub;
 import project.persistence.ProductDatabase;
 import project.persistence.ProductDatabaseStub;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SaleLogicTest {
 
