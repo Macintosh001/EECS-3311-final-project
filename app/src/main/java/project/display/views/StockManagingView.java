@@ -1,5 +1,8 @@
 package project.display.views;
 
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.demo.FullDemo;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
@@ -11,11 +14,14 @@ import project.objects.Result;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
 
-public class StockManagingView extends JPanel implements ViewWithTable {
+public class
+StockManagingView extends JPanel implements ViewWithTable {
     private StockManagingLogic logic;
-    private final String[] COLUMNS = {"Barcode", "Name", "Price", "Quantity", "Expiry Date"};
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private JTable table;
 
     public StockManagingView(Display display, StockManagingLogic logic) {
@@ -75,6 +81,44 @@ public class StockManagingView extends JPanel implements ViewWithTable {
         JTextField fQuantityMaxInput = new JTextField();
         fQuantityMaxInput.setBounds(800, 150, 100, 50);
         add(fQuantityMaxInput);
+
+        JLabel filterDateLabel = new JLabel("Filter by Expiry Date:");
+        filterDateLabel.setBounds(700, 190, 200, 50);
+        add(filterDateLabel);
+
+        JLabel minDateLabel = new JLabel("Min:");
+        minDateLabel.setBounds(570, 240, 100, 50);
+        add(minDateLabel);
+
+        //date picker set up with icon
+        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
+        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
+        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
+
+        DatePickerSettings dateSettings = new DatePickerSettings();
+        dateSettings.getEnableYearMenu();
+        DatePicker datePicker = new DatePicker(dateSettings);
+        JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
+        datePickerButton.setText("");
+        datePickerButton.setIcon(dateExampleIcon);
+        datePicker.setBounds(620,240,200,50);
+        add(datePicker);
+
+
+//        JTextField fDateMinInput = new JTextField();
+//        fDateMinInput.setBounds(620, 240, 100, 50);
+//        add(fDateMinInput);
+
+        JLabel maxDateLabel = new JLabel("Max:");
+        maxDateLabel.setBounds(570, 325, 100, 50);
+        add(maxDateLabel);
+
+        DatePicker datePickerMax = new DatePicker();
+        JButton datePickerButton2 = datePickerMax.getComponentToggleCalendarButton();
+        datePickerButton2.setText("");
+        datePickerButton2.setIcon(dateExampleIcon);
+        datePickerMax.setBounds(620,325,200,50);
+        add(datePickerMax);
 
         JButton confirmButton = new JButton("Apply Filters");
         confirmButton.setBounds(810, 310, 180, 80);
