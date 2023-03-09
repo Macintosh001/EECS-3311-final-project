@@ -149,7 +149,7 @@ public class SaleLogicTest {
         assertTrue(errors.isEmpty());
         String[][] cartTable = saleLogic.getCartTable();
         assertEquals(0, cartTable.length);
-        Product product = productDB.getName(0);
+        Product product = productDB.getProduct(0);
         assertEquals(74, product.getQuantity());
     }
 
