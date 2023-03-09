@@ -96,4 +96,50 @@ public class OrderLogicTest {
         // Price is negative
         assertFalse(logic.updateShelfLife("oreo", "-13").isEmpty());
     }
+
+    @Test
+    void addOrderable() {
+        ProductDatabase pdb = new ProductDatabaseStub();
+        OrderableDatabase odb = new OrderableDatabaseStub();
+        OrderLogic logic = new OrderLogic(pdb, odb);
+
+        // Add an orderable. Now there should be three to choose from
+        // Also, funtion should return no errors
+        assertTrue(logic.addOrderable("apple", "0.99", "40").isEmpty());
+        assertEquals(3, odb.getOrderableList().size());
+
+        // Error handling
+
+        // Empty fields
+        assertFalse(logic.addOrderable("", "", "").isEmpty());
+
+        // Product already orderable
+        assertFalse(logic.addOrderable("apple", "0.99", "40").isEmpty());
+
+        // invalid price
+        assertFalse(logic.addOrderable("apple", "-0.99", "40").isEmpty());
+
+        // invalid shelf life
+        assertFalse(logic.addOrderable("apple", "0.99", "-40").isEmpty());
+    }
+
+    @Test
+    void removeOrderable() {
+        ProductDatabase pdb = new ProductDatabaseStub();
+        OrderableDatabase odb = new OrderableDatabaseStub();
+        OrderLogic logic = new OrderLogic(pdb, odb);
+
+        // Removing an orderable should leave only one left
+        // Shouldn't return any errors
+        assertTrue(logic.removeOrderable("oreo").isEmpty());
+        assertEquals(1, odb.getOrderableList().size());
+
+        // Error handling
+
+        // Empty entry
+        assertFalse(logic.removeOrderable("").isEmpty());
+
+        // Orderable can't be removed cause it's not there
+        assertFalse(logic.removeOrderable("oreo").isEmpty());
+    }
 }

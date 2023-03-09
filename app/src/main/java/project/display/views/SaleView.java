@@ -2,6 +2,7 @@ package project.display.views;
 
 import project.display.Display;
 import project.display.buttons.BackButton;
+import project.display.dialogs.ErrorDialog;
 import project.display.dialogs.sale_dialog.ApplyCouponDialog;
 import project.display.dialogs.sale_dialog.ScanDialog;
 import project.logic.SaleLogic;
@@ -48,6 +49,9 @@ public class SaleView extends JPanel implements ViewWithTable {
         buyButton.setBounds(350, 130, 200, 50);
         buyButton.addActionListener(e -> {
                 List<ErrorMsg> errorMsgList = logic.buy();
+                if (!errorMsgList.isEmpty()) {
+                    new ErrorDialog(errorMsgList);
+                }
                 logic.clearShoppingCart();
                 regenTable();
         });
