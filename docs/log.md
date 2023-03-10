@@ -175,6 +175,8 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Lucas
 - Orderable and Coupon Tables added to database
 
+## Jeremy
+- Start working on the SaleLogic part
 
 # Thursday, March 2nd
 
@@ -206,6 +208,12 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 
 ## Aaron
 - Completed CouponManagerView
+
+# Saturday, March 4th
+
+## Jeremy
+- Finished the SaleLogic part
+- fixed bugs found in Salelogic
 
 # Sunday, March 5th
 
@@ -252,6 +260,10 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - SQLException handling changed
 - unit stub tests for all stubs 
 
+## Jeremy
+- Fixed bugs in the SaleLogic part
+- working on the SaleLogicTest
+
 # Thuesday, March 9th
 
 ## William
@@ -268,4 +280,8 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Lucas
 - bug fixes
 - Integration tests for three persistence classes
+
+## Jeremy
+- Fixed bugs in the SaleLogic
+- Fixed bugs in the SaleLogicTest
 
