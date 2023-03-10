@@ -49,7 +49,7 @@ Order More Stock | 2 point | 3 point
  
 ### Keep Permanent Record 
 - SQL / JDBC
-- 
+
 ### Add and Remove Coupon 
 - JDBC / SQL
 - Stub database functions
