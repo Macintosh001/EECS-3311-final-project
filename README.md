@@ -10,7 +10,7 @@ Download the ZIP archive onto your machine.
 
 ### SQL Database
 
-Our product required a local SQL database to work. So make sure you have one installed.
+Our product requires a local SQL database to work. So make sure you have one installed.
 In the first window of the application, you will be asked to enter a username and password. Here, you must enter the username and password for your
 local host server. 
 If running the persistence integration tests, which should only be done by the dev team or admin, you must have the username root (the default username) and the password root1234. 
