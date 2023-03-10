@@ -9,7 +9,13 @@ Task | Time Estimated | Time Spent
 Add to Stock | 1 Point | 2 Points
 Remove from Stock | 1 Point | 2 Points
 View Items | 2 Points | 1 Points
-Update Properties (only in backend right now) | 2 Points | 2 Points
+Update Properties  | 2 Points | 3 Points
+Filters | 3 points | 4 points
+Keep Permanent Record | 1 point | 3 points
+Add and Remove Coupon | 1 point | 1 point
+Sell Product | 1 point | 3 points
+Apply Coupons | 1 point | 1 point
+Order More Stock | 2 point | 3 point 
 
 # Dev tasks per small user story
 
@@ -33,6 +39,42 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Function to replace product in Database Stub
 - Logic Functions to update each field in a product
 - (not implemented) GUI to call the update functions
+
+### Filters 
+- GUI interactive elements
+- SQL Query building
+- JDBC code
+- Filter domain object
+- Filter logic, build filter lists from GUI
+ 
+### Keep Permanent Record 
+- SQL / JDBC
+- 
+### Add and Remove Coupon 
+- JDBC / SQL
+- Stub database functions
+- Buttons, dialogue and listeners in GUI
+- Coupon domain object
+- Logic to communicate with persistence
+
+### Sell Product 
+- GUI elements: new views, buttons, etc.
+- Logic for sales
+- Reduce quantity in database
+- Apply coupon logic
+
+### Order stock
+- GUI order views, dialogue, etc.
+- Logic for orders, add to stock, create and update orderables
+- Database interactions for create and update orderables
+- stub equivlent to database ops
+
+
+### Additional Tasks
+- Implement login feature for database password and username input
+- create different levels of access
+
+
 
 # Work Log:
 
