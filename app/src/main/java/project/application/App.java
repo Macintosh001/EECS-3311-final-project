@@ -82,7 +82,7 @@ public class App {
                 sLogic
         );
 
-        //dummy comment
+        //dummy
     }
 
 }
