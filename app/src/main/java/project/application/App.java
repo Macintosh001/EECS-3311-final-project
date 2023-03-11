@@ -21,7 +21,9 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        new DBConnectionWindow();
+
+        //new DBConnectionWindow();
+        initWithStub();
     }
 
     public static void init(String username, String password) throws SQLException {
@@ -60,4 +62,25 @@ public class App {
         );
 //        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
+
+    public static void initWithStub(){
+
+        ProductDatabaseStub productDB =  new ProductDatabaseStub();
+        CouponDatabaseStub couponStub = new CouponDatabaseStub();
+        OrderableDatabaseStub orderDBstub = new OrderableDatabaseStub();
+        OrderLogic oLogic = new OrderLogic(productDB,orderDBstub);
+        CouponManagerLogic cpLogic = new CouponManagerLogic(couponStub);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponStub);
+
+        Display display = new Display(
+                scLogic,
+                smLogic,
+                oLogic,
+                cpLogic,
+                sLogic
+        );
+    }
+
 }
