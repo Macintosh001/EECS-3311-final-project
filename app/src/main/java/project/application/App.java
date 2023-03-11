@@ -81,8 +81,6 @@ public class App {
                 cpLogic,
                 sLogic
         );
-
-        //dum
     }
 
 }

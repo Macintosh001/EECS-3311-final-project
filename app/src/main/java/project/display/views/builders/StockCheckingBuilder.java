@@ -10,6 +10,8 @@ import java.awt.*;
 import java.net.URL;
 
 public class StockCheckingBuilder implements ButtonBuilder, TableBuilder, LabelBuilder, TextFieldBuilder, DatePickerBuilder{
+
+    public StockCheckingBuilder(){}
     /**
      * @param title the name of the button
      * @param x horizontal position
