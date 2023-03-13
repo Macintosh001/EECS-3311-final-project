@@ -9,7 +9,13 @@ Task | Time Estimated | Time Spent
 Add to Stock | 1 Point | 2 Points
 Remove from Stock | 1 Point | 2 Points
 View Items | 2 Points | 1 Points
-Update Properties (only in backend right now) | 2 Points | 2 Points
+Update Properties  | 2 Points | 3 Points
+Filters | 3 points | 4 points
+Keep Permanent Record | 1 point | 3 points
+Add and Remove Coupon | 1 point | 1 point
+Sell Product | 1 point | 3 points
+Apply Coupons | 1 point | 1 point
+Order More Stock | 2 point | 3 point 
 
 # Dev tasks per small user story
 
@@ -33,6 +39,42 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Function to replace product in Database Stub
 - Logic Functions to update each field in a product
 - (not implemented) GUI to call the update functions
+
+### Filters 
+- GUI interactive elements
+- SQL Query building
+- JDBC code
+- Filter domain object
+- Filter logic, build filter lists from GUI
+ 
+### Keep Permanent Record 
+- SQL / JDBC
+
+### Add and Remove Coupon 
+- JDBC / SQL
+- Stub database functions
+- Buttons, dialogue and listeners in GUI
+- Coupon domain object
+- Logic to communicate with persistence
+
+### Sell Product 
+- GUI elements: new views, buttons, etc.
+- Logic for sales
+- Reduce quantity in database
+- Apply coupon logic
+
+### Order stock
+- GUI order views, dialogue, etc.
+- Logic for orders, add to stock, create and update orderables
+- Database interactions for create and update orderables
+- stub equivlent to database ops
+
+
+### Additional Tasks
+- Implement login feature for database password and username input
+- create different levels of access
+
+
 
 # Work Log:
 
@@ -128,6 +170,11 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Aaron
 - Utilize a Date Picker to handle inputting dates in the UI
 
+# Wednesdaym February 15th
+## Lucas
+- Added to database manager
+- Added persistence for products with some db functionality
+
 # Thursday, February 16th
 
 ## William
@@ -137,21 +184,55 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Aaron
 - Fixed small bugs in the UI
 
+## Lucas
+- Added queries for product persistence
+- Started work on filters
+
+# Saturday, February 19
+
+## Lucas
+- work on filters
+
+# Sunday, February 20
+
+## Lucas
+- finish filters
+- stub filters implemented
+
 # Monday, February 21st
 
 ## Aaron
 - Added multiple views and dialogs, some fully implemented and some empty
+
+## Lucas
+- filter bugs worked out 
 
 # Tuesday, February 22nd
 
 ## William
 - Added the "Result Type" so functions can return objects or errors depending on the inputs
 
+# Thursday, February 24th
+
+## Lucas
+- Orderable and Coupon Tables added to database
+
+## Jeremy
+- Start working on the SaleLogic part
+
 # Thursday, March 2nd
 
 ## Aaron
 - Thinking about using the Builder Pattern to build UI components which live in a Frame
 - Made some interfaces ect. NOTE we decided to move this to the next iteration
+
+## Lucas
+- persistence package complete restructure
+- new interfaces and stubs for orderable and coupon
+- database manager methods added
+- Orderable and coupon persistence fully implemented
+- queries for orderable and coupon
+- modifications methods for coupon and orderable databses
 
 # Friday, March 3rd
 
@@ -164,8 +245,17 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - Create a TableEntryGenerator class that turns lists of domain objects into 2D String arrays to be used in a JTable. THis decreases code duplication.
 - (A lot of this was probably written earlier but today is when they were commited.)
 
+## Lucas
+- persistence commented
+
 ## Aaron
 - Completed CouponManagerView
+
+# Saturday, March 4th
+
+## Jeremy
+- Finished the SaleLogic part
+- fixed bugs found in Salelogic
 
 # Sunday, March 5th
 
@@ -192,6 +282,10 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 - added init() method in App class to encapsulate initialization
 - added back buttons to all applicable views, still need to add action listeners
 
+## Lucas
+- persistence constructors changed for password/username arguments
+- bug fixes
+
 # Wednesday, March 8th
 
 ## William
@@ -202,6 +296,15 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 ## Aaron
 - got back buttons working except for coupon manager
 - fixed some overlapping fields
+
+## Lucas
+- bug fixes
+- SQLException handling changed
+- unit stub tests for all stubs 
+
+## Jeremy
+- Fixed bugs in the SaleLogic part
+- working on the SaleLogicTest
 
 # Thuesday, March 9th
 
@@ -215,4 +318,12 @@ Update Properties (only in backend right now) | 2 Points | 2 Points
 
 ## Aaron
 - added date filters in the Stock classes, utilizing the date picker
+
+## Lucas
+- bug fixes
+- Integration tests for three persistence classes
+
+## Jeremy
+- Fixed bugs in the SaleLogic
+- Fixed bugs in the SaleLogicTest
 

@@ -59,6 +59,7 @@ public class SaleLogic {
             cartTable[i][1] = product.getName();
             cartTable[i][2] = cart.get(barcode).toString();
             cartTable[i][3] = product.getPrice().toString();
+            i ++;
         }
         return cartTable;
     }

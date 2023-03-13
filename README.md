@@ -9,9 +9,13 @@ You can find our most recent releases [here](https://github.com/Macintosh001/EEC
 Download the ZIP archive onto your machine.
 
 ### SQL Database
-
-Our product required a local SQL database to work. So make sure you have one installed.
-To change your password (which you will need to know), you can run the following SQL query.
+#### For the user
+Our product requires a local SQL database to work. So make sure you have one installed.
+In the first window of the application, you will be asked to enter a username and password. Here, you must enter the username and password for your
+local host server. 
+#### For those running integration tests
+If running the persistence integration tests, which should only be done by the dev team or admin, you must have the username root (the default username) and the password root1234. 
+To change your password (which you will need to do only if running our integration test classes), you can run the following SQL query.
 ```roomsql
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root1234';
 ```
