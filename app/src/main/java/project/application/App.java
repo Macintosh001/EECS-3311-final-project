@@ -14,17 +14,15 @@ import project.objects.Orderable;
 import project.objects.Product;
 import project.persistence.*;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         new DBConnectionWindow();
     }
 
-    public static void init(String username, String password) throws SQLException {
+    public static void initWithSQL(String username, String password) throws SQLException {
 
         ProductDatabase productDB = null;
         OrderableDatabase orderDB = null;
@@ -45,7 +43,19 @@ public class App {
             couponDB.addCoupon(new Coupon("SAVE10", 0.1f));
         }
 
-        OrderLogic oLogic = new OrderLogic(productDB,orderDB);
+        run(productDB, orderDB, couponDB);
+    }
+
+    public static void initWithStub() {
+        ProductDatabase productDB = new ProductDatabaseStub();
+        OrderableDatabase orderDB = new OrderableDatabaseStub();
+        CouponDatabase couponDB = new CouponDatabaseStub();
+
+        run(productDB, orderDB, couponDB);
+    }
+
+    private static void run(ProductDatabase productDB, OrderableDatabase orderDB, CouponDatabase couponDB) {
+        OrderLogic oLogic = new OrderLogic(productDB, orderDB);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
@@ -58,6 +68,5 @@ public class App {
                 cpLogic,
                 sLogic
         );
-//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }

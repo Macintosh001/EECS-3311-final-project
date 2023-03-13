@@ -30,10 +30,10 @@ public class DBConnectionWindow {
         f.add(passInput);
 
         JButton connectButton = new JButton("Login and Connect to DB");
-        connectButton.setBounds(100, 340, 300, 50);
+        connectButton.setBounds(100, 340, 250, 50);
         connectButton.addActionListener(e -> {
             try {
-                App.init(userInput.getText(), new String(passInput.getPassword()));
+                App.initWithSQL(userInput.getText(), new String(passInput.getPassword()));
                 f.dispose();
             } catch (SQLException ex) {
                 JDialog fail = new JDialog();
@@ -55,6 +55,13 @@ public class DBConnectionWindow {
             }
         });
         f.add(connectButton);
+
+        JButton stubButton = new JButton("Use Stub Instead of SQL");
+        stubButton.setBounds(400, 340, 250, 50);
+        stubButton.addActionListener(e -> {
+            App.initWithStub();
+        });
+        f.add(stubButton);
 
         f.setVisible(true);
     }
