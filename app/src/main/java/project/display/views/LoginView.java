@@ -1,7 +1,6 @@
 package project.display.views;
 
 import project.display.Display;
-import project.logic.StockCheckingLogic;
 
 import javax.swing.*;
 

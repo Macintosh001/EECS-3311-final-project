@@ -4,11 +4,7 @@
 package project.application;
 
 import project.display.Display;
-import project.logic.CouponManagerLogic;
-import project.logic.OrderLogic;
-import project.logic.SaleLogic;
-import project.logic.StockCheckingLogic;
-import project.logic.StockManagingLogic;
+import project.logic.*;
 import project.objects.Coupon;
 import project.objects.Orderable;
 import project.objects.Product;
