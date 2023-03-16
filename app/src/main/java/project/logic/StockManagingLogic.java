@@ -47,4 +47,12 @@ public class StockManagingLogic extends StockCheckingLogic {
         super.db.removeProduct(oBarcode);
         return errorMsgs;
     }
+    //remove all products which in the expired list
+    public void removeExpiredProducts() {
+        String[][] expiredProducts = getExpiredList();
+        for (String[] product : expiredProducts) {
+            int exBarcode = Integer.parseInt(product[0]);
+            db.removeProduct(exBarcode);
+        }
+    }
 }
