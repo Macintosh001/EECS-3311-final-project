@@ -72,14 +72,10 @@ public class StockCheckingBuilder implements ButtonBuilder, TableBuilder, LabelB
     /**
      * @param data 2D Array that stores the data in the table
      * @param columns top header row of the table
-     * @param x horizontal position
-     * @param y vertical position
-     * @param width width of the table
-     * @param height height of the table
      * @return a reference to the table
      */
     @Override
-    public JTable buildTable(String[][] data, String[] columns, int x, int y, int width, int height) {
+    public JTable buildTable(String[][] data, String[] columns) {
         JTable table = new JTable(new DefaultTableModel(data,columns));
         table.setEnabled(false);
 

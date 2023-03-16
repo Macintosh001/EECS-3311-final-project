@@ -106,10 +106,6 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
         add(datePicker);
 
 
-//        JTextField fDateMinInput = new JTextField();
-//        fDateMinInput.setBounds(620, 240, 100, 50);
-//        add(fDateMinInput);
-
         JLabel maxDateLabel = new JLabel("Max:");
         maxDateLabel.setBounds(570, 325, 100, 50);
         add(maxDateLabel);

@@ -9,4 +9,8 @@ public class Director {
     public Director(StockCheckingBuilder builder){
         this.builder = builder;
     }
+
+    public StockCheckingBuilder getBuilder() {
+        return builder;
+    }
 }
