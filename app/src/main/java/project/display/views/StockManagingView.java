@@ -132,7 +132,7 @@ StockManagingView extends JPanel implements ViewWithTable {
                     fPriceMaxInput.getText(),
                     fQuantityMinInput.getText(),
                     fQuantityMaxInput.getText(),
-                    "", ""
+                    datePicker.getDateStringOrEmptyString(), datePickerMax.getDateStringOrEmptyString()
             );
 
             if (result.getError() != null) {
