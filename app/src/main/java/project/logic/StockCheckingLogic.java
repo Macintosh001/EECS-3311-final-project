@@ -97,7 +97,7 @@ public class StockCheckingLogic {
             }
         }
 
-        // Validate quantity entries
+        // Validate date entries
         DateValidator dateValidator = new DateValidator();
 
         if (!minExpiryDate.equals("")) {

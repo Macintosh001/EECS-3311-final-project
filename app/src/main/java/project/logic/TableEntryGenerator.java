@@ -1,6 +1,7 @@
 package project.logic;
 
 import project.objects.Coupon;
+import project.objects.Modifier;
 import project.objects.Orderable;
 import project.objects.Product;
 
@@ -60,6 +61,20 @@ public class TableEntryGenerator {
             tableEntries[i][1] = String.format("%.2f", orderable.getPrice());
             tableEntries[i][2] = orderable.getShelfLife().toString() + " Days";
             i++;
+        }
+
+        return tableEntries;
+    }
+
+    public static String[][] genModifierTableEntries(List<Modifier> list) {
+        String[][] tableEntries = new String[list.size()][4];
+
+        int i = 0;
+        for (Modifier modifier: list) {
+            tableEntries[i][0] = modifier.getName();
+            tableEntries[i][1] = String.format("%.2f", modifier.getModifier());
+            tableEntries[i][2] = modifier.getDateFrom().toString();
+            tableEntries[i][3] = modifier.getDateTo().toString();
         }
 
         return tableEntries;
