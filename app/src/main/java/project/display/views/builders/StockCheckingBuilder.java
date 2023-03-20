@@ -23,14 +23,16 @@ public class StockCheckingBuilder implements Builder{
         URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
         Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
         ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
-
         DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.getEnableYearMenu();
         DatePicker datePicker = new DatePicker(dateSettings);
         JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
         datePickerButton.setText("");
         datePickerButton.setIcon(dateExampleIcon);
         return datePicker;
+    }
+
+    public String[] getColumns(){
+        return COLUMNS;
     }
 
     /**
@@ -39,8 +41,7 @@ public class StockCheckingBuilder implements Builder{
      */
 
     public JLabel buildLabel(String title) {
-        JLabel label = new JLabel(title);
-        return label;
+        return new JLabel(title);
     }
 
     /**
@@ -48,7 +49,7 @@ public class StockCheckingBuilder implements Builder{
      * @return
      */
     public JButton buildBUtton(String title) {
-        return null;
+         return new JButton(title);
     }
 
     /**
@@ -65,6 +66,7 @@ public class StockCheckingBuilder implements Builder{
      * @return a reference to the text field
      */
     public JTextField buildTextField() {
-        return null;
+        return new JTextField();
     }
+
 }

@@ -6,6 +6,9 @@ import com.github.lgooddatepicker.demo.FullDemo;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
+import project.display.views.builders.Builder;
+import project.display.views.builders.StockCheckingBuilder;
+import project.display.views.builders.StockManagingBuilder;
 import project.logic.StockCheckingLogic;
 import project.objects.ErrorMsg;
 import project.objects.Result;
@@ -17,10 +20,10 @@ import java.net.URL;
 import java.util.List;
 
 public class StockCheckingView extends JPanel implements ViewWithTable {
-    private StockCheckingLogic logic;
-    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private JTable table;
 
+    private StockCheckingBuilder builder;
+    private StockCheckingLogic logic;
+    private JTable table;
     /**
      * @param display represents the JFrame that contains this JPanel
      * @param logic reference to the Logic object which handles the functionality and data structures
@@ -29,91 +32,78 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
 
         super();
         this.logic = logic;
+        builder = new StockCheckingBuilder();
         setBounds(0, 0, 1000, 700);
         setLayout(null);
 
-        // Add all the UI Elements
-        table = new JTable(new DefaultTableModel(this.logic.getProductList(), COLUMNS));
-        table.setEnabled(false);
+        table = builder.buildTable(logic.getProductList());
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
         add(tablePane);
 
         //Filter by label
-        JLabel filterPriceLabel = new JLabel("Filter by Price:");
+        JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
         filterPriceLabel.setBounds(700, 10, 200, 50);
         add(filterPriceLabel);
 
-        JLabel minPriceLabel = new JLabel("Min:");
+        JLabel minPriceLabel = builder.buildLabel("Min");
         minPriceLabel.setBounds(570, 60, 100, 50);
         add(minPriceLabel);
 
-        JTextField fPriceMinInput = new JTextField();
+        JTextField fPriceMinInput = builder.buildTextField();
         fPriceMinInput.setBounds(620, 60, 100, 50);
         add(fPriceMinInput);
 
-        JLabel maxPriceLabel = new JLabel("Max:");
+        JLabel maxPriceLabel = builder.buildLabel("Max");
         maxPriceLabel.setBounds(750, 60, 100, 50);
         add(maxPriceLabel);
 
-        JTextField fPriceMaxInput = new JTextField();
+        JTextField fPriceMaxInput = builder.buildTextField();
         fPriceMaxInput.setBounds(800, 60, 100, 50);
         add(fPriceMaxInput);
 
 
         // Filter by Quantity
-        JLabel filterQuantityLabel = new JLabel("Filter by Quantity:");
+        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
         filterQuantityLabel.setBounds(700, 100, 200, 50);
         add(filterQuantityLabel);
 
-        JLabel minQuantityLabel = new JLabel("Min:");
+        JLabel minQuantityLabel = builder.buildLabel("Min:");
         minQuantityLabel.setBounds(570, 150, 100, 50);
         add(minQuantityLabel);
 
-        JTextField fQuantityMinInput = new JTextField();
+        JTextField fQuantityMinInput = builder.buildTextField();
         fQuantityMinInput.setBounds(620, 150, 100, 50);
         add(fQuantityMinInput);
 
-        JLabel maxQuantityLabel = new JLabel("Max:");
+        JLabel maxQuantityLabel = builder.buildLabel("Max:");
         maxQuantityLabel.setBounds(750, 150, 100, 50);
         add(maxQuantityLabel);
 
-        JTextField fQuantityMaxInput = new JTextField();
+        JTextField fQuantityMaxInput = builder.buildTextField();
         fQuantityMaxInput.setBounds(800, 150, 100, 50);
         add(fQuantityMaxInput);
 
-        JLabel filterDateLabel = new JLabel("Filter by Expiry Date:");
+        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
         filterDateLabel.setBounds(700, 190, 200, 50);
         add(filterDateLabel);
 
-        JLabel minDateLabel = new JLabel("Min:");
+        JLabel minDateLabel = builder.buildLabel("Min:");
         minDateLabel.setBounds(570, 240, 100, 50);
         add(minDateLabel);
 
         //date picker set up with icon
-        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
-        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
-        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
-
-        DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.getEnableYearMenu();
-        DatePicker datePicker = new DatePicker(dateSettings);
-        JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
-        datePickerButton.setText("");
-        datePickerButton.setIcon(dateExampleIcon);
+        DatePicker datePicker = builder.buildDatePicker();
         datePicker.setBounds(620,240,200,50);
         add(datePicker);
 
 
-        JLabel maxDateLabel = new JLabel("Max:");
+        JLabel maxDateLabel = builder.buildLabel("Max:");
         maxDateLabel.setBounds(570, 325, 100, 50);
         add(maxDateLabel);
 
-        DatePicker datePickerMax = new DatePicker();
-        JButton datePickerButton2 = datePickerMax.getComponentToggleCalendarButton();
-        datePickerButton2.setText("");
-        datePickerButton2.setIcon(dateExampleIcon);
+        DatePicker datePickerMax = builder.buildDatePicker();
         datePickerMax.setBounds(620,325,200,50);
         add(datePickerMax);
 
@@ -125,7 +115,8 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
                     fPriceMaxInput.getText(),
                     fQuantityMinInput.getText(),
                     fQuantityMaxInput.getText(),
-                    datePicker.getDateStringOrEmptyString(), datePickerMax.getDateStringOrEmptyString()
+                    datePicker.getDateStringOrEmptyString(),
+                    datePickerMax.getDateStringOrEmptyString()
             );
 
             if (result.getError() != null) {
@@ -154,13 +145,14 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
      * Responsible for regenerating the table
      */
     public void regenTable(String[][] entries){
-        table.setModel(new DefaultTableModel(entries, COLUMNS));
+        table.setModel(new DefaultTableModel(entries, builder.getColumns()));
     }
 
     /**
      * Responsible for regenerating the table
      */
     public void regenTable() {
-        table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
+        table.setModel(new DefaultTableModel
+                (logic.getProductList(), builder.getColumns()));
     }
 }

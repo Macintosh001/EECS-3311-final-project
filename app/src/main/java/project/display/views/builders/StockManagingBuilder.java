@@ -25,7 +25,7 @@ public class StockManagingBuilder implements Builder{
      */
     @Override
     public JButton buildBUtton(String title) {
-        return null;
+        return new JButton(title);
     }
 
     /**
@@ -43,8 +43,7 @@ public class StockManagingBuilder implements Builder{
      * @return
      */
     public JTextField buildTextField() {
-        JTextField field = new JTextField();
-        return field;
+        return new JTextField();
     }
 
     /**
@@ -53,9 +52,7 @@ public class StockManagingBuilder implements Builder{
      */
     @Override
     public JLabel buildLabel(String title) {
-        JLabel label = new JLabel(title);
-
-        return label;
+        return new JLabel(title);
     }
 
     /**
@@ -65,9 +62,7 @@ public class StockManagingBuilder implements Builder{
         URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
         Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
         ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
-
         DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.getEnableYearMenu();
         DatePicker datePicker = new DatePicker(dateSettings);
         JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
         datePickerButton.setText("");
@@ -90,5 +85,9 @@ public class StockManagingBuilder implements Builder{
 
     public void setLabelY_offset(int y){
         labelY_offset = y;
+    }
+
+    public String[] getColumns(){
+        return this.COLUMNS;
     }
 }
