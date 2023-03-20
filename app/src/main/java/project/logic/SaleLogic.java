@@ -1,12 +1,12 @@
 package project.logic;
 
-import project.objects.*;
-import project.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
+import project.objects.Coupon;
+import project.objects.ErrorMsg;
+import project.objects.Product;
+import project.persistence.CouponDatabase;
+import project.persistence.ProductDatabase;
+
+import java.util.*;
 
 public class SaleLogic {
     private ProductDatabase productDB;

@@ -7,7 +7,6 @@ import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
 import project.display.dialogs.RemoveStockDialog;
-import project.logic.StockCheckingLogic;
 import project.logic.StockManagingLogic;
 import project.objects.ErrorMsg;
 import project.objects.Result;
@@ -132,7 +131,7 @@ StockManagingView extends JPanel implements ViewWithTable {
                     fPriceMaxInput.getText(),
                     fQuantityMinInput.getText(),
                     fQuantityMaxInput.getText(),
-                    "", ""
+                    datePicker.getDateStringOrEmptyString(), datePickerMax.getDateStringOrEmptyString()
             );
 
             if (result.getError() != null) {

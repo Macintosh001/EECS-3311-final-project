@@ -92,6 +92,7 @@ public class DatabaseManager {
             createProductTable();
             createCouponTable();
             createOrderableTable();
+            createModifierTable();
     }
 
     /**
@@ -148,6 +149,22 @@ public class DatabaseManager {
         }
     }
 
+    private void createModifierTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table modifier"
+                    +"(name varchar(500) primary key not null,"
+                    +"modifier real not null default(0),"
+                    +"date_from date not null,"
+                    +"date_to date not null"
+                    + ")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
     /**
      *
      * @return true if a database with the name of the database to be created exists, false otherwise
@@ -186,6 +203,9 @@ public class DatabaseManager {
         }
         if(!tableFound("orderable")){
             createOrderableTable();
+        }
+        if(!tableFound("modifier")){
+            createModifierTable();
         }
 
     }

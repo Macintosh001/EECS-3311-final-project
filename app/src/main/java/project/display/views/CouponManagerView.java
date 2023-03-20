@@ -6,7 +6,6 @@ import project.display.dialogs.coupon_dialog.AddCouponDialog;
 import project.display.dialogs.coupon_dialog.RemoveCouponDialog;
 import project.display.dialogs.coupon_dialog.UpdateCouponDialog;
 import project.logic.CouponManagerLogic;
-import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
