@@ -31,10 +31,6 @@ public class StockCheckingBuilder implements Builder{
         return datePicker;
     }
 
-    public String[] getColumns(){
-        return COLUMNS;
-    }
-
     /**
      * @param title text of the label
      * @return a reference to the label
@@ -48,7 +44,7 @@ public class StockCheckingBuilder implements Builder{
      * @param title
      * @return
      */
-    public JButton buildBUtton(String title) {
+    public JButton buildButton(String title) {
          return new JButton(title);
     }
 
@@ -56,8 +52,8 @@ public class StockCheckingBuilder implements Builder{
      * @param data 2D Array that stores the data in the table
      * @return a reference to the table
      */
-    public JTable buildTable(String[][] data) {
-        JTable table = new JTable(new DefaultTableModel(data,COLUMNS));
+    public JTable buildTable(String[][] data, String[] columns) {
+        JTable table = new JTable(new DefaultTableModel(data,columns));
         table.setEnabled(false);
 
         return table;

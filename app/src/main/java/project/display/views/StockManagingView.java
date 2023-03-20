@@ -22,6 +22,7 @@ import java.util.List;
 public class
 StockManagingView extends JPanel implements ViewWithTable {
 
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private StockManagingBuilder builder;
     private StockManagingLogic logic;
     private JTable table;
@@ -39,7 +40,7 @@ StockManagingView extends JPanel implements ViewWithTable {
         setLayout(null);
 
         // Add all the UI Elements
-        table = builder.buildTable(logic.getProductList());
+        table = builder.buildTable(logic.getProductList(),COLUMNS);
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
@@ -110,7 +111,7 @@ StockManagingView extends JPanel implements ViewWithTable {
         datePickerMax.setBounds(620,325,200,50);
         add(datePickerMax);
 
-        JButton confirmButton = builder.buildBUtton("Apply Filters");
+        JButton confirmButton = builder.buildButton("Apply Filters");
         confirmButton.setBounds(810, 310, 180, 80);
         confirmButton.addActionListener(e -> {
             Result<String[][], List<ErrorMsg>> result = logic.getFilteredList(
@@ -131,7 +132,7 @@ StockManagingView extends JPanel implements ViewWithTable {
         add(confirmButton);
 
         // Button to remove an item from stock
-        JButton removeButton = builder.buildBUtton("Remove Item");
+        JButton removeButton = builder.buildButton("Remove Item");
         removeButton.setBounds(510, 510,180,80);
         removeButton.addActionListener(e -> new RemoveStockDialog(this));
         add(removeButton);
@@ -154,13 +155,13 @@ StockManagingView extends JPanel implements ViewWithTable {
      * @param entries 2D array that holds the data in the table
      */
     public void regenTable(String[][] entries){
-        table.setModel(new DefaultTableModel(entries, builder.getColumns()));
+        table.setModel(new DefaultTableModel(entries, COLUMNS));
     }
 
     /**
      * Responsible for regenerating a table when that table has been updated or altered
      */
     public void regenTable() {
-        table.setModel(new DefaultTableModel(logic.getProductList(), builder.getColumns()));
+        table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
     }
 }

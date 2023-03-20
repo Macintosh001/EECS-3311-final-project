@@ -21,6 +21,7 @@ import java.util.List;
 
 public class StockCheckingView extends JPanel implements ViewWithTable {
 
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
     private StockCheckingBuilder builder;
     private StockCheckingLogic logic;
     private JTable table;
@@ -32,15 +33,18 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
 
         super();
         this.logic = logic;
+        setLayout(new BorderLayout());
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new GridLayout(4,4,5,5));
         builder = new StockCheckingBuilder();
         setBounds(0, 0, 1000, 700);
         setLayout(null);
 
-        table = builder.buildTable(logic.getProductList());
+        table = builder.buildTable(logic.getProductList(),COLUMNS);
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
-        add(tablePane);
+        add(tablePane, "West");
 
         //Filter by label
         JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
@@ -48,67 +52,80 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
         add(filterPriceLabel);
 
         JLabel minPriceLabel = builder.buildLabel("Min");
-        minPriceLabel.setBounds(570, 60, 100, 50);
-        add(minPriceLabel);
+        controlPanel.add(minPriceLabel);
+//        minPriceLabel.setBounds(570, 60, 100, 50);
+//        add(minPriceLabel);
 
         JTextField fPriceMinInput = builder.buildTextField();
-        fPriceMinInput.setBounds(620, 60, 100, 50);
-        add(fPriceMinInput);
+        controlPanel.add(fPriceMinInput);
+//        fPriceMinInput.setBounds(620, 60, 100, 50);
+//        add(fPriceMinInput);
 
         JLabel maxPriceLabel = builder.buildLabel("Max");
-        maxPriceLabel.setBounds(750, 60, 100, 50);
-        add(maxPriceLabel);
+        controlPanel.add(maxPriceLabel);
+//        maxPriceLabel.setBounds(750, 60, 100, 50);
+//        add(maxPriceLabel);
 
         JTextField fPriceMaxInput = builder.buildTextField();
-        fPriceMaxInput.setBounds(800, 60, 100, 50);
-        add(fPriceMaxInput);
+        controlPanel.add(fPriceMaxInput);
+//        fPriceMaxInput.setBounds(800, 60, 100, 50);
+//        add(fPriceMaxInput);
 
 
         // Filter by Quantity
-        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
-        filterQuantityLabel.setBounds(700, 100, 200, 50);
-        add(filterQuantityLabel);
+//        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
+//        filterQuantityLabel.setBounds(700, 100, 200, 50);
+//        add(filterQuantityLabel);
 
         JLabel minQuantityLabel = builder.buildLabel("Min:");
-        minQuantityLabel.setBounds(570, 150, 100, 50);
-        add(minQuantityLabel);
+        controlPanel.add(minQuantityLabel);
+//        minQuantityLabel.setBounds(570, 150, 100, 50);
+//        add(minQuantityLabel);
 
         JTextField fQuantityMinInput = builder.buildTextField();
-        fQuantityMinInput.setBounds(620, 150, 100, 50);
-        add(fQuantityMinInput);
+        controlPanel.add(fQuantityMinInput);
+//        fQuantityMinInput.setBounds(620, 150, 100, 50);
+//        add(fQuantityMinInput);
 
         JLabel maxQuantityLabel = builder.buildLabel("Max:");
-        maxQuantityLabel.setBounds(750, 150, 100, 50);
-        add(maxQuantityLabel);
+        controlPanel.add(maxQuantityLabel);
+//        maxQuantityLabel.setBounds(750, 150, 100, 50);
+//        add(maxQuantityLabel);
 
         JTextField fQuantityMaxInput = builder.buildTextField();
-        fQuantityMaxInput.setBounds(800, 150, 100, 50);
-        add(fQuantityMaxInput);
+        controlPanel.add(fQuantityMaxInput);
+//        fQuantityMaxInput.setBounds(800, 150, 100, 50);
+//        add(fQuantityMaxInput);
 
-        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
-        filterDateLabel.setBounds(700, 190, 200, 50);
-        add(filterDateLabel);
+//        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
+//        controlPanel.add(filterDateLabel);
+//        filterDateLabel.setBounds(700, 190, 200, 50);
+//        add(filterDateLabel);
 
         JLabel minDateLabel = builder.buildLabel("Min:");
-        minDateLabel.setBounds(570, 240, 100, 50);
-        add(minDateLabel);
+        controlPanel.add(minDateLabel);
+//        minDateLabel.setBounds(570, 240, 100, 50);
+//        add(minDateLabel);
 
         //date picker set up with icon
         DatePicker datePicker = builder.buildDatePicker();
-        datePicker.setBounds(620,240,200,50);
-        add(datePicker);
+        controlPanel.add(datePicker);
+//        datePicker.setBounds(620,240,200,50);
+//        add(datePicker);
 
 
         JLabel maxDateLabel = builder.buildLabel("Max:");
-        maxDateLabel.setBounds(570, 325, 100, 50);
-        add(maxDateLabel);
+        controlPanel.add(maxDateLabel);
+//        maxDateLabel.setBounds(570, 325, 100, 50);
+//        add(maxDateLabel);
 
         DatePicker datePickerMax = builder.buildDatePicker();
-        datePickerMax.setBounds(620,325,200,50);
-        add(datePickerMax);
+        controlPanel.add(datePickerMax);
+//        datePickerMax.setBounds(620,325,200,50);
+//        add(datePickerMax);
 
-        JButton confirmButton = new JButton("Apply Filters");
-        confirmButton.setBounds(810, 310, 180, 80);
+        JButton confirmButton = builder.buildButton("Apply Filters");
+//        confirmButton.setBounds(810, 310, 180, 80);
         confirmButton.addActionListener(e -> {
             Result<String[][], List<ErrorMsg>> result = logic.getFilteredList(
                     fPriceMinInput.getText(),
@@ -125,10 +142,14 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        add(confirmButton);
+        controlPanel.add(confirmButton);
+//        add(confirmButton);
 
         BackButton backButton = new BackButton("Back", display);
-        add(backButton);
+        controlPanel.add(backButton);
+//        add(backButton);
+        controlPanel.setVisible(true);
+        add(controlPanel, "East");
 
         // Hide when initialized
         setVisible(false);
@@ -145,7 +166,8 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
      * Responsible for regenerating the table
      */
     public void regenTable(String[][] entries){
-        table.setModel(new DefaultTableModel(entries, builder.getColumns()));
+        table.setModel(new DefaultTableModel
+                (entries, COLUMNS));
     }
 
     /**
@@ -153,6 +175,6 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
      */
     public void regenTable() {
         table.setModel(new DefaultTableModel
-                (logic.getProductList(), builder.getColumns()));
+                (logic.getProductList(), COLUMNS));
     }
 }

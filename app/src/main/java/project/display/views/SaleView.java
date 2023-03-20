@@ -5,6 +5,7 @@ import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
 import project.display.dialogs.sale_dialog.ApplyCouponDialog;
 import project.display.dialogs.sale_dialog.ScanDialog;
+import project.display.views.builders.OtherBuilder;
 import project.logic.SaleLogic;
 import project.objects.ErrorMsg;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class SaleView extends JPanel implements ViewWithTable {
     private final SaleLogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
+    private final OtherBuilder builder = new OtherBuilder();
     private JTable table;
     private JLabel totalPrice;
 
@@ -24,28 +26,26 @@ public class SaleView extends JPanel implements ViewWithTable {
         setBounds(0, 0, 1000, 700);
         setLayout(null);
 
-        table = new JTable(new DefaultTableModel(logic.getCartTable(), COLUMNS));
-        table.setEnabled(false);
-
+        table = builder.buildTable(logic.getCartTable(),COLUMNS);
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,330,580);
         add(tablePane);
 
-        totalPrice = new JLabel("Total Cost: $0.00");
+        totalPrice = builder.buildLabel("Total Cost: $0.00");
         totalPrice.setBounds(10, 610, 300, 50);
         add(totalPrice);
 
-        JButton scanButton = new JButton("Scan");
+        JButton scanButton = builder.buildButton("Scan");
         scanButton.setBounds(350, 10, 200, 50);
         scanButton.addActionListener(e -> new ScanDialog(this));
         add(scanButton);
 
-        JButton applyCouponButton = new JButton("Apply Coupon");
+        JButton applyCouponButton = builder.buildButton("Apply Coupon");
         applyCouponButton.setBounds(350, 70, 200, 50);
         applyCouponButton.addActionListener(e -> new ApplyCouponDialog(this));
         add(applyCouponButton);
 
-        JButton buyButton = new JButton("Buy");
+        JButton buyButton = builder.buildButton("Buy");
         buyButton.setBounds(350, 130, 200, 50);
         buyButton.addActionListener(e -> {
                 List<ErrorMsg> errorMsgList = logic.buy();
@@ -57,7 +57,7 @@ public class SaleView extends JPanel implements ViewWithTable {
         });
         add(buyButton);
 
-        JButton clearButton = new JButton("Clear Cart");
+        JButton clearButton = builder.buildButton("Clear Cart");
         clearButton.setBounds(350, 190, 200, 50);
         clearButton.addActionListener(e -> {
             logic.clearShoppingCart();
