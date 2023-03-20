@@ -1,7 +1,7 @@
 package project.display.views;
 
 import project.display.Display;
-import project.display.views.builders.Director;
+import project.display.views.builders.Builder;
 import project.display.views.builders.StockCheckingBuilder;
 import project.logic.StockCheckingLogic;
 
@@ -10,34 +10,29 @@ import java.awt.*;
 
 public class StockCheck extends JPanel {
 
-    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private Director director;
+    private Builder builder;
 
     public StockCheck(Display display, StockCheckingLogic logic){
 
         super();
-        StockCheckingBuilder stockBuilder = new StockCheckingBuilder();
-        this.director = new Director(stockBuilder);
+        JPanel buttonPanel = new JPanel();
+        display.setLayout(new BorderLayout());
+        builder = new StockCheckingBuilder();
 
         setBounds(0,0,1000,700);
         setLayout(new GridLayout(1,2));
 
-        JTable table = director.getBuilder().
-                buildTable(logic.getProductList(),
-                        COLUMNS);
+        JTable table = builder.buildTable(logic.getProductList());
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
-        add(tablePane);
+        add(tablePane, "West");
 
-        JLabel filterPriceLabel = director.getBuilder()
-                .buildLabel("Filter by Price:", 700,10,200,50);
+        JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
 
-        JLabel minPriceLabel = director.getBuilder()
-                .buildLabel("Min:", 570,60,100,50);
+        JLabel minPriceLabel = builder.buildLabel("Min:");
 
-        JTextField fPriceMinInput = director.getBuilder()
-                .buildTextField( 620,60,100,50);
+        JTextField fPriceMinInput = builder.buildTextField();
 
     }
 }

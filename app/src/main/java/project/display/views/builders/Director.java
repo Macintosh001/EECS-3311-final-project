@@ -1,16 +1,20 @@
 package project.display.views.builders;
 
-import project.displayold.Builder;
-
 public class Director {
 
-    private StockCheckingBuilder builder;
-
-    public Director(StockCheckingBuilder builder){
+    private int labelX_offset = 0;
+    private int labelY_offset = 0;
+    private int buttonX_offset = 0;
+    private int buttonY_offset = 0;
+    private int buttonCount = 0;
+    private int labelCount = 0;
+    private Builder builder;
+    public Director(Builder builder){
         this.builder = builder;
     }
 
-    public StockCheckingBuilder getBuilder() {
+    public Builder getBuilder() {
         return builder;
     }
+
 }
