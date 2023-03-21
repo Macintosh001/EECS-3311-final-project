@@ -306,7 +306,7 @@ Order More Stock | 2 point | 3 point
 - Fixed bugs in the SaleLogic part
 - working on the SaleLogicTest
 
-# Thuesday, March 9th
+# Thursday, March 9th
 
 ## William
 - A few more bug fixes
@@ -327,3 +327,30 @@ Order More Stock | 2 point | 3 point
 - Fixed bugs in the SaleLogic
 - Fixed bugs in the SaleLogicTest
 
+# Friday, March 10th
+
+## Aaron
+- begun working on implementing the Builder Pattern for ui
+
+# Saturday, March 11th
+
+## Aaron
+- continued working on implementing the Builder pattern, considering if it's necessary to use a Director
+
+# Thursday, March 16th
+
+## Aaron
+- interfaces for the Builder pattern almost done, doing refactoring. Decided to stick with only a few interfaces rather than one interface for each component in the ui
+
+# Monday, March 20th
+
+## Aaron
+- The main issue I encountered was how to abstract away or automate positioning of components. Otherwise the builder would only save perhaps a line of code per component which doesn't seem to be enough to justify use of the pattern. Began applying the pattern to the most complex views. Decided that rather than hard coding the position of each component it would be better and cleaner in the long run to utilize a layout manager
+
+
+# Tuesday, March 21st
+
+## Aaron
+- applied more builder pattern to the rest of the views
+- found a library called MigLayout which simplifies laying out the components
+- added the dependancy and refactored code to utilize the mig layout manager where it would be most useful
