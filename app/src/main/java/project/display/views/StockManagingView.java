@@ -3,6 +3,7 @@ package project.display.views;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.demo.FullDemo;
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
@@ -37,82 +38,68 @@ StockManagingView extends JPanel implements ViewWithTable {
         builder = new StockManagingBuilder();
         this.logic = logic;
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
+        setLayout(new BorderLayout());
 
         // Add all the UI Elements
         table = builder.buildTable(logic.getProductList(),COLUMNS);
 
+        JPanel controlPanel = new JPanel(new MigLayout("insets 20 20 20 20, gap 30px"));
+
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
-        add(tablePane);
+        add(tablePane, BorderLayout.WEST);
 
         //Filter by label
         JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
-        filterPriceLabel.setBounds(700, 10, 200, 50);
-        add(filterPriceLabel);
+        controlPanel.add(filterPriceLabel, "wrap");
 
         JLabel minPriceLabel = builder.buildLabel("Min:");
-        minPriceLabel.setBounds(570, 60, 100, 50);
-        add(minPriceLabel);
+        controlPanel.add(minPriceLabel, "split 4, sg a");
 
         JTextField fPriceMinInput = builder.buildTextField();
-        fPriceMinInput.setBounds(620, 60, 100, 50);
-        add(fPriceMinInput);
+        controlPanel.add(fPriceMinInput, "width 100::200, height :25:");
 
         JLabel maxPriceLabel = builder.buildLabel("Max:");
-        maxPriceLabel.setBounds(750, 60, 100, 50);
-        add(maxPriceLabel);
+        controlPanel.add(maxPriceLabel, "sg a");
 
         JTextField fPriceMaxInput = builder.buildTextField();
-        fPriceMaxInput.setBounds(800, 60, 100, 50);
-        add(fPriceMaxInput);
+        controlPanel.add(fPriceMaxInput, "wrap, width 100::200, height :25:");
 
 
         // Filter by Quantity
         JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
-        filterQuantityLabel.setBounds(700, 100, 200, 50);
-        add(filterQuantityLabel);
+        controlPanel.add(filterQuantityLabel, "wrap");
 
         JLabel minQuantityLabel = builder.buildLabel("Min:");
-        minQuantityLabel.setBounds(570, 150, 100, 50);
-        add(minQuantityLabel);
+        controlPanel.add(minQuantityLabel, "split 4, sg a");
 
         JTextField fQuantityMinInput = builder.buildTextField();
-        fQuantityMinInput.setBounds(620, 150, 100, 50);
-        add(fQuantityMinInput);
+        controlPanel.add(fQuantityMinInput, "width 100::200, height :25:");
 
         JLabel maxQuantityLabel = builder.buildLabel("Max:");
-        maxQuantityLabel.setBounds(750, 150, 100, 50);
-        add(maxQuantityLabel);
+        controlPanel.add(maxQuantityLabel, "sg a");
 
         JTextField fQuantityMaxInput = builder.buildTextField();
-        fQuantityMaxInput.setBounds(800, 150, 100, 50);
-        add(fQuantityMaxInput);
+        controlPanel.add(fQuantityMaxInput, "wrap, width 100::200, height :25:");
 
         JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
-        filterDateLabel.setBounds(700, 190, 200, 50);
-        add(filterDateLabel);
+        controlPanel.add(filterDateLabel, "wrap");
 
         JLabel minDateLabel = builder.buildLabel("Min:");
-        minDateLabel.setBounds(570, 240, 100, 50);
-        add(minDateLabel);
+        controlPanel.add(minDateLabel, "split 2, sg a");
 
         //date picker set up with icon
 
         DatePicker datePicker = builder.buildDatePicker();
-        datePicker.setBounds(620,240,200,50);
-        add(datePicker);
+        controlPanel.add(datePicker, "wrap");
 
         JLabel maxDateLabel = builder.buildLabel("Max:");
-        maxDateLabel.setBounds(570, 325, 100, 50);
-        add(maxDateLabel);
+        controlPanel.add(maxDateLabel, "split 2, sg a");
 
         DatePicker datePickerMax = builder.buildDatePicker();
-        datePickerMax.setBounds(620,325,200,50);
-        add(datePickerMax);
+        controlPanel.add(datePickerMax, "wrap");
 
         JButton confirmButton = builder.buildButton("Apply Filters");
-        confirmButton.setBounds(810, 310, 180, 80);
         confirmButton.addActionListener(e -> {
             Result<String[][], List<ErrorMsg>> result = logic.getFilteredList(
                     fPriceMinInput.getText(),
@@ -129,16 +116,14 @@ StockManagingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        add(confirmButton);
+        controlPanel.add(confirmButton, "split 2");
 
-        // Button to remove an item from stock
         JButton removeButton = builder.buildButton("Remove Item");
-        removeButton.setBounds(510, 510,180,80);
         removeButton.addActionListener(e -> new RemoveStockDialog(this));
-        add(removeButton);
-
+        controlPanel.add(removeButton, "wrap");
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
+        add(controlPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);
