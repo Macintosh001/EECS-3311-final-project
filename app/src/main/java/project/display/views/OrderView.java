@@ -1,5 +1,6 @@
 package project.display.views;
 
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.order_dialog.*;
@@ -8,6 +9,7 @@ import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class OrderView extends JPanel implements ViewWithTable {
 
@@ -24,46 +26,38 @@ public class OrderView extends JPanel implements ViewWithTable {
         super();
         this.logic = logic;
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
+        setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new MigLayout("insets 25 25 25 25, gap 25px"));
 
-        // Add all UI elements
         table = builder.buildTable(logic.getOrderableList(),COLUMNS);
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,580,680);
-        add(tablePane);
+        add(tablePane, BorderLayout.WEST);
 
-        // This is the button to add products
         JButton orderButton = builder.buildButton("Order");
-        orderButton.setBounds(610, 10, 180, 80);
         orderButton.addActionListener(e -> new PlaceOrderDialog(this));
-        add(orderButton);
+        buttonPanel.add(orderButton, "wrap, width :180:, height :80:");
 
-        // This is the button to update price
         JButton updatePriceButton = builder.buildButton("Update Price");
-        updatePriceButton.setBounds(610, 110, 180, 80);
         updatePriceButton.addActionListener(e -> new UpdatePriceDialog(this));
-        add(updatePriceButton);
+        buttonPanel.add(updatePriceButton, "wrap, width :180:, height :80:");
 
-        // This is the button to update shelf life
         JButton updateButton = builder.buildButton("Update Shelf Life");
-        updateButton.setBounds(610, 210, 180, 80);
         updateButton.addActionListener(e -> new UpdateShelfLifeDialog(this));
-        add(updateButton);
+        buttonPanel.add(updateButton, "wrap, width :180:, height :80:");
 
         JButton addButton = builder.buildButton("Add");
-        addButton.setBounds(610, 310, 180, 80);
         addButton.addActionListener(e -> new AddOrderDialog(this));
-        add(addButton);
+        buttonPanel.add(addButton, "wrap, width :180:, height :80:");
 
         JButton removeButton = builder.buildButton("Remove");
-        removeButton.setBounds(610, 410, 180, 80);
         removeButton.addActionListener(e -> new RemoveOrderDialog(this));
-        add(removeButton);
-
+        buttonPanel.add(removeButton, "wrap, width :180:, height :80:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
+        add(buttonPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);

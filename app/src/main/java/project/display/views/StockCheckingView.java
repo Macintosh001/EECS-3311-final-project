@@ -3,6 +3,7 @@ package project.display.views;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.demo.FullDemo;
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
@@ -34,14 +35,11 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
         super();
         this.logic = logic;
         setLayout(new BorderLayout());
-        JPanel controlPanel = new JPanel();
-        controlPanel.setLayout(new GridBagLayout());
         builder = new StockCheckingBuilder();
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
-        GridBagConstraints gbc = new GridBagConstraints();
 
         table = builder.buildTable(logic.getProductList(),COLUMNS);
+        JPanel controlPanel = new JPanel(new MigLayout("insets 20 20 20 20, gap 30px"));
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
@@ -49,110 +47,55 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
 
         //Filter by label
         JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
-        filterPriceLabel.setBounds(700, 10, 200, 50);
-        add(filterPriceLabel);
+        controlPanel.add(filterPriceLabel, "wrap");
 
-        JLabel minPriceLabel = builder.buildLabel("Min");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        controlPanel.add(minPriceLabel,gbc);
-//        minPriceLabel.setBounds(570, 60, 100, 50);
-//        add(minPriceLabel);
+        JLabel minPriceLabel = builder.buildLabel("Min:");
+        controlPanel.add(minPriceLabel, "split 4, sg a");
 
         JTextField fPriceMinInput = builder.buildTextField();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        controlPanel.add(fPriceMinInput, gbc);
-//        fPriceMinInput.setBounds(620, 60, 100, 50);
-//        add(fPriceMinInput);
+        controlPanel.add(fPriceMinInput, "width 100::200, height :25:");
 
-        JLabel maxPriceLabel = builder.buildLabel("Max");
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        controlPanel.add(maxPriceLabel, gbc);
-//        maxPriceLabel.setBounds(750, 60, 100, 50);
-//        add(maxPriceLabel);
+        JLabel maxPriceLabel = builder.buildLabel("Max:");
+        controlPanel.add(maxPriceLabel, "sg a");
 
         JTextField fPriceMaxInput = builder.buildTextField();
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        controlPanel.add(fPriceMaxInput, gbc);
-//        fPriceMaxInput.setBounds(800, 60, 100, 50);
-//        add(fPriceMaxInput);
+        controlPanel.add(fPriceMaxInput, "wrap, width 100::200, height :25:");
 
 
         // Filter by Quantity
-//        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
-//        filterQuantityLabel.setBounds(700, 100, 200, 50);
-//        add(filterQuantityLabel);
+        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
+        controlPanel.add(filterQuantityLabel, "wrap");
 
         JLabel minQuantityLabel = builder.buildLabel("Min:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        controlPanel.add(minQuantityLabel, gbc);
-//        minQuantityLabel.setBounds(570, 150, 100, 50);
-//        add(minQuantityLabel);
+        controlPanel.add(minQuantityLabel, "split 4, sg a");
 
         JTextField fQuantityMinInput = builder.buildTextField();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        controlPanel.add(fQuantityMinInput, gbc);
-//        fQuantityMinInput.setBounds(620, 150, 100, 50);
-//        add(fQuantityMinInput);
+        controlPanel.add(fQuantityMinInput, "width 100::200, height :25:");
 
         JLabel maxQuantityLabel = builder.buildLabel("Max:");
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        controlPanel.add(maxQuantityLabel, gbc);
-//        maxQuantityLabel.setBounds(750, 150, 100, 50);
-//        add(maxQuantityLabel);
+        controlPanel.add(maxQuantityLabel, "sg a");
 
         JTextField fQuantityMaxInput = builder.buildTextField();
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        controlPanel.add(fQuantityMaxInput, gbc);
-//        fQuantityMaxInput.setBounds(800, 150, 100, 50);
-//        add(fQuantityMaxInput);
+        controlPanel.add(fQuantityMaxInput, "wrap, width 100::200, height :25:");
 
-//        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
-//        controlPanel.add(filterDateLabel);
-//        filterDateLabel.setBounds(700, 190, 200, 50);
-//        add(filterDateLabel);
+        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
+        controlPanel.add(filterDateLabel, "wrap");
 
         JLabel minDateLabel = builder.buildLabel("Min:");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        controlPanel.add(minDateLabel, gbc);
-//        minDateLabel.setBounds(570, 240, 100, 50);
-//        add(minDateLabel);
+        controlPanel.add(minDateLabel, "split 2, sg a");
 
         //date picker set up with icon
-        DatePicker datePicker = builder.buildDatePicker();
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        controlPanel.add(datePicker, gbc);
-//        datePicker.setBounds(620,240,200,50);
-//        add(datePicker);
 
+        DatePicker datePicker = builder.buildDatePicker();
+        controlPanel.add(datePicker, "wrap");
 
         JLabel maxDateLabel = builder.buildLabel("Max:");
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        controlPanel.add(maxDateLabel, gbc);
-//        maxDateLabel.setBounds(570, 325, 100, 50);
-//        add(maxDateLabel);
+        controlPanel.add(maxDateLabel, "split 2, sg a");
 
         DatePicker datePickerMax = builder.buildDatePicker();
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
-        controlPanel.add(datePickerMax, gbc);
-//        datePickerMax.setBounds(620,325,200,50);
-//        add(datePickerMax);
+        controlPanel.add(datePickerMax, "wrap");
 
         JButton confirmButton = builder.buildButton("Apply Filters");
-//        confirmButton.setBounds(810, 310, 180, 80);
         confirmButton.addActionListener(e -> {
             Result<String[][], List<ErrorMsg>> result = logic.getFilteredList(
                     fPriceMinInput.getText(),
@@ -169,15 +112,11 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        controlPanel.add(confirmButton, gbc);
-//        add(confirmButton);
+        controlPanel.add(confirmButton, "width :180:, height :80:");
 
         BackButton backButton = new BackButton("Back", display);
-        controlPanel.add(backButton);
-//        add(backButton);
-        add(controlPanel, BorderLayout.EAST);
+        add(backButton);
+        add(controlPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);

@@ -1,17 +1,22 @@
 package project.display.views;
 
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.coupon_dialog.AddCouponDialog;
 import project.display.dialogs.coupon_dialog.RemoveCouponDialog;
 import project.display.dialogs.coupon_dialog.UpdateCouponDialog;
+import project.display.views.builders.OtherBuilder;
 import project.logic.CouponManagerLogic;
 import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class CouponManagerView extends JPanel implements ViewWithTable {
+
+    private final OtherBuilder builder = new OtherBuilder();
     private final CouponManagerLogic logic;
     final String[] COLUMNS = {"Barcode", "Discount"};
     private final JTable table;
@@ -24,33 +29,31 @@ public class CouponManagerView extends JPanel implements ViewWithTable {
         super();
         this.logic = logic;
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
+        setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new MigLayout("insets 25 25 25 25, gap 25px"));
 
-        // Add the table to the UI`
-        table = new JTable(new DefaultTableModel(logic.getCouponTable(), COLUMNS));
-        table.setEnabled(false);
+        table = builder.buildTable(logic.getCouponTable(), COLUMNS);
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,380,680);
-        add(tablePane);
+        add(tablePane, BorderLayout.WEST);
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
 
-        JButton addButton = new JButton("Add Coupon");
-        addButton.setBounds(410, 10, 180, 80);
+        JButton addButton = builder.buildButton("Add Coupon");
         addButton.addActionListener(e -> new AddCouponDialog(this));
-        add(addButton);
+        buttonPanel.add(addButton, "wrap, width :180:, height :80:");
 
-        JButton removeButton = new JButton("Remove Coupon");
-        removeButton.setBounds(410, 110, 180, 80);
+        JButton removeButton = builder.buildButton("Remove Coupon");
         removeButton.addActionListener(e -> new RemoveCouponDialog(this));
-        add(removeButton);
+        buttonPanel.add(removeButton, "wrap, width :180:, height :80:");
 
-        JButton updateButton = new JButton("Update Coupon");
-        updateButton.setBounds(410, 210, 180, 80);
+        JButton updateButton = builder.buildButton("Update Coupon");
         updateButton.addActionListener(e -> new UpdateCouponDialog(this));
-        add(updateButton);
+        buttonPanel.add(updateButton, "wrap, width :180:, height :80:");
+
+        add(buttonPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);
