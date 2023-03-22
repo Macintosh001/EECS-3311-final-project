@@ -8,7 +8,6 @@ import project.display.dialogs.coupon_dialog.RemoveCouponDialog;
 import project.display.dialogs.coupon_dialog.UpdateCouponDialog;
 import project.display.views.builders.OtherBuilder;
 import project.logic.CouponManagerLogic;
-import project.logic.OrderLogic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

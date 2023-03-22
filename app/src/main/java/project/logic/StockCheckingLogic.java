@@ -97,7 +97,7 @@ public class StockCheckingLogic {
             }
         }
 
-        // Validate quantity entries
+        // Validate date entries
         DateValidator dateValidator = new DateValidator();
 
         if (!minExpiryDate.equals("")) {
@@ -135,5 +135,12 @@ public class StockCheckingLogic {
         } else {
             return new Result<>(null, errorMsgs);
         }
+    }
+    //Listing all expired products
+    public String[][] getExpiredList() {
+        Date currentDate = new Date();
+        List<FilterProduct> filters = new ArrayList<>();
+        filters.add(FilterProduct.FilterProductFactory("expirydate", null, currentDate));
+        return TableEntryGenerator.genProductTableEntries(db.getFilteredProductList(filters));
     }
 }

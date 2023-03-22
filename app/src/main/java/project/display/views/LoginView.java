@@ -1,6 +1,7 @@
 package project.display.views;
 
 import project.display.Display;
+
 import project.display.views.builders.OtherBuilder;
 import project.logic.StockCheckingLogic;
 

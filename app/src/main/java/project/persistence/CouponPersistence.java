@@ -1,7 +1,6 @@
 package project.persistence;
 
 import project.objects.Coupon;
-import project.objects.Orderable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
