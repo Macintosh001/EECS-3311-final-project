@@ -30,6 +30,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     // this dependency is used to implement the date picker
     implementation group: 'com.github.lgooddatepicker', name: 'LGoodDatePicker', version: '11.2.1'
+    // this dependency allows us to use the mig layout manager
+    implementation group: 'com.miglayout', name: 'miglayout-swing', version: '11.0'
+
 }
 
 jar {
