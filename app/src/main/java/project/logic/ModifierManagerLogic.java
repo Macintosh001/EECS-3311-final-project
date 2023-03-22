@@ -104,10 +104,10 @@ public class ModifierManagerLogic {
         List<ErrorMsg> errorMsgs = new ArrayList<>();
 
         // Check if modifier is even there
-        boolean canRemove = true;
+        boolean canRemove = false;
         for (Modifier m: db.getModifierList()) {
             if (m.getName().equalsIgnoreCase(name)) {
-                canRemove = false;
+                canRemove = true;
                 break;
             }
         }
@@ -120,6 +120,6 @@ public class ModifierManagerLogic {
         // At this point, we know it's safe to remove
         db.removeModifier(name);
 
-        return null;
+        return errorMsgs;
     }
 }

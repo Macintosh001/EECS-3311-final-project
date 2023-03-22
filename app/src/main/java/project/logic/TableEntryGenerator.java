@@ -75,6 +75,7 @@ public class TableEntryGenerator {
             tableEntries[i][1] = String.format("%.2f", modifier.getModifier());
             tableEntries[i][2] = modifier.getDateFrom().toString();
             tableEntries[i][3] = modifier.getDateTo().toString();
+            i++;
         }
 
         return tableEntries;

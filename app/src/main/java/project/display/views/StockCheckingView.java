@@ -3,9 +3,13 @@ package project.display.views;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.demo.FullDemo;
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
+import project.display.views.builders.Builder;
+import project.display.views.builders.StockCheckingBuilder;
+import project.display.views.builders.StockManagingBuilder;
 import project.logic.StockCheckingLogic;
 import project.objects.ErrorMsg;
 import project.objects.Result;
@@ -17,10 +21,11 @@ import java.net.URL;
 import java.util.List;
 
 public class StockCheckingView extends JPanel implements ViewWithTable {
-    private StockCheckingLogic logic;
-    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
-    private JTable table;
 
+    private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price", "Expiry Date"};
+    private StockCheckingBuilder builder;
+    private StockCheckingLogic logic;
+    private JTable table;
     /**
      * @param display represents the JFrame that contains this JPanel
      * @param logic reference to the Logic object which handles the functionality and data structures
@@ -29,107 +34,76 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
 
         super();
         this.logic = logic;
+        setLayout(new BorderLayout());
+        builder = new StockCheckingBuilder();
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
 
-        // Add all the UI Elements
-        table = new JTable(new DefaultTableModel(this.logic.getProductList(), COLUMNS));
-        table.setEnabled(false);
+        table = builder.buildTable(logic.getProductList(),COLUMNS);
+        JPanel controlPanel = new JPanel(new MigLayout("insets 20 20 20 20, gap 30px"));
 
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,480,680);
-        add(tablePane);
+        add(tablePane, BorderLayout.WEST);
 
         //Filter by label
-        JLabel filterPriceLabel = new JLabel("Filter by Price:");
-        filterPriceLabel.setBounds(700, 10, 200, 50);
-        add(filterPriceLabel);
+        JLabel filterPriceLabel = builder.buildLabel("Filter by Price:");
+        controlPanel.add(filterPriceLabel, "wrap");
 
-        JLabel minPriceLabel = new JLabel("Min:");
-        minPriceLabel.setBounds(570, 60, 100, 50);
-        add(minPriceLabel);
+        JLabel minPriceLabel = builder.buildLabel("Min:");
+        controlPanel.add(minPriceLabel, "split 4, sg a");
 
-        JTextField fPriceMinInput = new JTextField();
-        fPriceMinInput.setBounds(620, 60, 100, 50);
-        add(fPriceMinInput);
+        JTextField fPriceMinInput = builder.buildTextField();
+        controlPanel.add(fPriceMinInput, "width 100::200, height :25:");
 
-        JLabel maxPriceLabel = new JLabel("Max:");
-        maxPriceLabel.setBounds(750, 60, 100, 50);
-        add(maxPriceLabel);
+        JLabel maxPriceLabel = builder.buildLabel("Max:");
+        controlPanel.add(maxPriceLabel, "sg a");
 
-        JTextField fPriceMaxInput = new JTextField();
-        fPriceMaxInput.setBounds(800, 60, 100, 50);
-        add(fPriceMaxInput);
+        JTextField fPriceMaxInput = builder.buildTextField();
+        controlPanel.add(fPriceMaxInput, "wrap, width 100::200, height :25:");
 
 
         // Filter by Quantity
-        JLabel filterQuantityLabel = new JLabel("Filter by Quantity:");
-        filterQuantityLabel.setBounds(700, 100, 200, 50);
-        add(filterQuantityLabel);
+        JLabel filterQuantityLabel = builder.buildLabel("Filter by Quantity:");
+        controlPanel.add(filterQuantityLabel, "wrap");
 
-        JLabel minQuantityLabel = new JLabel("Min:");
-        minQuantityLabel.setBounds(570, 150, 100, 50);
-        add(minQuantityLabel);
+        JLabel minQuantityLabel = builder.buildLabel("Min:");
+        controlPanel.add(minQuantityLabel, "split 4, sg a");
 
-        JTextField fQuantityMinInput = new JTextField();
-        fQuantityMinInput.setBounds(620, 150, 100, 50);
-        add(fQuantityMinInput);
+        JTextField fQuantityMinInput = builder.buildTextField();
+        controlPanel.add(fQuantityMinInput, "width 100::200, height :25:");
 
-        JLabel maxQuantityLabel = new JLabel("Max:");
-        maxQuantityLabel.setBounds(750, 150, 100, 50);
-        add(maxQuantityLabel);
+        JLabel maxQuantityLabel = builder.buildLabel("Max:");
+        controlPanel.add(maxQuantityLabel, "sg a");
 
-        JTextField fQuantityMaxInput = new JTextField();
-        fQuantityMaxInput.setBounds(800, 150, 100, 50);
-        add(fQuantityMaxInput);
+        JTextField fQuantityMaxInput = builder.buildTextField();
+        controlPanel.add(fQuantityMaxInput, "wrap, width 100::200, height :25:");
 
-        JLabel filterDateLabel = new JLabel("Filter by Expiry Date:");
-        filterDateLabel.setBounds(700, 190, 200, 50);
-        add(filterDateLabel);
+        JLabel filterDateLabel = builder.buildLabel("Filter by Expiry Date:");
+        controlPanel.add(filterDateLabel, "wrap");
 
-        JLabel minDateLabel = new JLabel("Min:");
-        minDateLabel.setBounds(570, 240, 100, 50);
-        add(minDateLabel);
+        JLabel minDateLabel = builder.buildLabel("Min:");
+        controlPanel.add(minDateLabel, "split 2, sg a");
 
         //date picker set up with icon
-        URL dateImageURL = FullDemo.class.getResource("/images/datepickerbutton1.png");
-        Image dateExampleImage = Toolkit.getDefaultToolkit().getImage(dateImageURL);
-        ImageIcon dateExampleIcon = new ImageIcon(dateExampleImage);
 
-        DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.getEnableYearMenu();
-        DatePicker datePicker = new DatePicker(dateSettings);
-        JButton datePickerButton = datePicker.getComponentToggleCalendarButton();
-        datePickerButton.setText("");
-        datePickerButton.setIcon(dateExampleIcon);
-        datePicker.setBounds(620,240,200,50);
-        add(datePicker);
+        DatePicker datePicker = builder.buildDatePicker();
+        controlPanel.add(datePicker, "wrap");
 
+        JLabel maxDateLabel = builder.buildLabel("Max:");
+        controlPanel.add(maxDateLabel, "split 2, sg a");
 
-//        JTextField fDateMinInput = new JTextField();
-//        fDateMinInput.setBounds(620, 240, 100, 50);
-//        add(fDateMinInput);
+        DatePicker datePickerMax = builder.buildDatePicker();
+        controlPanel.add(datePickerMax, "wrap");
 
-        JLabel maxDateLabel = new JLabel("Max:");
-        maxDateLabel.setBounds(570, 325, 100, 50);
-        add(maxDateLabel);
-
-        DatePicker datePickerMax = new DatePicker();
-        JButton datePickerButton2 = datePickerMax.getComponentToggleCalendarButton();
-        datePickerButton2.setText("");
-        datePickerButton2.setIcon(dateExampleIcon);
-        datePickerMax.setBounds(620,325,200,50);
-        add(datePickerMax);
-
-        JButton confirmButton = new JButton("Apply Filters");
-        confirmButton.setBounds(810, 310, 180, 80);
+        JButton confirmButton = builder.buildButton("Apply Filters");
         confirmButton.addActionListener(e -> {
             Result<String[][], List<ErrorMsg>> result = logic.getFilteredList(
                     fPriceMinInput.getText(),
                     fPriceMaxInput.getText(),
                     fQuantityMinInput.getText(),
                     fQuantityMaxInput.getText(),
-                    datePicker.getDateStringOrEmptyString(), datePickerMax.getDateStringOrEmptyString()
+                    datePicker.getDateStringOrEmptyString(),
+                    datePickerMax.getDateStringOrEmptyString()
             );
 
             if (result.getError() != null) {
@@ -138,10 +112,11 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        add(confirmButton);
+        controlPanel.add(confirmButton, "width :180:, height :80:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
+        add(controlPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);
@@ -158,13 +133,15 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
      * Responsible for regenerating the table
      */
     public void regenTable(String[][] entries){
-        table.setModel(new DefaultTableModel(entries, COLUMNS));
+        table.setModel(new DefaultTableModel
+                (entries, COLUMNS));
     }
 
     /**
      * Responsible for regenerating the table
      */
     public void regenTable() {
-        table.setModel(new DefaultTableModel(logic.getProductList(), COLUMNS));
+        table.setModel(new DefaultTableModel
+                (logic.getProductList(), COLUMNS));
     }
 }
