@@ -16,7 +16,7 @@ public class OrderView extends JPanel implements ViewWithTable {
     private final OtherBuilder builder = new OtherBuilder();
     private final OrderLogic logic;
     final String[] COLUMNS = {"Name", "Price", "Shelf Life"};
-    private JTable table;
+    private final JTable table;
 
     /**
      * @param display represents the JFrame that contains this JPanel

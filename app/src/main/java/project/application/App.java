@@ -6,6 +6,7 @@ package project.application;
 import project.display.Display;
 import project.logic.*;
 import project.objects.Coupon;
+import project.objects.Modifier;
 import project.objects.Orderable;
 import project.objects.Product;
 import project.persistence.*;
@@ -24,10 +25,12 @@ public class App {
         ProductDatabase productDB = null;
         OrderableDatabase orderDB = null;
         CouponDatabase couponDB = null;
+        ModifierDatabase modDB = null;
 
         productDB = new ProductPersistence(username, password);
         orderDB = new OrderablePersistence(username, password);
         couponDB = new CouponPersistence(username, password);
+        modDB = new ModifierPersistence(username, password);
 
         // We want to populate the DB if it's empty!
         if (productDB.getProductList().isEmpty()) {
@@ -39,31 +42,39 @@ public class App {
         if (couponDB.getCouponList().isEmpty()) {
             couponDB.addCoupon(new Coupon("SAVE10", 0.1f));
         }
+        if (modDB.getModifierList().isEmpty()){
+            Date date1 = new Date(1);
+            Date date2 = new Date(1000000000);
+            modDB.addModifier(new Modifier("sale1", 0.12F, date1, date2));
+        }
 
-        run(productDB, orderDB, couponDB);
+        run(productDB, orderDB, couponDB, modDB);
     }
 
     public static void initWithStub() {
         ProductDatabase productDB = new ProductDatabaseStub();
         OrderableDatabase orderDB = new OrderableDatabaseStub();
         CouponDatabase couponDB = new CouponDatabaseStub();
+        ModifierDatabase modDB = new ModifierDatabaseStub();
 
-        run(productDB, orderDB, couponDB);
+        run(productDB, orderDB, couponDB, modDB);
     }
 
-    private static void run(ProductDatabase productDB, OrderableDatabase orderDB, CouponDatabase couponDB) {
+    private static void run(ProductDatabase productDB, OrderableDatabase orderDB, CouponDatabase couponDB, ModifierDatabase modDB) {
         OrderLogic oLogic = new OrderLogic(productDB, orderDB);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponDB);
+        ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
 
         Display display = new Display(
                 scLogic,
                 smLogic,
                 oLogic,
                 cpLogic,
-                sLogic
+                sLogic,
+                mLogic
         );
     }
 }
