@@ -16,8 +16,7 @@ import java.util.Date;
 public class App {
     public static void main(String[] args) {
 
-        //new DBConnectionWindow();
-        initWithStub();
+        new DBConnectionWindow();
     }
 
     public static void initWithSQL(String username, String password) throws SQLException {
