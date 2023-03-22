@@ -354,3 +354,4 @@ Order More Stock | 2 point | 3 point
 - applied more builder pattern to the rest of the views
 - found a library called MigLayout which simplifies laying out the components
 - added the dependancy and refactored code to utilize the mig layout manager where it would be most useful
+- added ModifierManagerView
