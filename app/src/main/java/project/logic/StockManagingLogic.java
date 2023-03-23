@@ -32,7 +32,7 @@ public class StockManagingLogic extends StockCheckingLogic {
         // check if barcode exists
         Integer oBarcode = barcodeResult.getResult();
         boolean hasBarcode = false;
-        for (Product p: super.db.getProductList()) {
+        for (Product p: super.productDatabase.getProductList()) {
             if (p.getBarcode().equals(oBarcode)) {
                 hasBarcode = true;
                 break;
@@ -44,7 +44,7 @@ public class StockManagingLogic extends StockCheckingLogic {
         }
 
         // remove it if it does
-        super.db.removeProduct(oBarcode);
+        super.productDatabase.removeProduct(oBarcode);
         return errorMsgs;
     }
     //remove all products which in the expired list
@@ -52,7 +52,7 @@ public class StockManagingLogic extends StockCheckingLogic {
         String[][] expiredProducts = getExpiredList();
         for (String[] product : expiredProducts) {
             int exBarcode = Integer.parseInt(product[0]);
-            db.removeProduct(exBarcode);
+            productDatabase.removeProduct(exBarcode);
         }
     }
 }

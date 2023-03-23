@@ -40,7 +40,7 @@ public class TableEntryGenerator {
         int i = 0;
         for (Coupon coupon: list) {
             tableEntries[i][0] = coupon.getCode();
-            tableEntries[i][1] = Double.toString(Math.floor(coupon.getPercentOff() * 100.0f));
+            tableEntries[i][1] = String.format("%.0f", coupon.getPercentOff() * 100.0f);
             i++;
         }
 
@@ -72,7 +72,7 @@ public class TableEntryGenerator {
         int i = 0;
         for (Modifier modifier: list) {
             tableEntries[i][0] = modifier.getName();
-            tableEntries[i][1] = String.format("%.2f", modifier.getModifier());
+            tableEntries[i][1] = String.format("%.0f", modifier.getModifier() * 100.0f);
             tableEntries[i][2] = modifier.getDateFrom().toString();
             tableEntries[i][3] = modifier.getDateTo().toString();
             i++;

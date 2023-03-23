@@ -64,7 +64,7 @@ public class ModifierManagerLogic {
         if (modifierResult.getError() != null) {
             return modifierResult.getError();
         }
-        oModifier = modifierResult.getResult();
+        oModifier = modifierResult.getResult() / 100.0f;
 
         // Validate date range
         DateValidator dateValidator = new DateValidator();
