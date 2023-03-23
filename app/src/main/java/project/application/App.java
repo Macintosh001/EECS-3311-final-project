@@ -45,7 +45,7 @@ public class App {
         if (modDB.getModifierList().isEmpty()){
             Date date1 = new Date(1);
             Date date2 = new Date(1000000000);
-            modDB.addModifier(new Modifier("sale1", 0.12F, date1, date2));
+            modDB.addModifier(new Modifier("Chips", -0.12F, date1, date2));
         }
 
         run(productDB, orderDB, couponDB, modDB);
