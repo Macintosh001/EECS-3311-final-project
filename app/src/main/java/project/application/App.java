@@ -64,7 +64,7 @@ public class App {
         OrderLogic oLogic = new OrderLogic(productDB, orderDB);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB, modDB);
-        StockManagingLogic smLogic = new StockManagingLogic(productDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB, modDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponDB);
         ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
 
