@@ -63,7 +63,7 @@ public class App {
     private static void run(ProductDatabase productDB, OrderableDatabase orderDB, CouponDatabase couponDB, ModifierDatabase modDB) {
         OrderLogic oLogic = new OrderLogic(productDB, orderDB);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
-        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB, modDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponDB);
         ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
