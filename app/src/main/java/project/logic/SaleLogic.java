@@ -2,9 +2,11 @@ package project.logic;
 
 import project.objects.Coupon;
 import project.objects.ErrorMsg;
+import project.objects.Modifier;
 import project.objects.Product;
 import project.persistence.CouponDatabase;
 import project.persistence.ProductDatabase;
+import project.persistence.ModifierDatabase;
 
 import java.util.*;
 
@@ -13,15 +15,30 @@ public class SaleLogic {
     private final Map<Integer, Integer> cart;
     private CouponDatabase couponDB;
     private Coupon coupon;
+    private ModifierDatabase modifierDB;
 
 
-    public SaleLogic(ProductDatabase productDB, CouponDatabase couponDB) {
+    public SaleLogic(ProductDatabase productDB, CouponDatabase couponDB, ModifierDatabase modifierDB) {
         this.productDB = productDB;
         this.couponDB = couponDB;
+        this.modifierDB = modifierDB;
         this.cart = new HashMap<>();
         this.coupon = null;
     }
+    
 
+    private float applyModifiers(Product product) {
+        float price = product.getPrice();
+        java.util.Date currentDate = new java.util.Date();
+        for (Modifier modifier : modifierDB.getModifierList()) {
+            if (currentDate.after(modifier.getDateFrom()) && currentDate.before(modifier.getDateTo())) {
+                price += price * modifier.getModifier();
+            }
+        }
+        return price;
+    }
+    
+    
     //Scan the barcode, check if it is valid
     public List<ErrorMsg> scan(String barcodeString) {
         List<ErrorMsg> errors = new ArrayList<>();
@@ -58,7 +75,8 @@ public class SaleLogic {
             cartTable[i][0] = barcode.toString();
             cartTable[i][1] = product.getName();
             cartTable[i][2] = cart.get(barcode).toString();
-            cartTable[i][3] = product.getPrice().toString();
+            float modifiedPrice = applyModifiers(product);
+            cartTable[i][3] = String.format("%.2f", modifiedPrice);
             i ++;
         }
         return cartTable;
@@ -88,7 +106,8 @@ public class SaleLogic {
         double subtotal = 0;
         String[][] cartTable = getCartTable();
         for (int i = 0; i < cartTable.length; i ++) {
-            subtotal = Float.parseFloat(cartTable[i][3]) * Integer.parseInt(cartTable[i][2]) + subtotal; // subtotal += product.getPrice() * product.getQuantity();
+        	float modifiedPrice = applyModifiers(productDB.getProduct(Integer.parseInt(cartTable[i][0])));
+        	subtotal = modifiedPrice * Integer.parseInt(cartTable[i][2]) + subtotal; // subtotal += product.getPrice() * product.getQuantity();
         }
         if (this.coupon != null) {
             subtotal *= (1 - this.coupon.getPercentOff());
@@ -120,4 +139,5 @@ public class SaleLogic {
         }
         return errors;
     }
+    
 }
