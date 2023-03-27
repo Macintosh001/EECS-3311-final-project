@@ -89,7 +89,7 @@ public class SaleLogic {
         double subtotal = 0;
         String[][] cartTable = getCartTable();
         for (int i = 0; i < cartTable.length; i ++) {
-            subtotal = Float.parseFloat(cartTable[i][3]) * Integer.parseInt(cartTable[i][2]); // subtotal += product.getPrice() * product.getQuantity();
+            subtotal = Float.parseFloat(cartTable[i][3]) * Integer.parseInt(cartTable[i][2]) + subtotal; // subtotal += product.getPrice() * product.getQuantity();
         }
         if (this.coupon != null) {
             subtotal *= (1 - this.coupon.getPercentOff());

@@ -3,6 +3,7 @@ package project.logic.validation;
 import project.objects.ErrorMsg;
 import project.objects.Result;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,13 @@ public class QuantityValidator implements Validator<Integer> {
                 errorMsgs.add(new ErrorMsg("Quantity cannot be negative!"));
             }
         } catch (NumberFormatException ex) {
-            errorMsgs.add(new ErrorMsg("Quantity must be a whole number!"));
+            if(isTooBig(entry)){
+                errorMsgs.add(new ErrorMsg("Input is too large!"));
+            }
+            else{
+                errorMsgs.add(new ErrorMsg("Quantity must be a whole number!"));
+            }
+
         }
 
         if (errorMsgs.isEmpty()) {
@@ -33,4 +40,15 @@ public class QuantityValidator implements Validator<Integer> {
             return new Result<>(null, errorMsgs);
         }
     }
+
+    private boolean isTooBig(String entry){
+        try{
+            BigInteger entryNumber = new BigInteger(entry);
+            BigInteger max = BigInteger.valueOf(Integer.MAX_VALUE);
+            return entryNumber.compareTo(max) > 0;
+        } catch(NumberFormatException ex){
+            return false;
+        }
+    }
+
 }

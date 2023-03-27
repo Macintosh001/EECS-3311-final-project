@@ -26,8 +26,8 @@ public class ModifierDatabaseStub implements ModifierDatabase{
         Date date1 = new Date(1);
         Date date2 = new Date(1000000000);
         Date date3 = new Date();
-        Modifier mod = new Modifier("sale1", 0.12F, date1, date2);
-        Modifier mod2 = new Modifier("sale2", 0.1F, date2, date3);
+        Modifier mod = new Modifier("oreo", 0.12F, date1, date2);
+        Modifier mod2 = new Modifier("cheetos", 0.1F, date2, date3);
         ret.add(mod);
         ret.add(mod2);
         return ret;
