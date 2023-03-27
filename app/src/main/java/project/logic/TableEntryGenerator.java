@@ -1,9 +1,6 @@
 package project.logic;
 
-import project.objects.Coupon;
-import project.objects.Modifier;
-import project.objects.Orderable;
-import project.objects.Product;
+import project.objects.*;
 
 import java.util.List;
 
@@ -75,6 +72,20 @@ public class TableEntryGenerator {
             tableEntries[i][1] = String.format("%.1f", modifier.getModifier() * 100.0f);
             tableEntries[i][2] = modifier.getDateFrom().toString();
             tableEntries[i][3] = modifier.getDateTo().toString();
+            i++;
+        }
+
+        return tableEntries;
+    }
+
+    public static String[][] genRestockTaskTableEntries(List<RestockTask> list) {
+        String[][] tableEntries = new String[list.size()][3];
+
+        int i = 0;
+        for (RestockTask task: list) {
+            tableEntries[i][0] = task.getName();
+            tableEntries[i][1] = task.getMinQuantity().toString();
+            tableEntries[i][2] = task.getRestockAmount().toString();
             i++;
         }
 
