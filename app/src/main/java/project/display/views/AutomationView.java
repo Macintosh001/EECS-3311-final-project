@@ -3,6 +3,8 @@ package project.display.views;
 import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
+import project.display.dialogs.automation_dialog.AddRestockDialog;
+import project.display.dialogs.automation_dialog.RemoveRestockDialog;
 import project.display.views.builders.OtherBuilder;
 import project.logic.AutomationLogic;
 
@@ -34,19 +36,26 @@ public class AutomationView extends JPanel {
         JPanel controlPanel = new JPanel(new MigLayout("insets 20, gap 30px"));
 
         JButton addButton = builder.buildButton("Add Restock Task");
-        controlPanel.add(addButton);
+        addButton.addActionListener(e -> new AddRestockDialog(this));
+        controlPanel.add(addButton, "width :200:, height :50:");
 
         JButton removeButton = builder.buildButton("Remove Restock Task");
-        controlPanel.add(removeButton);
+        removeButton.addActionListener(e -> new RemoveRestockDialog(this));
+        controlPanel.add(removeButton, "width :200:, height :50:");
 
         JButton autoButton = builder.buildButton("Automate");
-        controlPanel.add(autoButton);
+        autoButton.addActionListener(e -> logic.automate());
+        controlPanel.add(autoButton,"width :200:, height :50:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
         add(controlPanel, BorderLayout.CENTER);
 
         setVisible(false);
+    }
+
+    public AutomationLogic getLogic(){
+        return logic;
     }
 
     public void regenTable(){
