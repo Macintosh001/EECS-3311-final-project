@@ -66,6 +66,7 @@ public class SaleLogic {
 
     //remove all products in the cart
     public void clearShoppingCart() {
+        this.coupon = null; // Reset the coupon usage after a successful purchase
         cart.clear();
     }
 

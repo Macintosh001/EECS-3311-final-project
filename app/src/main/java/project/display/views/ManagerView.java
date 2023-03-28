@@ -48,6 +48,20 @@ public class ManagerView extends JPanel {
         });
         add(logoutButton);
 
+        JButton modButton = builder.buildButton("Manage Modifiers(tentative)");
+        modButton.setBounds(110, 510, 180, 80);
+        modButton.addActionListener(e -> {
+            display.advanceTo(display.getModView());
+        });
+        add(modButton);
+
+        JButton aButton = builder.buildButton("Automation");
+        aButton.setBounds(310, 210, 180, 80);
+        aButton.addActionListener(e -> {
+            display.advanceTo(display.getAutoView());
+        });
+        add(aButton);
+
         // Hide when initialized
         setVisible(false);
 

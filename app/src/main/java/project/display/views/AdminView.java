@@ -57,6 +57,13 @@ public class AdminView extends JPanel {
         });
         add(cpButton);
 
+        JButton aButton = builder.buildButton("Automation");
+        aButton.setBounds(110, 410, 180, 80);
+        aButton.addActionListener(e -> {
+            display.advanceTo(display.getAutoView());
+        });
+        add(aButton);
+
         BackButton logoutButton = new BackButton("Logout", display);
         add(logoutButton);
 
