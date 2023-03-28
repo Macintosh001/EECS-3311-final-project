@@ -18,6 +18,7 @@ public class Display extends JFrame {
     private final OrderView orderView;
     private final CouponManagerView couponManagerView;
     private final SaleView saleView;
+    private final AutomationView autoView;
 
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
@@ -35,7 +36,8 @@ public class Display extends JFrame {
             OrderLogic orderLogic,
             CouponManagerLogic couponManagerLogic,
             SaleLogic saleLogic,
-            ModifierManagerLogic modLogic
+            ModifierManagerLogic modLogic,
+            AutomationLogic aLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -57,6 +59,8 @@ public class Display extends JFrame {
         this.couponManagerView = new CouponManagerView(this, couponManagerLogic);
         this.saleView = new SaleView(this, saleLogic);
         this.modView = new ModifierManagerView(this, modLogic);
+        this.autoView = new AutomationView(this, aLogic);
+
 
         add(loginView);
 
@@ -70,6 +74,7 @@ public class Display extends JFrame {
         add(couponManagerView);
         add(saleView);
         add(modView);
+        add(autoView);
 
         setVisible(true);
 
@@ -177,4 +182,5 @@ public class Display extends JFrame {
     }
 
     public ModifierManagerView getModView(){ return modView; }
+    public AutomationView getAutoView(){return autoView;}
 }
