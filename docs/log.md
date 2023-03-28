@@ -355,3 +355,8 @@ Order More Stock | 2 point | 3 point
 - found a library called MigLayout which simplifies laying out the components
 - added the dependancy and refactored code to utilize the mig layout manager where it would be most useful
 - added ModifierManagerView
+
+# Tuesday, March 28th
+
+## Aaron
+- Finished ui for Automation, last big user story.
