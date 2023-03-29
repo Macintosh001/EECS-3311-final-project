@@ -64,6 +64,5 @@ public class ManagerView extends JPanel {
 
         // Hide when initialized
         setVisible(false);
-
     }
 }

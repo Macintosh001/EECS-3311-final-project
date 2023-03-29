@@ -4,6 +4,8 @@ package unit;
 import org.junit.jupiter.api.Test;
 import project.logic.StockManagingLogic;
 import project.objects.Product;
+import project.persistence.ModifierDatabase;
+import project.persistence.ModifierDatabaseStub;
 import project.persistence.ProductDatabase;
 import project.persistence.ProductDatabaseStub;
 
@@ -15,7 +17,8 @@ public class StockManagingLogicTest {
     @Test
     void removeProduct() {
         ProductDatabase db = new ProductDatabaseStub();
-        StockManagingLogic logic = new StockManagingLogic(db);
+        ModifierDatabase mdb = new ModifierDatabaseStub();
+        StockManagingLogic logic = new StockManagingLogic(db, mdb);
 
         // The stub database initializes with 2 elements.
         assertEquals(2, logic.getProductList().length);
