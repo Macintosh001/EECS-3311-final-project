@@ -129,7 +129,7 @@ public class AutomationLogic {
 
         // the only automation task right now is restock, so that's what we do first
 
-        // first we need the total about of stock for each orderable. We only want to track orderables that are still
+        // first we need the total amount of stock for each orderable. We only want to track orderables that are still
         // in the orderable database, so we have to initialize all the orderables to zero, the count up the stock
         for (Orderable o: orderableDatabase.getOrderableList()) {
             stockTotals.put(o.getName(), 0);
