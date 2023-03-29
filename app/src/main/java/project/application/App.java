@@ -76,7 +76,6 @@ public class App {
         StockManagingLogic smLogic = new StockManagingLogic(productDB, modDB);
         SaleLogic sLogic = new SaleLogic(productDB, couponDB);
         ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
-
         AutomationLogic aLogic = new AutomationLogic(restockDB, productDB, orderDB, oLogic);
 
         Display display = new Display(
@@ -85,7 +84,8 @@ public class App {
                 oLogic,
                 cpLogic,
                 sLogic,
-                mLogic
+                mLogic,
+                aLogic
         );
     }
 }
