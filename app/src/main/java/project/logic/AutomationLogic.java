@@ -91,6 +91,70 @@ public class AutomationLogic {
     }
 
     /**
+     * Update an existing restock task
+     * @param name
+     * @param minQuantity
+     * @param restockAmount
+     * @return error messages or an empty list if the operation succeeded.
+     */
+    public List<ErrorMsg> updateRestockTask(String name, String minQuantity, String restockAmount) {
+        List<ErrorMsg> errorMsgs = new ArrayList<>();
+
+        Integer oMinQuantity = null;
+        Integer oRestockAmount = null;
+
+        // validate name
+        if (name.equals("")) {
+            errorMsgs.add(new ErrorMsg("Name cannot be empty!"));
+            return errorMsgs;
+        }
+
+        // we can't update a restock task if it doesn't exist
+        boolean taskExists = false;
+        for (RestockTask t: taskDatabase.getRestockTaskList()) {
+            if (t.getName().equals(name)) {
+                taskExists = true;
+                break;
+            }
+        }
+        if (!taskExists) {
+            errorMsgs.add(new ErrorMsg("You can't update '" + name + "' because it doesn't exist!"));
+        }
+
+        // validate minQuantity and restockAmount
+        QuantityValidator validator = new QuantityValidator();
+
+        if (!minQuantity.equals("")) {
+            Result<Integer, List<ErrorMsg>> minQuantityResult = validator.validate(minQuantity);
+            if (minQuantityResult.getError() != null) {
+                return minQuantityResult.getError();
+            }
+            oMinQuantity = minQuantityResult.getResult();
+        }
+
+        if (!restockAmount.equals("")) {
+            Result<Integer, List<ErrorMsg>> restockAmountResult = validator.validate(restockAmount);
+            if (restockAmountResult.getError() != null) {
+                return restockAmountResult.getError();
+            }
+            oRestockAmount = restockAmountResult.getResult();
+        }
+
+        // With the inputs validated, we can now update the automation task to the database
+        RestockTask oldTask = taskDatabase.getRestockTask(name);
+
+        if (oMinQuantity == null) {
+            oMinQuantity = oldTask.getMinQuantity();
+        }
+        if (oRestockAmount == null) {
+            oRestockAmount = oldTask.getRestockAmount();
+        }
+
+        taskDatabase.addRestockTask(new RestockTask(name, oMinQuantity, oRestockAmount));
+        return errorMsgs;
+    }
+
+    /**
      * Take the raw UI input and remove an automation task if it exists
      * @param name
      * @return a list of errors that occurred, empty list if there were no errors

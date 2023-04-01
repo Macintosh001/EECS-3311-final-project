@@ -74,7 +74,7 @@ public class App {
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
         StockCheckingLogic scLogic = new StockCheckingLogic(productDB, modDB);
         StockManagingLogic smLogic = new StockManagingLogic(productDB, modDB);
-        SaleLogic sLogic = new SaleLogic(productDB, couponDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponDB, modDB);
         ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
         AutomationLogic aLogic = new AutomationLogic(restockDB, productDB, orderDB, oLogic);
 
