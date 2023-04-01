@@ -1,6 +1,5 @@
 package project.persistence;
 
-import project.objects.Coupon;
 import project.objects.Modifier;
 
 import java.util.ArrayList;
