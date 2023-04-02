@@ -5,6 +5,7 @@ import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.automation_dialog.AddRestockDialog;
 import project.display.dialogs.automation_dialog.RemoveRestockDialog;
+import project.display.dialogs.automation_dialog.UpdateRestockDialog;
 import project.display.views.builders.OtherBuilder;
 import project.logic.AutomationLogic;
 
@@ -37,15 +38,15 @@ public class AutomationView extends JPanel {
 
         JButton addButton = builder.buildButton("Add Restock Task");
         addButton.addActionListener(e -> new AddRestockDialog(this));
-        controlPanel.add(addButton, "width :200:, height :50:");
+        controlPanel.add(addButton, "split 3, width :200:, height :50:, gapafter 10px");
 
         JButton removeButton = builder.buildButton("Remove Restock Task");
         removeButton.addActionListener(e -> new RemoveRestockDialog(this));
-        controlPanel.add(removeButton, "width :200:, height :50:");
+        controlPanel.add(removeButton, "width :200:, height :50:, gapafter 10px");
 
-        JButton autoButton = builder.buildButton("Automate");
-        autoButton.addActionListener(e -> logic.automate());
-        controlPanel.add(autoButton,"width :200:, height :50:");
+        JButton updateButton = builder.buildButton("Update Restock Task");
+        updateButton.addActionListener(e -> new UpdateRestockDialog(this));
+        controlPanel.add(updateButton, "width :200:, height :50:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
