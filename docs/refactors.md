@@ -1,4 +1,23 @@
 ## Builder Pattern in the UI
+**Problem**: As the codebase grew and more Views were needed, we found ourselves duplicating a lot of code.
+Mainly ui components like buttons and labels ect.
+
+**Solution**: Perhaps we could abstract the process of creating components in a way to reduce the lines of code,
+and also better satisfy SRP.The Builder pattern stood out to us as a potential solution to this problem, although
+there are perhaps other approaches or patterns that can be applied as well. The Builder is responsible for building each component
+except for JPanels and JFrames. This lead to a reduction in code by about 1 to 2 lines of code per component and in the case of the DatePicker
+6-8 lines of code.
+
+## MigLayout manager in the UI
+**Problem**: The process building Views, mainly the most complex ones, became a process of trial and error sometimes.
+This was due to our choice of hardcoding positions of every component in a particular view. As the Views and Dialogs
+increase in number so does the impact of this design decision on the speed of development.
+
+**Solution**: Perhaps delegating the components positioning to a Layout manager in Swing would help us achieve 
+greater development speed. We did try to use some Layout managers like GridLayout but they often brought their 
+own level complexity and learning curve. Fortunately through research we found an open source library MigLayout
+that made it very easy to position components in a View. Creating new Views or modify already made ones became very
+easy to do.
 
 ## Table Entry Generator
 **Problem**: Whenever we turn a list of items from the database into a `String[][]` that can be used 
