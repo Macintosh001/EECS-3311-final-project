@@ -360,3 +360,8 @@ Order More Stock | 2 point | 3 point
 
 ## Aaron
 - Finished ui for Automation, last big user story.
+
+# Sunday, April 2nd
+
+## Aaron
+- Added udapte restock task button to AutomationView.
