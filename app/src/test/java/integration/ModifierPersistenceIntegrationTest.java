@@ -31,7 +31,7 @@ public class ModifierPersistenceIntegrationTest {
             Date date2 = new Date(1000000000);
             Date date3 = new Date();
             db.addModifier(new Modifier("oreo", 0.12F, date1, date2));
-            db.addModifier(new Modifier("cheetos", 0.1F, date2, date3));
+            db.addModifier(new Modifier("cheeto", 0.1F, date2, date3));
         }
         catch(SQLException s){
             s.printStackTrace();

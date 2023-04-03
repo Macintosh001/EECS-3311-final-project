@@ -19,8 +19,8 @@ public class RestockTaskDatabaseStub implements RestockTaskDatabase{
      */
    private ArrayList<RestockTask> getTestData(){
        ArrayList<RestockTask> restockTasks = new ArrayList<>();
-       restockTasks.add(new RestockTask("oreos", 5, 20));
-       restockTasks.add(new RestockTask("cheetos", 3, 15));
+       restockTasks.add(new RestockTask("oreo", 5, 20));
+       restockTasks.add(new RestockTask("cheeto", 3, 15));
        return restockTasks;
    }
 

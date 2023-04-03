@@ -43,7 +43,7 @@ public class OrderLogicIntegrationTest {
             Date tomorrow = new Date(date1.getTime() + (1000 * 60 * 60 * 24));
 
             pdb.addProduct(new Product(15, "oreo", 75, 3.99F, date1));
-            pdb.addProduct(new Product(14, "cheetos", 44, 2.99F, date1));
+            pdb.addProduct(new Product(14, "cheeto", 44, 2.99F, date1));
 
             odb.addOrderable(new Orderable("oreo", 3.99F, 12));
             odb.addOrderable(new Orderable("cheetos", 2.99F, 100));

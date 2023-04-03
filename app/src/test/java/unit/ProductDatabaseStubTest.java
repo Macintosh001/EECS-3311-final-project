@@ -20,7 +20,7 @@ public class ProductDatabaseStubTest {
         Product p = db.getProduct(0);
         assertEquals(75, p.getQuantity());
         assertEquals(3.99F, p.getPrice());
-        assertEquals(0, p.getName().compareTo("oreos"));
+        assertEquals(0, p.getName().compareTo("oreo"));
     }
 
     @Test
@@ -152,7 +152,7 @@ public class ProductDatabaseStubTest {
     @Test
     void replaceProductNewDateTest(){
         ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 75, 3.99F, new Date(1));
+        Product oreos = new Product(0, "oreo", 75, 3.99F, new Date(1));
         db.replaceProduct(oreos);
         Product p = db.getProduct(0);
         assertEquals(0, p.getExpityDate().compareTo(new Date(1)));
@@ -163,7 +163,7 @@ public class ProductDatabaseStubTest {
     @Test
     void replaceProductNewQuantityAndPriceTest(){
         ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 80, 3.0F, new Date());
+        Product oreos = new Product(0, "oreo", 80, 3.0F, new Date());
         db.replaceProduct(oreos);
         Product p = db.getProduct(0);
         assertEquals(80, p.getQuantity());
@@ -186,10 +186,10 @@ public class ProductDatabaseStubTest {
     @Test
     void replaceNonexistantProduct(){
         ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(3, "oreos", 80, 3.0F, new Date(1));
+        Product oreos = new Product(3, "oreo", 80, 3.0F, new Date(1));
         db.replaceProduct(oreos);
         Product p = db.getProduct(3);
-        assertEquals(0, p.getName().compareTo("oreos"));
+        assertEquals(0, p.getName().compareTo("oreo"));
         ArrayList<Product> ps = (ArrayList<Product>) db.getProductList();
         assertEquals(3, ps.size());
     }

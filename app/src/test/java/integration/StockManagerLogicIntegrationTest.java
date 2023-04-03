@@ -40,10 +40,10 @@ public class StockManagerLogicIntegrationTest {
             Date tomorrow = new Date(date1.getTime() + (1000 * 60 * 60 * 24));
 
             db.addProduct(new Product(0, "oreo", 75, 3.99F, date2));
-            db.addProduct(new Product(1, "cheetos", 44, 2.99F, date1));
+            db.addProduct(new Product(1, "cheeto", 44, 2.99F, date1));
 
             mdb.addModifier(new Modifier("oreo", 0.12F, date2, tomorrow));
-            mdb.addModifier(new Modifier("cheetos", 0.1F, date2, tomorrow));
+            mdb.addModifier(new Modifier("cheeto", 0.1F, date2, tomorrow));
         }
         catch(SQLException s){
             s.printStackTrace();

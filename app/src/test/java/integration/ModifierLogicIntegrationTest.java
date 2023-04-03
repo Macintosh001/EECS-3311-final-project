@@ -38,7 +38,7 @@ public class ModifierLogicIntegrationTest {
             Date tomorrow = new Date(date1.getTime() + (1000 * 60 * 60 * 24));
 
             db.addModifier(new Modifier("oreo", 0.12F, date2, tomorrow));
-            db.addModifier(new Modifier("cheetos", 0.1F, date2, tomorrow));
+            db.addModifier(new Modifier("cheeto", 0.1F, date2, tomorrow));
         }
         catch(SQLException s){
             s.printStackTrace();

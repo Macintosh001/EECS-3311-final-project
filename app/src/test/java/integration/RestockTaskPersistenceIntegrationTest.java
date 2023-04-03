@@ -24,8 +24,8 @@ public class RestockTaskPersistenceIntegrationTest {
         try{
             db = new RestockTaskPersistence(username, password);
             db.empty();
-            db.addRestockTask(new RestockTask("oreos", 5, 20));
-            db.addRestockTask(new RestockTask("cheetos", 3, 15));
+            db.addRestockTask(new RestockTask("oreo", 5, 20));
+            db.addRestockTask(new RestockTask("cheeto", 3, 15));
         }
         catch(SQLException s){
             s.printStackTrace();
@@ -38,8 +38,8 @@ public class RestockTaskPersistenceIntegrationTest {
 
     @Test
     void getTest(){
-        RestockTask r = this.db.getRestockTask("oreos");
-        assertEquals("oreos", r.getName());
+        RestockTask r = this.db.getRestockTask("oreo");
+        assertEquals("oreo", r.getName());
         assertEquals(5, r.getMinQuantity());
         assertEquals(20, r.getRestockAmount());
     }
@@ -98,7 +98,7 @@ public class RestockTaskPersistenceIntegrationTest {
 
     @Test
     void removeTest(){
-        db.removeRestockTask("oreos");
+        db.removeRestockTask("oreo");
         ArrayList<RestockTask> rs = (ArrayList<RestockTask>) this.db.getRestockTaskList();
         ArrayList<Integer> quants = new ArrayList<>();
         for(RestockTask r : rs){
@@ -116,19 +116,19 @@ public class RestockTaskPersistenceIntegrationTest {
 
     @Test
     void replaceMinQuantTest(){
-        RestockTask r = new RestockTask("oreos", 7, 20);
+        RestockTask r = new RestockTask("oreo", 7, 20);
         db.replaceRestockTask(r);
-        assertEquals("oreos", db.getRestockTask("oreos").getName());
-        assertEquals(7, db.getRestockTask("oreos").getMinQuantity());
-        assertEquals(20, db.getRestockTask("oreos").getRestockAmount());
+        assertEquals("oreo", db.getRestockTask("oreo").getName());
+        assertEquals(7, db.getRestockTask("oreo").getMinQuantity());
+        assertEquals(20, db.getRestockTask("oreo").getRestockAmount());
     }
 
     @Test
     void replaceAmountTest(){
-        RestockTask r = new RestockTask("oreos", 3, 8);
+        RestockTask r = new RestockTask("oreo", 3, 8);
         db.replaceRestockTask(r);
-        assertEquals("oreos", db.getRestockTask("oreos").getName());
-        assertEquals(3, db.getRestockTask("oreos").getMinQuantity());
-        assertEquals(8, db.getRestockTask("oreos").getRestockAmount());
+        assertEquals("oreo", db.getRestockTask("oreo").getName());
+        assertEquals(3, db.getRestockTask("oreo").getMinQuantity());
+        assertEquals(8, db.getRestockTask("oreo").getRestockAmount());
     }
 }
