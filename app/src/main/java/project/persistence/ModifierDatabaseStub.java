@@ -5,6 +5,7 @@ import project.objects.Modifier;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Non-persistent storage for modifier objects
@@ -22,11 +23,12 @@ public class ModifierDatabaseStub implements ModifierDatabase{
      */
     private ArrayList<Modifier> getTestContent() {
         ArrayList<Modifier> ret = new ArrayList<>();
-        Date date1 = new Date(1);
-        Date date2 = new Date(1000000000);
-        Date date3 = new Date();
-        Modifier mod = new Modifier("oreo", 0.12F, date1, date2);
-        Modifier mod2 = new Modifier("cheeto", 0.1F, date2, date3);
+
+        Date dateFrom = new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30));
+        Date dateTo = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(30));
+        Modifier mod = new Modifier("oreo", 0.9F, dateFrom, dateTo);
+        Modifier mod2 = new Modifier("cheeto", -0.9F, dateFrom, dateTo);
+
         ret.add(mod);
         ret.add(mod2);
         return ret;
