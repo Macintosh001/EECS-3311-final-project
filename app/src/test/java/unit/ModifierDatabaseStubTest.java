@@ -8,6 +8,7 @@ import project.persistence.ModifierDatabaseStub;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class ModifierDatabaseStubTest {
     private ModifierDatabase db;
@@ -21,8 +22,9 @@ public class ModifierDatabaseStubTest {
     void getModifierTest(){
         Modifier m = this.db.getModifier("oreo");
         assertEquals("oreo", m.getName());
-        assertEquals(new Date(1), m.getDateFrom());
-        assertEquals(new Date(1000000000), m.getDateTo());
+        assertEquals(new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30)), m.getDateFrom());
+        assertEquals(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(30)), m.getDateTo());
+
     }
 
     @Test
@@ -53,8 +55,8 @@ public class ModifierDatabaseStubTest {
         for(Modifier m : ms){
             mods.add(m.getModifier());
         }
-        assertTrue(mods.contains(0.12F));
-        assertTrue(mods.contains(0.1F));
+        assertTrue(mods.contains(0.9F));
+        assertTrue(mods.contains(-0.9F));
     }
 
     @Test

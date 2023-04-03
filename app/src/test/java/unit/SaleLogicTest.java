@@ -11,7 +11,8 @@ import java.util.List;
 
 public class SaleLogicTest {
 
-    
+
+
     @Test
     public void scanInvalidBarcode() {
         ProductDatabase productDB = new ProductDatabaseStub();
