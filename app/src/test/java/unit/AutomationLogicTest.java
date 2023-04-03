@@ -49,7 +49,7 @@ class AutomationLogicTest {
 
     @Test
     void removeRestockTask() {
-        aLogic.removeRestockTask("oreos");
+        aLogic.removeRestockTask("oreo");
         assertEquals(1, aLogic.getRestockTaskTable().length);
     }
 
