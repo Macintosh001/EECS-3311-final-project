@@ -2,6 +2,10 @@ package project.logic;
 
 import project.objects.*;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.util.Date;
 import java.util.List;
 
 public class TableEntryGenerator {
@@ -12,6 +16,7 @@ public class TableEntryGenerator {
      */
     public static String[][] genProductTableEntries(List<Product> list) {
         String[][] tableEntries = new String[list.size()][5];
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 
         int i = 0;
         for (Product product: list) {
@@ -19,7 +24,7 @@ public class TableEntryGenerator {
             tableEntries[i][1] = product.getName();
             tableEntries[i][2] = product.getQuantity().toString();
             tableEntries[i][3] = String.format("%.2f", product.getPrice());
-            tableEntries[i][4] = product.getExpityDate().toString();
+            tableEntries[i][4] = df.format(product.getExpityDate());
             i++;
         }
 
@@ -65,13 +70,14 @@ public class TableEntryGenerator {
 
     public static String[][] genModifierTableEntries(List<Modifier> list) {
         String[][] tableEntries = new String[list.size()][4];
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 
         int i = 0;
         for (Modifier modifier: list) {
             tableEntries[i][0] = modifier.getName();
             tableEntries[i][1] = String.format("%.1f", modifier.getModifier() * 100.0f);
-            tableEntries[i][2] = modifier.getDateFrom().toString();
-            tableEntries[i][3] = modifier.getDateTo().toString();
+            tableEntries[i][2] = df.format(modifier.getDateFrom());
+            tableEntries[i][3] = df.format(modifier.getDateTo());
             i++;
         }
 
