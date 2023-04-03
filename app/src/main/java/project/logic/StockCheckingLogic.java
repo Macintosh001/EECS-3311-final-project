@@ -27,7 +27,7 @@ public class StockCheckingLogic {
      */
     public String[][] getProductList() {
         List<Product> modifiedProducts = applyModifiers(productDatabase.getProductList(), modifierDatabase.getModifierList());
-        return TableEntryGenerator.genProductTableEntries(modifiedProducts);
+        return TableEntryGenerator.genProductTableEntries(productDatabase.getProductList(), modifiedProducts);
     }
 
     /**
@@ -134,7 +134,7 @@ public class StockCheckingLogic {
             }
 
             List<Product> modifiedProducts = applyModifiers(productDatabase.getFilteredProductList(filters), modifierDatabase.getModifierList());
-            return new Result<>(TableEntryGenerator.genProductTableEntries(modifiedProducts), null);
+            return new Result<>(TableEntryGenerator.genProductTableEntries(productDatabase.getProductList(), modifiedProducts), null);
         } else {
             return new Result<>(null, errorMsgs);
         }
@@ -145,7 +145,7 @@ public class StockCheckingLogic {
         List<FilterProduct> filters = new ArrayList<>();
         filters.add(FilterProduct.FilterProductFactory("expirydate", null, currentDate));
         List<Product> modifiedProducts = applyModifiers(productDatabase.getFilteredProductList(filters), modifierDatabase.getModifierList());
-        return TableEntryGenerator.genProductTableEntries(modifiedProducts);
+        return TableEntryGenerator.genProductTableEntries(productDatabase.getProductList(), modifiedProducts);
     }
 
     /*

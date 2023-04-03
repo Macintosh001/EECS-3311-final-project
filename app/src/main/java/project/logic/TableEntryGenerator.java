@@ -14,8 +14,8 @@ public class TableEntryGenerator {
      * @param list a list of product objects
      * @return
      */
-    public static String[][] genProductTableEntries(List<Product> list) {
-        String[][] tableEntries = new String[list.size()][5];
+    public static String[][] genProductTableEntries(List<Product> list, List<Product> listAfterMod) {
+        String[][] tableEntries = new String[list.size()][6];
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 
         int i = 0;
@@ -24,7 +24,13 @@ public class TableEntryGenerator {
             tableEntries[i][1] = product.getName();
             tableEntries[i][2] = product.getQuantity().toString();
             tableEntries[i][3] = String.format("%.2f", product.getPrice());
-            tableEntries[i][4] = df.format(product.getExpityDate());
+            tableEntries[i][5] = df.format(product.getExpityDate());
+            i++;
+        }
+
+        i = 0;
+        for (Product product: listAfterMod) {
+            tableEntries[i][4] = String.format("%.2f", product.getPrice());
             i++;
         }
 

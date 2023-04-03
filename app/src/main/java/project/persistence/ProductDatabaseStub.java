@@ -6,6 +6,7 @@ import project.objects.Product;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * An implementation of a database communication class, used for testing only.
@@ -28,7 +29,7 @@ public class ProductDatabaseStub implements ProductDatabase {
     private ArrayList<Product> getTestContent(){
         ArrayList<Product> ret = new ArrayList<Product>();
         Date expOreos = new Date();
-        Date expCheetos = new Date();
+        Date expCheetos = new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(5));
         Product oreos = new Product(0, "oreo", 75, 3.99F, expOreos);
         Product cheetos = new Product(1, "cheeto", 44, 2.99F, expCheetos);
         ret.add(oreos);
