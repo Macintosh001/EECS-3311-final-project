@@ -119,6 +119,7 @@ public class AutomationLogic {
         }
         if (!taskExists) {
             errorMsgs.add(new ErrorMsg("You can't update '" + name + "' because it doesn't exist!"));
+            return errorMsgs;
         }
 
         // validate minQuantity and restockAmount
@@ -150,7 +151,7 @@ public class AutomationLogic {
             oRestockAmount = oldTask.getRestockAmount();
         }
 
-        taskDatabase.addRestockTask(new RestockTask(name, oMinQuantity, oRestockAmount));
+        taskDatabase.replaceRestockTask(new RestockTask(name, oMinQuantity, oRestockAmount));
         return errorMsgs;
     }
 

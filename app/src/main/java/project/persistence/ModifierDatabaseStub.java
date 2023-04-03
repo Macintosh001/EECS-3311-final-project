@@ -1,6 +1,5 @@
 package project.persistence;
 
-import project.objects.Coupon;
 import project.objects.Modifier;
 
 import java.util.ArrayList;
@@ -24,10 +23,12 @@ public class ModifierDatabaseStub implements ModifierDatabase{
      */
     private ArrayList<Modifier> getTestContent() {
         ArrayList<Modifier> ret = new ArrayList<>();
+
         Date dateFrom = new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30));
         Date dateTo = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(30));
         Modifier mod = new Modifier("oreo", 0.9F, dateFrom, dateTo);
         Modifier mod2 = new Modifier("cheeto", -0.9F, dateFrom, dateTo);
+
         ret.add(mod);
         ret.add(mod2);
         return ret;

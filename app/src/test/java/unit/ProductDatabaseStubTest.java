@@ -152,7 +152,7 @@ public class ProductDatabaseStubTest {
     @Test
     void replaceProductNewDateTest(){
         ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 75, 3.99F, new Date(1));
+        Product oreos = new Product(0, "oreo", 75, 3.99F, new Date(1));
         db.replaceProduct(oreos);
         Product p = db.getProduct(0);
         assertEquals(0, p.getExpityDate().compareTo(new Date(1)));
@@ -163,7 +163,7 @@ public class ProductDatabaseStubTest {
     @Test
     void replaceProductNewQuantityAndPriceTest(){
         ProductDatabase db = new ProductDatabaseStub();
-        Product oreos = new Product(0, "oreos", 80, 3.0F, new Date());
+        Product oreos = new Product(0, "oreo", 80, 3.0F, new Date());
         db.replaceProduct(oreos);
         Product p = db.getProduct(0);
         assertEquals(80, p.getQuantity());
