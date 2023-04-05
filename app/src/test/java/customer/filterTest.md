@@ -55,5 +55,6 @@ We will now check the error handling:
 - Enter "-100" into "Min:" of "Filter by Quantity"
 - Click "Apply Filter"
 - Verify that the error message that pops up is "Quantity cannot be negative!"
+- Close the application.
 
 You have now completed the customer test!
