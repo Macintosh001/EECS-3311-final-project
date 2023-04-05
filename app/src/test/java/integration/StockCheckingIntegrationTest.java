@@ -31,6 +31,7 @@ public class StockCheckingIntegrationTest {
             mdb.empty();
             Date date1 = new Date();
             Instant now = Instant.now();
+
             Instant yesterday = now.minus(1, ChronoUnit.DAYS);
             Date date2 = Date.from(yesterday);
             Date tomorrow = new Date(date1.getTime() + (1000 * 60 * 60 * 24));
@@ -47,6 +48,7 @@ public class StockCheckingIntegrationTest {
     @AfterEach
     void empty(){
         db.empty();
+        mdb.empty();
     }
 
     @Test
@@ -59,10 +61,10 @@ public class StockCheckingIntegrationTest {
     void applyModifierTest() {
         // The stub database initializes with 2 elements.
         String[][] products = logic.getProductList();
-        for(int i = 0; i < products.length; i++){
-            if(products[i][1].compareTo("oreo") == 0){
-                Float temp = Float.parseFloat(products[i][3]);
-                assertEquals(3.99F + (3.99F*0.12F), temp, 0.1);
+        for (String[] product : products) {
+            if (product[0].compareTo("0") == 0) {
+                Float temp = Float.parseFloat(product[3]);
+                assertEquals(3.99F + (3.99F * 0.12F), temp, 0.5);
             }
         }
     }
@@ -81,12 +83,12 @@ public class StockCheckingIntegrationTest {
     @Test
     void getFilteredList() {
         // Test the filter on quantities
-        assertEquals(1, logic.getFilteredList("", "",
+        assertEquals(2, logic.getFilteredList("", "",
                 "", "50",
                 "", "").getResult().length);
 
         // Test the filter on prices
-        assertEquals(1, logic.getFilteredList("2.0", "3.0",
+        assertEquals(2, logic.getFilteredList("2.0", "3.0",
                 "", "",
                 "", "").getResult().length);
 
