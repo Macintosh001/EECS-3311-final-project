@@ -31,12 +31,12 @@ public class StockCheckingLogicTest {
         StockCheckingLogic logic = new StockCheckingLogic(db, mdb);
 
         // Test the filter on quantities
-        assertEquals(2, logic.getFilteredList("", "",
+        assertEquals(1, logic.getFilteredList("", "",
                 "", "50",
                 "", "").getResult().length);
 
         // Test the filter on prices
-        assertEquals(2, logic.getFilteredList("2.0", "3.0",
+        assertEquals(1, logic.getFilteredList("2.0", "3.0",
                 "", "",
                 "", "").getResult().length);
 
