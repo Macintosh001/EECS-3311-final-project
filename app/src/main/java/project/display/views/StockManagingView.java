@@ -112,11 +112,18 @@ StockManagingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        controlPanel.add(confirmButton, "split 2, width :180:, height :80:, gapafter 30px");
+        controlPanel.add(confirmButton, "split 3, width :180:, height :80:, gapafter 10px");
 
         JButton removeButton = builder.buildButton("Remove Item");
         removeButton.addActionListener(e -> new RemoveStockDialog(this));
-        controlPanel.add(removeButton, "wrap, width :180:, height :80:");
+        controlPanel.add(removeButton, " width :180:, height :80:, gapafter 10px");
+
+        JButton removeExpired = builder.buildButton("Remove Expired Items");
+        removeExpired.addActionListener(e -> {
+            logic.removeExpiredProducts();
+            regenTable();});
+        controlPanel.add(removeExpired, "wrap, width :180:, height :80:");
+
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
         add(controlPanel, BorderLayout.CENTER);
