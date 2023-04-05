@@ -29,10 +29,11 @@ public class SaleLogic {
 
     private float applyModifiers(Product product) {
         float price = product.getPrice();
+        String productName = product.getName();
         java.util.Date currentDate = new java.util.Date();
         for (Modifier modifier : modifierDB.getModifierList()) {
-            if (currentDate.after(modifier.getDateFrom()) && currentDate.before(modifier.getDateTo())) {
-                price += price * modifier.getModifier();
+            if (modifier.getName().equals(productName) && currentDate.after(modifier.getDateFrom()) && currentDate.before(modifier.getDateTo())) {
+                price = price + price * modifier.getModifier();
             }
         }
         return price;
