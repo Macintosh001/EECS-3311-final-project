@@ -23,6 +23,8 @@ public class Display extends JFrame {
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
 
+    private final AutomationLogic automationLogic;
+
     /**
      * @param stockCheckingLogic logic object associated with the stock checking view
      * @param stockManagingLogic logic object associated with the stock managing view
@@ -61,6 +63,7 @@ public class Display extends JFrame {
         this.modView = new ModifierManagerView(this, modLogic);
         this.autoView = new AutomationView(this, aLogic);
 
+        this.automationLogic = aLogic;
 
         add(loginView);
 
@@ -97,7 +100,13 @@ public class Display extends JFrame {
      * @param panel pass in the next JPanel
      */
     public void advanceTo(JPanel panel) {
+        // hide the current panel
         currentPanel.setVisible(false);
+
+        // run automation tasks
+        automationLogic.automate();
+
+        // show the next panel
         viewStack.push(currentPanel);
         currentPanel = panel;
         refresh(currentPanel);
@@ -108,7 +117,11 @@ public class Display extends JFrame {
      * Go back to the last JPanel
      */
     public void back() {
+        // hide the current panel
         currentPanel.setVisible(false);
+
+        // run automation tasks
+        automationLogic.automate();
         if (viewStack.empty()) {
             dispose();
         } else {
