@@ -400,6 +400,10 @@ Order More Stock | 2 point | 3 point
 ## Aaron
 - Added udapte restock task button to AutomationView.
 
+## Behzad
+- Working on the slides of the presentation
+- Practicing the introduction part
+
 # Monday, April 3rd
 
 ## William
@@ -408,11 +412,19 @@ Order More Stock | 2 point | 3 point
 - Added unit tests for the `ModifierManagerLogic`
 - Modified the stock checking/managing views to display the original price of an item as well as the modified price
 
+## Behzad
+- Writing the Customer test for Price Modifier
+- Wirting the Customer test for Automation
+- Making Gifs for them
+
 # Tuesday, April 4th
 
 ## William
 - Added customer test for the filters
 - Fixed the QA bug where floating point numebers that were too big didn't display correctly
+
+## Behzad
+- Completing the detailed user stories for Iteration 3
 
 # Wednesday, April 5th
 
@@ -421,3 +433,7 @@ Order More Stock | 2 point | 3 point
 - Helped write the retrospective report
 - Fixed bug where the automation tasks were not actually running
 - Updated the UML diagrams and the wiki for iteration 3
+
+## Behzad
+- Writing the bug report, reported by the QA team in our issues section
+- Uploading the iter03 planning document
