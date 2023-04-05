@@ -337,6 +337,11 @@ Order More Stock | 2 point | 3 point
 ## Aaron
 - continued working on implementing the Builder pattern, considering if it's necessary to use a Director
 
+# Monday, March 13th
+
+## William
+- You can now choose between the SQL database or the database stub at runtime using a quick login dialog before the actual app launches
+
 # Thursday, March 16th
 
 ## Aaron
@@ -347,6 +352,9 @@ Order More Stock | 2 point | 3 point
 ## Aaron
 - The main issue I encountered was how to abstract away or automate positioning of components. Otherwise the builder would only save perhaps a line of code per component which doesn't seem to be enough to justify use of the pattern. Began applying the pattern to the most complex views. Decided that rather than hard coding the position of each component it would be better and cleaner in the long run to utilize a layout manager
 
+## William
+- Wrote the implementation for the entire `ModifierManagerLogic` class.
+
 
 # Tuesday, March 21st
 
@@ -356,12 +364,60 @@ Order More Stock | 2 point | 3 point
 - added the dependancy and refactored code to utilize the mig layout manager where it would be most useful
 - added ModifierManagerView
 
+# Wednesday, March 22nd
+
+## William
+- Fixed a bug in `ModifierManagerLogic` and in `TableEntryGenetator`
+
+# Thursday, March 23rd
+
+## William
+- Updated `StockCheckingLogic` so that it uses the modifier price instead of the original price
+- Fixed the decimal precision bug in `TableEntryGenerator`
+
+# Monday, March 27th
+
+## William
+- Implemented the entire `AutomationLogic` class, the logic for the final big user story.
+
 # Tuesday, March 28th
 
 ## Aaron
-- Finished ui for Automation, last big user story.
+- Finished UI for Automation, last big user story.
+
+# Wednesday, March 29th
+
+## William
+- Created the refactoring document
+
+# Friday, March 31st
+
+## William
+- Created the `updateRestockTask()` function in `AutomationLogic`
 
 # Sunday, April 2nd
 
 ## Aaron
 - Added udapte restock task button to AutomationView.
+
+# Monday, April 3rd
+
+## William
+- Modified the data in the stub databases so that the names of products lined up ("oreos" vs "oreo")
+- Fixed broken unit tests
+- Added unit tests for the `ModifierManagerLogic`
+- Modified the stock checking/managing views to display the original price of an item as well as the modified price
+
+# Tuesday, April 4th
+
+## William
+- Added customer test for the filters
+- Fixed the QA bug where floating point numebers that were too big didn't display correctly
+
+# Wednesday, April 5th
+
+## William
+- Added customer test for data persistence
+- Helped write the retrospective report
+- Fixed bug where the automation tasks were not actually running
+- Updated the UML diagrams and the wiki for iteration 3
