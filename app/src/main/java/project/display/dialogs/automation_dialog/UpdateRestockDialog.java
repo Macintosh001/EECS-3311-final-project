@@ -37,7 +37,7 @@ public class UpdateRestockDialog extends JDialog {
 
         JButton updateButton = builder.buildButton("Update Restock Task");
         updateButton.addActionListener(e -> {
-            List<ErrorMsg> errorMsgs = view.getLogic().addRestockTask(
+            List<ErrorMsg> errorMsgs = view.getLogic().updateRestockTask(
                     nameField.getText(),
                     quantityField.getText(),
                     amountField.getText()
