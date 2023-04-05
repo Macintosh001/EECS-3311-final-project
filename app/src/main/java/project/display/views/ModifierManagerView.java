@@ -5,8 +5,7 @@ import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
-import project.display.views.builders.OtherBuilder;
-import project.display.views.builders.StockManagingBuilder;
+import project.display.views.builders.StockCheckingBuilder;
 import project.logic.ModifierManagerLogic;
 import project.objects.ErrorMsg;
 
@@ -14,13 +13,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ModifierManagerView extends JPanel implements ViewWithTable{
 
     private final ModifierManagerLogic logic;
-    private final StockManagingBuilder builder = new StockManagingBuilder();
+    private final StockCheckingBuilder builder = new StockCheckingBuilder();
     private final String[] COLUMNS = {"Name", "Modifier", "Start Date", "End Date"};
     private final JTable table;
 

@@ -1,15 +1,11 @@
 package project.display.views;
 
 import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.demo.FullDemo;
 import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
-import project.display.views.builders.Builder;
 import project.display.views.builders.StockCheckingBuilder;
-import project.display.views.builders.StockManagingBuilder;
 import project.logic.StockCheckingLogic;
 import project.objects.ErrorMsg;
 import project.objects.Result;
@@ -17,7 +13,6 @@ import project.objects.Result;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.net.URL;
 import java.util.List;
 
 public class StockCheckingView extends JPanel implements ViewWithTable {

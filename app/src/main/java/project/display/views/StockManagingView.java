@@ -1,15 +1,12 @@
 package project.display.views;
 
 import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.demo.FullDemo;
 import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
 import project.display.dialogs.RemoveStockDialog;
-import project.display.views.builders.StockManagingBuilder;
-import project.logic.StockCheckingLogic;
+import project.display.views.builders.StockCheckingBuilder;
 import project.logic.StockManagingLogic;
 import project.objects.ErrorMsg;
 import project.objects.Result;
@@ -17,14 +14,13 @@ import project.objects.Result;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.net.URL;
 import java.util.List;
 
 public class
 StockManagingView extends JPanel implements ViewWithTable {
 
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Orig. Price", "Real Price", "Expiry Date"};
-    private StockManagingBuilder builder;
+    private StockCheckingBuilder builder;
     private StockManagingLogic logic;
     private JTable table;
 
@@ -35,7 +31,7 @@ StockManagingView extends JPanel implements ViewWithTable {
     public StockManagingView(Display display, StockManagingLogic logic) {
 
         super();
-        builder = new StockManagingBuilder();
+        builder = new StockCheckingBuilder();
         this.logic = logic;
         setBounds(0, 0, 1000, 700);
         setLayout(new BorderLayout());
