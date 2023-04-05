@@ -107,7 +107,13 @@ public class StockCheckingView extends JPanel implements ViewWithTable {
                 regenTable(result.getResult());
             }
         });
-        controlPanel.add(confirmButton, "width :180:, height :80:");
+        controlPanel.add(confirmButton, "split2, width :180:, height :80:, gapafter 10px");
+
+        JButton expiryButton = builder.buildButton("Expired Items");
+        expiryButton.addActionListener(e -> {
+            regenTable(logic.getExpiredList());
+        });
+        controlPanel.add(expiryButton, "width :180:, height :80:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
