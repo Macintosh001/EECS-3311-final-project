@@ -52,8 +52,4 @@ class AutomationLogicTest {
         aLogic.removeRestockTask("oreo");
         assertEquals(1, aLogic.getRestockTaskTable().length);
     }
-
-    @Test
-    void automate() {
-    }
 }
