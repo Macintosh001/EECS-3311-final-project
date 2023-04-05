@@ -4,35 +4,32 @@
 package project.application;
 
 import project.display.Display;
-import project.logic.CouponManagerLogic;
-import project.logic.OrderLogic;
-import project.logic.SaleLogic;
-import project.logic.StockCheckingLogic;
-import project.logic.StockManagingLogic;
-import project.objects.Coupon;
-import project.objects.Orderable;
-import project.objects.Product;
+import project.logic.*;
+import project.objects.*;
 import project.persistence.*;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {
+
         new DBConnectionWindow();
     }
 
-    public static void init(String username, String password) throws SQLException {
+    public static void initWithSQL(String username, String password) throws SQLException {
 
         ProductDatabase productDB = null;
         OrderableDatabase orderDB = null;
         CouponDatabase couponDB = null;
+        ModifierDatabase modDB = null;
+        RestockTaskDatabase restockDB = null;
 
         productDB = new ProductPersistence(username, password);
         orderDB = new OrderablePersistence(username, password);
         couponDB = new CouponPersistence(username, password);
+        modDB = new ModifierPersistence(username, password);
+        restockDB = new RestockTaskPersistence(username, password);
 
         // We want to populate the DB if it's empty!
         if (productDB.getProductList().isEmpty()) {
@@ -44,20 +41,51 @@ public class App {
         if (couponDB.getCouponList().isEmpty()) {
             couponDB.addCoupon(new Coupon("SAVE10", 0.1f));
         }
+        if (modDB.getModifierList().isEmpty()){
+            Date date1 = new Date(1);
+            Date date2 = new Date(1000000000);
+            modDB.addModifier(new Modifier("Chips", -0.12F, date1, date2));
+        }
+        if (restockDB.getRestockTaskList().isEmpty()) {
+            restockDB.addRestockTask(new RestockTask("Chips", 50, 100));
+        }
 
-        OrderLogic oLogic = new OrderLogic(productDB,orderDB);
+        run(productDB, orderDB, couponDB, modDB, restockDB);
+    }
+
+    public static void initWithStub() {
+        ProductDatabase productDB = new ProductDatabaseStub();
+        OrderableDatabase orderDB = new OrderableDatabaseStub();
+        CouponDatabase couponDB = new CouponDatabaseStub();
+        ModifierDatabase modDB = new ModifierDatabaseStub();
+        RestockTaskDatabase restockDB = new RestockTaskDatabaseStub();
+
+        run(productDB, orderDB, couponDB, modDB, restockDB);
+    }
+
+    private static void run(
+            ProductDatabase productDB,
+            OrderableDatabase orderDB,
+            CouponDatabase couponDB,
+            ModifierDatabase modDB,
+            RestockTaskDatabase restockDB
+    ) {
+        OrderLogic oLogic = new OrderLogic(productDB, orderDB);
         CouponManagerLogic cpLogic = new CouponManagerLogic(couponDB);
-        StockCheckingLogic scLogic = new StockCheckingLogic(productDB);
-        StockManagingLogic smLogic = new StockManagingLogic(productDB);
-        SaleLogic sLogic = new SaleLogic(productDB, couponDB);
+        StockCheckingLogic scLogic = new StockCheckingLogic(productDB, modDB);
+        StockManagingLogic smLogic = new StockManagingLogic(productDB, modDB);
+        SaleLogic sLogic = new SaleLogic(productDB, couponDB, modDB);
+        ModifierManagerLogic mLogic = new ModifierManagerLogic(modDB);
+        AutomationLogic aLogic = new AutomationLogic(restockDB, productDB, orderDB, oLogic);
 
         Display display = new Display(
                 scLogic,
                 smLogic,
                 oLogic,
                 cpLogic,
-                sLogic
+                sLogic,
+                mLogic,
+                aLogic
         );
-//        InitialDisplay in = new InitialDisplay(scLogic,sLogic,cpLogic,smLogic,oLogic);
     }
 }

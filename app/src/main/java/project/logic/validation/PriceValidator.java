@@ -19,8 +19,10 @@ public class PriceValidator implements Validator<Float> {
 
         try {
             result = Float.parseFloat(entry);
-            if (result < 0) {
+            if (result < 0.0F) {
                 errorMsgs.add(new ErrorMsg("Price cannot be negative!"));
+            } else if (result > 100000.0F) {
+                errorMsgs.add(new ErrorMsg("Price cannot be higher than $100'000"));
             }
         } catch (NumberFormatException ex) {
             errorMsgs.add(new ErrorMsg("Price must be a decimal number!"));

@@ -3,6 +3,8 @@ package unit;
 import org.junit.jupiter.api.Test;
 import project.logic.StockCheckingLogic;
 import project.objects.Product;
+import project.persistence.ModifierDatabase;
+import project.persistence.ModifierDatabaseStub;
 import project.persistence.ProductDatabase;
 import project.persistence.ProductDatabaseStub;
 
@@ -14,7 +16,8 @@ public class StockCheckingLogicTest {
     @Test
     void getProductList() {
         ProductDatabase db = new ProductDatabaseStub();
-        StockCheckingLogic logic = new StockCheckingLogic(db);
+        ModifierDatabase mdb = new ModifierDatabaseStub();
+        StockCheckingLogic logic = new StockCheckingLogic(db, mdb);
 
         // The stub database initializes with 2 elements.
         assertEquals(2, logic.getProductList().length);
@@ -24,7 +27,8 @@ public class StockCheckingLogicTest {
     void getFilteredList() {
         // Set up the stub database.
         ProductDatabase db = new ProductDatabaseStub();
-        StockCheckingLogic logic = new StockCheckingLogic(db);
+        ModifierDatabase mdb = new ModifierDatabaseStub();
+        StockCheckingLogic logic = new StockCheckingLogic(db, mdb);
 
         // Test the filter on quantities
         assertEquals(1, logic.getFilteredList("", "",

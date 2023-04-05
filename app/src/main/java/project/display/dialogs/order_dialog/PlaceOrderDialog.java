@@ -2,7 +2,6 @@ package project.display.dialogs.order_dialog;
 
 import project.display.dialogs.ErrorDialog;
 import project.display.views.OrderView;
-import project.display.views.ViewWithTable;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;

@@ -1,20 +1,24 @@
 package project.display.views;
 
+import net.miginfocom.swing.MigLayout;
 import project.display.Display;
 import project.display.buttons.BackButton;
 import project.display.dialogs.ErrorDialog;
 import project.display.dialogs.sale_dialog.ApplyCouponDialog;
 import project.display.dialogs.sale_dialog.ScanDialog;
+import project.display.views.builders.OtherBuilder;
 import project.logic.SaleLogic;
 import project.objects.ErrorMsg;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.List;
 
 public class SaleView extends JPanel implements ViewWithTable {
     private final SaleLogic logic;
     private final String[] COLUMNS = {"Barcode", "Name", "Quantity", "Price"};
+    private final OtherBuilder builder = new OtherBuilder();
     private JTable table;
     private JLabel totalPrice;
 
@@ -22,31 +26,24 @@ public class SaleView extends JPanel implements ViewWithTable {
         super();
         this.logic = logic;
         setBounds(0, 0, 1000, 700);
-        setLayout(null);
+        setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new MigLayout("insets 25, gap 25px"));
 
-        table = new JTable(new DefaultTableModel(logic.getCartTable(), COLUMNS));
-        table.setEnabled(false);
-
+        table = builder.buildTable(logic.getCartTable(),COLUMNS);
         JScrollPane tablePane = new JScrollPane(table);
         tablePane.setBounds(10,10,330,580);
-        add(tablePane);
+        add(tablePane, BorderLayout.WEST);
 
-        totalPrice = new JLabel("Total Cost: $0.00");
-        totalPrice.setBounds(10, 610, 300, 50);
-        add(totalPrice);
 
-        JButton scanButton = new JButton("Scan");
-        scanButton.setBounds(350, 10, 200, 50);
+        JButton scanButton = builder.buildButton("Scan");
         scanButton.addActionListener(e -> new ScanDialog(this));
-        add(scanButton);
+        buttonPanel.add(scanButton, "wrap, width :200:, height :50:");
 
-        JButton applyCouponButton = new JButton("Apply Coupon");
-        applyCouponButton.setBounds(350, 70, 200, 50);
+        JButton applyCouponButton = builder.buildButton("Apply Coupon");
         applyCouponButton.addActionListener(e -> new ApplyCouponDialog(this));
-        add(applyCouponButton);
+        buttonPanel.add(applyCouponButton, "wrap, width :200:, height :50:");
 
-        JButton buyButton = new JButton("Buy");
-        buyButton.setBounds(350, 130, 200, 50);
+        JButton buyButton = builder.buildButton("Buy");
         buyButton.addActionListener(e -> {
                 List<ErrorMsg> errorMsgList = logic.buy();
                 if (!errorMsgList.isEmpty()) {
@@ -55,18 +52,22 @@ public class SaleView extends JPanel implements ViewWithTable {
                 logic.clearShoppingCart();
                 regenTable();
         });
-        add(buyButton);
+        buttonPanel.add(buyButton, "wrap, width :200:, height :50:");
 
-        JButton clearButton = new JButton("Clear Cart");
-        clearButton.setBounds(350, 190, 200, 50);
+        JButton clearButton = builder.buildButton("Clear Cart");
         clearButton.addActionListener(e -> {
             logic.clearShoppingCart();
             regenTable();
         });
-        add(clearButton);
+        buttonPanel.add(clearButton, "wrap, width :200:, height :50:");
+
+        totalPrice = builder.buildLabel("Total Cost: $0.00");
+        totalPrice.setBounds(10, 610, 300, 50);
+        buttonPanel.add(totalPrice, "cell 0 18, width :300:, height :50:");
 
         BackButton backButton = new BackButton("Back", display);
         add(backButton);
+        add(buttonPanel, BorderLayout.CENTER);
 
         // Hide when initialized
         setVisible(false);

@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class Display extends JFrame {
     private final LoginView loginView;
-
+    private final ModifierManagerView modView;
     private final EmployeeView employeeView;
     private final ManagerView managerView;
     private final AdminView adminView;
@@ -18,6 +18,7 @@ public class Display extends JFrame {
     private final OrderView orderView;
     private final CouponManagerView couponManagerView;
     private final SaleView saleView;
+    private final AutomationView autoView;
 
     private final Stack<JPanel> viewStack;
     private JPanel currentPanel;
@@ -34,7 +35,9 @@ public class Display extends JFrame {
             StockManagingLogic stockManagingLogic,
             OrderLogic orderLogic,
             CouponManagerLogic couponManagerLogic,
-            SaleLogic saleLogic
+            SaleLogic saleLogic,
+            ModifierManagerLogic modLogic,
+            AutomationLogic aLogic
     ) {
         // Set up the JFrame
         super("TIM");
@@ -55,6 +58,9 @@ public class Display extends JFrame {
         this.orderView = new OrderView(this, orderLogic);
         this.couponManagerView = new CouponManagerView(this, couponManagerLogic);
         this.saleView = new SaleView(this, saleLogic);
+        this.modView = new ModifierManagerView(this, modLogic);
+        this.autoView = new AutomationView(this, aLogic);
+
 
         add(loginView);
 
@@ -67,6 +73,8 @@ public class Display extends JFrame {
         add(orderView);
         add(couponManagerView);
         add(saleView);
+        add(modView);
+        add(autoView);
 
         setVisible(true);
 
@@ -172,4 +180,7 @@ public class Display extends JFrame {
     public SaleView getSaleView() {
         return saleView;
     }
+
+    public ModifierManagerView getModView(){ return modView; }
+    public AutomationView getAutoView(){return autoView;}
 }

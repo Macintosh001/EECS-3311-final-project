@@ -1,9 +1,7 @@
 package project.persistence;
 
 import project.objects.Orderable;
-import project.objects.Product;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

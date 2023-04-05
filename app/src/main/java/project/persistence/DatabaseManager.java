@@ -92,6 +92,8 @@ public class DatabaseManager {
             createProductTable();
             createCouponTable();
             createOrderableTable();
+            createModifierTable();
+            createRestockTaskTable();
     }
 
     /**
@@ -148,6 +150,37 @@ public class DatabaseManager {
         }
     }
 
+    private void createModifierTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table modifier"
+                    +"(name varchar(500) primary key not null,"
+                    +"modifier real not null default(0),"
+                    +"date_from date not null,"
+                    +"date_to date not null"
+                    + ")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
+    private void createRestockTaskTable(){
+        try {
+            this.connect();
+            Statement statement = con.createStatement();
+            statement.execute("create table restock_task"
+                    +"(name varchar(500) primary key not null,"
+                    +"min_quantity int not null default(0),"
+                    + "restock_amount int not null default(0)"
+                    +")");
+            this.terminate();
+        } catch(SQLException c) {
+            c.printStackTrace();
+        }
+    }
+
     /**
      *
      * @return true if a database with the name of the database to be created exists, false otherwise
@@ -187,7 +220,12 @@ public class DatabaseManager {
         if(!tableFound("orderable")){
             createOrderableTable();
         }
-
+        if(!tableFound("modifier")){
+            createModifierTable();
+        }
+        if(!tableFound("restock_task")){
+            createRestockTaskTable();
+        }
     }
 
     /**
