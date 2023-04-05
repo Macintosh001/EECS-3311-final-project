@@ -43,6 +43,14 @@ Also, for the integration test to work, the username and password of the local S
 
 Integration tests are in `app/src/test/java/integration/` if you need to make this change.
 
+## Customer Tests
+
+We are employing manual customer tests. Each tests consists of a markdown file that
+includes all the instructions necessary to verify each big user story.
+
+The customer tests are included with the other tests. Specifically, the are 
+kept in `app/src/test/java/customer`
+
 ## Troubleshooting
 
 ### MacOS
