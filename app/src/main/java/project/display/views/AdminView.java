@@ -64,6 +64,11 @@ public class AdminView extends JPanel {
         });
         add(aButton);
 
+        JButton modButton = builder.buildButton("Modifier Manager");
+        modButton.setBounds(110,510,180,80);
+        modButton.addActionListener(e -> display.advanceTo(display.getModView()));
+        add(modButton);
+
         BackButton logoutButton = new BackButton("Logout", display);
         add(logoutButton);
 
