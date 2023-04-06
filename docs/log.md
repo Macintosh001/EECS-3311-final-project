@@ -467,3 +467,7 @@ Order More Stock | 2 point | 3 point
 
 ## Lucas
 - Customer test added
+
+## Jeremy
+- Added customer test for point of sale
+- Added customer test for coupon management 
