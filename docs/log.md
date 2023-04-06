@@ -347,6 +347,10 @@ Order More Stock | 2 point | 3 point
 ## Aaron
 - interfaces for the Builder pattern almost done, doing refactoring. Decided to stick with only a few interfaces rather than one interface for each component in the ui
 
+## Jeremy
+- Updated StockManagingLogic, added removeExpiredProducts() function
+- Updated StockCheckingLogic, added getExpiredList() funciton
+
 # Saturday, March 18 
 
 ## Lucas
@@ -374,6 +378,9 @@ Order More Stock | 2 point | 3 point
 ## William
 - Fixed a bug in `ModifierManagerLogic` and in `TableEntryGenetator`
 
+## Jeremy
+- Fixed a bug in SaleLogic that Total Cost shows wrong number
+
 # Thursday, March 23rd
 
 ## William
@@ -390,6 +397,9 @@ Order More Stock | 2 point | 3 point
 
 ## Lucas
 - RestockTask database, interface and stub implemented
+
+## Jeremy
+- Updated the SaleLogic, added some functions for Temporary Modifiers
 
 # Monday, March 27th
 
@@ -452,6 +462,9 @@ Order More Stock | 2 point | 3 point
 
 ## Behzad
 - Completing the detailed user stories for Iteration 3
+
+## Jeremy
+- Fixed a bug in the SaleLogic part that midifier function used all midifier percentage
 
 # Wednesday, April 5th
 
