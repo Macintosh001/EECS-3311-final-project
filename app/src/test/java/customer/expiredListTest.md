@@ -24,7 +24,7 @@ button as an employee
 - click on "Back"
 - click on "Logout"
 - click on "Login as Employee (Client)"
-- click on check what's in stock"
+- click on "check what's in stock"
 - you should see that a new oreo with quantity 3 that has an expiry date after the current date is now in the product list
 - click on "Expired Items"
 - you should see that the added item is no longer in the product list. Only one "oreo" and one "cheeto" should remain, both of which should have dates before or equal to the current date
