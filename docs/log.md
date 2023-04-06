@@ -16,6 +16,9 @@ Add and Remove Coupon | 1 point | 1 point
 Sell Product | 1 point | 3 points
 Apply Coupons | 1 point | 1 point
 Order More Stock | 2 point | 3 point 
+Automation | 5 points | 5 points
+Modifiers on Price | 3 points | 4 points
+List Expired Items | 2 points | 2 points
 
 # Dev tasks per small user story
 
@@ -63,16 +66,37 @@ Order More Stock | 2 point | 3 point
 - Reduce quantity in database
 - Apply coupon logic
 
-### Order stock
+### Order Stock
 - GUI order views, dialogue, etc.
 - Logic for orders, add to stock, create and update orderables
 - Database interactions for create and update orderables
 - stub equivlent to database ops
 
+### Add / Remove / Update Automation
+- Logic order, remove and update
+- view to update the automation list
+- Database table, persistence, stubs and interface for tasks.
+
+### Automate the Automation Tasks
+- Logic to perform tasks each time a view is changed
+
+### View / Remove Expired Items
+- Buttons to filter by and remove expired items
+- logic to go with the buttons
+
+### View / Remove / Add and Set Start/End Date for Modifiers
+- View to manage modifiers
+- Logic to modify modifiers
+- Database code to store, query and update modifiers; stub equivlent to persistence code
+
+### Apply Modifiers to Price
+- Logic to apply modifiers when a list of products is retrieved and before the list is printed in the GUI.
 
 ### Additional Tasks
 - Implement login feature for database password and username input
-- create different levels of access
+- Ceate different levels of access
+- Error handling
+- Unit, integration and customer tests written
 
 
 
