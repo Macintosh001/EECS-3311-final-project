@@ -19,6 +19,7 @@ Order More Stock | 2 point | 3 point
 Automation | 5 points | 5 points
 Modifiers on Price | 3 points | 4 points
 List Expired Items | 2 points | 2 points
+Remove Expired Items | 1 point | 1 point
 
 # Dev tasks per small user story
 
