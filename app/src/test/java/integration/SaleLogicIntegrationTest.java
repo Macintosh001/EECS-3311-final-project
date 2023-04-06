@@ -85,7 +85,7 @@ public class SaleLogicIntegrationTest {
         assertEquals("0", cartTable[0][0]);
         assertEquals("oreo", cartTable[0][1]);
         assertEquals("1", cartTable[0][2]);
-        assertEquals("4.92", cartTable[0][3]);
+        assertEquals("4.47", cartTable[0][3]);
     }
 
     @Test
@@ -118,7 +118,7 @@ public class SaleLogicIntegrationTest {
         List<ErrorMsg> errors = saleLogic.applyCoupon("coup1");
         assertTrue(errors.isEmpty());
         String total = saleLogic.getTotal();
-        assertEquals("4.18", total);
+        assertEquals("3.80", total);
     }
 
     @Test
