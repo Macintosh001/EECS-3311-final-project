@@ -347,6 +347,11 @@ Order More Stock | 2 point | 3 point
 ## Aaron
 - interfaces for the Builder pattern almost done, doing refactoring. Decided to stick with only a few interfaces rather than one interface for each component in the ui
 
+# Saturday, March 18 
+
+## Lucas
+- Modifier database, interface and stub
+
 # Monday, March 20th
 
 ## Aaron
@@ -375,6 +380,17 @@ Order More Stock | 2 point | 3 point
 - Updated `StockCheckingLogic` so that it uses the modifier price instead of the original price
 - Fixed the decimal precision bug in `TableEntryGenerator`
 
+# Friday, March 24th
+
+## Lucas
+- Bug fixes
+- Modifier stub update
+
+# Sunday, March 26th
+
+## Lucas
+- RestockTask database, interface and stub implemented
+
 # Monday, March 27th
 
 ## William
@@ -394,6 +410,13 @@ Order More Stock | 2 point | 3 point
 
 ## William
 - Created the `updateRestockTask()` function in `AutomationLogic`
+
+# Saturday, April 1st 
+
+## Lucas
+- Logic integration tests with real db
+- Persistence integration tests
+- Database stub unit tests
 
 # Sunday, April 2nd
 
@@ -417,6 +440,10 @@ Order More Stock | 2 point | 3 point
 - Wirting the Customer test for Automation
 - Making Gifs for them
 
+## Lucas
+- Bug fixes
+- integration tests
+
 # Tuesday, April 4th
 
 ## William
@@ -437,3 +464,6 @@ Order More Stock | 2 point | 3 point
 ## Behzad
 - Writing the bug report, reported by the QA team in our issues section
 - Uploading the iter03 planning document
+
+## Lucas
+- Customer test added
