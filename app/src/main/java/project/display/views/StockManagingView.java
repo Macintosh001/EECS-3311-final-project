@@ -118,7 +118,7 @@ StockManagingView extends JPanel implements ViewWithTable {
         removeButton.addActionListener(e -> new RemoveStockDialog(this));
         controlPanel.add(removeButton, " width :180:, height :80:, gapafter 10px");
 
-        JButton expiryButton = builder.buildButton("Remove Expire Items");
+        JButton expiryButton = builder.buildButton("Remove Expired Items");
         expiryButton.addActionListener(e -> {
             logic.removeExpiredProducts();
             regenTable();
